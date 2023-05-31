@@ -1,9 +1,9 @@
-AI 脚本的编号是小端四字符代码形式的，它实质也是个 32 位无符号整数
+The AI script number is in the form of a little-endian four-character code, which is essentially a 32-bit unsigned integer.
 
-b"TMCu" 表示数字 1967344980，这种使用四个字符表示一个数字的方法叫[四字符代码](https://en.wikipedia.org/wiki/FourCC)，在 x86 平台它通常是[字节序#小端序](https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F#%E5%B0%8F%E7%AB%AF%E5%BA%8F)的
+b"TMCu" represents the number 1967344980. This method of using four characters to represent a number is called [Four-Character Codes](https://en.wikipedia.org/wiki/FourCC), and on the x86 platform it is usually little-endian. 
 
 ```JavaScript
-println("{} == {}", py_int().from_bytes(b"+Vi0", "little"), EncodeAIScript("Turn ON Shared Vision for Player 1")); // 输出 812209707 == 812209707
+println("{} == {}", py_int().from_bytes(b"+Vi0", "little"), EncodeAIScript("Turn ON Shared Vision for Player 1")); // 812209707 == 812209707
 RunAIScript(b2i4(b"ZMCu"));
 ```
 
