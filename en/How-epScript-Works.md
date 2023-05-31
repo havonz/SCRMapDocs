@@ -319,7 +319,7 @@
             RawTrigger(actions = SetMemory(a_valueAddr, SetTo, 1234)); // a = 1234
             
             // Trigger(actions = SetResources(P1, Add, a, Ore));
-            const 加矿动作 = SetResources(P1, Add, 0, Ore); const AddMineralOperation_valueAddr = AddMineralOperation + 20;
+            const AddMineralOperation = SetResources(P1, Add, 0, Ore); const AddMineralOperation_valueAddr = AddMineralOperation + 20;
             //                                    ^
             //                The value of the variable a needs to be passed here 
             const AddMineralOperation = Forward();
