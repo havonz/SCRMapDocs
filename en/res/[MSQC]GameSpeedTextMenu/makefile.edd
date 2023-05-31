@@ -1,0 +1,18 @@
+[main]
+input: GameSpeedTextMenu-Terrain.scx
+output: GameSpeedTextMenu.scx
+
+[main.eps]
+
+[eudTurbo]
+
+[MSQC]
+QCDebug : 0
+QCUnit : 218
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 129;0x6CDDC8, AtMost, 139;MouseDown(L): menuSel, 50
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 145;0x6CDDC8, AtMost, 155;MouseDown(L): menuSel, 100
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 161;0x6CDDC8, AtMost, 171;MouseDown(L): menuSel, 125
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 177;0x6CDDC8, AtMost, 187;MouseDown(L): menuSel, 150
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 193;0x6CDDC8, AtMost, 203;MouseDown(L): menuSel, 200
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 209;0x6CDDC8, AtMost, 219;MouseDown(L): menuSel, 400
+0x6CDDC4, AtLeast, 10;0x6CDDC4, AtMost, 25;0x6CDDC8, AtLeast, 225;0x6CDDC8, AtMost, 235;MouseDown(L): menuSel, 4200

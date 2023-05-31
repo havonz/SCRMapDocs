@@ -106,11 +106,11 @@
 
 ### 示例工程
 
-- 实在是看不懂上面的配置过程，可下载一个简易示例工程查看  
-    - [Trigger和RawTrigger的运用.zip](res/Trigger和RawTrigger的运用.zip)
-    - [修改单位消耗人口限制.zip](res/修改单位消耗人口限制.zip)
-    - [位置函数的使用.zip](res/位置函数的使用.zip)
-    - [[MSQC演示]游戏中文字菜单.zip](res/[MSQC演示]游戏中文字菜单.zip)  <br /><br />
+- 实在是看不懂上面的配置过程，随意选择一个简易示例工程查看  
+    - [Trigger和RawTrigger的运用](res/Trigger和RawTrigger的运用/makefile.edd)
+    - [修改单位消耗人口限制](res/修改单位消耗人口限制/makefile.edd)
+    - [位置函数的使用](res/位置函数的使用/makefile.edd)
+    - [[MSQC演示]游戏中文字菜单](res/[MSQC演示]游戏中文字菜单/makefile.edd)  <br /><br />
 
 
 

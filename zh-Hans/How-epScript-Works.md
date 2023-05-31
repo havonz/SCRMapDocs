@@ -192,7 +192,7 @@
             conditions = {Always();};
             actions = {
                 SetMemory(b.目标地址, SetTo, EPD( &(a.值) )); -- &(a.值) 表示取 a 变量的[值]的地址
-                SetMemory(b.数字修改方法, SetTo, Add);
+                SetMemory(&(b.数字修改方法), SetTo, Add);
                 SetMemory(b.下一个触发器, SetTo, 接下来的下一个触发器);
             };
             下一个触发器 = b;
@@ -279,7 +279,7 @@
             conditions = {Always();};
             actions = {
                 SetMemory(a.目标地址, SetTo, EPD( &(加矿操作.值) )); -- & 是取地址符 &(加矿操作.值) 表示取 加矿操作 触发器中的[值]的地址
-                SetMemory(a.数字修改方法, SetTo, SetTo);
+                SetMemory(&(a.数字修改方法), SetTo, SetTo);
                 SetMemory(a.下一个触发器, SetTo, 加矿操作);
             };
             下一个触发器 = a;

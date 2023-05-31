@@ -1,0 +1,86 @@
+function angleBetween_256(x1, y1, x2, y2) {
+    return atan2_256(x2 - x1, y1 - y2);
+}
+
+function distanceBetween(x1, y1, x2, y2) {
+    const x = x2 - x1;
+    const y = y2 - y1;
+    return sqrt(x*x + y*y);
+}
+
+function polarProjection_256(x, y, length, angle) {
+    var angt = 320;
+    VProc(
+        angle,
+        list(
+            angle.AddNumberX(0xFFFFFFFF, 0x55555555),
+            angle.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
+            angle.AddNumber(1),
+            angle.QueueAddTo(angt),
+        ),
+    );
+    var ox, oy = lengthdir_256(length, angt);
+    VProc(
+        list(ox, oy),
+        list(
+            oy.AddNumberX(0xFFFFFFFF, 0x55555555),
+            oy.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
+            oy.AddNumber(1),
+            ox.QueueAddTo(x), oy.QueueAddTo(y),
+        ),
+    );
+    return x, y;
+}
+
+var marine_epd, ghost_epd = 0, 0;
+
+function onPluginStart() {
+
+}
+
+function beforeTriggerExec() {
+    const cp = getcurpl();
+
+    once (ElapsedTime(AtLeast, 0)) {
+        const cp2 = getcurpl();
+        setcurpl(EPD(0x628438));
+        {
+            const ptr, epd = cunitepdread_cp(0);
+            CreateUnit(1, "Terran Marine", "Location 1", P1);
+            if (ptr != 0) {
+                marine_epd = epd;
+            }
+        }
+        {
+            const ptr, epd = cunitepdread_cp(0);
+            CreateUnit(1, "Terran Ghost", "Location 2", P1);
+            if (ptr != 0) {
+                ghost_epd = epd;
+            }
+        }
+        setcurpl(cp2);
+    }
+
+    if (marine_epd != 0 && ghost_epd != 0) {
+        const marine_cu = CUnit(marine_epd);
+        const ghost_cu = CUnit(ghost_epd);
+        once {
+            ghost_cu.statusFlags.Invincible = 1;
+            marine_cu.statusFlags.Invincible = 1;
+        }
+        const x0, y0 = marine_cu.getpos("pos");
+        const x1, y1 = ghost_cu.getpos("pos");
+        const ang = angleBetween_256(x0, y0, x1, y1);
+        const dist = distanceBetween(x0, y0, x1, y1);
+        const x, y = polarProjection_256(x0, y0, dist, ang);
+        setcurpl(P1);
+        printAt(0, "The distance from the Machine({},{})(Face:{}) to the Ghost({},{})(Face:{}) is {} , the angle is {}", x0, y0, marine_cu.currentDirection2, x1, y1, ghost_cu.currentDirection2, dist, ang);
+        printAt(1, "Walking {} distance {} degrees from the Machine position will reach the Ghost's position at ({}, {})", ang, dist, x, y);
+    }
+
+    setcurpl(cp);
+}
+
+function afterTriggerExec() {
+
+}

@@ -1,0 +1,5 @@
+[main]
+input: ChangeSupplyLimit-Terrain.scx
+output: ChangeSupplyLimit.scx
+
+[main.eps]

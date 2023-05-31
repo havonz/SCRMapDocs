@@ -1,0 +1,6 @@
+[main]
+input: Trigger-and-RawTrigger-Terrain.scx
+output: Trigger-and-RawTrigger.scx
+
+[eudTurbo]
+[main.eps]

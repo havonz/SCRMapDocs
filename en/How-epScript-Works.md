@@ -320,8 +320,8 @@
             
             // Trigger(actions = SetResources(P1, Add, a, Ore));
             const AddMineralOperation = SetResources(P1, Add, 0, Ore); const AddMineralOperation_valueAddr = AddMineralOperation + 20;
-            //                                    ^
-            //                The value of the variable a needs to be passed here 
+            //                                                ^
+            //                         The value of the variable a needs to be passed here 
             const AddMineralOperation = Forward();
             RawTrigger(
                 actions = list(

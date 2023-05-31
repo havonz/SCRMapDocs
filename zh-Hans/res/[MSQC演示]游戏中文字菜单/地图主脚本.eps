@@ -1,0 +1,101 @@
+// 偏移地址参考：https://euddb.website/
+// epScript 函数参考：https://flowus.cn/share/8cbb3629-3733-4e0e-91fb-bd965df03795
+
+/* 设置游戏速度百分比函数，以 Fastest(level:6) 的普通速度作为 100% */
+function SetGameSpeed(level, speed) {
+    const mspf = 1000000 / (10000 / 42 * speed);
+    dwwrite_epd(EPD(0x5124D8) + level, mspf);
+}
+
+const MOUSE_X_EPD, MOUSE_Y_EPD = EPD(0x6CDDC4), EPD(0x6CDDC8);
+const menuSel = PVariable();
+var currentSpeedSel;
+
+/* 注册 menuSel 全局变量给 MSQC */
+EUDRegisterObjectToNamespace("menuSel", menuSel);
+
+function showMenu(p) {
+    const speedList = list(50, 100, 125, 150, 200, 400, 4200);
+    const isMouseOvered = EUDArray(7);
+    if (getcurpl() == p) {
+        const buf = StringBuffer(255);
+        buf.printfAt(0, "\x02当前选择的游戏速度：\x07{}\x02%\x02", currentSpeedSel);
+        foreach(i : py_range(0, 7)) {
+            buf.insert(0);
+            if (speedList[i] == currentSpeedSel) {
+                buf.append("\x03[\x07x\x03]\x1E ");
+            } else {
+                buf.append("\x03[  ]\x02");
+            }
+            buf.appendf(" 游戏速度 {}%\x02", speedList[i]);
+            buf.DisplayAt(i + 1);
+        }
+        if (MemoryEPD(MOUSE_X_EPD, AtLeast, 10) && MemoryEPD(MOUSE_X_EPD, AtMost, 25)) { /* 菜单选框 X 坐标触发范围 */
+            foreach(i : py_range(0, 7)) {
+                if (MemoryEPD(MOUSE_Y_EPD, AtLeast, 129 + i * 16) && MemoryEPD(MOUSE_Y_EPD, AtMost, 139 + i * 16)) { /* 菜单选框 Y 坐标触发范围 */
+                    if (speedList[i] != currentSpeedSel) {
+                        buf.insert(0);
+                        buf.append("\x07[  ]\x1E ");
+                        buf.appendf(" 游戏速度 {}%\x02", speedList[i]);
+                        buf.DisplayAt(i + 1);
+                        if (isMouseOvered[i] == false) {
+                            PlayWAV("sound\\glue\\mouseover.wav");
+                            isMouseOvered[i] = true;
+                        }
+                    }
+                } else {
+                    isMouseOvered[i] = false;
+                }
+            }
+        } else {
+            foreach(i : py_range(0, 6)) {
+                isMouseOvered[i] = false;
+            }
+        }
+    }
+}
+
+function onPluginStart() {
+    /* 设置 Fastest 的游戏速度为 100% */
+    currentSpeedSel = 100;
+    SetGameSpeed(6, currentSpeedSel);
+}
+
+function beforeTriggerExec() {
+    const cp = getcurpl();
+
+    RawTrigger(actions = list(
+        CreateUnitWithProperties(1, "Zerg Overlord", "Location 1", P1, UnitProperty(invincible = true)),
+        CreateUnitWithProperties(1, "Zerg Overlord", "Location 1", P2, UnitProperty(invincible = true)),
+    ), preserved = false);
+
+    /* 给所有的人类玩家显示菜单 */
+    foreach(p : EUDLoopPlayer("Human")) {
+        setcurpl(p);
+        showMenu(p);
+    }
+
+    setcurpl(cp);
+}
+
+function afterTriggerExec() {
+    /* 接收 MSQC 选择并同步到 currentSpeedSel，这个循环会在每一个玩家的机器上执行 */
+    foreach(p : EUDLoopPlayer("Human")) {
+        if (menuSel[p] != 0) { /* 如果某玩家 p 的 menuSel 有值，这个 p 不一定是本机玩家 */
+            currentSpeedSel = menuSel[p]; /* 接收它 */
+            menuSel[p] = 0;               /* 清空它，等待下一次接收 */
+
+            /* 以下就是对本机的操作了 */
+            SetGameSpeed(6, currentSpeedSel);
+            setcurpl(getuserplayerid());
+            
+            if (p == getuserplayerid()) { /* 如果本机玩家恰好就是操作菜单的玩家 */
+                PlayWAV("sound\\glue\\mousedown2.wav");
+                printAt(10, "你将游戏速度更改为 \x07{}\x02%", currentSpeedSel);
+            } else {
+                PlayWAV("sound\\misc\\transmission.wav");
+                printAt(10, "{}{} \x02将游戏速度更改为 \x07{}\x02%", PColor(p), PName(p), currentSpeedSel);
+            }
+        }
+    }
+}

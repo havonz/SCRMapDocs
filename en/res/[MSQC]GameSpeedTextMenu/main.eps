@@ -1,0 +1,100 @@
+// EUDDB: https://euddb.website/ 
+
+/* Set the game speed percentage function, with the normal speed of Fastest (level: 6) as 100% */ 
+function SetGameSpeed(level, speed) {
+    const mspf = 1000000 / (10000 / 42 * speed);
+    dwwrite_epd(EPD(0x5124D8) + level, mspf);
+}
+
+const MOUSE_X_EPD, MOUSE_Y_EPD = EPD(0x6CDDC4), EPD(0x6CDDC8);
+const menuSel = PVariable();
+var currentSpeedSel;
+
+/* Register the menuSel global variable to MSQC */ 
+EUDRegisterObjectToNamespace("menuSel", menuSel);
+
+function showMenu(p) {
+    const speedList = list(50, 100, 125, 150, 200, 400, 4200);
+    const isMouseOvered = EUDArray(7);
+    if (getcurpl() == p) {
+        const buf = StringBuffer(255);
+        buf.printfAt(0, "\x02Currently selected game speed: \x07{}\x02%\x02", currentSpeedSel);
+        foreach(i : py_range(0, 7)) {
+            buf.insert(0);
+            if (speedList[i] == currentSpeedSel) {
+                buf.append("\x03[\x07x\x03]\x1E ");
+            } else {
+                buf.append("\x03[  ]\x02");
+            }
+            buf.appendf(" Game Speed {}%\x02", speedList[i]);
+            buf.DisplayAt(i + 1);
+        }
+        if (MemoryEPD(MOUSE_X_EPD, AtLeast, 10) && MemoryEPD(MOUSE_X_EPD, AtMost, 25)) { /* The menu option X coordinates triggers the range */
+            foreach(i : py_range(0, 7)) {
+                if (MemoryEPD(MOUSE_Y_EPD, AtLeast, 129 + i * 16) && MemoryEPD(MOUSE_Y_EPD, AtMost, 139 + i * 16)) { /* The menu option Y coordinates triggers the range */
+                    if (speedList[i] != currentSpeedSel) {
+                        buf.insert(0);
+                        buf.append("\x07[  ]\x1E ");
+                        buf.appendf(" Game Speed {}%\x02", speedList[i]);
+                        buf.DisplayAt(i + 1);
+                        if (isMouseOvered[i] == false) {
+                            PlayWAV("sound\\glue\\mouseover.wav");
+                            isMouseOvered[i] = true;
+                        }
+                    }
+                } else {
+                    isMouseOvered[i] = false;
+                }
+            }
+        } else {
+            foreach(i : py_range(0, 6)) {
+                isMouseOvered[i] = false;
+            }
+        }
+    }
+}
+
+function onPluginStart() {
+    /* Set the Fastest game speed to 100% */
+    currentSpeedSel = 100;
+    SetGameSpeed(6, currentSpeedSel);
+}
+
+function beforeTriggerExec() {
+    const cp = getcurpl();
+
+    RawTrigger(actions = list(
+        CreateUnitWithProperties(1, "Zerg Overlord", "Location 1", P1, UnitProperty(invincible = true)),
+        CreateUnitWithProperties(1, "Zerg Overlord", "Location 1", P2, UnitProperty(invincible = true)),
+    ), preserved = false);
+
+    /* Show the menu to all human players */
+    foreach(p : EUDLoopPlayer("Human")) {
+        setcurpl(p);
+        showMenu(p);
+    }
+
+    setcurpl(cp);
+}
+
+function afterTriggerExec() {
+    /* Receive MSQC selection and sync to currentSpeedSel, this loop will execute on each player's machine */ 
+    foreach(p : EUDLoopPlayer("Human")) {
+        if (menuSel[p] != 0) { /* If player p's menuSel has a value, this p is not necessarily the local player */ 
+            currentSpeedSel = menuSel[p]; /* Receive it */
+            menuSel[p] = 0;               /* Clear it and wait for next reception */
+
+            /* The following is operation on the local machine */
+            SetGameSpeed(6, currentSpeedSel);
+            setcurpl(getuserplayerid());
+            
+            if (p == getuserplayerid()) { /* If the local player happens to be the player who operated the menu */
+                PlayWAV("sound\\glue\\mousedown2.wav");
+                printAt(10, "你将游戏速度更改为 \x07{}\x02%", currentSpeedSel);
+            } else {
+                PlayWAV("sound\\misc\\transmission.wav");
+                printAt(10, "{}{} \x02将游戏速度更改为 \x07{}\x02%", PColor(p), PName(p), currentSpeedSel);
+            }
+        }
+    }
+}

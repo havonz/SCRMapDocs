@@ -1,0 +1,65 @@
+// epScript 函数参考：https://flowus.cn/share/8cbb3629-3733-4e0e-91fb-bd965df03795
+
+var NextWaveTime = 3;
+
+function doTriggerList() {
+    // 设定一个无条件触发器，只触发一次
+    DoActions(CreateUnit(1, "Terran SCV", "Location 2", P1), preserved = false,);
+
+    // 设定一个无条件触发器，只触发一次
+    DoActions(CreateUnit(1, "Zerg Zergling", "Location 1", P1), preserved = false,);
+
+    // 设定一个每 3 游戏秒执行的触发器
+    Trigger(
+        conditions = list(
+            ElapsedTime(AtLeast, NextWaveTime), // 这个条件中用到了变量 NextWaveTime 所以只能用 Trigger 而不能用 RawTrigger
+        ),
+        actions = list(
+            GiveUnits(1, "Zerg Zergling", P1, $L("Location 1"), P12),
+            Order("Zerg Zergling", P12, $L("Location 1"), Move, $L("Location 3")),
+            // 给 NextWaveTime + 3 就是本次触发之后 3 秒之后再触发一次
+            NextWaveTime.AddNumber(3),
+            CreateUnit(1, "Zerg Zergling", "Location 1", P1),
+        ),
+    );
+
+    // 设定一个玩家12的小狗进入 Location 3 就死的触发器
+    RawTrigger(
+        conditions = list(
+            Bring(P12, AtLeast, 1, "Zerg Zergling", $L("Location 3")),
+        ),
+        actions = list(
+            KillUnitAt(10, "Zerg Zergling", "Location 3", P12),
+        ),
+    );
+
+    // 设定一个 玩家1 小狗进入 Location 3 变 10 只，只触发一次
+    RawTrigger(
+        conditions = list(
+            Bring(P1, AtLeast, 1, "Zerg Zergling", $L("Location 3")),
+        ),
+        actions = list(
+            CreateUnit(9, "Zerg Zergling", "Location 3", P1),
+        ),
+        preserved = false,
+    );
+}
+
+
+function onPluginStart() {
+
+}
+
+function beforeTriggerExec() { // 游戏每一帧会先执行一次这个，然后执行传统触发器
+    const cp = getcurpl();
+    
+    // 其它代码写在这里
+
+    setcurpl(cp);
+
+    doTriggerList(); // 执行触发器列表
+}
+
+function afterTriggerExec() { // 游戏每一帧在执行完传统触发器后，会执行一次这个函数
+
+}

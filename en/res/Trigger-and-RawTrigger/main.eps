@@ -1,0 +1,63 @@
+var NextWaveTime = 3;
+
+function doTriggerList() {
+    // Set up an unconditional trigger that only triggers once 
+    DoActions(CreateUnit(1, "Terran SCV", "Location 2", P1), preserved = false,);
+
+    // Set up an unconditional trigger that only triggers once 
+    DoActions(CreateUnit(1, "Zerg Zergling", "Location 1", P1), preserved = false,);
+
+    // Set up a trigger that executes every 3 game seconds 
+    Trigger(
+        conditions = list(
+            ElapsedTime(AtLeast, NextWaveTime), // This condition uses the variable NextWaveTime so only Trigger can be used instead of RawTrigger 
+        ),
+        actions = list(
+            GiveUnits(1, "Zerg Zergling", P1, $L("Location 1"), P12),
+            Order("Zerg Zergling", P12, $L("Location 1"), Move, $L("Location 3")),
+            // Give NextWaveTime + 3 to trigger again 3 seconds after this trigger 
+            NextWaveTime.AddNumber(3),
+            CreateUnit(1, "Zerg Zergling", "Location 1", P1),
+        ),
+    );
+
+     // Set up a trigger that kills player 12's zerglings when entering Location 3 
+    RawTrigger(
+        conditions = list(
+            Bring(P12, AtLeast, 1, "Zerg Zergling", $L("Location 3")),
+        ),
+        actions = list(
+            KillUnitAt(10, "Zerg Zergling", "Location 3", P12),
+        ),
+    );
+
+    // Set up a trigger that turns 1 of player 1's zerglings into 10 when entering Location 3, only triggers once 
+    RawTrigger(
+        conditions = list(
+            Bring(P1, AtLeast, 1, "Zerg Zergling", $L("Location 3")),
+        ),
+        actions = list(
+            CreateUnit(9, "Zerg Zergling", "Location 3", P1),
+        ),
+        preserved = false,
+    );
+}
+
+
+function onPluginStart() {
+
+}
+
+function beforeTriggerExec() {
+    const cp = getcurpl();
+    
+    // Other code written here 
+
+    setcurpl(cp);
+
+    doTriggerList(); // Execute triggers
+}
+
+function afterTriggerExec() {
+
+}
