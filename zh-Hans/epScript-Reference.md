@@ -13,6 +13,7 @@
   [常量对照表](epScript-Reference/Constants-Reference.md)  
   [内置函数库](epScript-Reference/Built-in-Functions.md)  
 
+
 ## 如何开始
 
 以下操作，假如有遇到看不懂的地方，可以尝试搜索引擎解决  
@@ -38,14 +39,12 @@
     Windows 10 可以参考 [https://www.baidu.com/s?wd=win10显示文件扩展名](https://www.baidu.com/s?wd=win10%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D)  
     Windows 11 可以参考 [https://www.baidu.com/s?wd=win11显示文件扩展名](https://www.baidu.com/s?wd=win11显示文件扩展名)  
 
-    
 
 ### 地图准备
 
 准备一个普通的地图文件，可以用 ScmDraft2 新建，然后保存成 Starcraft: Remastered Broodwar Map (*.scx) 格式的文件  
 依然保存到一个纯英文没有空格的路径中，例如 D:\Projects\test\basemap.scx
 
-    
 
 ### 建立工程
 1. 新建一个文本文档，并将它的扩展名改为 edd ，例如 D:\Projects\test\test.edd  
@@ -86,7 +85,6 @@
 
     至此，工程就已经建立好了，直接双击运行 build.bat 就可以生成 test.scx，将这个地图放入星际重制版的地图目录中，然后进游戏就能看到它在屏幕上输出的 `Hello World`
 
-    
 
 ### 示例工程
 
@@ -94,10 +92,9 @@
     - [Trigger和RawTrigger的运用.zip](res/Trigger和RawTrigger的运用.zip)
     - [修改单位消耗人口限制.zip](res/修改单位消耗人口限制.zip)
     - [位置函数的使用.zip](res/位置函数的使用.zip)
-    - [[MSQC演示]游戏中文字菜单.zip](res/[MSQC演示]游戏中文字菜单.zip)
+    - [[MSQC演示]游戏中文字菜单.zip](res/[MSQC演示]游戏中文字菜单.zip)  </br></br>
 
-</br>
-</br>
+
 
 ## 运行模式
 
@@ -146,9 +143,7 @@
         a.afterTriggerExec()
         eudTurbo.afterTriggerExec()
     ```
-
-</br>
-</br>
+    </br>
 
 ## edd 和 eds 的区别
 
@@ -162,18 +157,15 @@ euddraft 对这两种扩展名的处理方式不一样
 - ### 对 eds 格式
 
     它会在顺利编译生成地图完成后退出  
-    如果不顺利，会输出错误信息并等待你按回车键退出  
-
-</br>
-</br>
+    如果不顺利，会输出错误信息并等待你按回车键退出  </br></br>
 
 ## 数据同步说明
 
 如果将`非同步数据`（例如玩家当前鼠标位置）赋值给变量，该变量对于每个玩家的机器上都不一样，若以该变量的状态作为判断条件执行了`需要同步的数据`的动作（例如创建单位），则可能会导致多人游戏中玩家`需要同步的数据`不同步（例如 A 机器上创建了单位，B 机器上却没创建单位）而引发掉线。
 
-该类任务通常可以使用 MSQC 插件来辅助解决
+该类任务通常可以使用 MSQC 插件来辅助解决  </br></br>
 
-</br>
+
 
 ## 游戏时间说明
 
@@ -249,11 +241,7 @@ euddraft 对这两种扩展名的处理方式不一样
     }
     ```
     同理 CountdownTimer 条件也是取屏幕上方倒计时的整数部分  
-    因此在写有关时间判定的条件时，不应该使用 Exactly（等于），而应该用 AtLeast（大于或等于） 或者 AtMost（小于或等于）  
-
-    
-
-  
+    因此在写有关时间判定的条件时，不应该使用 Exactly（等于），而应该用 AtLeast（大于或等于） 或者 AtMost（小于或等于）  </br></br>
 
 ## 当前玩家与本机玩家
 

@@ -10,7 +10,7 @@
     [http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers)  
     [https://github.com/phu54321/TrigEditPlus/blob/master/TrigEditPlus/Editor/TriggerEditor.h#L71](https://github.com/phu54321/TrigEditPlus/blob/master/TrigEditPlus/Editor/TriggerEditor.h#L71)  
 
-</br>
+    </br>
 
 - ## 虚拟触发器（Virtual Triggers）
 
@@ -21,8 +21,8 @@
     在此基础之上，[trgk](http://www.staredit.net/topic/17546/#11) 设计出条件控制流程的 Python 伪语法库 [eudplib](https://github.com/armoha/eudplib)。  
 
     > 参考：[http://www.staredit.net/topic/17546/](http://www.staredit.net/topic/17546/)
-
-</br>
+    
+    </br>
 
 - ## 数学运算
 
@@ -128,7 +128,7 @@
     ```
     </details>
 
-</br>
+    </br>
 
 - ## 变量（EUDVariable）实现
 
@@ -246,8 +246,6 @@
         }
         ```
 
-      
-
     - ### 将变量的值传入到其它条件或动作
 
         将变量的值传入到其它动作中的实现过程  
@@ -339,8 +337,6 @@
             加矿触发器.__lshift__(RawTrigger(actions = 加矿动作)); // “加矿触发器” 在这
         }
         ```
-
-      
 
     - ### 为什么一个 EUDVariable 在内存中占用 72 字节？
 
@@ -607,8 +603,7 @@
             // 结果是 a:10 b:6
         }
         ```
-
-</br>
+    </br>
 
 - ## 字符串（Db 或 StringBuffer）、轻数组（EUDArray）及轻变量（EUDLightVariable）
 
@@ -621,8 +616,6 @@
         字符串就是 ASCII 字符的数组，其所占据的字节数即为包含的 ASCII 字符数量。  
         与字符串类似，轻变量也没有复杂的结构，它只占据连续的`4`个字节，表示 32 位整数。  
         轻数组是多个轻变量组成的数组，它占用连续的`数组尺寸 * 4`字节。  
-
-      
 
     - ### 内存读取或拷贝
 
@@ -667,10 +660,10 @@
         end
         ```
 
-        - 这个赋值操作用了 65 个触发器和一个中间单位彩蛇鸟来完成  
-            1. 用一个触发器将小狗的死亡数和辅助的彩蛇鸟的死亡数归零  
-            2. 使用 32 个触发器将机枪兵的死亡数用二进制位递减的方式转移到小狗和彩蛇鸟的死亡数上  
-            3. 将彩蛇鸟的死亡数用二进制递减的方转移回机枪兵的死亡数上  
+        这个赋值操作用了 65 个触发器和一个中间单位彩蛇鸟来完成  
+        1. 用一个触发器将小狗的死亡数和辅助的彩蛇鸟的死亡数归零  
+        2. 使用 32 个触发器将机枪兵的死亡数用二进制位递减的方式转移到小狗和彩蛇鸟的死亡数上  
+        3. 将彩蛇鸟的死亡数用二进制递减的方转移回机枪兵的死亡数上  
         
 
         在星际争霸重制版中，Deaths 是支持 bitmask 判断的（通常管它叫 DeathsX）  
@@ -696,9 +689,9 @@
         end
         ```
 
-        - 这个赋值操作用了 33 个触发器来完成  
-          1. 用一个触发器将小狗的死亡数归零  
-          2. 使用 32 个触发器将机枪兵的死亡数用二进制位判断法将对应的二进制位附加到小狗的死亡数上  
+        这个赋值操作用了 33 个触发器来完成  
+        1. 用一个触发器将小狗的死亡数归零  
+        2. 使用 32 个触发器将机枪兵的死亡数用二进制位判断法将对应的二进制位附加到小狗的死亡数上  
 
         以上我们用经典触发器实现了单位死亡数值的传递。  
 
