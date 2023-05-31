@@ -1,5 +1,12 @@
 # epScript 字符串说明
 
+- 字符串说明
+    - [编译期字符串（py_str）](#%E7%BC%96%E8%AF%91%E6%9C%9F%E5%AD%97%E7%AC%A6%E4%B8%B2py_str)
+    - [地图字符串（TrgString）](#%E5%9C%B0%E5%9B%BE%E5%AD%97%E7%AC%A6%E4%B8%B2trgstring)
+    - [字符串数据（Db）](#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E6%8D%AEdb)
+    - [TBL 字符串（stat_txt.tbl）](#tbl-%E5%AD%97%E7%AC%A6%E4%B8%B2stat_txttbl)
+
+
 - ## 编译期字符串（py_str）
 
     编译期字符串是指在编译期产生的最终不会插入地图的字符串，它包含所有的字面量字符串（literal string）以及编译期的字符串常量  

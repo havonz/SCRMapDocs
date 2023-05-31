@@ -1,5 +1,39 @@
 # epScript 基本语法
 
+- [基本语法的说明](#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E7%9A%84%E8%AF%B4%E6%98%8E)
+    - [编译期（compile-time）和运行时（run-time）](#%E7%BC%96%E8%AF%91%E6%9C%9Fcompile-time%E5%92%8C%E8%BF%90%E8%A1%8C%E6%97%B6run-time)
+    - [大小写敏感](#%E5%A4%A7%E5%B0%8F%E5%86%99%E6%95%8F%E6%84%9F)
+    - [值类型](#%E5%80%BC%E7%B1%BB%E5%9E%8B)
+    - [逻辑规则](#%E9%80%BB%E8%BE%91%E8%A7%84%E5%88%99)
+    - [字面量数字（literal number）](#%E5%AD%97%E9%9D%A2%E9%87%8F%E6%95%B0%E5%AD%97literal-number)
+    - [字面量字符串（literal string）](#%E5%AD%97%E9%9D%A2%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2literal-string)
+    - [字面量字节串（literal bytes）](#%E5%AD%97%E9%9D%A2%E9%87%8F%E5%AD%97%E8%8A%82%E4%B8%B2literal-bytes)
+    - [命名规则](#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99)
+    - [引入其它模块](#%E5%BC%95%E5%85%A5%E5%85%B6%E5%AE%83%E6%A8%A1%E5%9D%97)
+    - [符号](#%E7%AC%A6%E5%8F%B7)
+        - [代码块 {}](#%E4%BB%A3%E7%A0%81%E5%9D%97-)
+        - [语法层换行符 \;](#%E8%AF%AD%E6%B3%95%E5%B1%82%E6%8D%A2%E8%A1%8C%E7%AC%A6-%5C)
+        - [索引运算符 \[\]](#%E7%B4%A2%E5%BC%95%E8%BF%90%E7%AE%97%E7%AC%A6-%5C%5C)
+        - [赋值符 \=](#%E8%B5%8B%E5%80%BC%E7%AC%A6-%5C)
+        - [行注释符 //](#%E8%A1%8C%E6%B3%A8%E9%87%8A%E7%AC%A6-)
+        - [块注释符 /\* \*/](#%E5%9D%97%E6%B3%A8%E9%87%8A%E7%AC%A6-%5C-%5C)
+        - [条件判断运算符 > <](#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%BF%90%E7%AE%97%E7%AC%A6--)
+        - [数学运算符 + - * /](#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E7%AC%A6-----)
+        - [自增/自减/自乘/自除运算符](#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E8%87%AA%E4%B9%98%E8%87%AA%E9%99%A4%E8%BF%90%E7%AE%97%E7%AC%A6)
+    - [条件判断语法](#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E6%B3%95)
+        - [if](#if)
+        - [if else](#if-else)
+        - [条件串联](#%E6%9D%A1%E4%BB%B6%E4%B8%B2%E8%81%94)
+        - [条件嵌套](#%E6%9D%A1%E4%BB%B6%E5%B5%8C%E5%A5%97)
+        - [单次执行](#%E5%8D%95%E6%AC%A1%E6%89%A7%E8%A1%8C)
+    - [流程控制](#%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6)
+        - [for 循环](#for-%E5%BE%AA%E7%8E%AF)
+        - [while 循环](#while-%E5%BE%AA%E7%8E%AF)
+        - [break 跳出循环](#break-%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF)
+        - [foreach 迭代器循环](#foreach-%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%BE%AA%E7%8E%AF)
+        - [switch 变量值多重选择分支](#switch-%E5%8F%98%E9%87%8F%E5%80%BC%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E5%88%86%E6%94%AF)
+        - [- #### epdswitch 内存值多重选择分支](#epdswitch-%E5%86%85%E5%AD%98%E5%80%BC%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E5%88%86%E6%94%AF)
+
 ## 基本语法的说明
 
 - ### 编译期（compile-time）和运行时（run-time）
@@ -162,7 +196,7 @@
 
     - #### 代码块 {}
 
-        代码块`{}`，使用大括号把单句或多句代码框起来为一个代码块
+        使用大括号把单句或多句代码框起来为一个代码块
 
         ```JavaScript
         {
@@ -183,7 +217,7 @@
                     println("{} 大于 5", i);
         ```
 
-    - #### 语法层换行符 ;
+    - #### 语法层换行符 \;
 
         语法层的换行符是分号`;`，而不是换行符
 
@@ -191,9 +225,9 @@
         var a;var b;
         ```
 
-    - #### 索引运算符 []
+    - #### 索引运算符 \[\]
 
-        取索引用一对儿中括号`[]`，修改或访问数组中的元素
+        取索引访问或修改数组中的元素
 
         ```JavaScript
         const a = EUDArray(10);
@@ -201,7 +235,7 @@
         var b = a[0];
         ```
 
-    - #### 赋值符 =
+    - #### 赋值符 \=
 
         赋值符号是单个等号`=`
 
@@ -457,99 +491,95 @@
 
     - #### foreach 迭代器循环
 
-        - 编译期迭代器
+        **编译期迭代器**  
+        py_range 和 py_enumerator 是编译期迭代器  
+        使用编译期迭代器的情况下，foreach 是编译期循环，会在编译期静态展开，不能使用 break 和 continue  
+        ```C#
+        foreach (i : py_range(5)) {
+            simpleprint(i + 1);
+        }
+        // 完全等价于以下代码
+        simpleprint(0 + 1);
+        simpleprint(1 + 1);
+        simpleprint(2 + 1);
+        simpleprint(3 + 1);
+        simpleprint(4 + 1);
+        ```
 
-            py_range 和 py_enumerator 是编译期迭代器  
-            使用编译期迭代器的情况下，foreach 是编译期循环，会在编译期静态展开，不能使用 break 和 continue  
-            ```C#
-            foreach (i : py_range(5)) {
-                simpleprint(i + 1);
+        ```C#
+        foreach (i : py_range(3)) {
+            once (ElapsedTime(AtLeast, i)) {
+                println("第 {} 秒", i);
             }
-            // 完全等价于以下代码
-            simpleprint(0 + 1);
-            simpleprint(1 + 1);
-            simpleprint(2 + 1);
-            simpleprint(3 + 1);
-            simpleprint(4 + 1);
-            ```
+        }
+        // 完全等价于以下代码
+        once (ElapsedTime(AtLeast, 0)) {
+            println("第 {} 秒", 0);
+        }
+        once (ElapsedTime(AtLeast, 1)) {
+            println("第 {} 秒", 1);
+        }
+        once (ElapsedTime(AtLeast, 2)) {
+            println("第 {} 秒", 2);
+        }
+        ```
 
-            ```C#
-            foreach (i : py_range(3)) {
-                once (ElapsedTime(AtLeast, i)) {
-                    println("第 {} 秒", i);
-                }
-            }
-            // 完全等价于以下代码
-            once (ElapsedTime(AtLeast, 0)) {
-                println("第 {} 秒", 0);
-            }
-            once (ElapsedTime(AtLeast, 1)) {
-                println("第 {} 秒", 1);
-            }
-            once (ElapsedTime(AtLeast, 2)) {
-                println("第 {} 秒", 2);
-            }
-            ```
+        **运行时迭代器**  
+        名字以 EUDLoop 开头的迭代器通常是运行时迭代器  
+        EUDLoopPlayer、EUDLoopRange、EUDLoopUnit、EUDLoopUnit2、EUDLoopCUnit、EUDLoopNewUnit、EUDLoopNewCUnit、EUDLoopPlayerUnit、EUDLoopPlayerCUnit  
+        其次是 EUDQueue、EUDDeque 容器也属于运行时迭代器，UnitGroup.cploop 也返回一个运行时迭代器  
+        循环遍历展开双向队列（deque）中的每一个项，EUDDeque 是运行时迭代器类型  
+        ```C#
+        // dq3 是一个尺寸为 3 的 EUDDeque
+        const dq3 = EUDDeque(3)();
+        const ret = EUDCreateVariables(6);
 
-        - 运行时迭代器
-        
-            名字以 EUDLoop 开头的迭代器通常是运行时迭代器  
-            EUDLoopPlayer、EUDLoopRange、EUDLoopUnit、EUDLoopUnit2、EUDLoopCUnit、EUDLoopNewUnit、EUDLoopNewCUnit、EUDLoopPlayerUnit、EUDLoopPlayerCUnit  
-            其次是 EUDQueue、EUDDeque 容器也属于运行时迭代器，UnitGroup.cploop 也返回一个运行时迭代器  
-            
-            循环遍历展开双向队列（deque）中的每一个项，EUDDeque 是运行时迭代器类型  
-            ```C#
-            // dq3 是一个尺寸为 3 的 EUDDeque
-            const dq3 = EUDDeque(3)();
-            const ret = EUDCreateVariables(6);
+        // 如果 dq3 为空则运行时不会有任何代码被执行
+        foreach(v : dq3) {
+            ret[0] += v;
+        }
 
-            // 如果 dq3 为空则运行时不会有任何代码被执行
-            foreach(v : dq3) {
-                ret[0] += v;
-            }
+        // 从右侧添加 1 和 2 两个值到 dq3 这个 EUDDeque 中
+        dq3.append(1);  // dq3 : (1)
+        dq3.append(2);  // dq3 : (1, 2)
+        foreach(v : dq3) {
+            ret[1] += v; // 3 = 1 + 2
+        }
 
-            // 从右侧添加 1 和 2 两个值到 dq3 这个 EUDDeque 中
-            dq3.append(1);  // dq3 : (1)
-            dq3.append(2);  // dq3 : (1, 2)
-            foreach(v : dq3) {
-                ret[1] += v; // 3 = 1 + 2
-            }
+        // 从右侧添加 3 和 4 两个值到 dq3 这个 EUDDeque 中
+        dq3.append(3);  // dq3 : (1, 2, 3)
+        dq3.append(4);  // dq3 : (2, 3, 4)
+        foreach(v : dq3) {
+            ret[2] += v; // 9 = 2 + 3 + 4
+        }
 
-            // 从右侧添加 3 和 4 两个值到 dq3 这个 EUDDeque 中
-            dq3.append(3);  // dq3 : (1, 2, 3)
-            dq3.append(4);  // dq3 : (2, 3, 4)
-            foreach(v : dq3) {
-                ret[2] += v; // 9 = 2 + 3 + 4
-            }
+        // 从右侧添加 5 这个值到 dq3 这个 EUDDeque 中
+        dq3.append(5);  // dq3 : (3, 4, 5)
+        foreach(v : dq3) {
+            ret[3] += v; // 12 = 3 + 4 + 5
+        }
 
-            // 从右侧添加 5 这个值到 dq3 这个 EUDDeque 中
-            dq3.append(5);  // dq3 : (3, 4, 5)
-            foreach(v : dq3) {
-                ret[3] += v; // 12 = 3 + 4 + 5
-            }
+        // 从左侧弹出一个值，这里 3 被弹出
+        const three = dq3.popleft();  // dq3 : (4, 5)
+        foreach(v : dq3) {
+            ret[4] += v; // 9 = 4 + 5
+        }
 
-            // 从左侧弹出一个值，这里 3 被弹出
-            const three = dq3.popleft();  // dq3 : (4, 5)
-            foreach(v : dq3) {
-                ret[4] += v; // 9 = 4 + 5
-            }
-
-            // 从右侧添加 6 和 7 两个值到 dq3 这个 EUDDeque 中
-            dq3.append(6);  // dq3 : (4, 5, 6)
-            dq3.append(7);  // dq3 : (5, 6, 7)
-            foreach(v : dq3) {
-                ret[5] += v; // 18 = 5 + 6 + 7
-            }
-            ```
+        // 从右侧添加 6 和 7 两个值到 dq3 这个 EUDDeque 中
+        dq3.append(6);  // dq3 : (4, 5, 6)
+        dq3.append(7);  // dq3 : (5, 6, 7)
+        foreach(v : dq3) {
+            ret[5] += v; // 18 = 5 + 6 + 7
+        }
+        ```
 
     - #### switch 变量值多重选择分支
 
         对单个值的多种状态判断的条件分支
 
-        - 普通 switch
-
-            ```JavaScript
-            switch (day) {
+        **普通 switch**
+        ```JavaScript
+        switch (day) {
             case 1:
                 DisplayText("苦逼上班日子开始了");
                 break;
@@ -562,49 +592,46 @@
                 break;
             default:
                 DisplayText("期待周末");
-            }
-            ```
+        }
 
-            可以看作 if 条件分支代码
+        // 上述 switch 代码可以看作以下 if 条件分支代码
 
-            ```JavaScript
-            if (day == 1) {
-                DisplayText("苦逼上班日子开始了");
-            } else if (day == 4 || day == 5) {
-                DisplayText("马上周末了");
-            } else if (day == 0 || day == 6) {
-                DisplayText("好嗨啊！");
-            } else {
-                DisplayText("期待周末");
-            }
-            ```
+        if (day == 1) {
+            DisplayText("苦逼上班日子开始了");
+        } else if (day == 4 || day == 5) {
+            DisplayText("马上周末了");
+        } else if (day == 0 || day == 6) {
+            DisplayText("好嗨啊！");
+        } else {
+            DisplayText("期待周末");
+        }
+        ```
 
-        - 带 bitmask 的 switch
-
-            ```JavaScript
-            var x = 0x101;
-            switch (x, 0xff) {
+        **带 bitmask 的 switch**
+        ```JavaScript
+        var x = 0x101;
+        switch (x, 0xff) {
             case 0:
                 // (x & 0xff) == 0
                 break;
             default:
                 // (x & 0xff) != 0
                 break;
-            }
-            ```
+        }
+        ```
 
     - #### epdswitch 内存值多重选择分支
 
         ```JavaScript
         const unitId = epd + 0x64/4;
         epdswitch (unitId, 255) {  // you can put constant epd in epdswitch too
-        // switch branching by unit kind
-        case $U("Terran Marine"):
-            // Run when unitType is marine
-            break;
-        case $U("Terran Ghost"):
-            // Run when unitType is ghost
-            break;
+            // switch branching by unit kind
+            case $U("Terran Marine"):
+                // Run when unitType is marine
+                break;
+            case $U("Terran Ghost"):
+                // Run when unitType is ghost
+                break;
         }
         ```
 

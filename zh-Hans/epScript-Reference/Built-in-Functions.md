@@ -1,6 +1,191 @@
 # epScript 内建函数
 
-</br>
+- [触发器条件和动作](#触发器条件和动作)
+    - [普通条件函数](#普通条件函数)
+        - [Accumulate](#accumulate)
+        - [Bring](#bring)
+        - [Command](#command)
+        - [CountdownTimer](#countdowntimer)
+        - [Deaths](#deaths)
+        - [Memory](#memory)
+        - [Kills](#kills)
+        - [ElapsedTime](#elapsedtime)
+        - [LeastKills/MostKills](#leastkillsmostkills)
+        - [LeastResources/MostResources](#leastresourcesmostresources)
+        - [Opponents](#opponents)
+        - [Score](#score)
+        - [Switch](#switch)
+        - [~~Always/Never~~](#alwaysnever)
+    - [扩展条件函数](#扩展条件函数)
+        - [IsUserCP](#isusercp)
+        - [Is64BitWireframe](#is64bitwireframe)
+    - [普通动作函数](#普通动作函数)
+        - [CenterView](#centerview)
+        - [CreateUnit](#createunit)
+        - [Defeat/Victory/Draw](#defeatvictorydraw)
+        - [DisplayText](#displaytext)
+        - [GiveUnits](#giveunits)
+        - [KillUnit](#killunit)
+        - [LeaderBoard](#leaderboard)
+        - [MinimapPing](#minimapping)
+        - [ModifyUnit](#modifyunit)
+        - [MoveLocation](#movelocation)
+        - [MoveUnit](#moveunit)
+        - [MuteUnitSpeech/UnMuteUnitSpeech](#muteunitspeechunmuteunitspeech)
+        - [Order](#order)
+        - [PauseGame/UnpauseGame](#pausegameunpausegame)
+        - [PauseTimer/UnpauseTimer](#pausetimerunpausetimer)
+        - [PlayWAV](#playwav)
+        - [~~PreserveTrigger~~](#preservetrigger)
+        - [RemoveUnit](#removeunit)
+        - [RunAIScript](#runaiscript)
+        - [SetAllianceStatus](#setalliancestatus)
+        - [SetCountdownTimer](#setcountdowntimer)
+        - [SetDeaths](#setdeaths)
+        - [SetMemory](#setmemory)
+        - [SetDoodadState](#setdoodadstate)
+        - [SetInvincibility](#setinvincibility)
+        - [SetMissionObjectives](#setmissionobjectives)
+        - [SetNextScenario](#setnextscenario)
+        - [SetResources](#setresources)
+        - [SetScore](#setscore)
+        - [SetSwitch](#setswitch)
+        - [TalkingPortrait](#talkingportrait)
+        - [Transmission](#transmission)
+        - [~~Wait~~](#wait)
+    - [扩展动作函数](#扩展动作函数)
+        - [SetKills](#setkills)
+        - [SetCurrentPlayer](#setcurrentplayer)
+        - [AddCurrentPlayer](#addcurrentplayer)
+        - [DisplayTextAll](#displaytextall)
+        - [PlayWAVAll](#playwavall)
+        - [MinimapPingAll](#minimappingall)
+        - [CenterViewAll](#centerviewall)
+        - [SetMissionObjectivesAll](#setmissionobjectivesall)
+        - [TalkingPortraitAll](#talkingportraitall)
+        - [SetNextPtr](#setnextptr)
+- [扩展函数](#扩展函数)
+    - [编译期](#编译期)
+        - [编号索引](#编号索引)
+        - [list](#list)
+        - [EUDCreateVariables](#eudcreatevariables)
+        - [SetVariables](#setvariables)
+        - [SCMD2Text](#scmd2text)
+        - [unProxy](#unproxy)
+        - [UnitProperty](#unitproperty)
+        - [GetPropertyIndex](#getpropertyindex)
+        - [GetPlayerInfo](#getplayerinfo)
+        - [EUDRegisterObjectToNamespace](#eudregisterobjecttonamespace)
+        - [GetEUDNamespace](#geteudnamespace)
+        - [MPQAddFile](#mpqaddfile)
+        - [MPQAddWave](#mpqaddwave)
+    - [编译期 Python 宏](#编译期-python-宏)
+        - [py_print](#py_print)
+        - [py_list](#py_list)
+        - [py_open](#py_open)
+        - [py_eval](#py_eval)
+        - [py_str](#py_str)
+        - [py_len](#py_len)
+        - [py_enumerate](#py_enumerate)
+        - [py_range](#py_range)
+    - [编译期字节转换](#编译期字节转换)
+        - [b2i](#b2i)
+        - [i2b](#i2b)
+        - [u2b/b2u](#u2bb2u)
+        - [utf8 编码/解码](#utf8-编码/解码)
+    - [常规函数](#常规函数)
+        - [EPD](#epd)
+        - [l2v](#l2v)
+        - [EUDFuncPtr](#eudfuncptr)
+    - [触发器构建函数](#触发器构建函数)
+        - [RawTrigger](#rawtrigger)
+        - [Trigger](#trigger)
+        - [PTrigger](#ptrigger)
+        - [DoActions](#doactions)
+        - [VProc](#vproc)
+    - [运行时迭代器](#运行时迭代器)
+        - [EUDLoopPlayer](#eudloopplayer)
+        - [EUDLoopRange](#eudlooprange)
+        - [EUDLoopUnit](#eudloopunit)
+    - [屏幕输出文字函数](#屏幕输出文字函数)
+        - [DisplayTextAt](#displaytextat)
+        - [print](#print)
+        - [GetGlobalStringBuffer](#getglobalstringbuffer)
+        - [eprint](#eprint)
+        - [TextFX](#textfx)
+    - [玩家相关函数](#玩家相关函数)
+        - [getuserplayerid](#getuserplayerid)
+        - [playerexist](#playerexist)
+        - [当前玩家](#当前玩家)
+        - [PColor](#pcolor)
+        - [PName](#pname)
+        - [SetPName](#setpname)
+        - [EUDPlayerLoop](#eudplayerloop)
+    - [区域位置相关函数](#区域位置相关函数)
+        - [setloc](#setloc)
+        - [addloc](#addloc)
+        - [dilateloc](#dilateloc)
+        - [getlocTL](#getloctl)
+        - [setloc_epd](#setloc_epd)
+    - [内存读写相关函数](#内存读写相关函数)
+        - [dwbreak](#dwbreak)
+        - [read/write](#readwrite)
+        - [read_epd/write_epd](#read_epdwrite_epd)
+        - [add_epd/subtract_epd](#add_epdsubtract_epd)
+        - [repmovsd_epd](#repmovsd_epd)
+        - [dwepdread_epd](#dwepdread_epd)
+        - [ cunitread_epd](#cunitread_epd)
+        - [posread_epd](#posread_epd)
+        - [_cp 系列](#_cp-系列)
+        - [readgen](#readgen)
+        - [memcpy](#memcpy)
+        - [memcmp](#memcmp)
+        - [strcpy](#strcpy)
+        - [strcmp](#strcmp)
+        - [strlen](#strlen)
+        - [strnstr](#strnstr)
+        - [dbstr](#dbstr)
+        - [ptr2s/epd2s](#ptr2sepd2s)
+        - [hptr](#hptr)
+        - [gettextptr](#gettextptr)
+        - [dwpatch_epd](#dwpatch_epd)
+        - [GetMapStringAddr](#getmapstringaddr)
+        - [GetTBLAddr](#gettbladdr)
+        - [settbl](#settbl)
+    - [数学函数](#数学函数)
+        - [atan2](#atan2)
+        - [sqrt](#sqrt)
+        - [lengthdir](#lengthdir)
+        - [pow](#pow)
+        - [div](#div)
+        - [rand](#rand)
+        - [seed](#seed)
+        - [randomize](#randomize)
+        - [getgametick](#getgametick)
+    - [位运算函数](#位运算函数)
+        - [bitand](#bitand)
+        - [bitor](#bitor)
+        - [bitnot](#bitnot)
+        - [bitxor](#bitxor)
+        - [bitnand](#bitnand)
+        - [bitnor](#bitnor)
+        - [bitnxor](#bitnxor)
+        - [bitlshift](#bitlshift)
+        - [bitrshift](#bitrshift)
+    - [QueueGameCommand 函数](#queuegamecommand-函数)
+        - [QueueGameCommand](#queuegamecommand)
+        - [QueueGameCommand_MinimapPing](#queuegamecommand_minimapping)
+        - [QueueGameCommand_QueuedRightClick](#queuegamecommand_queuedrightclick)
+        - [QueueGameCommand_Select](#queuegamecommand_select)
+        - [QueueGameCommand_PauseGame](#queuegamecommand_pausegame)
+        - [QueueGameCommand_ResumeGame](#queuegamecommand_resumegame)
+        - [QueueGameCommand_RestartGame](#queuegamecommand_restartgame)
+        - [QueueGameCommand_UseCheat](#queuegamecommand_usecheat)
+        - [QueueGameCommand_TrainUnit](#queuegamecommand_trainunit)
+        - [QueueGameCommand_MergeDarkArchon](#queuegamecommand_mergedarkarchon)
+        - [QueueGameCommand_MergeArchon](#queuegamecommand_mergearchon)
+
+<br />
 
 ## 触发器条件和动作
 
@@ -22,7 +207,7 @@
     var vc2 = l2v(Accumulate(P1, AtLeast, 500, Ore));
     ```
 
-    </br>
+    <br />
 
     - ####  **Accumulate**
 
@@ -38,7 +223,7 @@
         ```
 
 
-    </br>
+    <br />
 
     - #### **Bring**
 
@@ -59,7 +244,7 @@
         ```
 
 
-    </br>
+    <br />
 
     - #### **Command**
 
@@ -114,7 +299,7 @@
         ```
 
 
-    </br>
+    <br />
 
     - #### **CountdownTimer**
 
@@ -131,7 +316,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **Deaths**
 
@@ -163,9 +348,9 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### Memory
+    - #### **Memory**
 
         - `Memory`(内存地址, 不少于/不多于/等于: TrgComparison, 数值) : Condition  
             判断 [内存地址] 上存储的 32 位正整数值是否 [不少于/不多于/等于] [数值]  
@@ -193,9 +378,9 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### Kills
+    - #### **Kills**
 
         - `Kills`(玩家 : TrgPlayer, 不少于/不多于/等于 : TrgComparison, 数值, 单位类型 : TrgUnit) : Condition  
             判断 [玩家] 的 [单位类型] 击杀数是否 [不少于/不多于/等于] [数值] 个  
@@ -210,7 +395,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **ElapsedTime**
 
@@ -227,7 +412,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **LeastKills/MostKills**
 
@@ -249,7 +434,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **LeastResources/MostResources**
 
@@ -271,7 +456,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **Opponents**
 
@@ -286,7 +471,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **Score**
 
@@ -315,7 +500,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **Switch**
 
@@ -334,37 +519,37 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **~~Always/Never~~**
 
         - ~~Always() : Condition~~  
             总是无条件执行，在 epScript 中似乎没啥用处
 
-        - ~~Never**()** : Condition~~  
+        - ~~Never() : Condition~~  
             总是不执行，在 epScript 中似乎没啥用处
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 扩展条件函数
 
 
-    - #### IsUserCP
+    - #### **IsUserCP**
 
         - `IsUserCP()`: Condition  
             非同步条件，用于判断`本机玩家`是否为`当前玩家`
 
       
 
-    - #### Is64BitWireframe
+    - #### **Is64BitWireframe**
 
         - `Is64BitWireframe()`: Condition  
             非同步条件，判断本机星际客户端是否为 64 位的
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 普通动作函数
 
@@ -377,7 +562,7 @@
     DoActions(a1); // 第一行声明的 a1 这个时候才执行
     ```
 
-    </br>
+    <br />
 
     - #### **CenterView**
 
@@ -391,7 +576,7 @@
         CenterView($L("Location 1"));
         ```
 
-    </br>
+    <br />
 
     - #### **CreateUnit**
 
@@ -406,20 +591,20 @@
         ```JavaScript
         CreateUnit(2, "Terran Siege Tank", $L("Location 1"), P1);
         CreateUnitWithProperties(1, "Terran Marine", $L("Location 1"), P1, UnitProperty(
-        hitpoint = 100,       // 生命百分比
-        shield = 100,         // 护盾百分比
-        energy = 100,         // 能量百分比
-        hanger = 0,           // 
-        resource = 0,         //
-        cloaked = False,      // 是否隐形
-        burrowed = False,     // 是否已钻地
-        intransit = False,    // 是否正在被运输
-        hallucinated = False, // 是否是个幻影
-        invincible = False)   // 是否无敌
+            hitpoint = 100,       // 生命百分比
+            shield = 100,         // 护盾百分比
+            energy = 100,         // 能量百分比
+            hanger = 0,           // 
+            resource = 0,         //
+            cloaked = False,      // 是否隐形
+            burrowed = False,     // 是否已钻地
+            intransit = False,    // 是否正在被运输
+            hallucinated = False, // 是否是个幻影
+            invincible = False)   // 是否无敌
         );
         ```
 
-    </br>
+    <br />
 
     - #### **Defeat/Victory/Draw**
 
@@ -432,7 +617,7 @@
         - `Draw()` : Action  
             所有玩家平局结束游戏
 
-    </br>
+    <br />
 
     - #### **DisplayText**
 
@@ -449,7 +634,7 @@
         DisplayText("Hello StarCraft!"); // 输出 WTF StarCraft!
         ```
 
-    </br>
+    <br />
 
     - #### **GiveUnits**
 
@@ -465,7 +650,7 @@
         GiveUnits(3, "Terran Marine", P2, $L("Location 1"), P1);
         ```
 
-    </br>
+    <br />
 
     - #### **KillUnit**
 
@@ -489,7 +674,7 @@
         KillUnitAt(3, "Terran Siege Tank", $L("Location 1"), P1) // 杀死 玩家1 在 Location 1 区域的最多 3 个坦克
         ```
 
-    </br>
+    <br />
 
     - #### **LeaderBoard**
 
@@ -535,7 +720,7 @@
         LeaderBoardGoalControlAt(10, "Terran Marine", $L("目的地"), "机枪兵到达目地");
         ```
 
-    </br>
+    <br />
 
     - #### **MinimapPing**
 
@@ -550,7 +735,7 @@
         MinimapPing($("Location 1"));
         ```
 
-    </br>
+    <br />
 
     - #### **ModifyUnit**
 
@@ -578,7 +763,7 @@
         ModifyUnitHitPoints(100, "Terran Marine", P1, $L("Location 1"), 100);
         ```
 
-    </br>
+    <br />
 
     - #### **MoveLocation**
 
@@ -592,7 +777,7 @@
         MoveLocation($L("Location 1"), "Terran Marine", P1, $L("AnyWhere"));
         ```
 
-    </br>
+    <br />
 
     - #### **MoveUnit**
 
@@ -606,7 +791,7 @@
         MoveUnit(10, "Terran Marine", P1, $L("Location 1"), $L("Location 2"));
         ```
 
-    </br>
+    <br />
 
     - #### **MuteUnitSpeech/UnMuteUnitSpeech**
 
@@ -616,7 +801,7 @@
         - `UnMuteUnitSpeech()` : Action  
             允许非同步执行，给当前玩家所有单位讲话取消静音（触发器单位讲话例外）
 
-    </br>
+    <br />
 
     - #### **Order**
 
@@ -630,7 +815,7 @@
         Order("Terran Marine", P1, $L("Location 1"), Attack, $L("Location 2"))
         ```
 
-    </br>
+    <br />
 
     - #### **PauseGame/UnpauseGame**
 
@@ -640,7 +825,7 @@
         - `UnpauseGame()` : Action  
             为所有玩家继续游戏
 
-    </br>
+    <br />
 
     - #### **PauseTimer/UnpauseTimer**
 
@@ -650,21 +835,21 @@
         - `UnpauseTimer()` : Action  
             为所有玩家继续倒数计时器
 
-    </br>
+    <br />
 
     - #### **PlayWAV**
 
         - `PlayWAV`(WAVName : TrgString) : Action  
             允许非同步执行，为当前玩家播放一个 WAV 文件 [WAVName]
 
-    </br>
+    <br />
 
     - #### **~~PreserveTrigger~~**
 
       - ~~PreserveTrigger() : Action~~  
         保留触发器，因为传统触发器执行一次后就失效，所以需要重复触发则需要加上这一条，epScript 中几乎用不着
 
-    </br>
+    <br />
 
     - #### **RemoveUnit**
 
@@ -683,7 +868,7 @@
             > 假如该动作执行后移除了区域中的一个运输机/碉堡或任意装载设备中的任意一个单位，那么同属这个运输机/碉堡或装载设备中的所有同类型单位都会被移除，并且这些被移除单位不会算在 [个数] 参数指定的个数以内  
             > 假设 RemoveUnitAt(1, "Terran Marine", "Location 1", P1) 这个动作执行后移除了 Location 1 区域的一个碉堡中的机枪兵，那么该碉堡内的所有机枪兵都会被移除，并且这个区域碉堡外如果还有机枪兵，还会被移除一个
 
-    </br>
+    <br />
 
     - #### **RunAIScript**
 
@@ -699,7 +884,7 @@
         RunAIScriptAt("Terran Custom Level", $L("Location 1"));
         ```
 
-    </br>
+    <br />
 
     - #### **SetAllianceStatus**
 
@@ -716,7 +901,7 @@
         SetAllianceStatus(P1, Enemy);
         ```
 
-    </br>
+    <br />
 
     - #### **SetCountdownTimer**
 
@@ -731,7 +916,7 @@
         SetCountdownTimer(Substract, 3); // 给倒数计时器减少 3 游戏秒
         ```
 
-    </br>
+    <br />
 
     - #### **SetDeaths**
 
@@ -761,9 +946,9 @@
         SetDeaths(P1, Add, 10, "Terran Marine"); // 将 玩家1 的 机枪兵 死亡数 +10
         ```
 
-    </br>
+    <br />
 
-    - #### SetMemory
+    - #### **SetMemory**
 
         - `SetMemory`(内存地址, 设为/增加/减少 : TrgModifier, 数值) : Action  
             将 [内存地址] 上的存储的 32 位正整数值 [设为/增加/减少] [数值]  
@@ -806,7 +991,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **SetDoodadState**
 
@@ -819,7 +1004,7 @@
         SetDoodadState(Enable, "Terran Marine", P1, $L("Location 1"));
         ```
 
-    </br>
+    <br />
 
     - #### **SetInvincibility**
 
@@ -833,7 +1018,7 @@
         SetInvincibility(Disable, "Terran Marine", P1, $L("Location 1")); // 将 玩家1 在 Location 1 区域的 机枪兵 的无敌状态设置为 禁用
         ```
 
-    </br>
+    <br />
 
     - #### **SetMissionObjectives**
 
@@ -848,7 +1033,7 @@
         SetMissionObjectives("我们的目标是：\n没有蛀牙！");
         ```
 
-    </br>
+    <br />
 
     - #### **SetNextScenario**
 
@@ -859,7 +1044,7 @@
 
         
 
-    </br>
+    <br />
 
     - #### **SetResources**
 
@@ -874,7 +1059,7 @@
         SetResources(P1, SetTo, 5000, OreAndGas); // 将 玩家1 的 水晶矿 和 气矿 都设置为 2000
         ```
 
-    </br>
+    <br />
 
     - #### **SetScore**
 
@@ -887,7 +1072,7 @@
         SetScore(P1, Add, 1000, Kills); // 给 玩家1 加 1000 分的 击杀分数
         ```
 
-    </br>
+    <br />
 
     - #### **SetSwitch**
 
@@ -903,7 +1088,7 @@
         SetSwitch($S("Switch 1"), Random); // 设置 Switch 1 为随机状态，使用之后 Switch 1 的状态可能是 Set 也可能是 Cleared
         ```
 
-    </br>
+    <br />
 
     - #### **TalkingPortrait**
 
@@ -918,7 +1103,7 @@
         TalkingPortrait("Terran Marine", 5000);
         ```
 
-    </br>
+    <br />
 
     - #### **Transmission**
 
@@ -935,7 +1120,7 @@
         Transmission("Terran Marine", $L("Location 3"), "sound\\Zerg\\Advisor\\ZAdUpd00.WAV", Add, 5000, "我们的目标是：\n没有蛀牙！");
         ```
 
-    </br>
+    <br />
 
     - #### **~~Wait~~**
 
@@ -944,8 +1129,8 @@
             等待 [毫秒] （在 epScript 中建议不使用）
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 
 - ### 扩展动作函数
@@ -953,9 +1138,9 @@
     扩展动作函数是一些无法在传统触发器中找到对应的动作的函数，但它仍然可以看作是触发器动作，会返回动作常量表达式或表达式列表  
     可以加入 RawTrigger 或 DoActions 的动作列表，它可能不再是单一的触发器动作  
 
-    </br>
+    <br />
 
-    - #### SetKills
+    - #### **SetKills**
 
         - `SetKills`(玩家: TrgPlayer, 设为/增加/减少 : TrgModifier, 数值, 单位类型: TrgUnit) : Action | [Action]  
             设置 [玩家] 的对 [单位类型] 击杀数 [设为/增加/减少] [数值]  
@@ -979,9 +1164,9 @@
         );
         ```
 
-    </br>
+    <br />
 
-    - #### SetCurrentPlayer
+    - #### **SetCurrentPlayer**
 
         - `SetCurrentPlayer`(playerid : TrgPlayer) : [Action]  
             允许非同步执行，将`当前玩家`和 cpcache 设置为 [playerid]  
@@ -1000,9 +1185,9 @@
         ));
         ```
 
-    </br>
+    <br />
 
-    - #### AddCurrentPlayer
+    - #### **AddCurrentPlayer**
 
         - `AddCurrentPlayer`(playerid : TrgPlayer) : [Action]  
             允许非同步执行，将`当前玩家`和 cpcache 自增 [playerid]  
@@ -1040,57 +1225,57 @@
         ));
         ```
 
-    </br>
+    <br />
 
-    - #### DisplayTextAll
+    - #### **DisplayTextAll**
 
         - `DisplayTextAll`(文本 : TrgString) : [Action]  
             为所有的玩家（包括观察者）文本区的下一行显示 [文本]  
             由两条传统触发器动作构成
 
-    </br>
+    <br />
 
-    - #### PlayWAVAll
+    - #### **PlayWAVAll**
 
         - `PlayWAVAll`(声音路径) : [Action]  
             为所有的玩家（包括观察者）播放声音 [声音路径]  
             由两条传统触发器动作构成  
 
-    </br>
+    <br />
 
-    - #### MinimapPingAll
+    - #### **MinimapPingAll**
 
         - `MinimapPingAll`(位置) : [Action]  
             为所有的玩家（包括观察者）在小地图上的 [位置] 发一个 Ping  
             由两条传统触发器动作构成  
 
-    </br>
+    <br />
 
-    - #### CenterViewAll
+    - #### **CenterViewAll**
 
         - `CenterViewAll`(位置) : [Action]  
             将所有的玩家（包括观察者）的镜头设置到 [位置]  
             由两条传统触发器动作构成  
 
-    </br>
+    <br />
 
-    - #### SetMissionObjectivesAll
+    - #### **SetMissionObjectivesAll**
 
         - `SetMissionObjectivesAll`(文本 : TrgString) : [Action]  
             设置所有玩家（包括观察者）的任务目标内容更改为 [文本]  
             由两条传统触发器动作构成  
 
-    </br>
+    <br />
 
-    - #### TalkingPortraitAll
+    - #### **TalkingPortraitAll**
 
         - `TalkingPortraitAll`(单位类型, 毫秒) : [Action]  
             在所有玩家（包括观察者）单位头像那里显示 [单位类型] 的头像持续 [毫秒] 游戏毫秒  
             由两条传统触发器动作构成  
 
-    </br>
+    <br />
 
-    - #### SetNextPtr
+    - #### **SetNextPtr**
 
         - `SetNextPtr`(trg, dest) : Action  
             设置触发器 [trg] 的下一个触发器指针为 [dest]  
@@ -1123,9 +1308,9 @@
         
 
 
-    </br>
-    </br>
-    </br>
+    <br />
+    <br />
+    <br />
 
 ## 扩展函数
 
@@ -1218,9 +1403,9 @@
         // EncodeUpgrade
         ```
 
-    </br>
+    <br />
 
-    - #### list
+    - #### **list**
 
         - `list`(*args) : py_list[]  
             编译期 Python 层平坦列表容器生成函数，至少需要一个参数，这个函数会自动拉平列表，不能生成多维列表  
@@ -1239,9 +1424,9 @@
         println("{}, {}, {}, {}", a, b, c, d); // 15, 4, 99, 47
         ```
 
-    </br>
+    <br />
 
-    - #### EUDCreateVariables
+    - #### **EUDCreateVariables**
 
         - `EUDCreateVariables`(count) : py_list[EUDVariable]  
             编译期创建 [count] 个变量，返回一个编译期 list，list 内包含被创建的变量的引用  
@@ -1257,7 +1442,7 @@
         // vs[0]、vs[1]、vs[2] 是三个变量，vs 在运行时不存在，所以 vs 的下标都必须是编译期常量
         ```
 
-    </br>
+    <br />
 
     - #### **SetVariables**
 
@@ -1281,9 +1466,9 @@
         SeqCompute(op1);
         ```
 
-    </br>
+    <br />
 
-    - #### SCMD2Text
+    - #### **SCMD2Text**
 
         - `SCMD2Text`(text) : py_str  
             编译期将文本 [text] 中的尖括号 16 进制数字值 <XX> 转换成对应的 ASCII 字符
@@ -1296,7 +1481,7 @@
         simpleprint("\x03哈哈\x02"); // 打印出黄色的 哈哈
         ```
 
-    </br>
+    <br />
 
     - #### **unProxy**
 
@@ -1313,7 +1498,7 @@
         println("b:{} a:{} c:{} a[1]:{} c[0]:{}", b, a, c, a[1], c[1]); // b:421156492 a:421156492 c:421156496 a[1]:888888 c[1]:7
         ```
 
-    </br>
+    <br />
 
     - #### **UnitProperty**
 
@@ -1325,23 +1510,23 @@
         ```JavaScript
         // 所有字段都可选
         const prop = UnitProperty(
-        hitpoint = 100,       // 生命百分比 0~100
-        shield = 100,         // 护盾百分比 0~100
-        energy = 100,         // 能量百分比 0~100
-        hanger = 0,           // 0~4294967295
-        resource = 0,         // 0~65536 (Count)
-        cloaked = False,      // 是否隐形 True(启用)/False(禁用)
-        burrowed = False,     // 是否已钻地 True(启用)/False(禁用)
-        intransit = False,    // 是否正在被运输 True(启用)/False(禁用)
-        hallucinated = False, // 是否是个幻影 True(启用)/False(禁用)
-        invincible = False    // 是否无敌 True(启用)/False(禁用)
+            hitpoint = 100,       // 生命百分比 0~100
+            shield = 100,         // 护盾百分比 0~100
+            energy = 100,         // 能量百分比 0~100
+            hanger = 0,           // 0~4294967295
+            resource = 0,         // 0~65536 (Count)
+            cloaked = False,      // 是否隐形 True(启用)/False(禁用)
+            burrowed = False,     // 是否已钻地 True(启用)/False(禁用)
+            intransit = False,    // 是否正在被运输 True(启用)/False(禁用)
+            hallucinated = False, // 是否是个幻影 True(启用)/False(禁用)
+            invincible = False    // 是否无敌 True(启用)/False(禁用)
         );
         CreateUnitWithProperties(1, "Terran Marine", $L("Location 3"), P1, prop);
         ```
 
-    </br>
+    <br />
 
-    - #### GetPropertyIndex
+    - #### **GetPropertyIndex**
 
         - `GetPropertyIndex`(创建单位属性 : CUWP) : py_int  
             编译期获取一个创建单位属性在地图 CUWP 列表中的编号
@@ -1356,9 +1541,9 @@
         py_print(GetPropertyIndex(prop));
         ```
 
-    </br>
+    <br />
 
-    - #### GetPlayerInfo
+    - #### **GetPlayerInfo**
 
         - `GetPlayerInfo`(player: TrgPlayer) : py_struct  
             编译期获取地图信息中玩家 [player] 的信息，[player] 仅支持常量，获取的信息是地图设定的信息，并非运行时信息
@@ -1371,9 +1556,9 @@
         printAt(9, "玩家 1 类型：{}({}) 种族：{}({}) 所属势力：{}", pinfo.typestr, pinfo.type, pinfo.racestr, pinfo.race, pinfo.force);
         ```
 
-    </br>
+    <br />
 
-    - #### EUDRegisterObjectToNamespace
+    - #### **EUDRegisterObjectToNamespace**
 
         - `EUDRegisterObjectToNamespace`(funcname, obj) : duck  
             注册一个对象到全局的名字空间，主要用于模块间反射传递参数
@@ -1385,9 +1570,9 @@
         EUDRegisterObjectToNamespace("menuSel", menuSel);
         ```
 
-    </br>
+    <br />
 
-    - #### GetEUDNamespace
+    - #### **GetEUDNamespace**
 
         - `GetEUDNamespace()` : py_dict[str, duck]  
             获取全局名字空间字典表，它记录着 EUDRegisterObjectToNamespace 里面注册的对象
@@ -1402,9 +1587,9 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### MPQAddFile
+    - #### **MPQAddFile**
 
         - `MPQAddFile`(fname, contents, isWave = false)  
             向 output 设定的输出地图中添加一个字节组内容为 [contents] 的文件 [fname]，如果 [isWave] 标志设置为 true，则会在导入前使用 Wave 有损压缩的方式压缩它
@@ -1415,9 +1600,9 @@
         MPQAddFile("1.txt", py_open("C:/1.txt", "rb").read());
         ```
 
-    </br>
+    <br />
 
-    - #### MPQAddWave
+    - #### **MPQAddWave**
 
         - `MPQAddWave`(fname, content)  
             它相当于是 MPQAddFile(fname, contents, true)
@@ -1429,8 +1614,8 @@
         ```
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 
 - ### 编译期 Python 宏
@@ -1439,7 +1624,7 @@
 
     在 epScript 中可以使用 py_ 前缀调用所有的 Python 3 内建函数，这里列举一些常用的
 
-    </br>
+    <br />
 
     - #### py_print
 
@@ -1453,7 +1638,7 @@
         py_print("这个仅仅会输出到编译时的黑框中，跟地图一毛钱关系也没有");
         ```
 
-        </br>
+        <br />
 
     - #### py_list
 
@@ -1470,7 +1655,7 @@
         DoActions(lst);
         ```
 
-    </br>
+    <br />
 
     - #### py_open
 
@@ -1485,7 +1670,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### py_eval
 
@@ -1503,7 +1688,7 @@
         DoActions(actions); // 一次性执行列表所有的动作
         ```
 
-    </br>
+    <br />
 
     - #### py_str
 
@@ -1520,7 +1705,7 @@
         DoActions(actions); // 一次性执行列表所有的动作
         ```
 
-    </br>
+    <br />
 
     - #### py_len
 
@@ -1539,7 +1724,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### py_enumerate
 
@@ -1558,7 +1743,7 @@
         println("{}, {}, {}, {}", a, b, c, d); // 15, 4, 99, 47
         ```
 
-    </br>
+    <br />
 
     - #### py_range
 
@@ -1597,14 +1782,14 @@
         ```
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 编译期字节转换
 
-    </br>
+    <br />
 
-    - #### b2i
+    - #### **b2i**
 
         - `b2i1`(content, index) : py_int  
         - `b2i1`(content, index) : py_int  
@@ -1619,9 +1804,9 @@
         printAt(4, "0x{:x}", b2i4(b"fuck")); // 0x6B637566
         ```
 
-    </br>
+    <br />
 
-    - #### i2b
+    - #### **i2b**
 
         - `i2b1`(i) : py_byte  
         - `i2b2`(i) : [py_byte]  
@@ -1634,9 +1819,9 @@
         printAt(4, "{}", i2b4(0x6B637566));
         ```
 
-    </br>
+    <br />
 
-    - #### u2b/b2u
+    - #### **u2b/b2u**
 
         - `u2b`(s) : [py_byte]  
         - `b2u`(b) : py_str  
@@ -1649,7 +1834,7 @@
         printAt(6, "{}", b2u(b"fuck")); // fuck
         ```
 
-    </br>
+    <br />
 
     - #### utf8 编码/解码
 
@@ -1666,13 +1851,13 @@
         printAt(6, "{}", u2utf8(b"fuck")); // fuck
         ```
 
-    </br>
-    </br>
+    <br />
+    <br />
     
 
 - ### 常规函数
 
-    </br>
+    <br />
 
     - #### **EPD**
 
@@ -1687,9 +1872,9 @@
         const epd = EPD(0x5124D8); // (0x5124D8-0x58A364)/4 = -0x1DFA3 = -122787
         ```
 
-    </br>
+    <br />
 
-    - #### l2v
+    - #### **l2v**
 
         - `l2v`(条件表达式) : EUDVariable  
             使用一个触发器在运行时获取 [条件表达式] 的结果逻辑值 false 或者 true
@@ -1700,9 +1885,9 @@
         var isP1MarineDeaths100 = l2v(Deaths(P1, AtLeast, 100, "Terran Marine"));
         ```
 
-    </br>
+    <br />
 
-    - #### EUDFuncPtr
+    - #### **EUDFuncPtr**
 
         - `EUDFuncPtr`(argn, retn) : py_int  
             声明一个 [argn] 个参数和 [retn] 个返回值的闭包函数的指针
@@ -1742,16 +1927,16 @@
         }
         ```
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 触发器构建函数
 
     触发器构建函数可以使用自定义构建各种属性的触发器
 
-    </br>
+    <br />
 
-    - #### RawTrigger
+    - #### **RawTrigger**
 
         - `RawTrigger`(conditions = list(...), actions = list(...), preserved = true/false) : RawTrigger  
             插入一个静态的传统触发器，不能传入变量，返回一个触发器指针  
@@ -1789,9 +1974,9 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### Trigger
+    - #### **Trigger**
 
         - `Trigger`(conditions = list(...), actions = list(...), preserved = true/false)  
             插入一个扩展触发器，扩展触发器可能会被拆分成很多个传统触发器，它没有 16 个条件和 64 个动作的限制，并且可以传入变量，不返回值  
@@ -1815,9 +2000,9 @@
         );
         ```
 
-    </br>
+    <br />
 
-    - #### PTrigger
+    - #### **PTrigger**
 
         - `PTrigger`(players, conditions = list(...), actions = list(...))  
             插入一个匹配当前玩家的触发器，`当前玩家`为 [players] 中任何一个玩家时，它就会执行，没有 preserved 字段，其它字段用法和 Trigger 一样。
@@ -1832,7 +2017,7 @@
         );
         ```
 
-    </br>
+    <br />
 
     - #### **DoActions**
 
@@ -1880,9 +2065,9 @@
         printAt(10, "你觉得应该创建了 {} 个 SCV，但实际只有 1 个", c); // 你觉得这里应该创建了 100 个 SCV，但实际只有 1 个
         ```
 
-    </br>
+    <br />
 
-    - #### VProc
+    - #### **VProc**
 
         - `VProc`(vars, actions) : RawTrigger | [RawTrigger]  
             变量处理过程 [actions] 只能传入常量动作表达式列表，VProc 会在顺序执行完 [actions] 所有动作后，再顺序将 [vars] 中所有变量的虚拟触发器都执行一遍  
@@ -1928,8 +2113,8 @@
         ```
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 运行时迭代器
 
@@ -1956,9 +2141,9 @@
     }
     ```
 
-    </br>
+    <br />
 
-    - #### EUDLoopPlayer
+    - #### **EUDLoopPlayer**
 
         - `EUDLoopPlayer`(ptype, force, race) : EUDIterator  
             迭代类型为 [ptype] 势力为 [force] 种族为 [race] 的活跃玩家，内部使用 playerexist 检测  
@@ -1976,9 +2161,9 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### EUDLoopRange
+    - #### **EUDLoopRange**
 
         - `EUDLoopRange`(start, end=None) : EUDIterator  
             迭代从 [start] 到 [end] - 1 的值
@@ -1996,9 +2181,9 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### EUDLoopUnit
+    - #### **EUDLoopUnit**
 
         - `EUDLoopUnit()` : EUDIterator  
             迭代单位主链上的所有单位的 ptr, epd  
@@ -2015,7 +2200,7 @@
         }
         ```
 
-        </br>
+        <br />
 
         - `EUDLoopUnit2()` : EUDIterator  
             迭代所有单位的 ptr, epd  
@@ -2041,7 +2226,7 @@
         }
         ```
 
-        </br>
+        <br />
 
         - `EUDLoopCUnit()` : EUDIterator  
             它使用 EUDLoopUnit2 遍历并将遍历出来的指针包装成 CUnit 对象  
@@ -2057,7 +2242,7 @@
         }
         ``` 
 
-        </br>
+        <br />
 
         - `EUDLoopNewUnit`(allowance = 2) : EUDIterator  
             迭代最多 [allowance] 个从`非本帧最后一次`调用 EUDLoopNewUnit 或者 EUDLoopNewCUnit 以来新出现的单位的 ptr, epd  
@@ -2153,7 +2338,7 @@
         }
         ```
 
-        </br>
+        <br />
 
         - `EUDLoopPlayerUnit`(player: TrgPlayer) : EUDIterator  
             迭代玩家 [player] 所有的单位的 ptr, epd
@@ -2191,14 +2376,14 @@
         }
         ```
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 屏幕输出文字函数
 
-    </br>
+    <br />
 
-    - #### DisplayTextAt
+    - #### **DisplayTextAt**
 
         - `DisplayTextAt`(行, 文本 : TrgString)  
             在`本机玩家 == 当前玩家`屏幕上第 [行] 行显示 [文本]  
@@ -2222,9 +2407,9 @@
         DisplayTextAt(line, "只显示给 P1");
         ```
 
-    </br>
+    <br />
 
-    - #### print
+    - #### **print**
 
         - `simpleprint`(*args, spaced=true)  
             将多个参数 [*args] 按顺序打印到`本机玩家 == 当前玩家`屏幕滚动信息的下一行，命名参数 spaced 表示是否将打印出来的每个参数用空格隔开，默认 true
@@ -2274,9 +2459,9 @@
         printAllAt(10, "{} {}", "你们好", "星际争霸");   // 在所有玩家的屏幕最下面一行输出 “你们好 星际争霸”
         ```
 
-    </br>
+    <br />
 
-    - #### GetGlobalStringBuffer
+    - #### **GetGlobalStringBuffer**
 
         - `GetGlobalStringBuffer()` : StringBuffer  
             获取`本机玩家 == 当前玩家` print 系列函数中内部使用的 StringBuffer，它的容量为 1023 字节
@@ -2289,9 +2474,9 @@
         GetGlobalStringBuffer().printfAt(0, "{} {}", "你好", "星际争霸");
         ```
 
-    </br>
+    <br />
 
-    - #### eprint
+    - #### **eprint**
 
         - `eprintln`(*args)  
             将多个参数 [*args] 按顺序打印到`当前玩家`屏幕中心偏下的错误提示信息，打印超过 218 个字节的内容（包含颜色代码字符串结尾等）会发生错误
@@ -2325,9 +2510,9 @@
         eprintAll("{}-{}", "你们好", "星际争霸"); // 输出 “你们好-星际争霸” 到所有玩家的屏幕中心偏下的错误提示信息
         ```
 
-    </br>
+    <br />
 
-    - #### TextFX
+    - #### **TextFX**
 
         - TextFX_FadeIn(*args, color=None, wait=1, reset=True, tag=None, encoding="UTF-8")  
             渐显特效文字
@@ -2342,12 +2527,12 @@
             将本机标签为 [标签] 的特效文字的计时器 [设为/增加/减少] [数值]
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 玩家相关函数
 
-    </br>
+    <br />
 
     - #### **getuserplayerid**
 
@@ -2361,7 +2546,7 @@
         println("当前玩家的编号：{}", getuserplayerid());
         ```
 
-    </br>
+    <br />
 
     - #### **playerexist**
 
@@ -2376,7 +2561,7 @@
         }
         ```
 
-    </br>
+    <br />
 
     - #### **当前玩家**
 
@@ -2438,16 +2623,16 @@
         setcurpl2cpcache(); // 将 当前玩家 恢复到 cpcache，防止干扰 getcurpl 等函数的使用
         ```
 
-    </br>
+    <br />
 
-    - #### PColor
+    - #### **PColor**
 
         - `PColor`(player: TrgPlayer) : Db*  
             返回玩家 [player] 在游戏中的颜色代码，在格式化文本中使用 `{:c}` 占位符等效
 
-    </br>
+    <br />
 
-    - #### PName
+    - #### **PName**
 
         - `PName`(player: TrgPlayer) : Db*  
             返回玩家 [player] 在游戏中的名字，在格式化文本中使用 `{:n}` 占位符等效
@@ -2459,9 +2644,9 @@
         println("玩家1: {:c}{:n}", P1, P1);            // 与上面那条等效
         ```
 
-    </br>
+    <br />
 
-    - #### SetPName
+    - #### **SetPName**
 
         - `SetPName`(player : TrgPlayer, *可变参数)  
             设置玩家 [player] 的名字为多个文本或其它参数组合起来的字符串
@@ -2479,14 +2664,13 @@
         SetPNamef(cp, "{:t} \x07等级: \x04{} {:c}{:n}", title, level, cp, cp);
         ```
 
-    </br>
+    <br />
 
     - #### **EUDPlayerLoop**
 
-      - `EUDPlayerLoop()()`  
-      - `EUDEndPlayerLoop()`  
-
-        这俩是一对儿，它会把当前玩家依次设为每一个活动玩家（包括电脑玩家），运行完毕后当前玩家值就是 Loop 开始前的当前玩家值
+        - `EUDPlayerLoop()()`  
+        - `EUDEndPlayerLoop()`  
+            这俩是一对儿，它会把当前玩家依次设为每一个活动玩家（包括电脑玩家），运行完毕后当前玩家值就是 Loop 开始前的当前玩家值  
 
         示例
 
@@ -2497,20 +2681,20 @@
         EUDEndPlayerLoop();
         ```
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 区域位置相关函数
 
-    </br>
+    <br />
 
-    - #### setloc
+    - #### **setloc**
 
         - `setloc`(loc : TrgLocation, x, y)  
-            设置区域 [loc] 左上右下坐标分别为 [x], [y], [x], [y] （也就是将区域设置为一个点）
+            设置区域 [loc] 左上右下坐标分别为 [x], [y], [x], [y] （也就是将区域设置为一个点）  
 
         - `setloc`(loc : TrgLocation, left, top, right, bottom)  
-            设置区域 [loc] 左上右下坐标分别为 [left], [top], [right], [bottom]
+            设置区域 [loc] 左上右下坐标分别为 [left], [top], [right], [bottom]  
 
         示例
 
@@ -2519,15 +2703,15 @@
         setloc($L("Location 1"), 1234, 1234, 2345, 2345);
         ```
 
-    </br>
+    <br />
 
-    - #### addloc
+    - #### **addloc**
 
         - `addloc`(loc : TrgLocation, x, y)  
-            设置区域 [loc] 的左右坐标加 [x] 上下坐标加 [y] （实际大小不变，中心平移到另外一个位置）
+            设置区域 [loc] 的左右坐标加 [x] 上下坐标加 [y] （实际大小不变，中心平移到另外一个位置）  
 
         - `addloc`(loc : TrgLocation, left, top, right, bottom)  
-            设置区域 [loc] 的左上右下分别加上 [left], [top], [right], [bottom]
+            设置区域 [loc] 的左上右下分别加上 [left], [top], [right], [bottom]  
 
         示例
 
@@ -2539,15 +2723,15 @@
         addloc($L("Location 1"), lengthdir(888, 102)); // 将 Location 1 区域往 102 度方向平移 888 个坐标的距离
         ```
 
-    </br>
+    <br />
 
-    - #### dilateloc
+    - #### **dilateloc**
 
         - `dilateloc`(loc : TrgLocation, x, y)  
-            设置区域 [loc] 的左上右下分别加上 -[x], -[y], [x], [y] （中心不变，区域扩张）
+            设置区域 [loc] 的左上右下分别加上 -[x], -[y], [x], [y] （中心不变，区域扩张）  
 
         - `dilateloc`(loc : TrgLocation, left, top, right, bottom)  
-            设置区域 [loc] 的左上右下分别加上 -[left], -[top], [right], [bottom]
+            设置区域 [loc] 的左上右下分别加上 -[left], -[top], [right], [bottom]  
 
         示例
 
@@ -2556,12 +2740,12 @@
         dilateloc($L("Location 1"), 1, 2, 3, 4);
         ```
 
-    </br>
+    <br />
 
-    - #### getlocTL
+    - #### **getlocTL**
 
         - `getlocTL`(loc : TrgLocation) : py_tuple[EUDVariable, EUDVariable]  
-            获取一个区域的左上坐标
+            获取一个区域的左上坐标  
 
         示例
 
@@ -2569,12 +2753,12 @@
         const top, left = getlocTL($L("Location 1"));
         ```
 
-    </br>
+    <br />
 
     - #### setloc_epd
 
         - `setloc_epd`(loc : TrgLocation, epd)  
-            设置区域 [loc] 的坐标为一个 EPD 地址 [epd] 上存储的值
+            设置区域 [loc] 的坐标为一个 EPD 地址 [epd] 上存储的值  
 
         示例
 
@@ -2586,17 +2770,17 @@
         }
         ```
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### 内存读写相关函数
 
-    </br>
+    <br />
 
-    - #### dwbreak
+    - #### **dwbreak**
 
         - `dwbreak`(number) : py_tuple[EUDVariable, EUDVariable, EUDVariable, EUDVariable, EUDVariable, EUDVariable]  
-        将一个 dword 值 [number] 切分成 word 及 byte 形式
+            将一个 dword 值 [number] 切分成 word 及 byte 形式  
 
         示例
 
@@ -2605,7 +2789,7 @@
         println("w1:{} w2:{} b1:{} b2:{} b3:{} b4:{}", w1, w2, b1, b2, b3, b4);
         ```
 
-    </br>
+    <br />
 
     - #### **read/write**
 
@@ -2613,13 +2797,13 @@
         - `wread`(ptr) : EUDVariable  
         - `bread`(ptr) : EUDVariable  
 
-            读取本机指定内存地址 [ptr] 上的 dword/word/byte 值
+            读取本机指定内存地址 [ptr] 上的 dword/word/byte 值  
 
         - `dwwrite`(ptr, dw)  
         - `wwrite`(ptr, w)  
         - `bwrite`(ptr, b)  
 
-            将 dword/word/byte 值写入到本机内存地址 [ptr] 上
+            将 dword/word/byte 值写入到本机内存地址 [ptr] 上  
 
         示例
 
@@ -2642,20 +2826,20 @@
         SetPlayerSupply(P1, SUP_RACE_ZERG, SUP_TYPE_MAX, 800); // 将 玩家1 的虫族人口最大值设置为 400
         ```
 
-    </br>
+    <br />
 
     - #### **read_epd/write_epd**
 
         - `dwread_epd`(epd) : EUDVariable  
-            读取本机指定 [epd] 偏移地址上的 dword 值
+            读取本机指定 [epd] 偏移地址上的 dword 值  
 
         - `dwwrite_epd`(epd, value)  
-            将 dword 值写入到本机 [epd] 偏移地址上
+            将 dword 值写入到本机 [epd] 偏移地址上  
 
         - `wread_epd`(epd, subp) : EUDVariable  
         - `bread_epd`(epd, subp) : EUDVariable  
 
-            读取本机指定玩家编号 [epd] 附加 [subp] 字节的偏移地址上的 word/byte 值，[subp] 小于 4（实际读取内存地址是 0x58A364 + epd * 4 + subp）
+            读取本机指定玩家编号 [epd] 附加 [subp] 字节的偏移地址上的 word/byte 值，[subp] 小于 4（实际读取内存地址是 0x58A364 + epd * 4 + subp）  
 
         - `wwrite_epd`(epd, subp, value)  
         - `bwrite_epd`(epd, subp, value)  
@@ -2663,7 +2847,7 @@
             将 word/byte 值写入到本机指定玩家编号 [epd] 的附加 [subp] 字节的偏移地址上，[subp] 小于 4（实际写入内存地址是 0x58A364 + epd * 4 + subp）  
 
         - `maskread_epd`(epd, mask) : EUDVariable  
-            使用 [mask] 做掩码读取本机指定 [epd] 偏移地址上的 dword 值
+            使用 [mask] 做掩码读取本机指定 [epd] 偏移地址上的 dword 值  
 
         示例
 
@@ -2681,7 +2865,7 @@
         bwrite_epd(EPD(0x656FB8) + oe, os, 1); // 修改鬼兵的武器攻击间隔为 1
         ```
 
-    </br>
+    <br />
 
     - #### add_epd/subtract_epd
 
@@ -2701,12 +2885,12 @@
 
             对本机指定玩家编号 [epd] 对应的偏移位置附加 [subp] 字节上的 word/byte 值自减 [value]（实际操作的内存地址是 0x58A364 + epd * 4 + subp）  
 
-    </br>
+    <br />
 
     - #### repmovsd_epd
 
         - `repmovsd_epd`(dstepdp, srcepdp, copydwn)  
-            从本机 [srcepdp] 拷贝 [copydwn] * 4 字节内存到 [dstepdp]
+            从本机 [srcepdp] 拷贝 [copydwn] * 4 字节内存到 [dstepdp]  
 
         示例
 
@@ -2717,15 +2901,15 @@
         // dst 将会是 Db(b"___1___2___3___4___5")
         ```
 
-    </br>
+    <br />
 
     - #### dwepdread_epd
 
-      - `dwepdread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
-        从本机 [epd] 偏移位置读取一个指针，它同时返回指针和该指针的 EPD 值
+        - `dwepdread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
+            从本机 [epd] 偏移位置读取一个指针，它同时返回指针和该指针的 EPD 值  
 
-      - `epdread_epd`(epd) : EUDVariable  
-        从本机 [epd] 偏移位置读取一个指针，它返回该指针的 EPD 值
+        - `epdread_epd`(epd) : EUDVariable  
+            从本机 [epd] 偏移位置读取一个指针，它返回该指针的 EPD 值  
 
         示例
 
@@ -2737,15 +2921,15 @@
         var epd2 = epdread_epd(lastUnitEPD);
         ```
 
-    </br>
+    <br />
 
     - ####  cunitread_epd
 
         - `cunitread_epd`(epd) : EUDVariable  
-            从本机 [epd] 偏移位置读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回一个指针
+            从本机 [epd] 偏移位置读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回一个指针  
 
         - `cunitepdread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
-            从本机 [epd] 偏移位置读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回该指针和该指针的 EPD 值
+            从本机 [epd] 偏移位置读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回该指针和该指针的 EPD 值  
 
         示例
 
@@ -2757,12 +2941,12 @@
         var ptr2 = cunitread_epd(lastUnitEPD);
         ```
 
-    </br>
+    <br />
 
     - #### posread_epd
 
         - `posread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
-            从本机 [epd] 偏移位置读取一个 pos（位置）
+            从本机 [epd] 偏移位置读取一个 pos（位置）  
 
         示例
 
@@ -2772,7 +2956,7 @@
         println("当前屏幕在地图上的坐标: ({}, {})", x, y);
         ```
 
-    </br>
+    <br />
 
     - #### _cp 系列
 
@@ -2808,14 +2992,14 @@
         println("当前屏幕在地图上的坐标: ({}, {})", x, y);
         ```
 
-    </br>
+    <br />
 
-    - #### readgen
+    - #### **readgen**
 
         - `readgen_epd`(mask, args) : duck  
         - `readgen_cp`(mask, args) : duck  
 
-        可用于创建自定义规则本机内存读取函数
+            可用于创建自定义规则本机内存读取函数  
 
         示例
 
@@ -2830,77 +3014,77 @@
         const x, y = posread_epd(epd_address);
         ```
 
-    </br>
+    <br />
 
-    - #### memcpy
+    - #### **memcpy**
 
         - `memcpy`(dst, src, copylen)  
-            从本机内存地址 [src] 拷贝 [copylen] 字节内容到内存地址 [dst]
+            从本机内存地址 [src] 拷贝 [copylen] 字节内容到内存地址 [dst]  
 
-    </br>
+    <br />
 
-    - #### memcmp
+    - #### **memcmp**
 
         - `memcmp`(buf1, buf2, count) : EUDVariable  
             对比本机 [buf1] 和 [buf2] 两个内存块 [count] 字节内容  
             如果两块内存完全一致，则返回 0  
-            否则，将对比第一个不同的字节并返回大于或者小于 0 的结果
+            否则，将对比第一个不同的字节并返回大于或者小于 0 的结果  
 
-    </br>
+    <br />
 
-    - #### strcpy
+    - #### **strcpy**
 
         - `strcpy`(dst, src)  
-            从本机内存地址 [src] 拷贝字符串（以 `\x00` 终止的字节块）内容到内存地址 [dst]
+            从本机内存地址 [src] 拷贝字符串（以 `\x00` 终止的字节块）内容到内存地址 [dst]  
 
-    </br>
+    <br />
 
-    - #### strcmp
+    - #### **strcmp**
 
         - `strcmp`(s1, s2) : EUDVariable  
             对比本机 [s1] 和 [s2] 两个内存块上的字符串（以 `\x00` 终止的字节块）内容  
             如果两块内存完全一致，则返回 0  
-            否则，将对比第一个不同的字节并返回大于或者小于 0 的结果
+            否则，将对比第一个不同的字节并返回大于或者小于 0 的结果  
 
-    </br>
+    <br />
 
-    - #### strlen
+    - #### **strlen**
 
       - `strlen`(ptr) : EUDVariable  
-        获取本机指针 [ptr] 指向的字符串（以 `\x00` 终止的字节块）长度，单位是字节
+        获取本机指针 [ptr] 指向的字符串（以 `\x00` 终止的字节块）长度，单位是字节  
 
       - `strlen_epd`(epd) : EUDVariable  
-        获取本机 [epd] 偏移位置指针指向的字符串（以 `\x00` 终止的字节块）长度，单位是字节
+        获取本机 [epd] 偏移位置指针指向的字符串（以 `\x00` 终止的字节块）长度，单位是字节  
 
-    </br>
+    <br />
 
-    - #### strnstr
+    - #### **strnstr**
 
         - `strnstr`(ptr, substr, count) : EUDVariable  
             在本机指针 [ptr] 指向的字符串的前 [count] 个字符中搜索另外一个字符串 [substr]  
-            找到了就返回找到的位置的指针，没找到返回 0
+            找到了就返回找到的位置的指针，没找到返回 0  
 
-    </br>
+    <br />
 
-    - #### dbstr
+    - #### **dbstr**
 
         - `dbstr_addstr`(dst, src) : EUDVariable  
-            将本机字符串 [src] 拷贝到 [dst] 位置，返回地址 dst + strlen(src)
+            将本机字符串 [src] 拷贝到 [dst] 位置，返回地址 dst + strlen(src)  
 
         - `dbstr_addstr_epd`(dst, srcepd) : EUDVariable  
-            将本机 [srcepd] 编号偏移位置内存的字符串拷贝到 [dst] 位置，它与 dbstr_addstr(dst, EPD(srcepd)) 等价，返回地址 dst + strlen_epd(srcepd)
+            将本机 [srcepd] 编号偏移位置内存的字符串拷贝到 [dst] 位置，它与 dbstr_addstr(dst, EPD(srcepd)) 等价，返回地址 dst + strlen_epd(srcepd)  
 
         - `dbstr_adddw`(dst, number) : EUDVariable  
-            将一个数字值转换成文本打印到本机 dst 位置上，返回地址 dst + strlen(itoa(number))
+            将一个数字值转换成文本打印到本机 dst 位置上，返回地址 dst + strlen(itoa(number))  
 
         - `dbstr_addptr`(dst, ptr) : EUDVariable  
-            将一个数字值转换成 16 进制数字文本打印到本机 dst 位置上，返回地址 dst + strlen(itox(number))
+            将一个数字值转换成 16 进制数字文本打印到本机 dst 位置上，返回地址 dst + strlen(itox(number))  
 
         - `dbstr_print`(dst, *args, EOS=true, encoding="UTF-8")  
-            将多个参数以字符串的形式打印到本机 [dst] 位置上；命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true；命名参数 [encoding] 指定编码，默认 UTF-8
+            将多个参数以字符串的形式打印到本机 [dst] 位置上；命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true；命名参数 [encoding] 指定编码，默认 UTF-8  
 
         - `sprintf`(dst, format_string : py_str, *args, EOS=true, encoding="UTF-8")  
-            以 [format_string] 作为格式将多个参数格式化后打印到本机 [dst] 位置上；命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true；命名参数 [encoding] 指定编码，默认 UTF-8
+            以 [format_string] 作为格式将多个参数格式化后打印到本机 [dst] 位置上；命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true；命名参数 [encoding] 指定编码，默认 UTF-8  
 
         示例
 
@@ -2919,24 +3103,22 @@
         simpleprint(s); // 0123456789ABCDEF
         ```
 
-    </br>
+    <br />
 
-    - #### ptr2s/epd2s
+    - #### **ptr2s/epd2s**
 
-      - `ptr2s`(ptr) : Db*
+      - `ptr2s`(ptr) : Db*  
+        以字符串形式读取本机 [ptr] 指向的内存，在格式化文本中使用 `{:s}` 占位符等效  
 
-        以字符串形式读取本机 [ptr] 指向的内存，在格式化文本中使用 `{:s}` 占位符等效
+      - `epd2s`(epd) : Db*  
+        以字符串形式读取本机 [epd] 指向的内存，在格式化文本中使用 `{:t}` 占位符等效  
 
-      - `epd2s`(epd) : Db*
+    <br />
 
-        以字符串形式读取本机 [epd] 指向的内存，在格式化文本中使用 `{:t}` 占位符等效
-
-    </br>
-
-    - #### hptr
+    - #### **hptr**
 
         - `hptr`(value) : Db*  
-            将 [value] 转成 16 进制形式输出，在格式化文本中使用 `{:x}` 占位符等效
+            将 [value] 转成 16 进制形式输出，在格式化文本中使用 `{:x}` 占位符等效  
 
         示例
 
@@ -2945,27 +3127,27 @@
         println("{}, {:x}", 0xAABBCC, 0xAABBCC);     // 11189196, 00AABBCC
         ```
 
-    </br>
+    <br />
 
-    - #### gettextptr
+    - #### **gettextptr**
 
         - `gettextptr()` : EUDVariable  
-            获取本机显示到屏幕上的下一行文本的行
+            获取本机显示到屏幕上的下一行文本的行  
 
-    </br>
+    <br />
 
     - #### dwpatch_epd
 
         - `dwpatch_epd`(dstepd, value)  
-            给目标 EPD 位置 [dstepd] 打内存补丁
+            给目标 EPD 位置 [dstepd] 打内存补丁  
 
-    </br>
+    <br />
 
-    - #### GetMapStringAddr
+    - #### **GetMapStringAddr**
 
         - `GetMapStringAddr`(strID : TrgString) : EUDVariable  
             获取本机一个地图字符串或字符串编号 [strID] 的内存地址  
-            这个不是 $T （或称 EncodeString）获取到的那个，$T 获取的是地图字符串在地图文件中对应的编号
+            这个不是 $T （或称 EncodeString）获取到的那个，$T 获取的是地图字符串在地图文件中对应的编号  
 
         示例
 
@@ -2975,9 +3157,9 @@
         const addr = GetMapStringAddr("Force 3");
         ```
 
-    </br>
+    <br />
 
-    - #### GetTBLAddr
+    - #### **GetTBLAddr**
 
         - `GetTBLAddr`(TBLKey : StatText) : EUDVariable  
             获取本机一个 TBL 表中的Key/编号 [TBLKey] 的内存地址  
@@ -2996,9 +3178,9 @@
         const addr = wread(dwread_epd(EPD(0x6D1238)) + $B("Terran Goliath"));
         ```
 
-    </br>
+    <br />
 
-    - #### settbl
+    - #### **settbl**
 
         - `settbl`(tblID : StatText, offset, *args, encoding="cp949")  
         - `settbl2`(tblID : StatText, offset, *args, encoding="cp949")  
@@ -3017,20 +3199,20 @@
         dbstr_print(GetTBLAddr("Terran Goliath") + 1, "1234\0", EOS = false); // 将 Terran Goliath 改名成 T1234
         ```
 
-    </br>
-    </br>
+    <br />
+    <br />
 
   ### 数学函数
 
-    </br>
+    <br />
 
-    - #### atan2
+    - #### **atan2**
 
         - `atan2`(y, x) : EUDVariable  
-            两个参数的反正切函数，返回的是原点至点 (x,y) 的方位角，即与 x 轴的夹角
+            两个参数的反正切函数，返回的是原点至点 (x,y) 的方位角，即与 x 轴的夹角  
 
         - `atan2_256`(x, y) : EUDVariable  
-            与 atan2 区别在于，在对角度对处理上，它将一个圆周分成 256 等份，角度是 256 度制，不是 360 度制
+            与 atan2 区别在于，在对角度对处理上，它将一个圆周分成 256 等份，角度是 256 度制，不是 360 度制  
 
         示例
 
@@ -3051,12 +3233,12 @@
         println("从 (131, 33) 到 (765, 546) 的角度是 {}", angleBetween_256(131, 33, 765, 546));
         ```
 
-    </br>
+    <br />
 
-    - #### sqrt
+    - #### **sqrt**
 
         - `sqrt`(x) : py_int | EUDVariable  
-            计算 [x] 的平方根（取整）
+            计算 [x] 的平方根（取整）  
 
         示例
 
@@ -3070,9 +3252,9 @@
         println("从 (131, 33) 到 (765, 546) 的距离是 {}", distanceBetween(131, 33, 765, 546));
         ```
 
-    </br>
+    <br />
 
-    - #### lengthdir
+    - #### **lengthdir**
 
         - `lengthdir`(length, angle) : tuple[EUDVariable, EUDVariable]  
             计算从 0, 0 位置出发向着 [angle] 角度出发走 [length] 距离的另外一个坐标  
@@ -3122,12 +3304,12 @@
         println("从 (1264, 880) 出发朝 73 度（256 度制）走 888 的距离到达 ({}, {})", x, y);
         ```
 
-    </br>
+    <br />
 
-    - #### pow
+    - #### **pow**
 
         - `pow`(x, y) : py_int | EUDVariable  
-            计算 [x] 的 [y] 次幂，如果两个参数都是常量，那么它的返回值也可以是常量
+            计算 [x] 的 [y] 次幂，如果两个参数都是常量，那么它的返回值也可以是常量  
 
         示例
 
@@ -3135,18 +3317,18 @@
         println("2^10 = {}", pow(2, 10));
         ```
 
-    </br>
+    <br />
 
-    - #### div
+    - #### **div**
 
         - `div`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            无符号整数除法 [a] 除以 [b]，仅支持正整数，返回商和余数
+            无符号整数除法 [a] 除以 [b]，仅支持正整数，返回商和余数  
 
         - `div_towards_zero`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            向下取整有符号除法 [a] 除以 [b]，返回商和余数，当商是负数时，商向上取整（向 0 的方向）
+            向下取整有符号除法 [a] 除以 [b]，返回商和余数，当商是负数时，商向上取整（向 0 的方向）  
 
         - `div_floor`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            向下取整有符号除法 [a] 除以 [b]，返回商和余数，商是负数时依然会向下取整（向远离 0 的方向）
+            向下取整有符号除法 [a] 除以 [b]，返回商和余数，商是负数时依然会向下取整（向远离 0 的方向）  
 
         - `div_euclid`(a, b) : py_tuple[EUDVariable, EUDVariable]  
             计算 [a] 除以 [b] 的欧几里得商和余数。  
@@ -3159,9 +3341,9 @@
         // 0.9.9.7 除了 div 其它几个都报错 : Undefined function f_div_*
         ```
 
-    </br>
+    <br />
 
-    - #### rand
+    - #### **rand**
 
         - `rand()` : EUDVariable  
             生成一个随机 word（范围 0~0xFFFF）  
@@ -3169,7 +3351,7 @@
         - `dwrand()` : EUDVariable  
             生成一个随机 dword（范围 0~0xFFFFFFFF）  
 
-      注意不要在非同步条件下使用随机数函数
+      注意不要在非同步条件下使用随机数函数  
 
         示例
 
@@ -3177,17 +3359,17 @@
         const r = rand();
         ```
 
-    </br>
+    <br />
 
-    - #### seed
+    - #### **seed**
 
         - `srand`(seed)  
-            设置随机因子为 [seed]
+            设置随机因子为 [seed]  
 
         - `getseed()` : EUDVariable  
-            获取设置好的随机因子
+            获取设置好的随机因子  
 
-      注意不要在非同步条件下使用随机数函数
+      注意不要在非同步条件下使用随机数函数  
 
         示例
 
@@ -3196,14 +3378,14 @@
         srand(seed + 1);
         ```
 
-    </br>
+    <br />
 
-    - #### randomize
+    - #### **randomize**
 
         - `randomize()` : EUDVariable  
-            初始化随机因子
+            初始化随机因子  
 
-        注意不要在非同步条件下使用随机数函数
+        注意不要在非同步条件下使用随机数函数  
 
         示例
 
@@ -3213,12 +3395,12 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### getgametick
+    - #### **getgametick**
 
         - `getgametick()` : EUDVariable  
-            获取逝去的游戏帧数，游戏速率为极快（Fastest）的情况下是 42 毫秒每帧
+            获取逝去的游戏帧数，游戏速率为极快（Fastest）的情况下是 42 毫秒每帧  
 
         示例
 
@@ -3232,12 +3414,12 @@
 
   ### 位运算函数
 
-    </br>
+    <br />
 
-    - #### bitand
+    - #### **bitand**
 
         - `bitand`(a, b) : py_int | EUDVariable  
-            按位与运算 [a] & [b]
+            按位与运算 [a] & [b]  
 
         示例
 
@@ -3247,12 +3429,12 @@
         println("{}", bitand(a, b)); // 0 （二进制的 0b0000）
         ```
 
-    </br>
+    <br />
 
-    - #### bitor
+    - #### **bitor**
 
         - `bitor`(a, b) : py_int | EUDVariable  
-        按位或运算 [a] | [b]
+            按位或运算 [a] | [b]  
 
         示例
 
@@ -3262,12 +3444,12 @@
         println("{}", bitor(a, b)); // 15 （二进制的 0b1111）
         ```
 
-    </br>
+    <br />
 
-    - #### bitnot
+    - #### **bitnot**
 
         - `bitnot`(a) : py_int | EUDVariable  
-        按位取反运算 ~[a]
+            按位取反运算 ~[a]  
 
         示例
 
@@ -3277,12 +3459,12 @@
         println("{}, {}", bitnot(a), b); // 12, 12 （二进制的 0b1100, 0b1100）
         ```
 
-    </br>
+    <br />
 
-    - #### bitxor
+    - #### **bitxor**
 
         - `bitxor`(a, b) : py_int | EUDVariable  
-        按位异或运算 [a] ^ [b]
+            按位异或运算 [a] ^ [b]  
 
         示例
 
@@ -3292,12 +3474,12 @@
         println("{}", bitxor(a, b)); // 9 （二进制的 0b1001）
         ```
 
-    </br>
+    <br />
 
-    - #### bitnand
+    - #### **bitnand**
 
         - `bitnand`(a, b) : py_int | EUDVariable  
-        按位与反运算 ~([a] & [b])
+            按位与反运算 ~([a] & [b])  
 
         示例
 
@@ -3307,12 +3489,12 @@
         println("{}", bitnand(a, b)); // 15 （二进制的 0b1111）
         ```
 
-    </br>
+    <br />
 
-    - #### bitnor
+    - #### **bitnor**
 
         - `bitnor`(a, b) : py_int | EUDVariable  
-        按位或反运算 ~([a] | [b])
+            按位或反运算 ~([a] | [b])  
 
         示例
 
@@ -3322,12 +3504,12 @@
         println("{}", bitnor(a, b)); // 0 （二进制的 0b0000）
         ```
 
-    </br>
+    <br />
 
-    - #### bitnxor
+    - #### **bitnxor**
 
         - `bitnxor`(a, b) : py_int | EUDVariable  
-        按位异或反运算 ~([a] ^ [b])
+            按位异或反运算 ~([a] ^ [b])  
 
         示例
 
@@ -3337,14 +3519,12 @@
         println("{}", bitnxor(a, b)); // 6 （二进制的 0b0110）
         ```
 
-    </br>
+    <br />
 
-    - #### bitlshift
+    - #### **bitlshift**
 
         - `bitlshift`(a, b) : py_int | EUDVariable  
-        [a] << [b]
-
-        左位移运算
+            左位移运算 [a] << [b]  
 
         示例
 
@@ -3354,14 +3534,12 @@
         println("{}", bitlshift(a, b)); // 14 （二进制的 0b1110）
         ```
 
-    </br>
+    <br />
 
-    - #### bitrshift
+    - #### **bitrshift**
 
         - `bitrshift`(a, b) : py_int | EUDVariable  
-        [a] >> [b]
-
-        右位移运算
+        右位移运算 [a] >> [b]  
 
         示例
 
@@ -3372,8 +3550,8 @@
         ```
 
 
-    </br>
-    </br>
+    <br />
+    <br />
 
 - ### QueueGameCommand 函数
 
@@ -3382,19 +3560,19 @@
 
     > 注意：如果本机数据包队列已满，这些函数调用会失效，并且是静默的，它不会有提示也不会有错误的返回值，所以不要过于频繁的调用这些函数。
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand
+    - #### **QueueGameCommand**
 
         - `QueueGameCommand`(data, size)  
-            向本机广播队列添加尺寸为 [size] 数据包 [data]，本节所有的函数都是对这个函数发送特定的数据包的封装
+            向本机广播队列添加尺寸为 [size] 数据包 [data]，本节所有的函数都是对这个函数发送特定的数据包的封装  
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_MinimapPing
+    - #### **QueueGameCommand_MinimapPing**
 
         - `QueueGameCommand_MinimapPing`(xy)  
-            向本机广播队列添加小地图 [xy] 坐标上发 Ping 的数据包，xy 的计算方法是 x + y*65536
+            向本机广播队列添加小地图 [xy] 坐标上发 Ping 的数据包，xy 的计算方法是 x + y * 65536  
 
         示例
 
@@ -3403,12 +3581,12 @@
         QueueGameCommand_MinimapPing(1234 + 2345 * 65536);
         ```
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_QueuedRightClick
+    - #### **QueueGameCommand_QueuedRightClick**
 
         - `QueueGameCommand_QueuedRightClick`(xy)  
-            向本机广播队列添加右键点击 [xy] 的数据包，xy 的计算方法是 x + y*65536
+            向本机广播队列添加右键点击 [xy] 的数据包，xy 的计算方法是 x + y * 65536  
 
         示例
 
@@ -3417,12 +3595,12 @@
         QueueGameCommand_QueuedRightClick(1234 + 2345 * 65536);
         ```
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_Select
+    - #### **QueueGameCommand_Select**
 
         - `QueueGameCommand_Select`(n, ptrList: EUDArray)  
-            向本机广播队列添加选中一些单位的数据包，[n] 是单位个数，[ptrList] 是 cunit 指针列表，不是 epd 列表
+            向本机广播队列添加选中一些单位的数据包，[n] 是单位个数，[ptrList] 是 cunit 指针列表，不是 epd 列表  
 
             > 这个只是会发出本机 “已经选中单位的数据包”，并不会在本机画面上选中单位，它只是告诉其它在线玩家，本机选中了这些单位，如果紧接着发 RightClick 数据包，则这些单位就会往目标位置移动
 
@@ -3442,33 +3620,33 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_PauseGame
+    - #### **QueueGameCommand_PauseGame**
 
         - `QueueGameCommand_PauseGame()`  
-            向本机广播队列添加暂停游戏的数据包
+            向本机广播队列添加暂停游戏的数据包  
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_ResumeGame
+    - #### **QueueGameCommand_ResumeGame**
 
         - `QueueGameCommand_ResumeGame()`  
-            向本机广播队列添加继续游戏的数据包
+            向本机广播队列添加继续游戏的数据包  
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_RestartGame
+    - #### **QueueGameCommand_RestartGame**
 
         - `QueueGameCommand_RestartGame()`  
-            向本机广播队列添加重新开始游戏的数据包
+            向本机广播队列添加重新开始游戏的数据包  
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_UseCheat
+    - #### **QueueGameCommand_UseCheat**
 
         - `QueueGameCommand_UseCheat`(启用/禁用)  
-            向本机广播队列添加 [启用/禁用] true/false 作弊的数据包，它不会真启用/禁用作弊，只是会发出一个 “我作弊了” 或者 “我取消作弊了” 的数据包
+            向本机广播队列添加 [启用/禁用] true/false 作弊的数据包，它不会真启用/禁用作弊，只是会发出一个 “我作弊了” 或者 “我取消作弊了” 的数据包  
 
         示例
 
@@ -3477,12 +3655,12 @@
         QueueGameCommand_UseCheat(false); // 关闭作弊
         ```
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_TrainUnit
+    - #### **QueueGameCommand_TrainUnit**
 
         - `QueueGameCommand_TrainUnit`(unit: TrgUnit)  
-            向本机广播队列添加训练指定单位类型的数据包，配合 QueueGameCommand_Select 选中单位后使用
+            向本机广播队列添加训练指定单位类型的数据包，配合 QueueGameCommand_Select 选中单位后使用  
 
         示例
 
@@ -3502,12 +3680,12 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_MergeDarkArchon()
+    - #### **QueueGameCommand_MergeDarkArchon**
 
         - `QueueGameCommand_MergeDarkArchon()`  
-            向本机广播队列添加合成红球（黑暗执政官）的数据包，配合 QueueGameCommand_Select 选中单位后使用
+            向本机广播队列添加合成红球（黑暗执政官）的数据包，配合 QueueGameCommand_Select 选中单位后使用  
 
         示例
 
@@ -3527,12 +3705,12 @@
         }
         ```
 
-    </br>
+    <br />
 
-    - #### QueueGameCommand_MergeArchon
+    - #### **QueueGameCommand_MergeArchon**
 
         - `QueueGameCommand_MergeArchon()`  
-            向本机广播队列添加合成白球（光明执政官）的数据包，配合 QueueGameCommand_Select 选中单位后使用
+            向本机广播队列添加合成白球（光明执政官）的数据包，配合 QueueGameCommand_Select 选中单位后使用  
 
         示例
 
@@ -3551,16 +3729,4 @@
             }
         }
         ```
-
-      
-
-    
-
-  
-
-
-
-
-
-
 

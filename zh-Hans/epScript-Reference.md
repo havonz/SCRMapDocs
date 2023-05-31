@@ -1,18 +1,36 @@
 # epScript 参考
 
-
-## 语言文档
-
-  [基本语法](epScript-Reference/Syntax.md)  
-  [使用变量](epScript-Reference/Use-of-Variables.md)  
-  [使用函数](epScript-Reference/Use-of-Functions.md)  
-  [使用对象](epScript-Reference/Use-of-Objects.md)  
-  [字符串说明](epScript-Reference/Understanding-Strings.md)  
-  [内置基本对象类型](epScript-Reference/Built-in-Object-Types.md)  
-  [内置扩展对象类型](epScript-Reference/Built-in-Object-Types-Ext.md)  
-  [常量对照表](epScript-Reference/Constants-Reference.md)  
-  [内置函数库](epScript-Reference/Built-in-Functions.md)  
-
+- 语言文档
+    - [基本语法](epScript-Reference/Syntax.md)  
+    - [使用变量](epScript-Reference/Use-of-Variables.md)  
+    - [使用函数](epScript-Reference/Use-of-Functions.md)  
+    - [使用对象](epScript-Reference/Use-of-Objects.md)  
+    - [字符串说明](epScript-Reference/Understanding-Strings.md)  
+    - [内置基本对象类型](epScript-Reference/Built-in-Object-Types.md)  
+    - [内置扩展对象类型](epScript-Reference/Built-in-Object-Types-Ext.md)  
+    - [常量对照表](epScript-Reference/Constants-Reference.md)  
+    - [内置函数库](epScript-Reference/Built-in-Functions.md) 
+- 相关说明  
+    - [如何开始](#%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B)
+        - [环境准备](#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87)
+        - [地图准备](#%E5%9C%B0%E5%9B%BE%E5%87%86%E5%A4%87)
+        - [建立工程](#%E5%BB%BA%E7%AB%8B%E5%B7%A5%E7%A8%8B)
+        - [示例工程](#%E7%A4%BA%E4%BE%8B%E5%B7%A5%E7%A8%8B)
+    - [运行模式](#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F)
+        - [脚本文件扩展名区别](#%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D%E5%8C%BA%E5%88%AB)
+        - [加载顺序](#%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F)
+    - [edd 和 eds 的区别](#edd-%E5%92%8C-eds-%E7%9A%84%E5%8C%BA%E5%88%AB)
+        - [对 edd 格式](#%E5%AF%B9-edd-%E6%A0%BC%E5%BC%8F)
+        - [对 eds 格式](#%E5%AF%B9-eds-%E6%A0%BC%E5%BC%8F)
+    - [数据同步说明](#%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5%E8%AF%B4%E6%98%8E)
+    - [游戏时间说明](#%E6%B8%B8%E6%88%8F%E6%97%B6%E9%97%B4%E8%AF%B4%E6%98%8E)
+        - [游戏帧（Frame）](#%E6%B8%B8%E6%88%8F%E5%B8%A7frame)
+        - [游戏秒](#%E6%B8%B8%E6%88%8F%E7%A7%92)
+        - [游戏速度](#%E6%B8%B8%E6%88%8F%E9%80%9F%E5%BA%A6)
+        - [触发器扫描间隔](#%E8%A7%A6%E5%8F%91%E5%99%A8%E6%89%AB%E6%8F%8F%E9%97%B4%E9%9A%94)
+    - [当前玩家与本机玩家](#%E5%BD%93%E5%89%8D%E7%8E%A9%E5%AE%B6%E4%B8%8E%E6%9C%AC%E6%9C%BA%E7%8E%A9%E5%AE%B6)
+        - [当前玩家](#%E5%BD%93%E5%89%8D%E7%8E%A9%E5%AE%B6)
+        - [本机玩家](#%E6%9C%AC%E6%9C%BA%E7%8E%A9%E5%AE%B6)
 
 ## 如何开始
 
@@ -92,7 +110,7 @@
     - [Trigger和RawTrigger的运用.zip](res/Trigger和RawTrigger的运用.zip)
     - [修改单位消耗人口限制.zip](res/修改单位消耗人口限制.zip)
     - [位置函数的使用.zip](res/位置函数的使用.zip)
-    - [[MSQC演示]游戏中文字菜单.zip](res/[MSQC演示]游戏中文字菜单.zip)  </br></br>
+    - [[MSQC演示]游戏中文字菜单.zip](res/[MSQC演示]游戏中文字菜单.zip)  <br /><br />
 
 
 
@@ -143,7 +161,7 @@
         a.afterTriggerExec()
         eudTurbo.afterTriggerExec()
     ```
-    </br>
+    <br />
 
 ## edd 和 eds 的区别
 
@@ -157,13 +175,13 @@ euddraft 对这两种扩展名的处理方式不一样
 - ### 对 eds 格式
 
     它会在顺利编译生成地图完成后退出  
-    如果不顺利，会输出错误信息并等待你按回车键退出  </br></br>
+    如果不顺利，会输出错误信息并等待你按回车键退出  <br /><br />
 
 ## 数据同步说明
 
 如果将`非同步数据`（例如玩家当前鼠标位置）赋值给变量，该变量对于每个玩家的机器上都不一样，若以该变量的状态作为判断条件执行了`需要同步的数据`的动作（例如创建单位），则可能会导致多人游戏中玩家`需要同步的数据`不同步（例如 A 机器上创建了单位，B 机器上却没创建单位）而引发掉线。
 
-该类任务通常可以使用 MSQC 插件来辅助解决  </br></br>
+该类任务通常可以使用 MSQC 插件来辅助解决  <br /><br />
 
 
 
@@ -241,7 +259,7 @@ euddraft 对这两种扩展名的处理方式不一样
     }
     ```
     同理 CountdownTimer 条件也是取屏幕上方倒计时的整数部分  
-    因此在写有关时间判定的条件时，不应该使用 Exactly（等于），而应该用 AtLeast（大于或等于） 或者 AtMost（小于或等于）  </br></br>
+    因此在写有关时间判定的条件时，不应该使用 Exactly（等于），而应该用 AtLeast（大于或等于） 或者 AtMost（小于或等于）  <br /><br />
 
 ## 当前玩家与本机玩家
 

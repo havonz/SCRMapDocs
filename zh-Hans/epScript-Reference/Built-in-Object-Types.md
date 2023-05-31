@@ -57,7 +57,7 @@
     };
     ```
 
-</br>
+<br />
 
 - ### EUDLightVariable
 
@@ -104,7 +104,7 @@
     }
     ```
 
-</br>
+<br />
 
 - ### EUDLightBool
 
@@ -145,7 +145,7 @@
     }
     ```
 
-</br>
+<br />
 
 - ### EUDArray
 
@@ -171,7 +171,7 @@
     const c = [list(3, 2, 1), 4, list(5, 6)]; // 声明一个尺寸为 6 的数组（下标 0~5）并初始化为 b[0] = 3; b[1] = 2; b[2] = 1; b[3] = 4; b[4] = 5; b[5] = 6;
     ```
 
-</br>
+<br />
 
 - ### EUDVArray
 
@@ -203,7 +203,7 @@
     }
     ```
 
-</br>
+<br />
 
 - ### PVariable
 
@@ -235,7 +235,7 @@
     }
     ```
 
-</br>
+<br />
 
 - ### EUDDeque
 
@@ -283,7 +283,7 @@
     }
     ```
 
-</br>
+<br />
 
 - ### StringBuffer
 
@@ -512,7 +512,7 @@
     ```
 
 
-</br>
+<br />
 
 ### Db
 
@@ -535,7 +535,7 @@ const buf2 = Db("string");    // Db(b"string\0")
 const buf3 = Db(5);           // Db(b"\0\0\0\0\0")
 ```
 
-</br>
+<br />
 
 ### EUDByteStream
 
@@ -565,7 +565,7 @@ stream.writebyte(99);
 StringBuffer().printAt(8, ptr2s(buf));
 ```
 
-</br>
+<br />
 
 ### ~~CPString~~
 
@@ -585,7 +585,7 @@ const s2 = CPString(b"stringstringstring");
 const s3 = CPString(64);
 ```
 
-</br>
+<br />
 
 ### ~~DBString~~
 

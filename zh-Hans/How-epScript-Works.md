@@ -10,7 +10,7 @@
     [http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers)  
     [https://github.com/phu54321/TrigEditPlus/blob/master/TrigEditPlus/Editor/TriggerEditor.h#L71](https://github.com/phu54321/TrigEditPlus/blob/master/TrigEditPlus/Editor/TriggerEditor.h#L71)  
 
-    </br>
+    <br />
 
 - ## 虚拟触发器（Virtual Triggers）
 
@@ -22,7 +22,7 @@
 
     > 参考：[http://www.staredit.net/topic/17546/](http://www.staredit.net/topic/17546/)
     
-    </br>
+    <br />
 
 - ## 数学运算
 
@@ -128,7 +128,7 @@
     ```
     </details>
 
-    </br>
+    <br />
 
 - ## 变量（EUDVariable）实现
 
@@ -603,7 +603,7 @@
             // 结果是 a:10 b:6
         }
         ```
-    </br>
+    <br />
 
 - ## 字符串（Db 或 StringBuffer）、轻数组（EUDArray）及轻变量（EUDLightVariable）
 
