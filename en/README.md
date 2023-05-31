@@ -2,8 +2,8 @@
 
 "StarCraft 1" is StarCraft, plus the number 1 is mainly used to distinguish "StarCraft 2"  
 StarCraft can be downloaded and played for free since version [1.18](https://news.blizzard.com/en-gb/starcraft/20674424/starcraft-brood-war-patch-1-18-patch-notes)  
-[StarCraft: Remastered Edition](https://news.blizzard.com/en-gb/starcraft/20977641/starcraft-remastered-is-live) is StarCraft 1.20+ a paid skin, which can be unlocked for a fee in the latest version of StarCraft  
-"StarCraft: Remastered Edition" also belongs to "StarCraft 1"
+[StarCraft: Remastered](https://news.blizzard.com/en-gb/starcraft/20977641/starcraft-remastered-is-live) is StarCraft 1.20+ a paid skin, which can be unlocked for a fee in the latest version of StarCraft  
+StarCraft: Remastered also belongs to "StarCraft 1"
 
 ## Concept
 - [What are Triggers](What-are-Triggers.md)
