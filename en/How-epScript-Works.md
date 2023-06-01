@@ -14,7 +14,11 @@
 
 - ## Virtual Triggers
 
-    Because the triggers in the [TRIG section](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers) in [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) are not loaded into the memory as a whole, but are loaded in the form of a [node list](https://euddb.website/?pg=entry&id=763), and the nodes on the node list need to be traversed to locate them during runtime. [jjf28](http://www.staredit.net/topic/17546/#1) posted that you just need to write the bytecode of the trigger to any accessible location in memory, then add it to the trigger list , and they will work normally. These triggers that are not in the TRIG section can determine their relative positions in memory at runtime, which means that it is relatively easy to achieve positioning jumps between such triggers. jjf28 calls such triggers Virtual Triggers. [trgk](http://www.staredit.net/topic/17546/#11) proposed that the STR section will be loaded into the memory as a whole at runtime, so if a virtual trigger is written to the STR section, the relative position of its runtime memory can be easily fixed at compile time, thereby enabling more It is easy to implement dynamic modification of triggers during runtime to realize conditional judgment and flow control. On this basis, trgk designed a Python pseudo-syntax library [eudplib](https://github.com/armoha/eudplib) for conditional control flow .
+    Because the triggers in the [TRIG section](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers) in [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) are not loaded into the memory as a whole, but are loaded in the form of a [node list](https://euddb.website/?pg=entry&id=763), and the nodes on the node list need to be traversed to locate them during runtime.  
+    [jjf28](http://www.staredit.net/topic/17546/#1) posted that you just need to write the bytecode of the trigger to any accessible location in memory, then add it to the trigger node list , and they will work normally.  
+    These triggers that are not in the TRIG section can determine their relative positions in memory at runtime, which means that it is relatively easy to achieve positioning jumps between such triggers. jjf28 calls such triggers Virtual Triggers.  
+    [trgk](http://www.staredit.net/topic/17546/#11) proposed that the STR section will be loaded into the memory as a whole at runtime, so if a virtual trigger is written to the STR section, the relative position of its runtime memory can be easily fixed at compile time, thereby enabling more It is easy to implement dynamic modification of triggers during runtime to realize conditional judgment and flow control.  
+    On this basis, trgk designed a Python pseudo-syntax library [eudplib](https://github.com/armoha/eudplib) for conditional control flow .
 
     > Reference: [http://www.staredit.net/topic/17546/](http://www.staredit.net/topic/17546/)
 
@@ -388,12 +392,12 @@
         ```
         </details>
 
-        Structurally, a single trigger node (TriggerNode) does occupy 2408 bytes in memory.  
-        Among them, the first 8 bytes are th node structure. The next 320 bytes are 16 conditions, each occupying 20 bytes. Starting from the 328th byte, there is the action list, with each of the 64 actions occupying 32 bytes.  
+        Structurally, a single TriggerNode occupies 2408 bytes in memory.  
+        The first 8 bytes are the linked list node structure, followed by 320 bytes for 16 conditions, with each condition occupying 20 bytes. From the 328th byte onwards is the action list, with 64 actions occupying 32 bytes each.    
         This structure is fixed, so even with only one action, a trigger node will occupy 2408 bytes of space.  
         However, when StarCraft 1 is running, the traversal of trigger conditions/actions follows a short-circuit policy - when traversing conditions/actions, the first empty condition/action will ignore all subsequent conditions/actions.  
         In addition, an EUDVariable only needs to use one action, which means that many bytes used to implement the EUDVariable trigger are actually ignored and idle.  
-        So how do we utilize this idle space? The answer is to stack multiple EUDVariable trigger nodes together, just like poker cards stacked together with only the key parts exposed for people to identify the contents on these cards.  
+        So how can we use this idle space? The answer is to stack  multiple EUDVariable trigger nodes, like a poker hand with only the key parts exposed, allowing people to identify the contents.  
         Now assume we have more than 2408 bytes of memory space. We can try to build a fake trigger node structure on top of this.  
         The first 4 bytes of the trigger node store the information of the previous trigger node (prevTriggerPtr), which seems to have no use during the game. We can ignore it.   
         The next 5 to 8 bytes are the information of the next trigger node (nextTriggerPtr), which is useful. So these few bytes cannot be overwritten when stacked.   
