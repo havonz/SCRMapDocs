@@ -11,14 +11,14 @@
     - [命名规则](#%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99)
     - [引入其它模块](#%E5%BC%95%E5%85%A5%E5%85%B6%E5%AE%83%E6%A8%A1%E5%9D%97)
     - [符号](#%E7%AC%A6%E5%8F%B7)
-        - [代码块 {}](#%E4%BB%A3%E7%A0%81%E5%9D%97-)
-        - [语法层换行符 \;](#%E8%AF%AD%E6%B3%95%E5%B1%82%E6%8D%A2%E8%A1%8C%E7%AC%A6-%5C)
-        - [索引运算符 \[\]](#%E7%B4%A2%E5%BC%95%E8%BF%90%E7%AE%97%E7%AC%A6-%5C%5C)
-        - [赋值符 \=](#%E8%B5%8B%E5%80%BC%E7%AC%A6-%5C)
-        - [行注释符 //](#%E8%A1%8C%E6%B3%A8%E9%87%8A%E7%AC%A6-)
-        - [块注释符 /\* \*/](#%E5%9D%97%E6%B3%A8%E9%87%8A%E7%AC%A6-%5C-%5C)
-        - [条件判断运算符 > <](#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%BF%90%E7%AE%97%E7%AC%A6--)
-        - [数学运算符 + - * /](#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E7%AC%A6-----)
+        - [代码块 {}](#%E4%BB%A3%E7%A0%81%E5%9D%97)
+        - [语法层换行符 \;](#%E8%AF%AD%E6%B3%95%E5%B1%82%E6%8D%A2%E8%A1%8C%E7%AC%A6)
+        - [索引运算符 \[\]](#%E7%B4%A2%E5%BC%95%E8%BF%90%E7%AE%97%E7%AC%A6)
+        - [赋值符 \=](#%E8%B5%8B%E5%80%BC%E7%AC%A6)
+        - [行注释符 //](#%E8%A1%8C%E6%B3%A8%E9%87%8A%E7%AC%A6)
+        - [块注释符 /\* \*/](#%E5%9D%97%E6%B3%A8%E9%87%8A%E7%AC%A6)
+        - [条件判断运算符 > <](#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%BF%90%E7%AE%97%E7%AC%A6)
+        - [数学运算符 + - * /](#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E7%AC%A6)
         - [自增/自减/自乘/自除运算符](#%E8%87%AA%E5%A2%9E%E8%87%AA%E5%87%8F%E8%87%AA%E4%B9%98%E8%87%AA%E9%99%A4%E8%BF%90%E7%AE%97%E7%AC%A6)
     - [条件判断语法](#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E8%AF%AD%E6%B3%95)
         - [if](#if)
@@ -406,18 +406,18 @@
 
     - #### 单次执行
 
-        故名思义就是在条件满足执行了一次之后就不再判断也不再执行，不论你调用多少次，通常用于加在 beforeTriggerExec 或者 afterTriggerExec 中每一帧重复判断，直到达成条件则执行一次
+        故名思义就是在运行时条件满足执行了一次之后就不再执行，通常用于加在 beforeTriggerExec 或者 afterTriggerExec 中每一帧重复判断，直到达成条件则执行一次
 
         ```JavaScript
-        once (条件) { // 在代码中重复运行的情况下，会在条件满足时仅仅运行一次内部动作
-            // 动作
+        once (条件表达式) { // 在运行时重复运行 once 代码块的情况下，会在条件表达式满足时仅仅运行一次它里面的代码
+            // 代码
         }
 
-        once { // 无条件执行一次
-            // 动作
+        once { // 无条件仅执行一次它里面的代码
+            // 代码
         }
 
-        // 以下代码执行后将只打印一个 0
+        // 以下代码执行后将只打印一次 0
         for (var i = 0; i < 100; i++) {
             once {
                 println("{}", i);
@@ -447,14 +447,13 @@
         for (var i = 0; i < 10; i++) {
             println("{}", i);
         }
+        // 简单描述一下，上面的代码声明了一个计数变量 i，初始值为 0，当 i < 10 的情况下就一直循环执行，并且每执行一次都将 i 自增 1，i 的作用域就是后面那个大括号里，大括号是每次循环需要执行的内容
 
         var i1, i8;
         for (i1, i8 = 0, 0 ; i1 < 10 && i8 < 80 ; i1++, i8 += 8) {
             printAll("{} x 8 = {}", i1, i8);
         }
         ```
-
-        简单描述一下，上面的代码声明了一个计数变量 i，初始值为 0，当 i < 10 的情况下就一直循环执行，并且每执行一次都将 i 自增 1，i 的作用域就是后面那个大括号里，大括号是每次循环需要执行的内容
 
     - #### while 循环
 
@@ -467,8 +466,6 @@
             i++;
         }
         ```
-
-        它与上面的 for 循环等效，除了 i 的作用域不一样
 
     - #### break 跳出循环
 
@@ -522,10 +519,13 @@
         ```
 
         **运行时迭代器**  
-        名字以 EUDLoop 开头的迭代器通常是运行时迭代器  
-        EUDLoopPlayer、EUDLoopRange、EUDLoopUnit、EUDLoopUnit2、EUDLoopCUnit、EUDLoopNewUnit、EUDLoopNewCUnit、EUDLoopPlayerUnit、EUDLoopPlayerCUnit  
+        名字以 EUDLoop 开头的迭代器函数通常是返回的是运行时迭代器  
+
+        > EUDLoopPlayer、EUDLoopRange、EUDLoopUnit、EUDLoopUnit2、EUDLoopCUnit、EUDLoopNewUnit、EUDLoopNewCUnit、EUDLoopPlayerUnit、EUDLoopPlayerCUnit   
+        
         其次是 EUDQueue、EUDDeque 容器也属于运行时迭代器，UnitGroup.cploop 也返回一个运行时迭代器  
-        循环遍历展开双向队列（deque）中的每一个项，EUDDeque 是运行时迭代器类型  
+        
+        EUDDeque 演示  
         ```C#
         // dq3 是一个尺寸为 3 的 EUDDeque
         const dq3 = EUDDeque(3)();
@@ -618,6 +618,8 @@
         ```
 
     - #### epdswitch 内存值多重选择分支
+
+        对单个运行时内存位置的值的多种状态判断的条件分支
 
         ```JavaScript
         const unitId = epd + 0x64/4;
