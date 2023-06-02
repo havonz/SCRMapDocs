@@ -196,11 +196,11 @@
 
     - #### Code block
 
-        Use curly braces {} to denote a code block in epScript.  
+        Use curly braces `{}` to denote a code block in epScript.  
 
         ```JavaScript
         {
-            // 代码
+            // codes
         }
         ```
 
@@ -415,11 +415,11 @@
 
         ```JavaScript
         once (condition expression) { // In a situation where the once code block is repeatedly running during runtime, it will only run the code inside it once when the conditional expression is satisfied. 
-            // Code
+            // Codes
         }
 
         once { // Unconditionally execute the code inside it only once
-            // Code
+            // Codes
         }
 
         // The following code will only print 0 once
