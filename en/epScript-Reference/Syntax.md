@@ -194,7 +194,7 @@
 
     All syntax-related symbols are half-width symbols in pure English state and can be found in the [ASCII](https://en.wikipedia.org/wiki/ASCII) table.  
 
-    - #### Code block {} 
+    - #### Code block
 
         Use curly braces {} to denote a code block in epScript.  
 
@@ -217,7 +217,7 @@
                     println("{} > 5", i);
         ```
 
-    - #### Syntax line break \;
+    - #### Syntax line break
 
         The syntax line break is a semicolon `;` instead of a line break.
 
@@ -225,8 +225,8 @@
         var a;var b;
         ```
 
-    - #### Index operator \[\]
-
+    - #### Index operator
+        `[]`
         Used to access or modify elements in an array.  
 
         ```JavaScript
@@ -235,7 +235,7 @@
         var b = a[0];
         ```
 
-    - #### Assignment operator \=
+    - #### Assignment operator
 
         The assignment operator is a single equal sign `=`  
 
@@ -245,15 +245,15 @@
         a = 2; // Assign variable a to 2 
         ```
 
-    - #### Line comment //
+    - #### Line comment
 
-        Two slashes // starts a line comment.
+        Two slashes `//` starts a line comment.
 
         ```JavaScript
         var a = 1; // Comments are parts of the code that will not be executed. // starts a comment that continues to the end of the current line.
         ```
 
-    - #### Block comment /\* \*/
+    - #### Block comment
 
         The content between `/*` to `*/` is a block comment.  
 
@@ -261,7 +261,7 @@
         var /* This is a block comment, which can be placed in the middle of code */ a = 1;
         ```
 
-    - #### Conditional operator > <
+    - #### Conditional operator
 
         - Greater than `>`
         - Less than `<`
@@ -324,7 +324,9 @@
         var e = l2v(d);      // At runtime, use l2v to assign the result of expression d to e
         ```
 
-    - #### Mathematical operators + - * /
+    - #### Mathematical operators
+
+        `+` `-` `*` `/`
 
         ```JavaScript
         a = a + 1;  
