@@ -86,10 +86,10 @@
 
     - TrgString  
     - StringBuffer  
-    - $T(字面量字符串)  
-    - EncodeString(编译期字符串)  
-    - GetStringIndex(编译期字符串)  
-    - GetMapStringAddr(地图字符串 : TrgString)  
+    - $T(cstr : [literal](Syntax.md#字面量字符串literal-string))
+    - EncodeString(cstr: py_str)
+    - GetStringIndex(cstr: py_str)
+    - GetMapStringAddr(str: TrgString)
     </details>
     
     地图字符串（TrgString）是最常用的运行时字符串  
@@ -122,7 +122,7 @@
     DisplayText(str_idx);
     ```
 
-  再来个自定义函数接受地图字符串参数的例子
+    再来个自定义函数接受地图字符串参数的例子
 
     ```JavaScript
     function test(strId : TrgString) {
@@ -135,7 +135,7 @@
     }
     ```
 
-  也可以构造一个很长的编译期空字符串使用 EncodeString 宏转换成地图字符串（TrgString）当作字符串缓冲区充当字符串变量
+    也可以构造一个很长的编译期空字符串使用 EncodeString 宏转换成地图字符串（TrgString）当作字符串缓冲区充当字符串变量
 
     ```JavaScript
     const buf_idx = EncodeString(py_str(" ") * 128);
@@ -205,11 +205,11 @@
 - ## TBL 字符串（stat_txt.tbl）
     <details> <summary>相关类型及函数</summary>
 
-    - $B(字面量TBLKey)  
-    - EncodeTBL(编译期TBLKey)  
-    - GetTBLAddr(TBLKey或TBL编号)  
-    - settbl(TBLKey或TBL编号, 偏移地址, *args)  
-    - settbl2(TBLKey或TBL编号, 偏移地址, *args)  
+    - $B([TBLKey](Constants-Reference/StatText.md) : [literal](Syntax.md#literal-strings))
+    - EncodeTBL([TBLKey](Constants-Reference/StatText.md) : py_str)
+    - GetTBLAddr([TBLKey或TBL编号](Constants-Reference/StatText.md))
+    - settbl([TBLKey或TBL编号](Constants-Reference/StatText.md), 偏移地址, *args)
+    - settbl2([TBLKey或TBL编号](Constants-Reference/StatText.md), 偏移地址, *args)
     </details>
 
     TBL 字符串是指星际争霸1内部的字符串表中的字符串，它包含单位名称、科技名称、技能名称等等  

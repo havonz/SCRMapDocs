@@ -181,8 +181,8 @@
 
     ```JavaScript
     object EUDVArray {
-    function constructor(size) {}
-    const length;
+        function constructor(size) {}
+        const length;
     };
     ```
 
@@ -211,7 +211,7 @@
 
     ```JavaScript
     object PVariable {
-    const length;
+        const length;
     };
     ```
 
@@ -223,6 +223,7 @@
     const pv2 = EUDVArray(8)();
     ```
 
+<br />
 
 - ### EUDVArrayReader
 
@@ -239,18 +240,18 @@
 
 - ### EUDDeque
 
-    使用虚拟触发器实现的静态双向队列容器，EUDDeque 是运行时迭代器
+    使用虚拟触发器实现的静态双向队列容器，EUDDeque 是运行时迭代器类型
 
     ```JavaScript
     object EUDDeque {
-    function constructor(size) {}
-    function append(arg) {}
-    function appendleft(arg) {}
-    function pop() {}
-    function popleft() {}
-    function clear() {}
-    function empty() {}
-    const length;
+        function constructor(size) {}
+        function append(arg) {}
+        function appendleft(arg) {}
+        function pop() {}
+        function popleft() {}
+        function clear() {}
+        function empty() {}
+        const length;
     };
     ```
 
@@ -291,26 +292,26 @@
 
     ```JavaScript
     object StringBuffer {
-    function constructor(content) {}
-    function constructor(len) {}
-    function append(*args) {}
-    function appendf(format_string, *args) {}
-    function insert(index, *args) {}
-    function insertf(index, format_string, *args) {}
-    function delete(start, length=1) {}
-    function Display() {}
-    function DisplayAt(line) {}
-    function print(*args) {}
-    function printf(format_string, *args) {}
-    function printfAt(line, format_string, *args) {}
-    function Play() {}
-    function fadeIn(*args, line=-1, color=None, wait=1, reset=True, tag=None) {}
-    function fadeOut(*args, line=-1, color=None, wait=1, reset=True, tag=None) {}
-    function fadeInf(format_string, *args, line=-1, color=None, wait=1, reset=True, tag=None) {}
-    function fadeOutf(format_string, *args, line=-1, color=None, wait=1, reset=True, tag=None) {}
-    function length();
-    const StringIndex;
-    const epd;
+        function constructor(content) {}
+        function constructor(len) {}
+        function append(*args) {}
+        function appendf(format_string, *args) {}
+        function insert(index, *args) {}
+        function insertf(index, format_string, *args) {}
+        function delete(start, length=1) {}
+        function Display() {}
+        function DisplayAt(line) {}
+        function print(*args) {}
+        function printf(format_string, *args) {}
+        function printfAt(line, format_string, *args) {}
+        function Play() {}
+        function fadeIn(*args, line=-1, color=None, wait=1, reset=True, tag=None) {}
+        function fadeOut(*args, line=-1, color=None, wait=1, reset=True, tag=None) {}
+        function fadeInf(format_string, *args, line=-1, color=None, wait=1, reset=True, tag=None) {}
+        function fadeOutf(format_string, *args, line=-1, color=None, wait=1, reset=True, tag=None) {}
+        function length();
+        const StringIndex;
+        const epd;
     };
     ```
 
@@ -511,102 +512,103 @@
     }
     ```
 
+<br />
+
+- ### Db
+
+    静态内存字节数据类型
+
+    ```JavaScript
+    object Db {
+    function constructor(content) {}
+    function GetDataSize() {}
+    };
+    ```
+
+    支持使用整数、字符串、字节串初始化一段内存字节数据
+
+    使用`Db("string")`等同于`Db(b"string\0")`(UTF-8)
+
+    ```JavaScript
+    const buf1 = Db(b"string\0"); // Db(b"string\0")
+    const buf2 = Db("string");    // Db(b"string\0")
+    const buf3 = Db(5);           // Db(b"\0\0\0\0\0")
+    ```
 
 <br />
 
-### Db
+- ### EUDByteStream
 
-静态内存字节数据类型
+    内存字节流操作类
 
-```JavaScript
-object Db {
-   function constructor(content) {}
-   function GetDataSize() {}
-};
-```
+    ```JavaScript
+    object EUDByteStream {
+        function seekepd(epd) {}
+        function seekoffset(ptr) {}
+        function copyto(stream : EUDByteStream) {}
+        function readbyte() {}
+        function writebyte(byte) {}
+    }
+    ```
 
-支持使用整数、字符串、字节串初始化一段内存字节数据
-
-使用`Db("string")`等同于`Db(b"string\0")`(UTF-8)
-
-```JavaScript
-const buf1 = Db(b"string\0"); // Db(b"string\0")
-const buf2 = Db("string");    // Db(b"string\0")
-const buf3 = Db(5);           // Db(b"\0\0\0\0\0")
-```
-
-<br />
-
-### EUDByteStream
-
-内存字节流操作类
-
-```JavaScript
-object EUDByteStream {
-    function seekepd(epd) {}
-    function seekoffset(ptr) {}
-    function copyto(stream : EUDByteStream) {}
-    function readbyte() {}
-    function writebyte(byte) {}
-}
-```
-
-```JavaScript
-const buf = Db(b"\0uck fu\0k fuck");
-sprintf(buf, "908 + 8 = {}", 908 + 8);
-StringBuffer().printAt(6, ptr2s(buf));
-const stream = EUDByteStream();
-stream.seekoffset(buf);
-StringBuffer().printAt(7, stream.readbyte());
-stream.seekoffset(buf);
-stream.writebyte(97);
-stream.writebyte(98);
-stream.writebyte(99);
-StringBuffer().printAt(8, ptr2s(buf));
-```
+    ```JavaScript
+    const buf = Db(b"\0uck fu\0k fuck");
+    sprintf(buf, "908 + 8 = {}", 908 + 8);
+    StringBuffer().printAt(6, ptr2s(buf));
+    const stream = EUDByteStream();
+    stream.seekoffset(buf);
+    StringBuffer().printAt(7, stream.readbyte());
+    stream.seekoffset(buf);
+    stream.writebyte(97);
+    stream.writebyte(98);
+    stream.writebyte(99);
+    StringBuffer().printAt(8, ptr2s(buf));
+    ```
 
 <br />
 
-### ~~CPString~~
+- ### ~~CPString~~
 
-CPTrick 优化的字符串缓冲操作类
+    **已废弃**
+    CPTrick 优化的字符串缓冲操作类
 
-```JavaScript
-object CPString {
-   function constructor(content) {}
-   function Display() {}
-   function GetVTable() {}
-};
-```
+    ```JavaScript
+    object CPString {
+    function constructor(content) {}
+    function Display() {}
+    function GetVTable() {}
+    };
+    ```
 
-```JavaScript
-const s1 = CPString("一个字符串");
-const s2 = CPString(b"stringstringstring");
-const s3 = CPString(64);
-```
+    ```JavaScript
+    const s1 = CPString("一个字符串");
+    const s2 = CPString(b"stringstringstring");
+    const s3 = CPString(64);
+    ```
 
 <br />
 
-### ~~DBString~~
+- ### ~~DBString~~
 
-静态内存字符串 已废弃 Deprecated
+    **已废弃**
+    静态内存字符串
 
-```JavaScript
-object DBString {
-   function constructor(content) {}
-   function GetStringMemoryAddr() {}
-   function Display() {}
-   function Play() {}
-};
-```
+    ```JavaScript
+    object DBString {
+    function constructor(content) {}
+    function GetStringMemoryAddr() {}
+    function Display() {}
+    function Play() {}
+    };
+    ```
 
-```JavaScript
-const s = DBString("一个很长的字符串\0一个很长的字符串");
-const buf = s.GetStringMemoryAddr();
-s.Display();
-sprintf(buf, "908 + 8 = {}", 908 + 8);
-s.Display();
-```
+    ```JavaScript
+    const s = DBString("一个很长的字符串\0一个很长的字符串");
+    const buf = s.GetStringMemoryAddr();
+    s.Display();
+    sprintf(buf, "908 + 8 = {}", 908 + 8);
+    s.Display();
+    ```
 
     
 

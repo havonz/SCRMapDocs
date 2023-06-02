@@ -1,19 +1,23 @@
-# epScript 内置的地图辅助开发对象类型
+# Built-in Extended Object Types
 
-这些是与游戏相关的对象类型
+Object types related to game content  
 
-文档资料参考来源：  
-[https://cafe.naver.com/edac/120138](https://cafe.naver.com/edac/120138)
-
+Reference: [https://cafe.naver.com/edac/120138](https://cafe.naver.com/edac/120138)
 
 
-## 扩展对象类型
+- [Extended Object Types](#extended-object-types)
+    - [CUnit](#cunit)
+    - [UnitGroup](#unitgroup)
+    - [CSprite](#csprite)
+
+
+## Extended Object Types
 
 - ### CUnit
 
-    EPDCUnitMap 是 CUnit 的另外一种写法  
-    单位实例操作对象，可以特别操作地图上某一个单位，编辑器里中 Unit 实际是指单位的类型，而非单位的实例  
-    CUnit 是引用类型，它所操作单位实例属于`需要同步的数据`  
+    EPDCUnitMap is another way to write CUnit  
+    Unit instance operation object, which can operate a specific unit on the map. In the editor, Unit actually refers to the unit type instead of the unit instance.  
+    CUnit is a reference type, and the unit instance it operates on belongs to `data that needs to be synchronized`.  
 
     ```JavaScript
     object CUnit {
@@ -137,93 +141,93 @@
     ```
 
     ```JavaScript
-    const unit = CUnit.cast(v)        // 将函数参数或返回值转换为 CUnit 对象
-    const unit = CUnit(EPD)           // 从结构偏移 EPD 值创建 CUnit 对象
-    const unit = CUnit(EPD, ptr=ptr)  // 从结构偏移 EPD 值和 ptr 值创建 CUnit 对象
-    const unit = CUnit.from_read(EPD) // 从存储 EPD 地址的值读取并创建 CUnit 对象。 如果地址为空则 unit 为 0
-    const unit = CUnit.from_ptr(ptr)  // 从 ptr 值计算 EPD 并创建 CUnit 类型。在调用位置缓存 ptr 值，避免重复计算 EPD
-    const unit = CUnit(EPD).subUnit   // CUnit 实例的 CUnit 类型成员
+    const unit = CUnit.cast(v)        // Convert function argument or return value to CUnit object  
+    const unit = CUnit(EPD)           // Create CUnit object from structure offset EPD value   
+    const unit = CUnit(EPD, ptr=ptr)  // Create CUnit object from structure offset EPD value and ptr value
+    const unit = CUnit.from_read(EPD) // Read from the memory address storing EPD value and create CUnit object. If the address is empty, unit is 0   
+    const unit = CUnit.from_ptr(ptr)  // Calculate EPD from ptr value and create CUnit type. Cache ptr value at call location to avoid recalculating EPD
+    const unit = CUnit(EPD).subUnit   // CUnit type member of CUnit instance
     ```
 
     ```JavaScript
-    // 示例：工人单次资源采集超过 256
-    const bonusMineral = PVariable(list(492, 0, 0, 0, 0, 0, 0, 0));  // P1 工人采矿为 492 + 8 = 收集最多 500 个水晶矿
-    const bonusGas = PVariable(list(992, 0, 0, 0, 0, 0, 0, 0));  // P1 工人采矿为 992 + 8 = 最多收集 1000 个气矿
+    // Example: Increase resource collection over 256
+    const bonusMineral = PVariable(list(492, 0, 0, 0, 0, 0, 0, 0));  // P1 is 492 + 8 = collect up to 500 mineral  
+    const bonusGas = PVariable(list(992, 0, 0, 0, 0, 0, 0, 0));  // P1 is 992 + 8 = collect up to 1000 gas
     function loopUnit() {
-        foreach(unit : EUDLoopCUnit()) { 
-            epdswitch(unit + 0x64/4, 255) {  // 单位类型
+        foreach(unit : EUDLoopCUnit()) {
+            epdswitch(unit + 0x64/4, 255) {  // Unit type  
             case $U("Mineral Field (Type 1)"), $U("Mineral Field (Type 2)"), $U("Mineral Field (Type 3)"):
-                // 让多个工人同时采集水晶矿
+                // Several workers collect a mineral patch at the same time 
                 unit.gatherQueueCount = 0;
                 unit.nextGatherer = 0;
                 break;
             case $U("Terran SCV"), $U("Zerg Drone"), $U("Protoss Probe"):
-                const worker = unit; 
-                // 如果工人没有携带任何物品，并有额外资源，则提供额外资源
-                // worker.unknown0x66 = 额外采集量(水晶矿或气矿) 
-                // worker.resourceType = 资源类型 (1 = 水晶矿, 2 = 气矿)
-                // worker.connectedUnit = 资源(水晶矿/气矿建筑)内存地址
+                const worker = unit;
+                // If the worker is not carrying anything and has extra resources, provide extra resources
+                // worker.unknown0x66 = Extra collection amount (mineral or gas)
+                // worker.resourceType = Resource type (1 = mineral, 2 = gas) 
+                // worker.connectedUnit = Resource (mineral patch/gas building) address
                 if(worker.resourceCarryAmount == 0 && worker.unknown0x66 >= 1) {
-                    if(worker.resourceType == 1) {  
-                        SetResources(worker.owner, Add, worker.unknown0x66, Ore); 
-                    } else if(worker.resourceType == 2) { 
-                        SetResources(worker.owner, Add, worker.unknown0x66, Gas); 
+                    if(worker.resourceType == 1) {
+                        SetResources(worker.owner, Add, worker.unknown0x66, Ore);
+                    } else if(worker.resourceType == 2) {
+                        SetResources(worker.owner, Add, worker.unknown0x66, Gas);
                     }
-                    worker.resourceType = 0; 
-                    worker.unknown0x66 = 0; 
-                } 
-                epdswitch(worker + 0x4D/4, 0xFF00) {  // 命令 
-                case EncodeUnitOrder("Harvesting Minerals") * 256, EncodeUnitOrder("Enter/Exit Gas Mine") * 256: { 
-                    worker.connectedUnit = worker.orderTarget;  // 在未使用的空间中存储水晶矿内存地址
-                    // 表示水晶矿/气矿 
-                    worker.resourceType = 1 + l2v(worker.order == EncodeUnitOrder("Enter/Exit Gas Mine")); 
-                    break; 
-                } case EncodeUnitOrder("Reset Collision (Harvester&Mine)") * 256: { 
-                    // 在采集水晶矿或气矿后操作
-                    if(worker.connectedUnit >= 1 && worker.resourceType >= 1 && worker.resourceType <= 2) { 
-                        const player = worker.owner; 
-                        const bonusAmount = (worker.resourceType == 1) ? bonusMineral[player] : bonusGas[player]; 
-                        const targetResource = worker.connectedUnit;  // 水晶矿/气矿建筑 CUnit
-                        const resourceAmount = targetResource.resourceAmount; 
-                        // 如果水晶矿/气矿建筑剩余量少于额外采集量
-                        if (resourceAmount < bonusAmount) {   
-                            // 采集全部剩余量 
-                            worker.unknown0x66 = resourceAmount; 
-                            targetResource.resourceAmount = 0; 
-                        } else { 
-                            // 如果水晶矿/气矿建筑有足够的额外采集量,则采集更多 
-                            worker.unknown0x66 = bonusAmount; 
-                            targetResource.resourceAmount -= bonusAmount; 
-                        }
-                    } 
+                    worker.resourceType = 0;
+                    worker.unknown0x66 = 0;
                 }
-                case EncodeUnitOrder("Can Harvesting Minerals") * 256:
-                    if(worker.orderState == 2) { 
-                        worker.order = py_str("Move to Harvesting Minerals"); 
-                        worker.orderState = 1; 
-                    } 
-                    break; 
-                } 
-                break; 
-            } 
-        } 
-    } 
+                epdswitch(worker + 0x4D/4, 0xFF00) {  // Order
+                case EncodeUnitOrder("Harvesting Minerals") * 256, EncodeUnitOrder("Enter/Exit Gas Mine") * 256: {
+                    worker.connectedUnit = worker.orderTarget;  // Store the mineral address in unused space
+                    // Indicates mineral/gas 
+                    worker.resourceType = 1 + l2v(worker.order == EncodeUnitOrder("Enter/Exit Gas Mine"));
+                    break;
+                } case EncodeUnitOrder("Reset Collision (Harvester&amp;Mine)") * 256: {
+                    // Operates after mining minerals or gas
+                    if(worker.connectedUnit >= 1 && worker.resourceType >= 1 && worker.resourceType <= 2) {
+                        const player = worker.owner;
+                        const bonusAmount = (worker.resourceType == 1) ? bonusMineral[player] : bonusGas[player];
+                        const targetResource = worker.connectedUnit;  // Mineral patch/gas building CUnit!
+                        const resourceAmount = targetResource.resourceAmount;
+                        // If the remaining amount of mineral/gas building is less than the extra collection amount
+                        if (resourceAmount < bonusAmount) {
+                            // Collect all remaining amounts
+                            worker.unknown0x66 = resourceAmount;
+                            targetResource.resourceAmount = 0;
+                        } else {
+                            // If the mineral patch/gas building has enough extra collection amounts, collect more
+                            worker.unknown0x66 = bonusAmount;
+                            targetResource.resourceAmount -= bonusAmount;
+                        }
+                    }
+                }
+                case EncodeUnitOrder("Can Harvest Minerals") * 256:
+                    if(worker.orderState == 2) {
+                        worker.order = py_str("Move to Harvest Minerals");
+                        worker.orderState = 1;
+                    }
+                    break;
+                }
+                break;
+            }
+        }
+    }
     ```
 
 
 - ### UnitGroup
 
-    UnitGroup 是一个经过 CPTricks 优化的单位实例容器
+    UnitGroup is an optimized unit instance container after applying CPTricks.  
 
     ```JavaScript
     object GUnit {
-        function remove(){}           // 把自身从所属的 UnitGroup 中删除
-        const dying : EUDGUnitIter;   // 它实际不是一个迭代器，若单位未死则不执行 foreach 代码块，若单位已死它会执行完 foreach 代码块中的代码后再把已死单位从所属的 UnitGroup 中删除
+        function remove(){}           // Remove itself from the UnitGroup you belong to
+        const dying : EUDGUnitIter;   // It is not actually an iterator. If the unit is alive, the foreach code block will not execute. If the unit dies, after executing the code block in foreach, the dead unit will remove itself from the UnitGroup it belongs to.
     }
 
     object UnitGroup {
         function add(epd) {}
-        const cp_loop : EUDGUnitIter; // cp_loop 返回一个迭代器，它迭代容器内所有的单位实例，暂时把这个单位实例类型称为 GUnit 吧，GUnit 有一个 remove 方法，可以把自身从所属的 UnitGroup 中删除
+        const cp_loop : EUDGUnitIter; // cp_loop returns an iterator that iterates over all unit instances in the container. For now, let's call this unit instance type GUnit. GUnit has a remove method to remove itself from the UnitGroup it belongs to
     };
     ```
 
@@ -232,7 +236,7 @@
 
     // UnitGroup Declaration
     const zerglings = UnitGroup(1000);
-    // max capacity = 1000, will use CPTricks
+    // max capacity = 1000, will use CPTrick
 
     // Register Unit
     zerglings.add(epd);
@@ -273,7 +277,7 @@
 
 - ### CSprite
 
-    Sprite 实例操作对象类型
+    Sprite instance operation object type
 
     ```Python
     class CSpriteFlags(EnumMember):
