@@ -14,4 +14,4 @@ makefile.edd
     这是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\）在游戏中看到实际代码在游戏中的效果，它已经无法再直接使用 SCMD 打开编辑
 
 
-演示来自 https://flowus.cn/share/fd0e1781-bef6-428b-93d8-af0289d5941c
+演示来自 https://github.com/havonz/SCRMapDocs
