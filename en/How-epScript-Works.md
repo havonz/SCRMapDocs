@@ -162,8 +162,8 @@
             conditions = {Always();};
             actions = {
                 SetDeathsX(EPD(destAddr), modifier, value, 0, 0xFFFFFFFF);
-                --                                     ^
-                --                     The value of the variable exists here
+                --                                    ^
+                --                     The variable value is stored here
             };
         }
         ```
