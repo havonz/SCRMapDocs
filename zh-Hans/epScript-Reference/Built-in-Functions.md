@@ -529,7 +529,7 @@
             总是无条件执行，在 epScript 中无用
 
         - ~~Never() : Condition~~  
-            总是不执行，在 epScript 中无用
+            总是不执行，在 epScript 中绝大多数情况下该函数无用
 
     <br />
     <br />
@@ -1037,12 +1037,13 @@
 
     <br />
 
-    - #### **SetNextScenario**
+    - #### **~~SetNextScenario~~**
 
-        - `SetNextScenario`(文本 : TrgString) : Action  
+        - ~~`SetNextScenario`(文本 : TrgString) : Action~~  
             设置本局游戏完成后要载入的下一张地图名 [文本]，必须要在同一目录  
-
-            > 该动作的参数 [文本] 实际为该文本条目在地图字符串表（Map String Table）中的编号，假如这个条目在地图字符串表不存在，那么 epScript 会先将该 [文本] 插入到地图字符串表中然后将其编号作为它的参数。  
+            
+            > **Note**
+            > 只能用于单人游戏，并且在 EUD 地图中无用，epScript 中无用
 
         
 
@@ -1107,12 +1108,13 @@
 
     <br />
 
-    - #### **Transmission**
+    - #### **~~Transmission~~**
 
-        - `Transmission`(单位类型 : TrgUnit, 指定区域 : TrgLocation, WAVName : TrgString, 设为/增加/减少 : TrgModifier, Time, 文本 : TrgString) : Action  
+        - ~~`Transmission`(单位类型 : TrgUnit, 指定区域 : TrgLocation, WAVName : TrgString, 设为/增加/减少 : TrgModifier, Time, 文本 : TrgString) : Action~~  
             允许非同步执行，为当前玩家播放一段声音 [WAVName] 并且让玩家单位头像那里显示 [指定区域] 内 [单位类型] 头像 [设为/增加/减少] [Time] 游戏毫秒，同时在小地图该单位上发出 Ping 同时输出文字信息 [文本]
 
-            > 该动作的参数 [文本]/[WAVName] 实际为该文本条目在地图字符串表（Map String Table）中的编号，假如这个条目在地图字符串表不存在，那么 epScript 会先将该 [文本]/[WAVName] 插入到地图字符串表中然后将其编号作为它的参数。  
+            > **Note**
+            > 该函数内部包含 Wait，会影响触发器控制流程，不建议在 epScript 中使用
 
         
 
@@ -1128,7 +1130,10 @@
 
         - ~~Wait(毫秒) : Action~~
 
-            等待 [毫秒] （在 epScript 中建议不使用）
+            等待 [毫秒]
+            
+            > **Note**
+            > 该函数会影响触发器控制流程，不建议在 epScript 中使用
 
 
     <br />
@@ -1884,6 +1889,28 @@
 
         ```JavaScript
         var isP1MarineDeaths100 = l2v(Deaths(P1, AtLeast, 100, "Terran Marine"));
+        ```
+
+    <br />
+
+    - #### **parse**
+
+        - `parse`(address, radix=10) : py_list[EUDVariable, EUDVariable]  
+            使用 [radix] 进制方式将内存地址 [address] 上的字符串转换为一个数字  
+            解析成功返回值为：数字, 位数  
+            解析失败返回值为：0, 0
+
+        Example
+
+        ```JavaScript
+        const numstr = Db("102a\r\r\r\r\r\r\r\r\r\r\r\0");
+        var num, digits;
+        num, digits = parse(numstr, 8);
+        println("0x{:x}, {},  8进制位数：{}", num, num, digits); // 0x00000042, 66,  8进制位数：3
+        num, digits = parse(numstr, 10);
+        println("0x{:x}, {}, 10进制位数：{}", num, num, digits); // 0x00000066, 102, 10进制位数：3
+        num, digits = parse(numstr, 16);
+        println("0x{:x}, {}, 16进制位数：{}", num, num, digits); // 0x0000102A, 4138, 16进制位数：4
         ```
 
     <br />

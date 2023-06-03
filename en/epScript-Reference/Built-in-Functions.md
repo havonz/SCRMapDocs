@@ -389,7 +389,7 @@
             Compare whether the kills of [unitType] of [player] is [AtLeast/AtMost/Exactly] [value]  
 
             Kills is not kill score, note the difference  
-            Killing own or allied units is not counted in the kill count  
+            Killing own or allied units is not counted in the Kills  
         
         Example
 
@@ -531,7 +531,7 @@
             Always executes unconditionally, useless in epScript
 
         - ~~Never() : Condition~~  
-            Never executes, useless in epScript
+            Never executes, In most cases, this function is useless in epScript.  
 
     <br />
     <br />
@@ -1039,12 +1039,13 @@
 
     <br />
 
-    - #### **SetNextScenario**
+    - #### **~~SetNextScenario~~**
 
-        - `SetNextScenario`(text : TrgString) : Action  
+        - ~~`SetNextScenario`(text : TrgString) : Action~~  
             Set the name of the next map to load after the current game ends to [text]. Must be in the same directory.   
 
-            > The argument [text] of this action is actually the ID of this text entry in the Map String Table. If this entry does not exist in the Map String Table, epScript will first insert this [text] into the Map String Table and then use its ID as the argument.  
+            > **Note**
+            > `SetNextScenario` is singleplayer-only and currently does not work on EUD maps (useless at the moment).
 
 
     <br />
@@ -1110,10 +1111,11 @@
 
     - #### **Transmission**
 
-        - `Transmission`(unitType : TrgUnit, area : TrgLocation, WAVName : TrgString, SetTo/Add/Subtract : TrgModifier, time, text : TrgString) : Action  
+        - ~~`Transmission`(unitType : TrgUnit, area : TrgLocation, WAVName : TrgString, SetTo/Add/Subtract : TrgModifier, time, text : TrgString) : Action~~  
             Allows desynchronized execution. Play a sound [WAVName] for the current player and display the portrait of [unitType] units in [area] at the player's unit portrait for [SetTo/Add/Subtract] [time] game milliseconds, while pinging the unit on the minimap and outputting the text information [text].  
 
-            > The arguments [text] and [WAVName] of this action are actually the IDs of these text entries in the Map String Table. If these entries do not exist in the Map String Table, epScript will first insert them into the Map String Table and then use their IDs as the arguments.  
+            > **Note**
+            > This function will affect trigger control flow, it is not recommended to use in epScript.
 
         Example
 
@@ -1127,7 +1129,8 @@
 
         - ~~Wait(milliseconds) : Action~~
 
-            （Not recommended to use in epScript）
+            > **Note**
+            > This function will affect trigger control flow, it is not recommended to use in epScript.
 
 
     <br />
@@ -1881,6 +1884,28 @@
 
         ```JavaScript
         var isP1MarineDeaths100 = l2v(Deaths(P1, AtLeast, 100, "Terran Marine"));
+        ```
+
+    <br />
+
+    - #### **parse**
+
+        - `parse`(address, radix=10) : py_list[EUDVariable, EUDVariable]  
+            Parses a string at memory [address] into a number using [radix] notation.  
+            Returns: number, digits  
+            Returns 0, 0 on parse failure
+
+        Example
+
+        ```JavaScript
+        const numstr = Db("102a\r\r\r\r\r\r\r\r\r\r\r\0");  
+        var num, digits;  
+        num, digits = parse(numstr, 8);  
+        println("0x{:x}, {},  8 radix digits:{}", num, num, digits); // 0x00000042, 66,  8 radix digits:3
+        num, digits = parse(numstr, 10);  
+        println("0x{:x}, {}, 10 radix digits:{}", num, num, digits); // 0x00000066, 102, 10 radix digits:3
+        num, digits = parse(numstr, 16);  
+        println("0x{:x}, {}, 16 radix digits:{}", num, num, digits); // 0x0000102A, 4138, 16 radix digits:4
         ```
 
     <br />
