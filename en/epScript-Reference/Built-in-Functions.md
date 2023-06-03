@@ -1285,11 +1285,11 @@
         Example
 
         ```javascript
-        // The .getDestAddr() method of a variable can obtain the destination address in the variable trigger at compile time.  
-        // The .getValueAddr() method of a variable can obtain the value address in the variable trigger at compile time.   
-        // The .GetVTable() method of a variable can obtain the virtual trigger address of the variable at compile time.  
-        // The .SetModifier(method) method of a variable sets the numeric modification method of the variable trigger to method.  
-        // The SetNextPtr(trg, ptr) function is used to set the next trigger of trigger trg to ptr.  
+        // The .getDestAddr() method of a variable can obtain the destination address in the variable trigger at compile time.
+        // The .getValueAddr() method of a variable can obtain the value address in the variable trigger at compile time. 
+        // The .GetVTable() method of a variable can obtain the virtual trigger address of the variable at compile time.
+        // The .SetModifier(method) method of a variable sets the numeric modification method of the variable trigger to method.
+        // The SetNextPtr(trg, ptr) function is used to set the next trigger of trg to ptr.
         function afterTriggerExec() {  
             var a, b = 3, 5;  
             const next = Forward();  
