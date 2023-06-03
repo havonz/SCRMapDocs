@@ -183,7 +183,10 @@ euddraft handles these two extensions differently.
 
 If you assign `desync-data` (such as the player's current mouse position) to a variable, the value of the variable will be different for each player's machine. If you execute an action that requires `sync-data` (such as creating a unit) based on the state of that variable, it may cause the `sync-data` to be out of sync for players in multiplayer games (e.g. a unit is created on player A's machine but not on player B's machine), leading to a drop.  
 
-Such tasks can usually be assisted by the MSQC plugin.  <br /><br />
+Such tasks can usually be assisted by the MSQC plugin.  
+
+[Example: GameSpeedTextMenu/main.eps](res/%5BMSQC%5DGameSpeedTextMenu/main.eps)  
+<br /><br />
 
 
 

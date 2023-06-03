@@ -3346,6 +3346,8 @@
         println("Traveling 888 distance from (1264, 880) in the direction of 73 degrees (256 degrees) arrives at ({}, {})", x, y);
         ```
 
+        [Example: UsePosition/main.eps](../res/UsePosition/main.eps)
+
     <br />
 
     - #### **pow**
@@ -3596,7 +3598,7 @@
     > **Note**
     > If packet queue is full, this function fails. This behavior is silent
     > without any warning or error, since this behavior shouldn't happen in
-    > common situations. So **Don't use this function too much in a frame.
+    > common situations. So **Don't** use this function too much in a frame.
 
     <br />
 
