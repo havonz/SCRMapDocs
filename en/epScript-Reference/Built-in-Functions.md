@@ -2115,6 +2115,8 @@
             It is usually used to optimize the overhead of serial assignment or bitwise operations on variables. Its overhead is slightly higher than RawTrigger but lower than DoActions or Trigger.  
             A virtual trigger of a variable can only have one SetDeathsX action. If multiple actions are queued to the variable queue, the last one is taken.  
 
+            [Variable Operation Optimization](../How-epScript-Works.md#variable-operation-optimization)
+
         Example
 
         ```JavaScript

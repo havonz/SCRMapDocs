@@ -2119,6 +2119,8 @@
             它通常用于优化对变量进行串行赋值或位运算的开销，它的开销略高于 RawTrigger 但小于 DoActions 或 Trigger  
             一个变量的虚拟触发器中只能有一次 SetDeathsX 动作，若设定多个动作到变量队列中取最后一个  
 
+            [变量操作优化](../How-epScript-Works.md#变量操作优化)
+
         示例
 
         ```JavaScript
