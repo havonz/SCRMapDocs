@@ -105,7 +105,7 @@
         - [PTrigger](#ptrigger)
         - [DoActions](#doactions)
         - [VProc](#vproc)
-    - [Runtime iterators](#runtime-iterators)
+    - [Runtime Iterators](#runtime-iterators)
         - [EUDLoopPlayer](#eudloopplayer)
         - [EUDLoopRange](#eudlooprange)
         - [EUDLoopUnit](#eudloopunit)
@@ -2154,7 +2154,7 @@
     <br />
     <br />
 
-- ### Runtime iterators
+- ### Runtime Iterators
 
     Runtime iterators can be used with the compile-time loop syntax foreach to construct a runtime loop. The number of times it executes is controlled by the internal flow control logic of the iterator.  
     break and continue can be used in the foreach code block belonging to the runtime iterator, and they will be compiled into EUDContinue() and EUDBreak().  
