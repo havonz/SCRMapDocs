@@ -3661,6 +3661,33 @@
         - `QueueGameCommand_UseCheat`(cheats)  
             Use [cheats] locally, invalid for multiplayer games.  
 
+        <details><summary>Cheat code list</summary>
+
+        ```js
+        0x00000001 Black Sheep Wall
+        0x00000002 Operation CWAL
+        0x00000004 Power Overwhelming
+        0x00000008 Something For Nothing
+        0x00000010 Show me the Money
+        0x00000020
+        0x00000040 Game Over Man
+        0x00000080 There is no Cow Level
+        0x00000100 Staying Alive
+        0x00000200 Ophelia
+        0x00000400
+        0x00000800 The Gathering
+        0x00001000 Medieval Man
+        0x00002000 Modify the Phase Variance
+        0x00004000 War Aint What It Used To Be
+        0x00008000
+        0x00010000
+        0x00020000 Food For Thought
+        0x00040000 Whats Mine Is Mine
+        0x00080000 Breathe Deep
+        0x20000000 Noglues
+        ```
+        </details>
+
         Example
 
         ```JavaScript
