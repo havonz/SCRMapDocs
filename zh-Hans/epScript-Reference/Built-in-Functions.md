@@ -97,6 +97,7 @@
         - [EPD](#epd)
         - [l2v](#l2v)
         - [EUDFuncPtr](#eudfuncptr)
+        - [getgametick](#getgametick)
     - [触发器构建函数](#触发器构建函数)
         - [RawTrigger](#rawtrigger)
         - [Trigger](#trigger)
@@ -134,7 +135,7 @@
         - [add_epd/subtract_epd](#add_epdsubtract_epd)
         - [repmovsd_epd](#repmovsd_epd)
         - [dwepdread_epd](#dwepdread_epd)
-        - [ cunitread_epd](#cunitread_epd)
+        - [cunitread_epd](#cunitread_epd)
         - [posread_epd](#posread_epd)
         - [_cp 系列](#_cp-系列)
         - [readgen](#readgen)
@@ -161,7 +162,6 @@
         - [rand](#rand)
         - [seed](#seed)
         - [randomize](#randomize)
-        - [getgametick](#getgametick)
     - [位运算函数](#位运算函数)
         - [bitand](#bitand)
         - [bitor](#bitor)
@@ -209,7 +209,7 @@
 
     <br />
 
-    - ####  **Accumulate**
+    - #### **Accumulate**
 
         - `Accumulate`(玩家 : TrgPlayer, 不少于/不多于/等于 : TrgComparison, 数值, 资源类型 : TrgResource) : Condition  
             判断 [玩家] 收集的 [资源类型] 是否 [不少于/不多于/等于] [数值]
@@ -229,6 +229,7 @@
 
         - `Bring`(玩家 : TrgPlayer, 不少于/不多于/等于 : TrgComparison, 数值, 单位类型 : TrgUnit, 指定区域 : TrgLocation) : Condition  
             判断 [玩家] 在 [指定区域] 的 [单位类型] 是否 [不少于/不多余/等于] [数值] 个  
+
             Bring 第二个参数为 AtMost （不多于）的情况下，会检测到尚未建造完成的建筑、孵化中的虫卵；不会检测到被装载的单位、尚在训练中的单位；会忽略掉 [指定区域] 的高度设置  
             Bring 第二个参数为 AtLeast/Exactly （不少于/等于）的情况下，会检测到被装载的单位；不会检测到尚在训练中的单位、尚未建造完成的建筑、孵化中的虫卵  
             Bring 无法检测到 Scanner Sweep（扫雷达特效单位）和 Map Revealers（地图小雷达）  
@@ -249,7 +250,8 @@
     - #### **Command**
 
         - `Command`(玩家 : TrgPlayer, 不少于/不多于/等于 : TrgComparison, 数值, 单位类型 : TrgUnit) : Condition  
-            判断地图上受 [玩家] 控制的 [单位类型] 是否 [不少于/不多于/等于] [数值] 个 
+            判断地图上受 [玩家] 控制的 [单位类型] 是否 [不少于/不多于/等于] [数值] 个  
+
             Command 条件的第二个参数为 AtMost （不多于）的情况下，会检测到被装载的单位、尚在训练中的单位、尚未建造完成的建筑、孵化中的虫卵  
             Command 条件的第二个参数为 AtLeast/Exactly （不少于/等于）的情况下，会检测到已装载的单位；不会检测到尚在训练中的单位、尚未建造完成的建筑、孵化中的虫卵  
             Command 可以检测到 Scanner Sweep（扫雷达特效单位）和 Map Revealers（地图小雷达）  
@@ -524,10 +526,10 @@
     - #### **~~Always/Never~~**
 
         - ~~Always() : Condition~~  
-            总是无条件执行，在 epScript 中似乎没啥用处
+            总是无条件执行，在 epScript 中无用
 
         - ~~Never() : Condition~~  
-            总是不执行，在 epScript 中似乎没啥用处
+            总是不执行，在 epScript 中无用
 
     <br />
     <br />
@@ -540,7 +542,7 @@
         - `IsUserCP()`: Condition  
             非同步条件，用于判断`本机玩家`是否为`当前玩家`
 
-      
+    <br />
 
     - #### **Is64BitWireframe**
 
@@ -705,7 +707,7 @@
         - `LeaderBoardGreed`(目标数量) : Action  
             显示所有玩家采集水晶矿和气矿最接近 [目标数量] 的排行榜
 
-        - `LeaderBoardKills`(单位类型] : TrgUnit, 标签 : TrgString) : Action  
+        - `LeaderBoardKills`(单位类型 : TrgUnit, 标签 : TrgString) : Action  
             显示描述为 [标签] 所有玩家击杀 [单位类型] 个数的排行榜
 
         - `LeaderBoardResources`(资源类型 : TrgResource, 标签 : TrgString) : Action  
@@ -740,21 +742,21 @@
     - #### **ModifyUnit**
 
         - `ModifyUnitEnergy`(个数 : TrgCount, 单位类型 : TrgUnit, 玩家 : TrgPlayer,  指定区域 : TrgLocation, 百分数) : Action  
-            更改 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 的能量为百分之 [百分数]，[个数] 为 0 代表所有（All）
+            更改 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 的能量为百分之 [百分数]，[个数] 为 0 代表所有（All）  
 
         - `ModifyUnitHangarCount`(新增, 个数 : TrgCount, 单位类型 : TrgUnit, 玩家 : TrgPlayer, 指定区域 : TrgLocation) : Action  
-            给 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 增加最多 [新增] 装载单位，[个数] 为 0 代表所有（All）
+            给 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 增加最多 [新增] 装载单位，[个数] 为 0 代表所有（All）  
 
-        例如航母的小飞机、金甲的子弹；注意，该动作对无法增加雷车的地雷数量
+            例如航母的小飞机、金甲的子弹；注意，该动作对无法增加雷车的地雷数量  
 
         - `ModifyUnitHitPoints`(个数 : TrgCount, 单位类型 : TrgUnit, 玩家 : TrgPlayer, 指定区域 : TrgLocation, 百分数) : Action  
-            更改 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 的生命值为百分之 [百分数]，[个数] 为 0 代表所有（All）
+            更改 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 的生命值为百分之 [百分数]，[个数] 为 0 代表所有（All）  
 
         - `ModifyUnitResourceAmount`(个数 : TrgCount, 玩家 : TrgPlayer, 指定区域 : TrgLocation, 新值) : Action  
-            将 [玩家] 在 [指定区域] 的最多 [个数] 个单位的资源值改为 [新值]，[个数] 为 0 代表所有（All）
+            将 [玩家] 在 [指定区域] 的最多 [个数] 个单位的资源值改为 [新值]，[个数] 为 0 代表所有（All）  
 
         - `ModifyUnitShields`(个数 : TrgCount, 单位类型 : TrgUnit, 玩家 : TrgPlayer, 指定区域 : TrgLocation, 百分数) : Action  
-            更改 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 的护盾值为百分之 [百分数]，[个数] 为 0 代表所有（All）
+            更改 [玩家] 在 [指定区域] 的最多 [个数] 个 [单位类型] 的护盾值为百分之 [百分数]，[个数] 为 0 代表所有（All）  
 
         示例
 
@@ -846,8 +848,8 @@
 
     - #### **~~PreserveTrigger~~**
 
-      - ~~PreserveTrigger() : Action~~  
-        保留触发器，因为传统触发器执行一次后就失效，所以需要重复触发则需要加上这一条，epScript 中几乎用不着
+        - ~~PreserveTrigger() : Action~~  
+            保留触发器，因为传统触发器执行一次后就失效，所以需要重复触发则需要加上这一条，在 epScript 中无用
 
     <br />
 
@@ -1620,13 +1622,12 @@
 
 - ### 编译期 Python 宏
 
-    
 
     在 epScript 中可以使用 py_ 前缀调用所有的 Python 3 内建函数，这里列举一些常用的
 
     <br />
 
-    - #### py_print
+    - #### **py_print**
 
         - `py_print`(*args)  
 
@@ -1640,7 +1641,7 @@
 
         <br />
 
-    - #### py_list
+    - #### **py_list**
 
         - `py_list`(iter) : py_list  
             编译期 Python 列表创建
@@ -1657,7 +1658,7 @@
 
     <br />
 
-    - #### py_open
+    - #### **py_open**
 
         - `py_open`(filename, mode) : py_file  
             编译期以 [mode] 模式打开文件 [filename]，返回一个 Python 文件对象
@@ -1672,7 +1673,7 @@
 
     <br />
 
-    - #### py_eval
+    - #### **py_eval**
 
         - `py_eval`(str) : duck  
             编译期简单的 Python 代码执行，返回结果
@@ -1690,7 +1691,7 @@
 
     <br />
 
-    - #### py_str
+    - #### **py_str**
 
         - `py_str`(val) : py_str  
             编译期字符串包装转换
@@ -1707,7 +1708,7 @@
 
     <br />
 
-    - #### py_len
+    - #### **py_len**
 
         - `py_len`(gconstant) : py_int  
             编译期 Python 层全局常量长度判断
@@ -1726,7 +1727,7 @@
 
     <br />
 
-    - #### py_enumerate
+    - #### **py_enumerate**
 
         - `py_enumerate`(vlist) : py_iter  
             编译期枚举迭代器，枚举展开编译期容器中的项
@@ -1745,7 +1746,7 @@
 
     <br />
 
-    - #### py_range
+    - #### **py_range**
 
         - `py_range`(start, end, step) : py_iter  
             编译期计数迭代器，从 [start] 步进为 [step] 迭代到 [end] 结束展开代码块，包含 [start] 不包含 [end]
@@ -1836,7 +1837,7 @@
 
     <br />
 
-    - #### utf8 编码/解码
+    - #### **utf8 编码/解码**
 
         - `b2utf8`(str) : [py_byte]  
             使用 UTF-8 解码 [str]
@@ -1925,6 +1926,19 @@
             setcurpl(P1);
             printAt(10, "after funcptr returns {}, {}", x, y);
         }
+        ```
+
+    <br />
+
+    - #### **getgametick**
+
+        - `getgametick()` : EUDVariable  
+            获取逝去的游戏帧数，游戏速率为极快（Fastest）的情况下是 42 毫秒每帧  
+
+        示例
+
+        ```JavaScript
+        var tick = getgametick();
         ```
 
     <br />
@@ -2648,13 +2662,13 @@
 
     - #### **SetPName**
 
-        - `SetPName`(player : TrgPlayer, *可变参数)  
-            设置玩家 [player] 的名字为多个文本或其它参数组合起来的字符串
+        - `SetPName`(player : TrgPlayer, *args)  
+            设置玩家 [player] 的名字为多个参数 [*args] 组合起来的文本
 
-        - `SetPNamef`(player: TrgPlayer, 指定格式, *可变参数)  
-            设置玩家 [player] 的名字为一个用 [指定格式] 格式化的文本
+        - `SetPNamef`(player: TrgPlayer, format_string, *args)  
+            设置玩家 [player] 的名字为多个参数 [*args] 使用 [format_string] 格式化输出的文本
 
-        这俩函数均不能影响 PName 函数获取到的那个名字，只影响玩家打字显示的那个名字，并且只对当前帧有效，每一帧都需要重复运行
+        这俩函数均不能影响 PName 函数获取到的那个名字，只影响玩家聊天显示的那个名字，并且只对当前帧有效，每一帧都需要重复运行
 
         示例
 
@@ -2670,7 +2684,7 @@
 
         - `EUDPlayerLoop()()`  
         - `EUDEndPlayerLoop()`  
-            这俩是一对儿，它会把当前玩家依次设为每一个活动玩家（包括电脑玩家），运行完毕后当前玩家值就是 Loop 开始前的当前玩家值  
+            这俩是一对儿，它会把`当前玩家`依次设为每一个活动玩家（包括电脑玩家），运行完毕后当前玩家值就是 Loop 开始前的当前玩家值  
 
         示例
 
@@ -2755,10 +2769,10 @@
 
     <br />
 
-    - #### setloc_epd
+    - #### **setloc_epd**
 
         - `setloc_epd`(loc : TrgLocation, epd)  
-            设置区域 [loc] 的坐标为一个 EPD 地址 [epd] 上存储的值  
+            设置区域 [loc] 的坐标为本机内存地址 `0x58A364 + [epd] * 4` 上存储的值  
 
         示例
 
@@ -2831,28 +2845,28 @@
     - #### **read_epd/write_epd**
 
         - `dwread_epd`(epd) : EUDVariable  
-            读取本机指定 [epd] 偏移地址上的 dword 值  
+            读取本机内存地址 `0x58A364 + [epd] * 4` 上的 dword 值  
 
         - `dwwrite_epd`(epd, value)  
-            将 dword 值写入到本机 [epd] 偏移地址上  
+            将 dword 值写入到本机内存地址 `0x58A364 + [epd] * 4` 上  
 
         - `wread_epd`(epd, subp) : EUDVariable  
         - `bread_epd`(epd, subp) : EUDVariable  
 
-            读取本机指定玩家编号 [epd] 附加 [subp] 字节的偏移地址上的 word/byte 值，[subp] 小于 4（实际读取内存地址是 0x58A364 + epd * 4 + subp）  
+            读取本机内存地址 `0x58A364 + [epd] * 4 + [subp]` 上的 word/byte 值，`[subp] < 4`  
 
         - `wwrite_epd`(epd, subp, value)  
         - `bwrite_epd`(epd, subp, value)  
 
-            将 word/byte 值写入到本机指定玩家编号 [epd] 的附加 [subp] 字节的偏移地址上，[subp] 小于 4（实际写入内存地址是 0x58A364 + epd * 4 + subp）  
+            将 dword 值写入到本机内存地址 `0x58A364 + [epd] * 4 + [subp]` 上，`[subp] < 4`  
 
         - `maskread_epd`(epd, mask) : EUDVariable  
-            使用 [mask] 做掩码读取本机指定 [epd] 偏移地址上的 dword 值  
+            使用 [mask] 做掩码读取本机内存地址 `0x58A364 + [epd] * 4` 上的 dword 值  
 
-        示例
+        Example
 
         ```JavaScript
-        // 与上面那个例子很相似，不过 _epd 系列基准的内存偏移不同，用 EPD 宏可以转换
+        // 与 read/write 的例子很相似，不过 _epd 系列基准的内存偏移不同，用 EPD 宏可以转换
         function SetPlayerSupply(player: TrgPlayer, race, type, amount) {
             dwwrite_epd(EPD(0x582144) + (race) * 36 + (type) * 12 + (player), amount);
         }
@@ -2867,30 +2881,30 @@
 
     <br />
 
-    - #### add_epd/subtract_epd
+    - #### **add_epd/subtract_epd**
 
         - `dwadd_epd`(epd, value)  
-            对本机指定 [epd] 偏移地址的 dword 值自增 [value]  
+            使本机内存地址 `0x58A364 + [epd] * 4` 上的 dword 值自增 [value]  
 
         - `dwsubtract_epd`(epd, value)  
-            对本机指定 [epd] 偏移地址的 dword 值自减 [value]  
+            使本机内存地址 `0x58A364 + [epd] * 4` 上的 dword 值自减 [value]  
 
         - `wadd_epd`(epd, subp, value)  
         - `badd_epd`(epd, subp, value)  
 
-            对本机指定玩家编号 [epd] 对应的偏移位置附加 [subp] 字节位置上的 word/byte 值自增 [value]（实际操作的内存地址是 0x58A364 + epd * 4 + subp）  
+            使本机内存地址 `0x58A364 + [epd] * 4 + [subp]` 上的 word/byte 值自增 [value]，`[subp] < 4`  
 
         - `wsubtract_epd`(epd, subp, value)  
         - `bsubtract_epd`(epd, subp, value)  
 
-            对本机指定玩家编号 [epd] 对应的偏移位置附加 [subp] 字节上的 word/byte 值自减 [value]（实际操作的内存地址是 0x58A364 + epd * 4 + subp）  
+            使本机内存地址 `0x58A364 + [epd] * 4 + [subp]` 上的 word/byte 值自减 [value]，`[subp] < 4`  
 
     <br />
 
-    - #### repmovsd_epd
+    - #### **repmovsd_epd**
 
         - `repmovsd_epd`(dstepdp, srcepdp, copydwn)  
-            从本机 [srcepdp] 拷贝 [copydwn] * 4 字节内存到 [dstepdp]  
+            从本机内存地址 `0x58A364 + [srcepdp] * 4` 拷贝 `[copydwn] * 4` 字节内容到内存地址 `0x58A364 + [dstepdp] * 4` 上  
 
         示例
 
@@ -2903,13 +2917,13 @@
 
     <br />
 
-    - #### dwepdread_epd
+    - #### **dwepdread_epd**
 
         - `dwepdread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
-            从本机 [epd] 偏移位置读取一个指针，它同时返回指针和该指针的 EPD 值  
+            从本机内存地址 `0x58A364 + [epd] * 4` 上读取一个指针，它同时返回指针和该指针的 EPD 值  
 
         - `epdread_epd`(epd) : EUDVariable  
-            从本机 [epd] 偏移位置读取一个指针，它返回该指针的 EPD 值  
+            从本机内存地址 `0x58A364 + [epd] * 4` 上读取一个指针，它返回该指针的 EPD 值  
 
         示例
 
@@ -2923,13 +2937,13 @@
 
     <br />
 
-    - ####  cunitread_epd
+    - #### **cunitread_epd**
 
         - `cunitread_epd`(epd) : EUDVariable  
-            从本机 [epd] 偏移位置读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回一个指针  
+            从本机内存地址 `0x58A364 + [epd] * 4` 上读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回一个指针  
 
         - `cunitepdread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
-            从本机 [epd] 偏移位置读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回该指针和该指针的 EPD 值  
+            从本机内存地址 `0x58A364 + [epd] * 4` 上读取一个 cunit 指针，该函数为读取 cunit 指针优化过，它返回该指针和该指针的 EPD 值  
 
         示例
 
@@ -2943,10 +2957,10 @@
 
     <br />
 
-    - #### posread_epd
+    - #### **posread_epd**
 
         - `posread_epd`(epd) : py_tuple[EUDVariable, EUDVariable]  
-            从本机 [epd] 偏移位置读取一个 pos（位置）  
+            从本机内存地址 `0x58A364 + [epd] * 4` 上读取一个 pos（位置）  
 
         示例
 
@@ -2958,7 +2972,7 @@
 
     <br />
 
-    - #### _cp 系列
+    - #### **_cp 系列**
 
         - `dwread_cp`(cpoffset) : EUDVariable  
         - `dwwrite_cp`(cpoffset, value)  
@@ -2976,8 +2990,8 @@
         - `cunitepdread_cp`(cpoffset) : py_tuple[EUDVariable, EUDVariable]  
         - `posread_cp`(cpoffset) : py_tuple[EUDVariable, EUDVariable]  
         
-        _cp 系列所有函数用法都可以参考 _epd 系列，区别在于 _epd 系列需要传递一个 epd 偏移值作为其参数，而 _cp 是以传入一个以`当前玩家`这个全局变量的偏移值做参数  
-        它们通常用于提升代码运行效率，减少最终生成的触发器字节码的指令（触发器）数量
+        _cp 系列所有函数用法都可以参考 _epd 系列，_cp 系列会把 `当前玩家 + [cpoffset]` 当作 epd  
+        它们通常用于提升代码运行效率，减少最终生成的触发器数量
 
         示例
 
@@ -3035,14 +3049,14 @@
     - #### **strcpy**
 
         - `strcpy`(dst, src)  
-            从本机内存地址 [src] 拷贝字符串（以 `\x00` 终止的字节块）内容到内存地址 [dst]  
+            从本机内存地址 [src] 拷贝字符串（以 `\x00` 终止的字节块内容）到内存地址 [dst]  
 
     <br />
 
     - #### **strcmp**
 
         - `strcmp`(s1, s2) : EUDVariable  
-            对比本机 [s1] 和 [s2] 两个内存块上的字符串（以 `\x00` 终止的字节块）内容  
+            对比本机 [s1] 和 [s2] 两个内存块上的字符串（以 `\x00` 终止的字节块内容）  
             如果两块内存完全一致，则返回 0  
             否则，将对比第一个不同的字节并返回大于或者小于 0 的结果  
 
@@ -3050,18 +3064,18 @@
 
     - #### **strlen**
 
-      - `strlen`(ptr) : EUDVariable  
-        获取本机指针 [ptr] 指向的字符串（以 `\x00` 终止的字节块）长度，单位是字节  
+        - `strlen`(ptr) : EUDVariable  
+            获取本机内存地址 [ptr] 上的字符串（以 `\x00` 终止的字节块内容）的 ASCII 字符个数  
 
-      - `strlen_epd`(epd) : EUDVariable  
-        获取本机 [epd] 偏移位置指针指向的字符串（以 `\x00` 终止的字节块）长度，单位是字节  
+        - `strlen_epd`(epd) : EUDVariable  
+            获取本机内存地址 `0x58A364 + [epd] * 4` 上的字符串（以 `\x00` 终止的字节块内容）的 ASCII 字符个数  
 
     <br />
 
     - #### **strnstr**
 
         - `strnstr`(ptr, substr, count) : EUDVariable  
-            在本机指针 [ptr] 指向的字符串的前 [count] 个字符中搜索另外一个字符串 [substr]  
+            在本机内存地址 [ptr] 上的字符串的前 [count] 个 ASCII 字符中搜索另外一个字符串 [substr]  
             找到了就返回找到的位置的指针，没找到返回 0  
 
     <br />
@@ -3069,22 +3083,26 @@
     - #### **dbstr**
 
         - `dbstr_addstr`(dst, src) : EUDVariable  
-            将本机字符串 [src] 拷贝到 [dst] 位置，返回地址 dst + strlen(src)  
+            将本机字符串 [src] 拷贝到内存地址 [dst] 上，返回地址 [dst] + strlen([src])  
 
         - `dbstr_addstr_epd`(dst, srcepd) : EUDVariable  
-            将本机 [srcepd] 编号偏移位置内存的字符串拷贝到 [dst] 位置，它与 dbstr_addstr(dst, EPD(srcepd)) 等价，返回地址 dst + strlen_epd(srcepd)  
+            将本机内存地址 `0x58A364 + [srcepd] * 4` 上的字符串拷贝到内存地址 [dst] 上，返回地址 [dst] + strlen_epd([srcepd])  
 
         - `dbstr_adddw`(dst, number) : EUDVariable  
-            将一个数字值转换成文本打印到本机 dst 位置上，返回地址 dst + strlen(itoa(number))  
+            将一个数字值转换成文本输出到本机内存地址 [dst] 上，返回地址 [dst] + strlen(itoa([number]))  
 
         - `dbstr_addptr`(dst, ptr) : EUDVariable  
-            将一个数字值转换成 16 进制数字文本打印到本机 dst 位置上，返回地址 dst + strlen(itox(number))  
+            将一个数字值转换成 16 进制数字文本输出到本机内存地址 [dst] 上，返回地址 [dst] + strlen(itox([number]))  
 
         - `dbstr_print`(dst, *args, EOS=true, encoding="UTF-8")  
-            将多个参数以字符串的形式打印到本机 [dst] 位置上；命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true；命名参数 [encoding] 指定编码，默认 UTF-8  
+            将多个参数 [*args] 组合成字符串输出到本机内存地址 [dst] 上  
+            命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true  
+            命名参数 [encoding] 指定编码，默认 UTF-8  
 
         - `sprintf`(dst, format_string : py_str, *args, EOS=true, encoding="UTF-8")  
-            以 [format_string] 作为格式将多个参数格式化后打印到本机 [dst] 位置上；命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true；命名参数 [encoding] 指定编码，默认 UTF-8  
+            以 [format_string] 作为格式将多个参数 [*args] 格式化后输出到本机内存地址 [dst] 上  
+            命名参数 [EOS] 指定是否在字符串结尾附加字符串结尾符号，默认 true  
+            命名参数 [encoding] 指定编码，默认 UTF-8  
 
         示例
 
@@ -3107,11 +3125,11 @@
 
     - #### **ptr2s/epd2s**
 
-      - `ptr2s`(ptr) : Db*  
-        以字符串形式读取本机 [ptr] 指向的内存，在格式化文本中使用 `{:s}` 占位符等效  
+        - `ptr2s`(ptr) : Db*  
+            读取本机内存地址 [ptr] 上的字符串，在格式化文本中使用 `{:s}` 占位符等效  
 
-      - `epd2s`(epd) : Db*  
-        以字符串形式读取本机 [epd] 指向的内存，在格式化文本中使用 `{:t}` 占位符等效  
+        - `epd2s`(epd) : Db*  
+            读取本机内存地址 `0x58A364 + [srcepd] * 4` 上的字符串，在格式化文本中使用 `{:t}` 占位符等效  
 
     <br />
 
@@ -3136,10 +3154,10 @@
 
     <br />
 
-    - #### dwpatch_epd
+    - #### **dwpatch_epd**
 
         - `dwpatch_epd`(dstepd, value)  
-            给目标 EPD 位置 [dstepd] 打内存补丁  
+            用 [value] 给本机内存地址 `0x58A364 + [dstepd] * 4` 打内存补丁  
 
     <br />
 
@@ -3147,7 +3165,6 @@
 
         - `GetMapStringAddr`(strID : TrgString) : EUDVariable  
             获取本机一个地图字符串或字符串编号 [strID] 的内存地址  
-            这个不是 $T （或称 EncodeString）获取到的那个，$T 获取的是地图字符串在地图文件中对应的编号  
 
         示例
 
@@ -3202,7 +3219,7 @@
     <br />
     <br />
 
-  ### 数学函数
+- ### 数学函数
 
     <br />
 
@@ -3257,7 +3274,7 @@
     - #### **lengthdir**
 
         - `lengthdir`(length, angle) : tuple[EUDVariable, EUDVariable]  
-            计算从 0, 0 位置出发向着 [angle] 角度出发走 [length] 距离的另外一个坐标  
+            计算从坐标 (0, 0) 出发向着 [angle] 角度出发走 [length] 距离的另外一个坐标  
 
         - `lengthdir_256`(length, angle) : tuple[EUDVariable, EUDVariable]  
             与 lengthdir 的区别在于，在对角度对处理上，它将一个圆周分成 256 等份，角度是 256 度制，不是 360 度制  
@@ -3309,7 +3326,7 @@
     - #### **pow**
 
         - `pow`(x, y) : py_int | EUDVariable  
-            计算 [x] 的 [y] 次幂，如果两个参数都是常量，那么它的返回值也可以是常量  
+            计算 [x] 的 [y] 次幂，如果两个参数都是编译期常量，那么它可以在编译期返回常量  
 
         示例
 
@@ -3346,10 +3363,10 @@
     - #### **rand**
 
         - `rand()` : EUDVariable  
-            生成一个随机 word（范围 0~0xFFFF）  
+            生成一个范围在 0~0xFFFF 的随机整数  
 
         - `dwrand()` : EUDVariable  
-            生成一个随机 dword（范围 0~0xFFFFFFFF）  
+            生成一个范围在 0~0xFFFFFFFF 的随机整数
 
       注意不要在非同步条件下使用随机数函数  
 
@@ -3395,24 +3412,11 @@
         }
         ```
 
+
+    <br />
     <br />
 
-    - #### **getgametick**
-
-        - `getgametick()` : EUDVariable  
-            获取逝去的游戏帧数，游戏速率为极快（Fastest）的情况下是 42 毫秒每帧  
-
-        示例
-
-        ```JavaScript
-        var tick = getgametick();
-        ```
-
-      
-
-    
-
-  ### 位运算函数
+- ### 位运算函数
 
     <br />
 
@@ -3645,14 +3649,42 @@
 
     - #### **QueueGameCommand_UseCheat**
 
-        - `QueueGameCommand_UseCheat`(启用/禁用)  
-            向本机广播队列添加 [启用/禁用] true/false 作弊的数据包，它不会真启用/禁用作弊，只是会发出一个 “我作弊了” 或者 “我取消作弊了” 的数据包  
+        - `QueueGameCommand_UseCheat`(cheats)  
+            设置本机作弊码使用情况为 [cheats]，多人游戏无效  
+        
+        <details><summary>作弊码列表</summary>
+
+        ```js
+        0x00000001 Black Sheep Wall
+        0x00000002 Operation CWAL
+        0x00000004 Power Overwhelming
+        0x00000008 Something For Nothing
+        0x00000010 Show me the Money
+        0x00000020
+        0x00000040 Game Over Man
+        0x00000080 There is no Cow Level
+        0x00000100 Staying Alive
+        0x00000200 Ophelia
+        0x00000400
+        0x00000800 The Gathering
+        0x00001000 Medieval Man
+        0x00002000 Modify the Phase Variance
+        0x00004000 War Aint What It Used To Be
+        0x00008000
+        0x00010000
+        0x00020000 Food For Thought
+        0x00040000 Whats Mine Is Mine
+        0x00080000 Breathe Deep
+        0x20000000 Noglues
+        ```
+        </details>
 
         示例
 
         ```JavaScript
-        QueueGameCommand_UseCheat(true);  // 启用作弊
-        QueueGameCommand_UseCheat(false); // 关闭作弊
+        QueueGameCommand_UseCheat(0x00000001 | 0x00000002 | 0x00000010);  // 启用 Black Sheep Wall + Operation CWAL + Show me the Money
+        QueueGameCommand_UseCheat(0x00000002);                            // 关闭 Operation CWAL
+        QueueGameCommand_UseCheat(0);                                     // 关闭所有作弊
         ```
 
     <br />
