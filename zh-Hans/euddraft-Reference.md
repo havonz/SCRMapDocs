@@ -3,6 +3,17 @@
 文档资料来源：  
 [http://www.staredit.net/topic/17037/](http://www.staredit.net/topic/17037/)  
 
+<br />
+
+- [基本配置](#%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)
+- [脚本/插件编写](#%E8%84%9A%E6%9C%AC%E6%8F%92%E4%BB%B6%E7%BC%96%E5%86%99)
+    - [Python 伪语法](#python-%E4%BC%AA%E8%AF%AD%E6%B3%95)
+    - [epScript](#epscript)
+- [运行模式](#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F)
+    - [脚本文件扩展名区别](#%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D%E5%8C%BA%E5%88%AB)
+    - [加载顺序](#%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F)
+
+<br />
 
 ## 基本配置
 1. 创建一个配置文件，配置文件的扩展名为 .eds/edd  

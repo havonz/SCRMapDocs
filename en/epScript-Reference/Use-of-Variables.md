@@ -1,24 +1,28 @@
 # Use of Variables
 
+<br />
+
 - [Basic Description](#basic-description)
-    - [Variable declaration](#variable-declaration)
-    - [Static variables](#static-variables)
-    - [Constant declaration](#constant-declaration)
-    - [Variable assignment](#variable-assignment)
-    - [Variable scope](#variable-scope)
-    - [Mathematical operations of variables](#mathematical-operations-of-variables)
-    - [Object types](#object-types)
-    - [Value types, reference types](#value-types-reference-types)
-    - [Runtime strings](#runtime-strings)
-    - [Appendix Static or Dynamic instantiation](#appendix-static-or-dynamic-instantiation)
-    - [Explanation of const and var](#explanation-of-const-and-var)
+    - [Variable Declaration](#variable-declaration)
+    - [Static Variables](#static-variables)
+    - [Constant Declaration](#constant-declaration)
+    - [Variable Assignment](#variable-assignment)
+    - [Variable Scope](#variable-scope)
+    - [Mathematical Operations Of Variables](#mathematical-operations-of-variables)
+    - [Object Types](#object-types)
+    - [Value Types, Reference Types](#value-types-reference-types)
+    - [Runtime Strings](#runtime-strings)
+    - [Appendix Static Or Dynamic Instantiation](#appendix-static-or-dynamic-instantiation)
+    - [Explanation Of const And var](#explanation-of-const-and-var)
+
+<br />
 
 ## Basic Description
 
 All variables in epScript code allow desync modification or access. sync modification access belongs to synced-data, and desync modification access belongs to desync-data.  
 epScript has only one value type variable, which is a 32-bit unsigned integer.  
 
-- ### Variable declaration
+- ### Variable Declaration
 
     You can use `var` syntax to declare a normal variable
 
@@ -29,7 +33,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     var variableName2 = initialValue; 
     ```
 
-- ### Static variables
+- ### Static Variables
 
     In fact, all variables are implemented internally as static, but local variables are restored to their initial values each time.  
     Variables without an initial value have static properties. Using the `static` keyword to declare a variable can explicitly give it static properties.  
@@ -48,7 +52,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     ```
 
 
-- ### Constant declaration
+- ### Constant Declaration
 
     The value of a constant cannot be changed at runtime.  
     All reference types (objects) must be declared with the const modifier. The state of reference type objects can be changed at runtime, but the target object they refer to cannot be changed at runtime.  
@@ -59,7 +63,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     ```
 
 
-- ### Variable assignment
+- ### Variable Assignment
 
     The value of a variable can be changed at runtime. After declaration, the equal sign (`=`) can be used to assign a value to the variable.
 
@@ -71,7 +75,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     ```
 
 
-- ### Variable scope
+- ### Variable Scope
 
     The scope of a variable is from its declaration down to leaving the current layer of braces (or file). Variables of the same name in inner scopes have higher priority than those in outer scopes.   
     Although unnecessary, here is an incorrect example:  
@@ -94,7 +98,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     ```
 
 
-- ### Mathematical operations of variables
+- ### Mathematical Operations Of Variables
 
     Although variables can only be 32-bit unsigned integers, variables can represent negative numbers, like unsigned 32-bit integers in C language.  
     ```JavaScript
@@ -119,7 +123,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     ```
 
 
-- ### Object types
+- ### Object Types
 
     Object types are reference types, which are different from value types.
 
@@ -143,7 +147,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
         - Dynamic initialization: `const object1 = ObjectTypeName.alloc();` You can pass it to any scope for use. Remember to release the memory it occupies with `ObjectTypeName.free(object1);`  
 
 
-- ### Value types, reference types
+- ### Value Types, Reference Types
 
     Value types
 
@@ -167,7 +171,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     Reference types pass the memory address of the value, while value types pass the value itself.
 
 
-- ### Runtime strings
+- ### Runtime Strings
 
     You can use GetMapStringAddr to get the address of the map string in memory and use memory functions to modify its content (unable to change the string size).  
 
@@ -201,7 +205,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     ```
 
 
-- ### Appendix Static or Dynamic instantiation
+- ### Appendix Static Or Dynamic Instantiation
 
     Every variable in epScript has fixed memory address. So every variable is persistent. For example, consider this code.
 
@@ -266,7 +270,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
 
 
 
-- ### Explanation of const and var
+- ### Explanation Of const And var
     The essence of const is to declare a variable at the Python (compile time), not a map runtime variable. When declaring an object, it stores the runtime address of the referenced object.  
     The essence of var is syntactic sugar for declaring a reference to an EUDVariable object, which is a map runtime variable.  
     The difference from const is that at compile time, it will compile the assignment operation `=` into the left shift operator `<<` at the Python. The left shift operator of runtime types is usually overloaded to change the value stored in the runtime object, while the const at the syntax level does not allow the use of the assignment operator `=` after declaring the initial value.  

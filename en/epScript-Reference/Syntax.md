@@ -1,43 +1,46 @@
 # epScript Syntax
 
+<br />
+
 - [Basic Syntax](#basic-syntax)
-    - [Compile-time and Run-time](#compile-time-and-run-time)
-    - [Case sensitivity](#case-sensitivity)
-    - [Value types](#value-types)
-    - [Logical rules](#logical-rules)
-    - [Literal numbers](#literal-numbers)
-    - [Literal strings](#literal-strings)
-    - [Literal bytes](#literal-bytes)
-    - [Naming rules](#naming-rules)
-    - [Importing other modules](#importing-other-modules)
+    - [Compile-time And Run-time](#compile-time-and-run-time)
+    - [Case Sensitivity](#case-sensitivity)
+    - [Value Types](#value-types)
+    - [Logical Rules](#logical-rules)
+    - [Literal Numbers](#literal-numbers)
+    - [Literal Strings](#literal-strings)
+    - [Literal Bytes](#literal-bytes)
+    - [Naming Rules](#naming-rules)
+    - [Importing Other Modules](#importing-other-modules)
     - [Symbols](#symbols)
-        - [Code block {}](#code-block)
-        - [Syntax line break \;](#syntax-line-break)
-        - [Index operator \[\]](#index-operator)
-        - [Assignment operator \=](#assignment-operator)
-        - [Line comment //](#line-comment)
-        - [Block comment /\* \*/](#block-comment)
-        - [Conditional operator > <](#conditional-operator)
-        - [Mathematical operators + - * /](#mathematical-operators)
-        - [Increment/Decrement/Multiplication/Division assignment operators](#incrementdecrementmultiplicationdivision-assignment-operators)
-    - [Conditional statement syntax](#conditional-statement-syntax)
+        - [Code Block {}](#code-block)
+        - [Syntax Line Break \;](#syntax-line-break)
+        - [Index Operator \[\]](#index-operator)
+        - [Assignment Operator \=](#assignment-operator)
+        - [Line Comment //](#line-comment)
+        - [Block Comment /\* \*/](#block-comment)
+        - [Conditional Operator > <](#conditional-operator)
+        - [Mathematical Operators + - * /](#mathematical-operators)
+        - [Increment/Decrement/Multiplication/Division Assignment Operators](#incrementdecrementmultiplicationdivision-assignment-operators)
+    - [Conditional Statement Syntax](#conditional-statement-syntax)
         - [if](#if)
         - [if else](#if-else)
-        - [Conditional chaining](#conditional-chaining)
-        - [Conditional nesting](#conditional-nesting)
-        - [Once execution](#once-execution)
-    - [Control flow](#control-flow)
-        - [for loop](#for-loop)
-        - [while loop](#while-loop)
+        - [Conditional Chaining](#conditional-chaining)
+        - [Conditional Nesting](#conditional-nesting)
+        - [Once Execution](#once-execution)
+    - [Control Flow](#control-flow)
+        - [for Loop](#for-loop)
+        - [while Loop](#while-loop)
         - [break](#break)
-        - [foreach iterator loop](#foreach-iterator-loop)
+        - [foreach Iterator Loop](#foreach-iterator-loop)
         - [switch](#switch)
         - [epdswitch](#epdswitch)
 
+<br />
 
 ## Basic Syntax
 
-- ### Compile-time and Run-time
+- ### Compile-time And Run-time
 
     Any non-compile-time code outside of variable declarations cannot be exposed outside of functions.  
     Functions containing any runtime operations are non-compile-time functions.  
@@ -45,23 +48,23 @@
     Compile-time code will execute even if the if condition is not met.   
 
 
-- ### Case sensitivity
+- ### Case Sensitivity
 
     epScript is a case-sensitive programming language where A and a have different meanings.   
 
 
-- ### Value types
+- ### Value Types
 
     epScript has only one basic `value type`, which is a 32-bit unsigned integer. 
 
 
-- ### Logical rules
+- ### Logical Rules
 
     Integer `0` is logically false.  
     `Non-zero` integer values are logically true.  
 
 
-- ### Literal numbers
+- ### Literal Numbers
 
     Literal numbers include decimal numbers, hexadecimal numbers, and binary numbers.
     ```JavaScript
@@ -73,7 +76,7 @@
     ```
 
 
-- ### Literal strings
+- ### Literal Strings
 
     Literal strings can be enclosed in single quotes `'` or double quotes `"`.  
     ```JavaScript
@@ -96,7 +99,7 @@
     |\\'|Denotes a single quote in a single quote string|`DisplayText('Hello\'SC\'');`|Hello'SC'|
 
 
-- ### Literal bytes
+- ### Literal Bytes
 
     Literal bytes can be enclosed in `b"` to `"` or `b'` to `'`. Bytes will not end with `\0`. Literal bytes also support the escape characters in literal strings.  
     ```JavaScript
@@ -105,7 +108,7 @@
     ```
 
 
-- ### Naming rules
+- ### Naming Rules
 
     Variable names, constant names and function names can only contain `non-ASCII UTF-8 characters` (Chinese, Japanese and Korean can be used),
     [ASCII](https://en.wikipedia.org/wiki/ASCII) letters/numbers and `_`, and cannot start with ASCII numbers.
@@ -154,7 +157,7 @@
     ```
 
 
-- ### Importing other modules
+- ### Importing Other Modules
 
     You can use the `import` keyword to import other modules. `as` gives an alias to the imported module. The following code illustrates the usage:  
 
@@ -194,7 +197,7 @@
 
     All syntax-related symbols are half-width symbols in pure English state and can be found in the [ASCII](https://en.wikipedia.org/wiki/ASCII) table.  
 
-    - #### Code block
+    - #### Code Block
 
         Use curly braces `{}` to denote a code block in epScript.  
 
@@ -217,7 +220,7 @@
                     println("{} > 5", i);
         ```
 
-    - #### Syntax line break
+    - #### Syntax Line Break
 
         The syntax line break is a semicolon `;` instead of a line break.
 
@@ -225,7 +228,7 @@
         var a;var b;
         ```
 
-    - #### Index operator
+    - #### Index Operator
         `[]`
         Used to access or modify elements in an array.  
 
@@ -235,7 +238,7 @@
         var b = a[0];
         ```
 
-    - #### Assignment operator
+    - #### Assignment Operator
 
         The assignment operator is a single equal sign `=`  
 
@@ -245,7 +248,7 @@
         a = 2; // Assign variable a to 2 
         ```
 
-    - #### Line comment
+    - #### Line Comment
 
         Two slashes `//` starts a line comment.
 
@@ -253,7 +256,7 @@
         var a = 1; // Comments are parts of the code that will not be executed. // starts a comment that continues to the end of the current line.
         ```
 
-    - #### Block comment
+    - #### Block Comment
 
         The content between `/*` to `*/` is a block comment.  
 
@@ -261,7 +264,7 @@
         var /* This is a block comment, which can be placed in the middle of code */ a = 1;
         ```
 
-    - #### Conditional operator
+    - #### Conditional Operator
 
         - Greater than `>`
         - Less than `<`
@@ -324,7 +327,7 @@
         var e = l2v(d);      // At runtime, use l2v to assign the result of expression d to e
         ```
 
-    - #### Mathematical operators
+    - #### Mathematical Operators
 
         `+` `-` `*` `/`
 
@@ -339,7 +342,7 @@
         a = a >> 1; // Right bitwise shift by 1
         ```
 
-    - #### Increment/Decrement/Multiplication/Division assignment operators
+    - #### Increment/Decrement/Multiplication/Division Assignment Operators
 
         ```JavaScript
         a += 10; // Equivalent to a = a + 10;  
@@ -351,7 +354,7 @@
         ```
 
 
-- ### Conditional statement syntax
+- ### Conditional Statement Syntax
 
     - #### if
 
@@ -375,7 +378,7 @@
         }
         ```
 
-    - #### Conditional chaining
+    - #### Conditional Chaining
 
         You can chain if to another else  
 
@@ -389,7 +392,7 @@
         }
         ```
 
-    - #### Conditional nesting
+    - #### Conditional Nesting
 
         You can nest if within the code block of another if
 
@@ -409,7 +412,7 @@
         } 
         ```
 
-    - #### Once execution
+    - #### Once Execution
 
         As the name suggests, once execution will execute its internal code only once when the condition is met during runtime, and will not execute again. It is usually used to repeatedly determine in beforeTriggerExec or afterTriggerExec for each frame until the condition is met and executed once.  
 
@@ -438,9 +441,9 @@
         ```
 
 
-- ### Control flow
+- ### Control Flow
 
-    - #### for loop
+    - #### for Loop
 
         The for loop can set loop initialization expression, loop execution condition expression and loop additional action expression.  
 
@@ -460,7 +463,7 @@
         }
         ```
 
-    - #### while loop
+    - #### while Loop
 
         The while loop can set a loop condition, and will keep looping as long as the condition is satisfied, until the condition is not satisfied.
 
@@ -488,9 +491,9 @@
 
         It is equivalent to the while loop above.
 
-    - #### foreach iterator loop
+    - #### foreach Iterator Loop
 
-        **Compile-time iterators**  
+        **Compile-time Iterators**  
         py_range and py_enumerator are compile-time iterators.  
         When using compile-time iterators, foreach is a compile-time loop and will be statically unfolded at compile time. break and continue cannot be used.  
         ```C#
@@ -523,7 +526,7 @@
         }
         ```
 
-        **Runtime iterators**  
+        **Runtime Iterators**  
         Iterator functions named EUDLoop* return runtime iterators.  
 
         > EUDLoopPlayer, EUDLoopRange, EUDLoopUnit, EUDLoopUnit2, EUDLoopCUnit, EUDLoopNewUnit, EUDLoopNewCUnit, EUDLoopPlayerUnit, EUDLoopPlayerCUnit  
@@ -579,7 +582,7 @@
 
         Conditional branching for multiple states of a single runtime variable value.  
 
-        **Normal switch**
+        **Normal Switch**
         ```JavaScript
         switch (day) {
             case 1: 
@@ -609,7 +612,7 @@
         }
         ```
 
-        **Switch with bitmask**
+        **Switch with Bitmask**
         ```JavaScript
         var x = 0x101;
         switch (x, 0xff) {

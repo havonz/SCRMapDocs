@@ -3,6 +3,17 @@
 Reference:  
 [http://www.staredit.net/topic/17037/](http://www.staredit.net/topic/17037/)  
 
+<br />
+
+- [Basic configuration](#basic-configuration)
+- [Script/Plugin Writing](#scriptplugin-writing)
+    - [Python Pseudo-Syntax](#python-pseudo-syntax)
+    - [epScript](#epscript)
+- [Running Mode](#running-mode)
+    - [Script File Extension Differences](#script-file-extension-differences)
+    - [Load Order](#load-order)
+
+<br />
 
 ## Basic configuration
 1. Create a configuration file with the extension .eds/.edd  

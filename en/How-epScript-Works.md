@@ -1,7 +1,23 @@
-# epScript implementation  
+# How epScript Works 
 
+<br />
 
-- ## Everything is a trigger
+- [Everything Is A Trigger](#everything-is-a-trigger)
+- [Virtual Triggers](#virtual-triggers)
+- [Mathematical Operations](#mathematical-operations)
+    - [Number Modifier Description](#number-modifier-description)
+- [Variable Implementation](#eudvariable-implementation)
+    - [What Are Variables](#what-are-variables-eudvariable)
+    - [Passing The Variable To Conditions Or Actions](#passing-the-variable-to-conditions-or-actions)
+    - [Why Does An Variable Occupy 72 Bytes In Memory?](#why-does-an-eudvariable-occupy-72-bytes-in-memory)
+    - [Variable Operation Optimization](#variable-operation-optimization)
+- [Strings And Light Variables](#strings-db-or-stringbuffer-light-arrays-eudarray-and-light-variables-eudlightvariable)
+    - [Structure](#structure)
+    - [Memory Reading or Copying](#memory-reading-or-copying)
+
+<br />
+
+- ## Everything Is A Trigger
 
     The maps of Starcraft: Remastered do not support any runtime scripting languages.  
     The reason why epScript scripts (`*.eps`) can take effect at runtime is that epScript code will eventually be inserted into the map in the form of triggers, and triggers can really take effect at runtime.   
@@ -24,7 +40,7 @@
 
     <br />
 
-- ## Mathematical operations
+- ## Mathematical Operations
 
     Ordinary triggers do not have complete mathematical operation capabilities.  
     The functions that can be used to simulate mathematical operations are the [number modifier](http://www.staredit.net/wiki/index.php/Scenario.chk#Number_Modifiers) (SetTo/Add/Subtract) in the trigger [actions](http://www.staredit.net/wiki/index.php/Scenario.chk#Trigger_Actions_List) - they are usually used to SetTo/Add/Subtract player resources or death counts, etc.  
@@ -131,12 +147,11 @@
 
     <br />
 
-- ## Variable (EUDVariable) implementation
+- ## EUDVariable Implementation
 
     Reference: [https://cafe.naver.com/edac/74507](https://cafe.naver.com/edac/74507)
 
-
-    - ### The form of variables (EUDVariable)
+    - ### What Are Variables (EUDVariable)
 
         EUD triggers themselves have no concept of variables. Runtime variables (EUDVariable) in eudplib are essentially virtual triggers with only one SetDeathsX action and no conditions.   
         
@@ -248,7 +263,7 @@
         }
         ```
 
-    - ### Passing the value of a variable to other conditions or actions
+    - ### Passing The Variable To Conditions Or Actions
 
         The process of passing the value of a variable to action parameters    
 
@@ -340,7 +355,7 @@
         }
         ```
 
-    - ### Why does an EUDVariable occupy 72 bytes in memory? 
+    - ### Why Does An EUDVariable Occupy 72 Bytes In Memory? 
 
         As mentioned earlier, an EUDVariable is a trigger that contains only one SetDeathsX action.  
         However, in the Scenario.chk structure of the map, a trigger occupies 2400 bytes. In addition, the trigger node information prevTriggerPtr and nextTriggerPtr in memory occupies 8 bytes. Therefore, a trigger should occupy 2408 bytes in memory.  
@@ -608,11 +623,11 @@
         ```
     <br />
 
-- ## Strings (Db or StringBuffer), Light Arrays (EUDArray) and Light Variables (EUDLightVariable)  
+- ## Strings (Db Or StringBuffer), Light Arrays (EUDArray) And Light Variables (EUDLightVariable)  
 
     The strings in the map will be stored in the STR section. Usually these strings are immutable, but EUD is different. Let's not consider the data structure of the STR section for now. It can probably use a very large memory space, which is usually enough.  
 
-    - ### Forms of existence
+    - ### Structure
 
         Compared with ordinary variables (EUDVariable), the structure of strings is very simple and crude.  
         Strings are arrays of ASCII characters, and the number of bytes they occupy is the number of ASCII characters they contain.  

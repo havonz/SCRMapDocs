@@ -1,5 +1,7 @@
 # Built-in Basic Object Types
 
+<br />
+
 - [Basic Object Types](#basic-object-types)
     - [EUDVariable](#eudvariable)
     - [EUDLightVariable](#eudlightvariable)
@@ -22,6 +24,8 @@
     - [EUDByteStream](#eudbytestream)
     - [~~CPString~~](#cpstring)
     - [~~DBString~~](#dbstring)
+
+<br />
 
 ## Basic Object Types
 

@@ -1,5 +1,21 @@
 # epScript 实现解析
 
+<br />
+
+- [万物皆触发器](#%E4%B8%87%E7%89%A9%E7%9A%86%E8%A7%A6%E5%8F%91%E5%99%A8)
+- [虚拟触发器（Virtual Triggers）](#%E8%99%9A%E6%8B%9F%E8%A7%A6%E5%8F%91%E5%99%A8virtual-triggers)
+- [数学运算](#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97)
+    - [数字修改方法说明](#%E6%95%B0%E5%AD%97%E4%BF%AE%E6%94%B9%E6%96%B9%E6%B3%95%E8%AF%B4%E6%98%8E)
+- [变量（EUDVariable）实现](#%E5%8F%98%E9%87%8Feudvariable%E5%AE%9E%E7%8E%B0)
+    - [变量（EUDVariable）存在的形式](#%E5%8F%98%E9%87%8Feudvariable%E5%AD%98%E5%9C%A8%E7%9A%84%E5%BD%A2%E5%BC%8F)
+    - [将变量的值传入到其它条件或动作](#%E5%B0%86%E5%8F%98%E9%87%8F%E7%9A%84%E5%80%BC%E4%BC%A0%E5%85%A5%E5%88%B0%E5%85%B6%E5%AE%83%E6%9D%A1%E4%BB%B6%E6%88%96%E5%8A%A8%E4%BD%9C)
+    - [为什么一个 EUDVariable 在内存中占用 72 字节？](#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA-eudvariable-%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E5%8D%A0%E7%94%A8-72-%E5%AD%97%E8%8A%82)
+    - [变量操作优化](#%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%E4%BC%98%E5%8C%96)
+- [字符串（Db 或 StringBuffer）、轻数组（EUDArray）及轻变量（EUDLightVariable）](#%E5%AD%97%E7%AC%A6%E4%B8%B2db-%E6%88%96-stringbuffer%E8%BD%BB%E6%95%B0%E7%BB%84eudarray%E5%8F%8A%E8%BD%BB%E5%8F%98%E9%87%8Feudlightvariable)
+    - [存在的形式](#%E5%AD%98%E5%9C%A8%E7%9A%84%E5%BD%A2%E5%BC%8F)
+    - [内存读取或拷贝](#%E5%86%85%E5%AD%98%E8%AF%BB%E5%8F%96%E6%88%96%E6%8B%B7%E8%B4%9D)
+
+<br />
 
 - ## 万物皆触发器
 

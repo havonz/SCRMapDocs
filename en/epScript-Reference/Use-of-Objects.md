@@ -1,8 +1,12 @@
 # Use of Objects
 
+<br />
+
 - [Object types](#object-types)
     - [Declarations](#declarations)
-    - [Creating instances](#creating-instances)
+    - [Creating Instances](#creating-instances)
+
+<br />
 
 ## Object types
 Object types are reference types.
@@ -108,7 +112,7 @@ Object types are reference types.
     ```
 
 
-- ### Creating instances
+- ### Creating Instances
     - There are two ways to create an object instance:  
         - Static initialization: `const object1 = ObjectTypeName()`;  
         - Dynamic initialization: `const object1 = ObjectTypeName.alloc();` You can pass it to any scope for use. Remember to use `ObjectTypeName.free(object1);` to free the memory it occupies when done.  

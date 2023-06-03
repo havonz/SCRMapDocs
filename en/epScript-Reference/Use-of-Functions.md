@@ -1,18 +1,21 @@
 # Use of Functions
 
+<br />
 
 - [Functions](#functions)
     - [Declarations](#function-declarations)
     - [Implementation](#function-implementation)
     - [Parameters](#function-parameters)
-    - [Return values](#function-return-values)
-    - [Parameter and return value types](#parameter-and-return-value-types)
+    - [Return Values](#function-return-values)
+    - [Parameter And Return Value Types](#parameter-and-return-value-types)
     - [Calls](#function-calls)
-    - [Explanation of multiple return values](#explanation-of-multiple-return-values)
+    - [Explanation Of Multiple Return Values](#explanation-of-multiple-return-values)
+
+<br />
 
 ## Functions
 
-- ### Function declarations
+- ### Function Declarations
 
     ```JavaScript
     function aFunction();
@@ -21,7 +24,7 @@
     If a function is not declared, it will be declared at the location where it is implemented.
 
 
-- ### Function implementation
+- ### Function Implementation
 
     ```JavaScript
     function aFunction() {
@@ -30,7 +33,7 @@
     ```
 
 
-- ### Function parameters
+- ### Function Parameters
 
     A function can have one or more parameters, separated by commas. Parameter passing and return value passing are done through runtime value type variables (EUDVariable).
 
@@ -41,7 +44,7 @@
     ```
 
 
-- ### Function return values
+- ### Function Return Values
 
     A function can return one or more values after being called, with multiple return values separated by commas.
 
@@ -52,7 +55,7 @@
     ```
 
 
-- ### Parameter and return value types
+- ### Parameter And Return Value Types
     Function parameters and return values can set types.  
     To set the parameter type, add a colon after the parameter name and write the type name, indicating that the runtime parameter value (as a number or pointer) will be set to the specified type.   
     To set the return value type, add a colon after the closing parenthesis of the function declaration parameter list and write the type name, indicating that the returned runtime value (as a number or pointer) will be set to the specified type.  
@@ -81,7 +84,7 @@
     }
     ```
 
-- ### Function calls
+- ### Function Calls
 
     ```JavaScript
     aFunction(); // Directly call a function without arguments
@@ -94,7 +97,7 @@
     printTwoVariableValues(a, b); // Pass arguments to call a function   
     ```
 
-- ### Explanation of multiple return values
+- ### Explanation Of Multiple Return Values
     A function that returns multiple return values actually returns a compile-time tuple. When you do not need to get all the return values, you can use selection `[[]]` to get one or more (starting from index 0) from the returned tuple.  
     A tuple is a compile-time type, not a runtime data structure.  
 

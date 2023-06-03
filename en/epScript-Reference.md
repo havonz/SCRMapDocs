@@ -1,15 +1,17 @@
 # epScript Reference
 
+<br />
+
 - Language Reference
     - [Syntax](epScript-Reference/Syntax.md)  
-    - [Use of Variables](epScript-Reference/Use-of-Variables.md)  
-    - [Use of Functions](epScript-Reference/Use-of-Functions.md)  
-    - [Use of Objects](epScript-Reference/Use-of-Objects.md)  
+    - [Use Of Variables](epScript-Reference/Use-of-Variables.md)  
+    - [Use Of Functions](epScript-Reference/Use-of-Functions.md)  
+    - [Use Of Objects](epScript-Reference/Use-of-Objects.md)  
     - [Understanding Strings](epScript-Reference/Understanding-Strings.md)  
-    - [Built in Object Types](epScript-Reference/Built-in-Object-Types.md)  
-    - [Built in Object Types Ext](epScript-Reference/Built-in-Object-Types-Ext.md)  
+    - [Built-in Object Types](epScript-Reference/Built-in-Object-Types.md)  
+    - [Built-in Object Types Ext](epScript-Reference/Built-in-Object-Types-Ext.md)  
     - [Constants Reference](epScript-Reference/Constants-Reference.md)  
-    - [Built in Functions](epScript-Reference/Built-in-Functions.md) 
+    - [Built-in Functions](epScript-Reference/Built-in-Functions.md) 
 - Description
     - [Getting Started](#getting-started)
         - [Environment Preparation](#environment-preparation)
@@ -19,18 +21,20 @@
     - [Running Mode](#running-mode)
         - [Script File Extension Differences](#script-file-extension-differences)
         - [Load Order](#load-order)
-    - [The Difference Between .edd and .eds](#the-difference-between-edd-and-eds)
-        - [For .edd format](#for-edd-format)
-        - [For .eds format](#for-eds-format)
+    - [The Difference Between .edd And .eds](#the-difference-between-edd-and-eds)
+        - [For .edd Format](#for-edd-format)
+        - [For .eds Format](#for-eds-format)
     - [Data Synchronization](#data-synchronization)
     - [Game Time](#game-time)
-        - [Game Frame fr](#game-frame-fr)
+        - [Game Frame](#game-frame-fr)
         - [Game Seconds](#game-seconds)
         - [Game Speed](#game-speed)
         - [Triggers Poll Interval](#triggers-poll-interval)
-    - [Current Player and Local Player](#current-player-and-local-player)
+    - [Current Player And Local Player](#current-player-and-local-player)
         - [Current Player](#current-player)
         - [Local Player](#local-player)
+
+<br />
 
 ## Getting Started 
 If there are any parts you don't understand, you can try searching the Internet to solve them.  
@@ -164,16 +168,16 @@ T   hen change its content to:
     ```
     <br />
 
-## The Difference Between .edd and .eds
+## The Difference Between .edd And .eds
 
 euddraft handles these two extensions differently.
 
-- ### For .edd format  
+- ### For .edd Format  
 
     After successfully compiling and generating the map, it will keep waiting. If the files in the project directory change, it will automatically recompile and generate the map again.  
     If unsuccessful, it will output error messages. You can press R to recompile and generate after modifying.  
 
-- ### For .eds format  
+- ### For .eds Format  
 
     After successfully compiling and generating the map, it will exit.   
     If unsuccessful, it will output error messages and wait for you to press Enter to exit.  <br /><br />
@@ -266,7 +270,7 @@ Such tasks can usually be assisted by the MSQC plugin.
     Therefore, when writing conditions related to time comparsion, Exactly (==) should not be used, but AtLeast (>=) or AtMost (<=) should be used.  <br /><br />
 
 
-## Current Player and Local Player
+## Current Player And Local Player
 
 `Current Player` and `Local Player` are two different concepts.
 

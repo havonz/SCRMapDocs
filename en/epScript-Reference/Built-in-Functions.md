@@ -1,5 +1,7 @@
 # Built-in Functions
 
+<br />
+
 - [Conditions and Actions](#conditions-and-actions)
     - [Normal Condition Functions](#normal-condition-functions)
         - [Accumulate](#accumulate)
@@ -92,7 +94,7 @@
         - [b2i](#b2i)
         - [i2b](#i2b)
         - [u2b/b2u](#u2bb2u)
-        - [utf8 Encode/Decode](#utf8-encodedecode)
+        - [UTF8 Encode/Decode](#utf8-encodedecode)
     - [General Functions](#general-functions)
         - [EPD](#epd)
         - [l2v](#l2v)
@@ -1838,7 +1840,7 @@
 
     <br />
 
-    - #### **utf8 Encode/Decode**
+    - #### **UTF8 Encode/Decode**
 
         - `b2utf8`(str) : [py_byte]  
             Decodes [str] using UTF-8.  

@@ -2,14 +2,17 @@
 
 Object types related to game content  
 
-Reference: [https://cafe.naver.com/edac/120138](https://cafe.naver.com/edac/120138)
+Reference:   
+[https://cafe.naver.com/edac/120138](https://cafe.naver.com/edac/120138)
 
+<br />
 
 - [Extended Object Types](#extended-object-types)
     - [CUnit](#cunit)
     - [UnitGroup](#unitgroup)
     - [CSprite](#csprite)
 
+<br />
 
 ## Extended Object Types
 

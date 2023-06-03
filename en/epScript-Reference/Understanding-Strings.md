@@ -1,12 +1,16 @@
 # Understanding Strings
 
-- Strings
-    - [Compile-time strings](#compile-time-strings-py_str)
-    - [Map strings](#map-strings-trgstring)
-    - [String data](#string-data-db)
-    - [TBL strings](#tbl-strings-stat_txttbl)
+<br />
 
-- ## Compile-time strings (py_str)
+- Strings
+    - [Compile-time Strings](#compile-time-strings-py_str)
+    - [Map Strings](#map-strings-trgstring)
+    - [String Data](#string-data-db)
+    - [TBL Strings](#tbl-strings-stat_txttbl)
+
+<br />
+
+- ## Compile-time Strings (py_str)
 
     Compile-time strings refer to strings generated at compile time that will never be inserted into the map. They contain all literal strings and compile-time string constants.   
     Because the epScript compiler is implemented in Python, it is called py_str. Compile-time strings cannot be used directly for map runtime.  
@@ -79,7 +83,7 @@
 
 
 
-- ## Map strings (TrgString)
+- ## Map Strings (TrgString)
 
     <details><summary>Related types and functions</summary>
 
@@ -170,7 +174,7 @@
 
 
 
-- ## String data (Db)
+- ## String Data (Db)
     <details><summary>Related types and functions</summary>
 
     - Db  
@@ -204,7 +208,7 @@
 
 
 
-- ## TBL strings (stat_txt.tbl)
+- ## TBL Strings (stat_txt.tbl)
     <details><summary>Related types and functions</summary>
     
     - $B([TBLKey](Constants-Reference/StatText.md) : [literal](Syntax.md#literal-strings))
