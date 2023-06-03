@@ -196,7 +196,7 @@
 
     Normal condition functions are functions encapsulated based on the conditions in classical triggers, just like the trigger conditions in ScmDraft2.  
     Any normal condition function will return a trigger condition expression constant (not a logical value). The concepts of `condition expression` and `condition expression result` need to be distinguished clearly.  
-    If you need to use a variable to store the result of a condition expression judgment, you should pass it into the condition list of a trigger or as an if syntax parameter. You can also use l2v to get the runtime result of the condition expression. See the following example:  
+    If you need to use a variable to store the condition expression result, you should pass it into the condition list of a trigger or as an if syntax parameter. You can also use l2v to get the runtime result of the condition expression. See the following example:  
     
     ```JavaScript
     var vc0 = Accumulate(P1, AtLeast, 500, Ore);  // This is wrong!!! It does not return a logical value.

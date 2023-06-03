@@ -33,8 +33,8 @@
     Because the triggers in the [TRIG section](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers) in [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) are not loaded into the memory as a whole, but are loaded in the form of a [node list](https://euddb.website/?pg=entry&id=763), and the nodes on the node list need to be traversed to locate them during runtime.  
     [jjf28](http://www.staredit.net/topic/17546/#1) posted that you just need to write the bytecode of the trigger to any accessible location in memory, then add it to the trigger node list , and they will work normally.  
     These triggers that are not in the TRIG section can determine their relative positions in memory at runtime, which means that it is relatively easy to achieve positioning jumps between such triggers. jjf28 calls such triggers Virtual Triggers.  
-    [trgk](http://www.staredit.net/topic/17546/#11) proposed that the STR section will be loaded into the memory as a whole at runtime, so if a virtual trigger is written to the STR section, the relative position of its runtime memory can be easily fixed at compile time, thereby enabling more It is easy to implement dynamic modification of triggers during runtime to realize conditional judgment and flow control.  
-    On this basis, trgk designed a Python pseudo-syntax library [eudplib](https://github.com/armoha/eudplib) for conditional control flow .
+    [trgk](http://www.staredit.net/topic/17546/#11) proposed that the STR section will be loaded into the memory as a whole at runtime, so if a virtual trigger is written to the STR section, the relative position of its runtime memory can be easily fixed at compile time, thereby enabling more It is easy to implement dynamic modification of triggers during runtime to realize conditional control flow.  
+    On this basis, trgk designed a Python pseudo-syntax library [eudplib](https://github.com/armoha/eudplib) for conditional control flow.  
 
     > Reference: [http://www.staredit.net/topic/17546/](http://www.staredit.net/topic/17546/)
 
