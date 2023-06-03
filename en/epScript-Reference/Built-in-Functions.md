@@ -96,6 +96,7 @@
     - [General Functions](#general-functions)
         - [EPD](#epd)
         - [l2v](#l2v)
+        - [parse](#parse)
         - [EUDFuncPtr](#eudfuncptr)
         - [getgametick](#getgametick)
     - [Trigger Construction Functions](#trigger-construction-functions)

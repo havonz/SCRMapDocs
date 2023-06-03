@@ -96,6 +96,7 @@
     - [常规函数](#常规函数)
         - [EPD](#epd)
         - [l2v](#l2v)
+        - [parse](#parse)
         - [EUDFuncPtr](#eudfuncptr)
         - [getgametick](#getgametick)
     - [触发器构建函数](#触发器构建函数)
@@ -1900,7 +1901,7 @@
             解析成功返回值为：数字, 位数  
             解析失败返回值为：0, 0
 
-        Example
+        示例
 
         ```JavaScript
         const numstr = Db("102a\r\r\r\r\r\r\r\r\r\r\r\0");
