@@ -589,10 +589,10 @@
     - #### **CreateUnit**
 
         - `CreateUnit`(number, unitType : TrgUnit, location : TrgLocation, player : TrgPlayer) : Action  
-            Create [number] of [unitType] for [player] at [location]. The moment a unit is created, the population occupied by the unit will immediately (in the current frame) increase.  
+            Create [number] of [unitType] for [player] at [location]. The moment a unit is created, the supply used by the unit will immediately (in the current frame) increase.  
 
         - `CreateUnitWithProperties`(number, unitType : TrgUnit, Where : location : TrgLocation, player : TrgPlayer, properties : TrgProperty) : Action  
-            Create [number] of [unitType] with [properties] for [player] at [location]. The moment a unit is created, the population occupied by the unit will immediately (in the current frame) increase.  
+            Create [number] of [unitType] with [properties] for [player] at [location]. The moment a unit is created, the supply used by the unit will immediately (in the current frame) increase.  
 
         Example
 
@@ -672,8 +672,8 @@
 
             > **Warning**  
             > This action has a bug:  
-            > If after executing this action, any unit inside a transporter (Dropship/Bunker, etc.) in the area is killed, then all units of the same type in that transporter (Dropship/Bunker, etc.) will be killed, and these killed units will not be counted within the [number] parameter specified.  
-            > For example, if KillUnitAt(1, "Terran Marine", "Location 1", P1) kills a marine inside a bunker in Location 1, then all marines in that bunker will be killed, and if there are more marines outside the bunker in that area, one more will be killed.  
+            > If this action kills any unit inside a transporter (Dropship/Bunker, etc.), then all units of the same type inside that transporter (Dropship/Bunker, etc.) will be killed, and these killed units will not be counted within the [number] parameter specified.  
+            > For example, if executing KillUnitAt(1, "Terran Marine", "Location 1", P1) kills a marine inside a bunker in Location 1, then all marines in that bunker will be killed, and if there are more marines outside the bunker in that area, one more will be killed.  
 
         Example
 
@@ -862,18 +862,18 @@
     - #### **RemoveUnit**
 
         - `RemoveUnit`(unitType : TrgUnit, player : TrgPlayer) : Action  
-            Remove all [unitType] units of [player] from the map, including units still in the production queue. Can remove nuclear missiles that have not been launched in Nuclear Silos. The population taken up by the removed units will decrease in the next frame.  
+            Remove all [unitType] units of [player] from the map, including units still in the production queue. Can remove nuclear missiles that have not been launched in Nuclear Silos. The supply used by the removed units will decrease in the next frame.  
 
         - `RemoveUnitAt`(number : TrgCount, unitType : TrgUnit, area : TrgLocation, player : TrgPlayer) : Action  
-            Remove up to [number] [unitType] units of [player] in [area] from the map, [number] = 0 represents all (All) units. Does not include units still in the production queue. Will not remove nuclear missiles that have not been launched in Nuclear Silos. The population taken up by the removed units will decrease in the next frame.  
+            Remove up to [number] [unitType] units of [player] in [area] from the map, [number] = 0 represents all (All) units. Does not include units still in the production queue. Will not remove nuclear missiles that have not been launched in Nuclear Silos. The supply used by the removed units will decrease in the next frame.  
 
             > RemoveUnitAt(All, "Scanner Sweep", "Anywhere", P1) cannot remove Scanner Sweep units.  
             > RemoveUnitAt(All, "Map Revealer", "Anywhere", P1) cannot remove Map Revealer units.  
 
             > **Warning**  
             > This action has a bug:  
-            > If after executing this action, any unit inside a transporter (dropship/shuttle/overlord/bunker) in the area is removed, then all units of the same type in that transporter (dropship/shuttle/overlord/bunker) will be removed, and these removed units will not be counted within the [number] parameter specified.  
-            > For example, if RemoveUnitAt(1, "Terran Marine", "Location 1", P1) removes a marine inside a bunker in Location 1, then all marines in that bunker will be removed, and if there are more marines outside the bunker in that area, one more will be removed.  
+            > If this action removes any unit inside a transporter (Dropship/Bunker, etc.), then all units of the same type inside that transporter (Dropship/Bunker, etc.) will be removed, and these removed units will not be counted within the [number] parameter specified.  
+            > For example, if executing RemoveUnitAt(1, "Terran Marine", "Location 1", P1) removes a marine inside a bunker in Location 1, then all marines in that bunker will be removed, and if there are more marines outside the bunker in that area, one more will be removed.  
 
     <br />
 
