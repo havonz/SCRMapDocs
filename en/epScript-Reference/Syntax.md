@@ -169,7 +169,7 @@
     function *A_FUNC*() {
         A_VAR++;
         return A_VAR;
-    }  
+    }
     ```
 
     `Module2.eps`：
@@ -273,10 +273,9 @@
         - Equal to `==`
         - Logical and `&&`
         - Logical or `||` 
-        - Logical not `!`
 
-        It is worth mentioning that when using conditional operators on variables, what is returned is the `conditional expression` itself, not the `result of the conditional expression`.
-        The parameters of if are a list of `conditional expressions`. If a variable is passed directly to if, if will convert it into an expression that checks if its runtime value is not equal to 0.  
+        It is worth mentioning that when using conditional comparison operators on variables, what is returned is the `conditional expression` itself, not the `conditional expression result`.  
+        The parameters of if are a list of `conditional expression`s. If a variable is passed directly to if, if will convert it into an expression that checks if its runtime value is not equal to 0.  
 
         ```JavaScript
         if (a == 2) // Double equals sign for logical equal 
@@ -290,41 +289,54 @@
 
         if (a != 2) { 
             // a is not equal to 2
-        }  
+        }
 
         if (a > 2) {  
             // a is greater than 2
-        }   
+        }
 
         if (a < 2) {    
             // a is less than 2 
-        }   
+        }
 
         if (a >= 2) {     
             // a is greater than or equal to 2
-        }  
+        }
 
         if (a <= 2) {      
             // a is less than or equal to 2  
-        }   
+        } 
 
         if (a > 2 && a < 10) {   
             // a is greater than 2 and less than 10
-        }  
+        }
 
         if (a > 10 || a <= 5) { 
             // a is greater than 10 or less than or equal to 5  
-        }  
+        }
 
         if ( ! (a < 2) ) {    
             // a is not less than 2
         }
 
-        var a = 1;
+        var a = 3;
         var b = a > 0;       // Error! It returns not true but the conditional expression a > 0 itself
         var c = l2v(a > 0);  // This is correct. At runtime, c will be equal to either true or false, depending on the runtime state of a.
         const d = a > 0;     // Here, d represents the conditional expression a > 0 itself, not the result of a > 0
         var e = l2v(d);      // At runtime, use l2v to assign the result of expression d to e
+        ```
+
+        - Logical not `!`  
+        
+        Using `!` on the variable a will return a variable whose value is the result of `l2v((a != 0) == 0)`.  
+        Using double consecutive `!` on the variable a, such as `!!a` or `!(!a)` or `!!!(!a)` is directly equal to `a` itself.  
+        Using `!` on a `constant` or a `conditional expression` will still return a `conditional expression`.  
+
+        ```js
+        var four = 4;
+        var b = !four; // b == 0
+        if (!b   != !!four) println("b is not !!four");
+        if (four == !!four) println("four is !!four");
         ```
 
     - #### Mathematical Operators
@@ -597,7 +609,7 @@
                 break;
             default:
                 DisplayText("Looking forward to the weekend");
-        }  
+        }
 
         // The above switch code can be viewed as the following if conditional branching code
 
