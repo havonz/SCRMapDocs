@@ -669,11 +669,11 @@
             Kill up to [number] [unitType] units of [player] in [specified area]. [number] = 0 represents all units. Does not include units still in the build queue or nuclear missiles not yet launched in nuclear silos.  
 
             > KillUnitAt(All, "Scanner Sweep", "Anywhere", P1) cannot kill Scanner Sweeps.  
-            
+
             > **Warning**  
-            > This action has the following bug:  
-            > If after this action executes and kills a transport/bunker or any loading device in the area, all units of the same type in that transport/bunker or loading device will be killed. These killed units will not be counted within the number specified by the [number] parameter.   
-            > If KillUnitAt(1, "Terran Marine", "Location 1", P1) executes and kills a marine in a bunker in Location 1, all marines in that bunker will be killed. And if there are marines outside this bunker in the area, one more will be killed.  
+            > This action has a bug:  
+            > If after executing this action, any unit inside a transporter (Dropship/Bunker, etc.) in the area is killed, then all units of the same type in that transporter (Dropship/Bunker, etc.) will be killed, and these killed units will not be counted within the [number] parameter specified.  
+            > For example, if KillUnitAt(1, "Terran Marine", "Location 1", P1) kills a marine inside a bunker in Location 1, then all marines in that bunker will be killed, and if there are more marines outside the bunker in that area, one more will be killed.  
 
         Example
 
@@ -869,10 +869,11 @@
 
             > RemoveUnitAt(All, "Scanner Sweep", "Anywhere", P1) cannot remove Scanner Sweep units.  
             > RemoveUnitAt(All, "Map Revealer", "Anywhere", P1) cannot remove Map Revealer units.  
-            > **Warning** 
-            > There is a bug with this action:  
-            > If after executing this action, one unit in a transport/bunker or any loading unit in the area is removed, then all units of the same type in the transport/bunker or loading unit will be removed. And these removed units will not be counted in the number specified by the [number] parameter.  
-            > For example, if after RemoveUnitAt(1, "Terran Marine", "Location 1", P1) executes and removes a Marine in a bunker in Location 1, then all Marines in that bunker will be removed. And Marines outside that bunker in that area will have one removed.  
+
+            > **Warning**  
+            > This action has a bug:  
+            > If after executing this action, any unit inside a transporter (dropship/shuttle/overlord/bunker) in the area is removed, then all units of the same type in that transporter (dropship/shuttle/overlord/bunker) will be removed, and these removed units will not be counted within the [number] parameter specified.  
+            > For example, if RemoveUnitAt(1, "Terran Marine", "Location 1", P1) removes a marine inside a bunker in Location 1, then all marines in that bunker will be removed, and if there are more marines outside the bunker in that area, one more will be removed.  
 
     <br />
 
