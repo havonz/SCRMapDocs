@@ -328,8 +328,8 @@
 
         - Logical not `!`  
         
-        Using `!` on the variable a will return a variable whose value is the result of `l2v((a != 0) == 0)`.  
-        Using double consecutive `!` on the variable a, such as `!!a` or `!(!a)` or `!!!(!a)` is directly equal to `a` itself.  
+        Using `!` on the variable `a` will return a variable whose value is the result of `l2v((a != 0) == 0)`.  
+        Using double consecutive `!` on the variable `a`, such as `!!a` or `!(!a)` or `!!!(!a)` is directly equal to `a` itself.  
         Using `!` on a `constant` or a `conditional expression` will still return a `conditional expression`.  
 
         ```js
