@@ -239,6 +239,8 @@
             Bring cannot detect Scanner Sweep units or Map Revealers.  
             Units killed using KillUnit or KillUnitAt can still be detected by the Bring condition in the current frame; units removed using RemoveUnit or RemoveUnitAt can no longer be detected by the Bring condition in the current frame, and units previously killed using KillUnit or KillUnitAt will also no longer be detected by Bring.  
 
+            [Bring Condition Bug](http://www.staredit.net/wiki/index.php?title=Bring_Condition_Bug)  
+
         Example
 
         ```JavaScript
@@ -669,6 +671,7 @@
             Kill up to [number] [unitType] units of [player] in [specified area]. [number] = 0 represents all units. Does not include units still in the build queue or nuclear missiles not yet launched in nuclear silos.  
 
             > KillUnitAt(All, "Scanner Sweep", "Anywhere", P1) cannot kill Scanner Sweeps.  
+            > KillUnitAt(All, "Map Revealer", "Anywhere", P1) cannot kill Map Revealers.  
 
             > **Warning**  
             > This action has a bug:  
@@ -867,8 +870,8 @@
         - `RemoveUnitAt`(number : TrgCount, unitType : TrgUnit, area : TrgLocation, player : TrgPlayer) : Action  
             Remove up to [number] [unitType] units of [player] in [area] from the map, [number] = 0 represents all (All) units. Does not include units still in the production queue. Will not remove nuclear missiles that have not been launched in Nuclear Silos. The supply used by the removed units will decrease in the next frame.  
 
-            > RemoveUnitAt(All, "Scanner Sweep", "Anywhere", P1) cannot remove Scanner Sweep units.  
-            > RemoveUnitAt(All, "Map Revealer", "Anywhere", P1) cannot remove Map Revealer units.  
+            > RemoveUnitAt(All, "Scanner Sweep", "Anywhere", P1) cannot remove Scanner Sweeps.   
+            > RemoveUnitAt(All, "Map Revealer", "Anywhere", P1) cannot remove Map Revealers.  
 
             > **Warning**  
             > This action has a bug:  

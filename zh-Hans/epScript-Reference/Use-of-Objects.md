@@ -31,6 +31,36 @@
     };
     ```
 
+    也可以给对象类型声明构造方法和销毁方法
+
+    ```js
+    const objList = EUDArray(100);
+    var objCount = 0;
+    object Obj {
+        var a, b, c;
+        var index;
+        function constructor(a, b, c) {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+
+            this.index = objCount;
+            objList[objCount] = this;
+            objCount++;
+        }
+        function destructor() {  // 当运行 Obj.free(instance) 时，销毁方法就会被执行
+            objCount--;
+            const lastObj = objList[objCount];
+            objList[this.index] = lastObj;
+        }
+    };
+
+    const staticObj = Obj(1, 2, 3);
+    const dynObj = Obj.alloc(1, 2, 3);
+    ```
+
+    `(epScript 对象类型通常都有一个静态构造方法 constructor_static，它内部对内存的分配都是限制在一定范围的)`
+
     以下声明了一个 Date 对象类型
 
     ```JavaScript

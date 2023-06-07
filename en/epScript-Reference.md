@@ -40,7 +40,7 @@
 If there are any parts you don't understand, you can try searching the Internet to solve them.  
 
 Here we assume you already know how to use ScmDraft2 for basic terrain design.  
-- If not, refer to: [SCMD](https://www.scrmea.com/index.php?title=SCMD)   
+- If not, refer to: [SCMD](http://www.stormcoast-fortress.net/Irregularies/#downloads)   
 
 Here we assume you already have a basic understanding of EUD.   
 - If not, refer to: [What is EUD](What-is-EUD.md)  

@@ -238,6 +238,8 @@
             Bring 无法检测到 Scanner Sweep（扫雷达特效单位）和 Map Revealers（地图小雷达）  
             使用 KillUnit 或 KillUnitAt 杀死的单位在当前帧仍然可以被 Bring 条件检测到；使用 RemoveUnit 或 RemoveUnitAt 移除的单位在当前帧不再可以被 Bring 条件检测到，并且也会让在这之前用 KillUnit 或 KillUnitAt 杀死的单位也不再被 Bring 检测到。  
 
+            [Bring 条件 Bug](http://www.staredit.net/wiki/index.php?title=Bring_Condition_Bug)
+
         示例
         ```JavaScript
         KillUnitAt(All, "Terran Marine", $L("Location 1"), P1); // 杀死 玩家1 在 Location 1 所有的 机枪兵，这个动作之后在当前帧 Bring 条件仍然可以检测到 玩家1 在 Location 1 的 机枪兵
