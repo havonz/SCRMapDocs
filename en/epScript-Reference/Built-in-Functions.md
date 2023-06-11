@@ -547,14 +547,14 @@
     - #### **IsUserCP**
 
         - `IsUserCP()`: Condition  
-            Desync condition used to compare if the local player is the current player  
+            Desync condition used to check if the local player is the current player  
 
     <br />
 
     - #### **Is64BitWireframe**
 
         - `Is64BitWireframe()`: Condition  
-            Desync condition used to compare if the local Starcraft client is 64-bit  
+            Desync condition used to check if the local Starcraft client is 64-bit  
 
 
     <br />

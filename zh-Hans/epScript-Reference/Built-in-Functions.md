@@ -545,14 +545,14 @@
     - #### **IsUserCP**
 
         - `IsUserCP()`: Condition  
-            非同步条件，用于判断`本机玩家`是否为`当前玩家`
+            非同步条件，用于检测`本机玩家`是否为`当前玩家`
 
     <br />
 
     - #### **Is64BitWireframe**
 
         - `Is64BitWireframe()`: Condition  
-            非同步条件，判断本机星际客户端是否为 64 位的
+            非同步条件，检测本机星际客户端是否为 64 位的
 
 
     <br />
@@ -1721,7 +1721,7 @@
     - #### **py_len**
 
         - `py_len`(gconstant) : py_int  
-            编译期 Python 层全局常量长度判断
+            获取编译期 Python 层全局常量长度
 
         示例
 
@@ -2599,7 +2599,7 @@
     - #### **playerexist**
 
         - `playerexist`(player) : EUDVariable  
-            判断玩家 [player] 是否仍在游戏中，电脑玩家也是玩家
+            检测玩家 [player] 是否仍在游戏中，电脑玩家也是玩家
 
         示例
 
@@ -3649,13 +3649,13 @@
 
         ```JavaScript
         const uar = EUDArray(12);
-        if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 判断玩家1是否为在线的人类玩家
+        if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 检测玩家1是否为在线的人类玩家
             foreach(i : py_range(3)) {
                 uar[i] = dwread_epd(EPD(0x628438));
                 CreateUnitWithProperties(1, "Zerg Overlord", "Location 1", P1, UnitProperty(invincible = true));
             }
         }
-        if (getuserplayerid() == $P1) { // 判断本机是否玩家1
+        if (getuserplayerid() == $P1) { // 检测本机是否玩家1
             QueueGameCommand_Select(3, uar);
             QueueGameCommand_QueuedRightClick(1234 + 2345 * 65536);
         }
@@ -3736,12 +3736,12 @@
         ```JavaScript
         once {
             const uar = EUDArray(12);
-            if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 判断玩家1是否为在线的人类玩家
+            if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 检测玩家1是否为在线的人类玩家
                 SetResources(P1, Add, 10000, OreAndGas);
                 uar[0] = dwread_epd(EPD(0x628438));
                 CreateUnitWithProperties(1, "Terran Command Center", "Location 1", P1, UnitProperty(invincible = true));
             }
-            if (getuserplayerid() == $P1) { // 判断本机是否玩家1
+            if (getuserplayerid() == $P1) { // 检测本机是否玩家1
                 QueueGameCommand_Select(1, uar); /* 选中它 */
                 QueueGameCommand_QueuedRightClick(1234 + 2345 * 65536); /* 设置集结点到 1234, 2345 */
                 QueueGameCommand_TrainUnit("Terran SCV"); /* 训练一个 SCV */
@@ -3761,13 +3761,13 @@
         ```JavaScript
         once {
             const uar = EUDArray(12);
-            if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 判断玩家1是否为在线的人类玩家
+            if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 检测玩家1是否为在线的人类玩家
                 foreach(i : py_range(6)) {
                     uar[i] = dwread_epd(EPD(0x628438));
                     CreateUnitWithProperties(1, "Protoss Dark Templar", "Location 1", P1, UnitProperty(invincible = true));
                 }
             }
-            if (getuserplayerid() == $P1) { // 判断本机是否玩家1
+            if (getuserplayerid() == $P1) { // 检测本机是否玩家1
                 QueueGameCommand_Select(6, uar);
                 QueueGameCommand_MergeDarkArchon();
             }
@@ -3786,13 +3786,13 @@
         ```JavaScript
         once {
             const uar = EUDArray(12);
-            if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 判断玩家1是否为在线的人类玩家
+            if (playerexist(P1) && GetPlayerInfo(P1).type == 0x06) { // 检测玩家1是否为在线的人类玩家
                 foreach(i : py_range(6)) {
                     uar[i] = dwread_epd(EPD(0x628438));
                     CreateUnitWithProperties(1, "Protoss High Templar", "Location 1", P1, UnitProperty(invincible = true));
                 }
             }
-            if (getuserplayerid() == $P1) { // 判断本机是否玩家1
+            if (getuserplayerid() == $P1) { // 检测本机是否玩家1
                 QueueGameCommand_Select(6, uar);
                 QueueGameCommand_MergeArchon();
             }
