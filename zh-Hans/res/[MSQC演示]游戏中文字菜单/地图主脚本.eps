@@ -14,8 +14,8 @@ var currentSpeedSel;
 EUDRegisterObjectToNamespace("menuSel", menuSel);
 
 function showMenu(p) {
-    const speedList = list(50, 100, 125, 150, 200, 400, 4200);
-    const isMouseOvered = EUDArray(7);
+    const speedList = 50, 100, 125, 150, 200, 400, 4200;
+    const isMouseOvered = EUDLightBool(), EUDLightBool(), EUDLightBool(), EUDLightBool(), EUDLightBool(), EUDLightBool(), EUDLightBool();
     if (getcurpl() == p) {
         const buf = StringBuffer(255);
         buf.printfAt(0, "\x02当前选择的游戏速度：\x07{}\x02%\x02", currentSpeedSel);
@@ -37,19 +37,24 @@ function showMenu(p) {
                         buf.append("\x07[  ]\x1E ");
                         buf.appendf(" 游戏速度 {}%\x02", speedList[i]);
                         buf.DisplayAt(i + 1);
-                        if (isMouseOvered[i] == false) {
-                            PlayWAV("sound\\glue\\mouseover.wav");
-                            isMouseOvered[i] = true;
-                        }
+                        RawTrigger(
+                            conditions = isMouseOvered[i].IsCleared(),
+                            actions = list(
+                                PlayWAV("sound\\glue\\mouseover.wav"),
+                                isMouseOvered[i].Set(),
+                            ),
+                        );
                     }
                 } else {
-                    isMouseOvered[i] = false;
+                    RawTrigger(actions = isMouseOvered[i].Clear());
                 }
             }
         } else {
-            foreach(i : py_range(0, 6)) {
-                isMouseOvered[i] = false;
+            const clearActions = py_list();
+            foreach(i : py_range(0, 7)) {
+                clearActions.append(isMouseOvered[i].Clear());
             }
+            RawTrigger(actions = clearActions);
         }
     }
 }
