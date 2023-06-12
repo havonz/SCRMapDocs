@@ -1417,17 +1417,17 @@
 
     - #### **list**
 
-        - `list`(*args) : py_list[]  
-            Compile-time Python layer flat list container generation function. It requires at least one argument. This function will automatically flatten the list and cannot generate multidimensional lists.  
-            If you want to generate an empty Python list, you can use py_list.  
-            The compile-time list array index can only be a constant.  
+        - `list`(*args) : py_list  
+            Creates and returns a flat compile-time Python list. It requires at least one argument. This function will automatically flatten lists and cannot create multi-dimensional lists.  
+            If you want to create an empty compile-time list, use the py_list function.  
+            Compile-time lists can be iterated at compile time using foreach syntax, and their indices can only be constants.  
 
         Example
 
         ```JavaScript
         var a, b, c, d;  
-        const list1 = list(a, b, c, d); // list is a compile-time container. Here it only packs the references of a/b/c/d instead of the values of a/b/c/d.
-        const list2 = list(15, 4, list(99, 47)); // The list will be flattened and will not generate a multidimensional list. This is equivalent to list(15, 4, 99, 47)
+        const list1 = list(a, b, c, d); // list is a compile-time container, it just references a/b/c/d here, not the values of a/b/c/d
+        const list2 = list(15, 4, list(99, 47)); // The list will be flattened, no multi-dimensional list will be created, this is equivalent to list(15, 4, 99, 47)
         foreach(i, v : py_enumerate(list2)) {
             list1[i] = v;  
         }
@@ -1439,8 +1439,8 @@
     - #### **EUDCreateVariables**
 
         - `EUDCreateVariables`(count) : py_list[EUDVariable]  
-            Compile-time creates [count] variables and returns a compile-time list containing references to the created variables.  
-            The compile-time list index can only be a constant.  
+            Creates [count] variables at compile time and returns a compile-time list containing references to the created variables.   
+            Compile-time lists can be iterated at compile time using foreach syntax, and their indices can only be constants.  
 
         Example
 
@@ -1456,7 +1456,7 @@
 
     - #### **SetVariables**
 
-        - `SetVariables`(varList, number, opList)  
+        - `SetVariables`(varList : py_list, number : py_list, opList : py_list)  
             Uses at least one trigger to set all variables in [varList] to [number] values according to the corresponding operators in [opList]. This macro is used to optimize.  
             Even if the target value is a variable, it will not take effect dynamically before the action is completed. It will only keep the target value as the state when it started executing.  
 
@@ -1651,7 +1651,8 @@
     - #### **py_list**
 
         - `py_list`(iter) : py_list  
-            Compile-time Python list creation.  
+            Creates and returns a compile-time Python list.  
+            Compile-time lists can be iterated at compile time using foreach syntax, and their indices can only be constants.  
 
         Example
 

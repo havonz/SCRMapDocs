@@ -506,6 +506,7 @@
 
         **编译期迭代器**  
         py_range 和 py_enumerator 是编译期迭代器  
+        Python 层的容器（list、tuple 等）属于编译期迭代器  
         使用编译期迭代器的情况下，foreach 是编译期循环，会在编译期静态展开，不能使用 break 和 continue  
         ```C#
         foreach (i : py_range(5)) {
@@ -535,6 +536,18 @@
         once (ElapsedTime(AtLeast, 2)) {
             println("第 {} 秒", 2);
         }
+        ```
+
+        ```C#
+        const arrs = py_list();
+        foreach (x : list(50, 100, 150)) {
+            arrs.append(EUDArray(x));
+        }
+        // 完全等价于以下代码
+        const arrs = py_list();
+        arrs[0] = EUDArray(50);
+        arrs[1] = EUDArray(100);
+        arrs[2] = EUDArray(150);
         ```
 
         **运行时迭代器**  

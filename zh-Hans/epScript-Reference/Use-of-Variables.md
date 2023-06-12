@@ -239,20 +239,21 @@ epScript 中`值类型`变量只有一种类型，就是 32 位无符号整数
     var c = x();  // returns 3
     ```
 
-    > ⚠️注意：只有当你没有给局部变量初始化值的情况下，它才会有静态特性，如果你使用`var y = 0;`声明变量时给它一个初始值，则每次调用 x 时，y 的值都是 0。euddraft 对于给变量初始值和不给初始值的行为是不同的，因此它可能导致混淆。你不应该依赖于该特性写代码，最好给所有的变量都明确指定初始值。你如果希望一个变量有静态特性，可使用 static 关键字显式声明它，并明确给它指定一个初始值，哪怕它是 0。  
+    > **warning**
+    > 只有当你没有给局部变量初始化值的情况下，它才会有静态特性，如果你使用`var y = 0;`声明变量时给它一个初始值，则每次调用 x 时，y 的值都是 0。euddraft 对于给变量初始值和不给初始值的行为是不同的，因此它可能导致混淆。你不应该依赖于该特性写代码，最好给所有的变量都明确指定初始值。你如果希望一个变量有静态特性，可使用 static 关键字显式声明它，并明确给它指定一个初始值，哪怕它是 0。  
 
-    该特性对于对象也是一样的。所有的对象，无论是局部还是全局，都有固定的内存空间。例如，参考以下代码
+    该特性对于对象也是一样的。所有的对象，无论是局部还是全局，都有固定的内存空间。例如，参考以下代码  
 
     ```JavaScript
     function main() {
         const X = EUDArray(10);
         for (var i = 0 ; i < 10 ; i++) {
             X[i] = EUDArray(10);
-        })
+        }
     }
     ```
 
-    你可能认为我们为 X 的每个单元格分配了一个单独的 `EUDArray(10)` 实例，但是这段代码并不像那样。上面的代码等同于
+    你可能认为我们为 X 的每个单元格分配了一个单独的 `EUDArray(10)` 实例，但是这段代码并不像那样。上面的代码等同于  
 
     ```JavaScript
     const _t0 = EUDArray(10);  // Even intermediate values are static
@@ -262,14 +263,44 @@ epScript 中`值类型`变量只有一种类型，就是 32 位无符号整数
         const X = _t0;
         for (var i = 0 ; i < 10 ; i++) {
             X[i] = _t1;
-        })
+        }
     }
     ```
 
     这不是你可能预料或期待的结果，X 数组的所有值都指向同一个 `_t1` EUDArray  
     而且不幸的是，`EUDArray` 没有 `X[i] = EUDArray.alloc(10)` 这种用法  
-    以上参考资料来源：[https://github.com/phu54321/euddraft/wiki/9B.-Appendix---Static-or-Dynamic-instantiation](https://github.com/phu54321/euddraft/wiki/9B.-Appendix---Static-or-Dynamic-instantiation)
 
+    尽管我们无法在运行时动态创建数组，但是我们仍然可以静态分配缓冲区，并且在运行时动态使用它们，参考以下代码  
+
+    ```JavaScript
+    function onPluginStart() {
+        const X = EUDArray(10);
+        foreach (i : py_range(5)) {
+            X[i] = EUDArray(10);
+        }
+        const X_2 = EUDArray.cast(X[2]);
+        X_2[3] = 4;
+        println("{}", X_2[3]);
+    }
+    ```
+
+    上面的代码等同于  
+
+    ```JavaScript
+    function onPluginStart() {
+        const X = EUDArray(10);
+        X[0] = EUDArray(10);
+        X[1] = EUDArray(10);
+        X[2] = EUDArray(10);
+        X[3] = EUDArray(10);
+        X[4] = EUDArray(10);
+        const X_2 = EUDArray.cast(X[2]);
+        X_2[3] = 4;
+        println("{}", X_2[3]);
+    }
+    ```
+
+    以上参考资料来源：[https://github.com/phu54321/euddraft/wiki/9B.-Appendix---Static-or-Dynamic-instantiation](https://github.com/phu54321/euddraft/wiki/9B.-Appendix---Static-or-Dynamic-instantiation)  
 
 
 - ### const 和 var 的说明

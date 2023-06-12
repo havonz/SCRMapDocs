@@ -246,7 +246,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
         const X = EUDArray(10);
         for (var i = 0 ; i < 10 ; i++) {
             X[i] = EUDArray(10);
-        })
+        }
     }
     ```
 
@@ -260,12 +260,43 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
         const X = _t0;
         for (var i = 0 ; i < 10 ; i++) {
             X[i] = _t1;
-        })
+        }
     }
     ```
 
     This is not what you might expect. All cells of X points to the same `_t1` EUDArray.  
     We need to use dynamic instantiation like `X[i] = EUDArray.alloc(10);` to assign 10 different EUDArray to each X cell. Sadly EUDArray cannot be dynamically instantiated, so it doesn't have `.alloc()`. So we cannot fix this code.  
+
+    Although we cannot dynamically create arrays at runtime, we can still statically allocate buffers and dynamically use them at runtime. Refer to the following code:  
+
+    ```JavaScript
+    function onPluginStart() {
+        const X = EUDArray(10);
+        foreach (i : py_range(5)) {
+            X[i] = EUDArray(10);
+        }
+        const X_2 = EUDArray.cast(X[2]);
+        X_2[3] = 4;
+        println("{}", X_2[3]);
+    }
+    ```
+
+    The above code is equivalent to:  
+
+    ```JavaScript
+    function onPluginStart() {
+        const X = EUDArray(10);
+        X[0] = EUDArray(10);
+        X[1] = EUDArray(10);
+        X[2] = EUDArray(10);
+        X[3] = EUDArray(10);
+        X[4] = EUDArray(10);
+        const X_2 = EUDArray.cast(X[2]);
+        X_2[3] = 4;
+        println("{}", X_2[3]);
+    }
+    ```
+
     Reference：[https://github.com/phu54321/euddraft/wiki/9B.-Appendix---Static-or-Dynamic-instantiation](https://github.com/phu54321/euddraft/wiki/9B.-Appendix---Static-or-Dynamic-instantiation)
 
 

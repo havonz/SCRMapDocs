@@ -1419,17 +1419,17 @@
 
     - #### **list**
 
-        - `list`(*args) : py_list[]  
-            编译期 Python 层平坦列表容器生成函数，至少需要一个参数，这个函数会自动拉平列表，不能生成多维列表  
-            如果要生成一个空的 Python 列表，可以用 py_list  
-            编译期 list 数组下标（索引）只能是常量  
+        - `list`(*args) : py_list  
+            创建并返回一个平坦的编译期 Python 列表，至少需要一个参数，这个函数会自动拉平列表，不能创建多维列表  
+            如果要创建一个空的编译期列表，可以用 py_list 函数  
+            编译期列表可以使用 foreach 语法在编译期迭代，数组下标（索引）只能是常量  
 
         示例
 
         ```JavaScript
         var a, b, c, d;
         const list1 = list(a, b, c, d); // list 是编译期容器，它这里只是把 a/b/c/d 的引用装起来，而非 a/b/c/d 的值
-        const list2 = list(15, 4, list(99, 47)); // 列表会被拉平，不会生成多维列表，这个等同 list(15, 4, 99, 47)
+        const list2 = list(15, 4, list(99, 47)); // 列表会被拉平，不会创建多维列表，这个等同 list(15, 4, 99, 47)
         foreach(i, v : py_enumerate(list2)) {
             list1[i] = v;
         }
@@ -1441,8 +1441,8 @@
     - #### **EUDCreateVariables**
 
         - `EUDCreateVariables`(count) : py_list[EUDVariable]  
-            编译期创建 [count] 个变量，返回一个编译期 list，list 内包含被创建的变量的引用  
-            编译期 list 数组下标（索引）只能是常量  
+            编译期创建 [count] 个变量，返回一个编译期列表，列表内包含被创建的变量的引用  
+            编译期列表可以使用 foreach 语法在编译期迭代，数组下标（索引）只能是常量  
 
         示例
 
@@ -1458,7 +1458,7 @@
 
     - #### **SetVariables**
 
-        - `SetVariables`(变量列表, 目标列表, 操作符列表)  
+        - `SetVariables`(变量列表 : py_list, 目标列表 : py_list, 操作符列表 : py_list)  
             使用最少一个触发器将 [变量列表] 中所有的变量按照 [操作符列表] 中对应的操作为 [目标列表] 值，该宏用于优化  
             传入目标值是变量也不会在动作完成之前动态生效，仅仅会保持目标值为它开始执行时的状态  
 
@@ -1654,7 +1654,8 @@
     - #### **py_list**
 
         - `py_list`(iter) : py_list  
-            编译期 Python 列表创建
+            创建并返回一个编译期 Python 列表  
+            编译期列表可以使用 foreach 语法在编译期迭代，数组下标（索引）只能是常量  
 
         示例
 

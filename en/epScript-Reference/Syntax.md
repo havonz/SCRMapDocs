@@ -507,7 +507,8 @@
 
         **Compile-time Iterators**  
         py_range and py_enumerator are compile-time iterators.  
-        When using compile-time iterators, foreach is a compile-time loop and will be statically unfolded at compile time. break and continue cannot be used.  
+        Python containers (list, tuple, etc.) are compile-time iterators.  
+        When using compile-time iterators, foreach is a compile-time loop that will be statically expanded at compile time and cannot use break and continue.  
         ```C#
         foreach (i : py_range(5)) {
             simpleprint(i + 1);
@@ -536,6 +537,18 @@
         once (ElapsedTime(AtLeast, 2)) {
             println("The {} secound(s)", 2);
         }
+        ```
+
+        ```C#
+        const arrs = py_list();
+        foreach (x : list(50, 100, 150)) {
+            arrs.append(EUDArray(x));
+        }
+        // Equivalent to the following code
+        const arrs = py_list();
+        arrs[0] = EUDArray(50);
+        arrs[1] = EUDArray(100);
+        arrs[2] = EUDArray(150);
         ```
 
         **Runtime Iterators**  
