@@ -3266,19 +3266,26 @@
         - `atan2_256`(x, y) : EUDVariable  
             与 atan2 区别在于，在对角度对处理上，它将一个圆周分成 256 等份，角度是 256 度制，不是 360 度制  
 
+        > 星际争霸中的单位使用的角度用一个字节存储，所以是 256 度制  
+        > 0   度表示面朝上，0 到 256 递增向右旋转  
+        > 64  度表示面朝右，128 度表示面朝下，192 度表示面朝左  
+        > **warning**  
+        > euddraft 0.9.9.7 及以前的版本中 atan2_256 使用数学坐标系  
+        > euddraft 0.9.9.8 及以上版本中 atan2_256 更改为使用星际争霸坐标系  
+
         示例
 
         ```JavaScript
-        function angleBetween(x1, y1, x2, y2) {
-            return atan2(x2 - x1, y1 - y2);
+        function _0998_above() {
+            static var is0998above = false;
+            once is0998above = l2v(atan2_256(10, 10) >= 90);
+            return is0998above;
         }
 
-        // 星际中的单位使用的角度用一个字节存储，所以是 256 度制
-        // 0   度表示面朝上，0 到 256 递增向右旋转
-        // 64  度表示面朝右，128 度表示面朝下，192 度表示面朝左
-        // 所以它需要使用一个叫 atan2_256 的函数，它会把 360 度制角度换算成 256 度制
-
         function angleBetween_256(x1, y1, x2, y2) {
+            if (_0998_above()) {
+                return atan2_256(y2 - y1, x2 - x1);
+            }
             return atan2_256(x2 - x1, y1 - y2);
         }
 
@@ -3314,41 +3321,30 @@
         - `lengthdir_256`(length, angle) : tuple[EUDVariable, EUDVariable]  
             与 lengthdir 的区别在于，在对角度对处理上，它将一个圆周分成 256 等份，角度是 256 度制，不是 360 度制  
 
+        > 星际争霸中的单位使用的角度用一个字节存储，所以是 256 度制  
+        > 0   度表示面朝上，0 到 256 递增向右旋转  
+        > 64  度表示面朝右，128 度表示面朝下，192 度表示面朝左  
+        > **warning**  
+        > euddraft 0.9.9.7 及以前的版本中 lengthdir_256 使用数学坐标系  
+        > euddraft 0.9.9.8 及以上版本中 lengthdir_256 更改为使用星际争霸坐标系  
+
         示例
 
         ```JavaScript
-        function polarProjection(x, y, length, angle) {
-            const ox, oy = lengthdir(length, angle);
-            return x + ox, y + oy;
+        function _0998_above() {
+            static var is0998above = false;
+            once is0998above = l2v(atan2_256(10, 10) >= 90);
+            return is0998above;
         }
 
-        // 星际中的单位使用的角度用一个字节存储，所以是 256 度制
-        // 0   度表示面朝上，0 到 256 递增向右旋转
-        // 64  度表示面朝右，128 度表示面朝下，192 度表示面朝左
-        // lengthdir_256 函数，会把 360 度制角度换算成 256 度制，但 lenghdir_256 是 0 度表示朝右，0 到 256 递增向左旋转
-        // 所以实际应该把单位面向的角度转换过去，并且把返回的 y 换算成 -y
-        function polarProjection_256(x, y, length, angle) {
-            var angt = 320;
-            VProc(
-                angle,
-                list(
-                    angle.AddNumberX(0xFFFFFFFF, 0x55555555),
-                    angle.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
-                    angle.AddNumber(1),
-                    angle.QueueAddTo(angt),
-                ),
-            );
-            var ox, oy = lengthdir_256(length, angt);
-            VProc(
-                list(ox, oy),
-                list(
-                    oy.AddNumberX(0xFFFFFFFF, 0x55555555),
-                    oy.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
-                    oy.AddNumber(1),
-                    ox.QueueAddTo(x), oy.QueueAddTo(y),
-                ),
-            );
-            return x, y;
+        function polarProjection_256(x, y, length, angle256) {
+            var ox, oy;
+            if (_0998_above()) {
+                ox, oy = lengthdir_256(length, angle256);
+            } else {
+                ox, oy = lengthdir_256(length, 320 - angle256);
+            }
+            return x + ox, y - oy;
         }
 
         const x, y = polarProjection_256(1264, 880, 888, 73);
@@ -3392,7 +3388,7 @@
         示例
 
         ```JavaScript
-        // 0.9.9.7 除了 div 其它几个都报错 : Undefined function f_div_*
+        //
         ```
 
     <br />

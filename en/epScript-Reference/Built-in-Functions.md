@@ -3265,19 +3265,26 @@
         - `atan2_256`(x, y) : EUDVariable  
             The difference from atan2 is that in processing angles, it divides a circumference into 256 equal parts, and the angle is in 256 degrees, not 360 degrees.  
 
+        > StarCraft units use angles stored in one byte, so they use the 256 degree system.  
+        > 0 degrees faces up, 0 to 256 increments clockwise.  
+        > 64 degrees faces right, 128 degrees faces down, 192 degrees faces left.  
+        > **warning**  
+        > In euddraft version 0.9.9.7 and earlier, atan2_256 uses the mathematical coordinate system.  
+        > In euddraft version 0.9.9.8 and above, atan2_256 is changed to use the StarCraft coordinate system.  
+
         Example
 
         ```JavaScript
-        function angleBetween(x1, y1, x2, y2) {
-            return atan2(x2 - x1, y1 - y2);
+        function _0998_above() {
+            static var is0998above = false;
+            once is0998above = l2v(atan2_256(10, 10) >= 90);
+            return is0998above;
         }
 
-        // The angles used in StarCraft are stored in one byte, so they are in 256 degrees.
-        // 0 degrees faces up, 0 to 256 increments clockwise.
-        // 64 degrees faces right, 128 degrees faces down, 192 degrees faces left.
-        // So it needs a function called atan2_256 which will convert 360 degree angles to 256 degrees.
-
         function angleBetween_256(x1, y1, x2, y2) {
+            if (_0998_above()) {
+                return atan2_256(y2 - y1, x2 - x1);
+            }
             return atan2_256(x2 - x1, y1 - y2);
         }
 
@@ -3313,41 +3320,30 @@
         - `lengthdir_256`(length, angle) : tuple[EUDVariable, EUDVariable]  
             The difference from lengthdir is that in processing angles, it divides a circumference into 256 equal parts, and the angle is in 256 degrees, not 360 degrees.  
 
+        > StarCraft units use angles stored in one byte, so they use the 256 degree system.  
+        > 0 degrees faces up, 0 to 256 increments clockwise.  
+        > 64 degrees faces right, 128 degrees faces down, 192 degrees faces left.  
+        > **warning**  
+        > In euddraft version 0.9.9.7 and earlier, lengthdir_256 uses the mathematical coordinate system.  
+        > In euddraft version 0.9.9.8 and above, lengthdir_256 is changed to use the StarCraft coordinate system.  
+
         Example
 
         ```JavaScript
-        function polarProjection(x, y, length, angle) {
-            const ox, oy = lengthdir(length, angle);
-            return x + ox, y + oy;
+        function _0998_above() {
+            static var is0998above = false;
+            once is0998above = l2v(atan2_256(10, 10) >= 90);
+            return is0998above;
         }
 
-        // The angles used in StarCraft are stored in one byte, so they are in 256 degrees.
-        // 0 degrees faces up, 0 to 256 increments clockwise.
-        // 64 degrees faces right, 128 degrees faces down, 192 degrees faces left.
-        // The lengthdir_256 function converts 360 degree angles to 256 degrees, but lengthdir_256 is 0 degrees facing right, 0 to 256 increments counterclockwise.
-        // So the unit facing angle should be converted, and the returned y should be converted to -y.
-        function polarProjection_256(x, y, length, angle) {
-            var angt = 320;
-            VProc(
-                angle,
-                list(
-                    angle.AddNumberX(0xFFFFFFFF, 0x55555555),
-                    angle.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
-                    angle.AddNumber(1),
-                    angle.QueueAddTo(angt),
-                ),
-            );
-            var ox, oy = lengthdir_256(length, angt);
-            VProc(
-                list(ox, oy),
-                list(
-                    oy.AddNumberX(0xFFFFFFFF, 0x55555555),
-                    oy.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
-                    oy.AddNumber(1),
-                    ox.QueueAddTo(x), oy.QueueAddTo(y),
-                ),
-            );
-            return x, y;
+        function polarProjection_256(x, y, length, angle256) {
+            var ox, oy;
+            if (_0998_above()) {
+                ox, oy = lengthdir_256(length, angle256);
+            } else {
+                ox, oy = lengthdir_256(length, 320 - angle256);
+            }
+            return x + ox, y - oy;
         }
 
         const x, y = polarProjection_256(1264, 880, 888, 73);
@@ -3392,7 +3388,7 @@
         Example
 
         ```JavaScript
-        // 0.9.9.7 All except div throw errors: Undefined function f_div_*
+        //
         ```
 
     <br />

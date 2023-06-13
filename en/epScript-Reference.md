@@ -50,8 +50,8 @@ Here we assume you already have a basic understanding of EUD.
 Prepare a Windows 10 or higher PC, or a virtual machine.  
 Prepare ScmDraft2. If not already prepared, look back a few lines.  
 
-- Download [euddraft0.9.9.7.zip](https://github.com/armoha/euddraft/releases/download/v0.9.9.7/euddraft0.9.9.7.zip)   
-    Unpack euddraft to a path with only English letters and no spaces, e.g. D:\SCRMapDevTools\euddraft0.9.9.7 
+- Download [euddraft0.9.9.9.zip](https://github.com/armoha/euddraft/releases/download/v0.9.9.9/euddraft0.9.9.9.zip)   
+    Unpack euddraft to a path with only English letters and no spaces, e.g. D:\SCRMapDevTools\euddraft0.9.9.9 
 - Download [VSCode](https://code.visualstudio.com/Download)  
     Install it, install it however you like.   
     Install the eps-server plugin from the VSCode plugin store.  
@@ -100,9 +100,9 @@ T   hen change its content to:
 3. Create a new text document and change its extension to bat, e.g. D:\Projects\test\build.bat  
     Open this bat file with VSCode and change its content to:  
     ```PowerShell
-    D:\SCRMapDevTools\euddraft0.9.9.7\euddraft.exe test.edd
+    D:\SCRMapDevTools\euddraft0.9.9.9\euddraft.exe test.edd
     ```
-    The above code assumes you unpacked euddraft to D:\SCRMapDevTools\euddraft0.9.9.7. If not, you should replace it.  
+    The above code assumes you unpacked euddraft to D:\SCRMapDevTools\euddraft0.9.9.9. If not, you should replace it.  
 
     Now the project is ready. Just double click to run build.bat to generate test.scx. Put this map in the map directory of StarCraft: Remastered. Then when you enter the game, you will see `Hello World` output on the screen.
 

@@ -50,8 +50,8 @@
 准备一台 Windows 10 以上的 PC，或者虚拟机  
 准备好 ScmDraft2，如果还没准备，往回看几行  
 
-- 下载 [euddraft0.9.9.7.zip](https://github.com/armoha/euddraft/releases/download/v0.9.9.7/euddraft0.9.9.7.zip)  
-    将 euddraft 解压缩到一个纯英文没有空格的路径中，例如 D:\SCRMapDevTools\euddraft0.9.9.7
+- 下载 [euddraft0.9.9.9.zip](https://github.com/armoha/euddraft/releases/download/v0.9.9.9/euddraft0.9.9.9.zip)  
+    将 euddraft 解压缩到一个纯英文没有空格的路径中，例如 D:\SCRMapDevTools\euddraft0.9.9.9
 
 - 下载 [VSCode](https://code.visualstudio.com/Download)  
     安装它，随便怎么安装都行  
@@ -101,9 +101,9 @@
 3. 新建一个文本文档，并将它的扩展名改为 bat ，例如 D:\Projects\test\build.bat  
     使用 VSCode 打开这个 bat 文件，然后把它的内容改为  
     ```PowerShell
-    D:\SCRMapDevTools\euddraft0.9.9.7\euddraft.exe test.edd
+    D:\SCRMapDevTools\euddraft0.9.9.9\euddraft.exe test.edd
     ```
-    以上代码假设你将 euddraft 解压到了 D:\SCRMapDevTools\euddraft0.9.9.7 这个位置，如果它不在这儿，你应该替换它  
+    以上代码假设你将 euddraft 解压到了 D:\SCRMapDevTools\euddraft0.9.9.9 这个位置，如果它不在这儿，你应该替换它  
 
     至此，工程就已经建立好了，直接双击运行 build.bat 就可以生成 test.scx，将这个地图放入星际重制版的地图目录中，然后进游戏就能看到它在屏幕上输出的 `Hello World`
 

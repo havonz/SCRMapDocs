@@ -1,4 +1,13 @@
+function _0998_above() {
+    static var is0998above = false;
+    once is0998above = l2v(atan2_256(10, 10) >= 90);
+    return is0998above;
+}
+
 function angleBetween_256(x1, y1, x2, y2) {
+    if (_0998_above()) {
+        return atan2_256(y2 - y1, x2 - x1);
+    }
     return atan2_256(x2 - x1, y1 - y2);
 }
 
@@ -9,27 +18,13 @@ function distanceBetween(x1, y1, x2, y2) {
 }
 
 function polarProjection_256(x, y, length, angle) {
-    var angt = 320;
-    VProc(
-        angle,
-        list(
-            angle.AddNumberX(0xFFFFFFFF, 0x55555555),
-            angle.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
-            angle.AddNumber(1),
-            angle.QueueAddTo(angt),
-        ),
-    );
-    var ox, oy = lengthdir_256(length, angt);
-    VProc(
-        list(ox, oy),
-        list(
-            oy.AddNumberX(0xFFFFFFFF, 0x55555555),
-            oy.AddNumberX(0xFFFFFFFF, 0xAAAAAAAA),
-            oy.AddNumber(1),
-            ox.QueueAddTo(x), oy.QueueAddTo(y),
-        ),
-    );
-    return x, y;
+    var ox, oy;
+    if (_0998_above()) {
+        ox, oy = lengthdir_256(length, angle);
+    } else {
+        ox, oy = lengthdir_256(length, 320 - angle);
+    }
+    return x + ox, y - oy;
 }
 
 var marine_epd, ghost_epd = 0, 0;
