@@ -65,6 +65,9 @@ Reference:
 
     [MSQC]
     :: Many parameters, hard to explain briefly
+
+    [freeze]
+    freeze : false
     ```
 
 <br />
