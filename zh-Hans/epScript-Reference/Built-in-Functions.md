@@ -3272,7 +3272,7 @@
 
         > **Warning**  
         > euddraft 0.9.9.7 及以前的版本中 atan2_256 使用数学坐标系  
-        > euddraft 0.9.9. 及以上版本中 atan2_256 更改为使用星际争霸坐标系  
+        > euddraft 0.9.9.8 及以上版本中 atan2_256 更改为使用星际争霸坐标系  
 
         示例
 
@@ -3328,7 +3328,7 @@
 
         > **Warning**  
         > euddraft 0.9.9.7 及以前的版本中 lengthdir_256 使用数学坐标系  
-        > euddraft 0.9.9. 及以上版本中 lengthdir_256 更改为使用星际争霸坐标系  
+        > euddraft 0.9.9.8 及以上版本中 lengthdir_256 更改为使用星际争霸坐标系  
 
         示例
 

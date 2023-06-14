@@ -3421,7 +3421,7 @@
             Generates a random integer in the range of 0~0xFFFFFFFF.
 
         > **Note**
-        > Do not use random number functions in desync conditions.  
+        > Do not use random functions in desync conditions.  
 
         Example
 
@@ -3440,7 +3440,7 @@
             Gets the set random seed.  
 
         > **Note**
-        > Do not use random number functions in desync conditions.    
+        > Do not use random functions in desync conditions.    
 
         Example
 
@@ -3457,7 +3457,7 @@
             Initializes the random seed.  
 
         > **Note**
-        > Do not use random number functions in desync conditions.    
+        > Do not use random functions in desync conditions.    
 
         Example
 
