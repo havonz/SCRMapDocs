@@ -10,6 +10,10 @@
     一个 EUDVariable 将使用一个只有一条 SetDeathsX 动作的虚拟触发器模拟，占用 72 字节，以下是它的类型结构，它有很多条件和动作函数  
     ```JavaScript
     object EUDVariable {
+        // 常规方法
+        function ineg(){}                   // euddraft 0.9.9.8 版新增，将自身值转换为相反数，相当于 x = -x; 支持转换成动作这样用 DoActions(v.ineg(action = true));
+        function iabs(){}                   // euddraft 0.9.9.8 版新增，将自身值转换为绝对值，相当于 x = (x & (1 << 31) == 0) ? x : -x; 支持转换成动作这样用 DoActions(v.iabs(action = true));
+
         // 常规条件
         function AtLeast(v){}               // 变量值 >= v
         function AtMost(v){}                // 变量值 <= v
@@ -73,7 +77,8 @@
 
         // 能够通过以下函数、条件、动作搭配达成的目标，都可选用 EUDLightVariable 实现，否则就应该用普通变量（EUDVariable）
         // 常规方法
-        function ineg(){}                   // 将自身值转换为相反数，例如 10 转成 -10
+        function ineg(){}                   // 将自身值转换为相反数，相当于 x = -x; 在 euddraft 0.9.9.8 及之后的版本中支持转换成动作这样用 DoActions(v.ineg(action = true));
+        function iabs(){}                   // euddraft 0.9.9.8 新增，将自身值转换为绝对值，相当于 x = (x & (1 << 31) == 0) ? x : -x; 支持转换成动作这样用 DoActions(v.iabs(action = true));
         // 常规条件
         function AtLeast(v){}               // 轻变量值 >= v
         function AtMost(v){}                // 轻变量值 <= v

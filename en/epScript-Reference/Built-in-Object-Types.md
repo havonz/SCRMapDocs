@@ -35,7 +35,11 @@
     An EUDVariable will use a virtual trigger with only one SetDeathsX action to simulate, occupying 72 bytes. Here is its type structure. It has many conditional and action functions.  
     ```JavaScript
     object EUDVariable {
-        // Regular conditions
+        // Common methods
+        function ineg(){}                // Added in euddraft 0.9.9.8, Negate variable in-place (same as x = -x;). Supports action alternative DoActions(v.ineg(action = true));
+        function iabs(){}                // Added in euddraft 0.9.9.8, Self-assign absolute value in-place (same as x = (x & (1 << 31) == 0) ? x : -x;). Supports action alternative DoActions(v.iabs(action = true));
+
+        // Common conditions
         function AtLeast(v){}               // Variable value >= v
         function AtMost(v){}                // Variable value <= v 
         function Exactly(v){}               // Variable value == v
@@ -49,7 +53,7 @@
         function MaskAtMostX(v,msk){}       // (The Mask of the SetDeathsX action of the variable's virtual trigger & msk) <= v 
         function MaskExactlyX(v,msk){}      // (The Mask of the SetDeathsX action of the variable's virtual trigger & msk) == v
 
-        // Regular actions
+        // Common actions
         function SetNumber(v){}             // Variable value = v
         function AddNumber(v){}             // Variable value = value + v
         function SubtractNumber(v){}        // Variable value = value - v if value <= v else value = 0
@@ -98,16 +102,17 @@
         function getValueAddr(){}        
 
         // The goals that can be achieved by the following functions, conditions and actions can optionally use EUDLightVariable, otherwise an ordinary variable (EUDVariable) should be used.
-        // Regular methods
-        function ineg(){}                   // Convert own value to opposite number, e.g. 10 to -10
-        // Regular conditions
+        // Common methods
+        function ineg(){}                   // Negate variable in-place (same as x = -x;). Supports action alternative DoActions(v.ineg(action = true)) in euddraft 0.9.9.8 and later versions;
+        function iabs(){}                   // Added in euddraft 0.9.9.8, Self-assign absolute value in-place (same as x = (x & (1 << 31) == 0) ? x : -x;). Supports action alternative DoActions(v.iabs(action = true));
+        // Common conditions
         function AtLeast(v){}               // Light variable value >= v
         function AtMost(v){}                // Light variable value <= v 
         function Exactly(v){}               // Light variable value == v
         function AtLeastX(v,mask){}         // (Light variable value & mask) >= v
         function AtMostX(v,mask){}          // (Light variable value & mask) <= v 
         function ExactlyX(v,mask){}         // (Light variable value & mask) == v
-        // Regular actions
+        // Common actions
         function SetNumber(v){}             // Light variable value = v
         function AddNumber(v){}             // Light variable value = value + v
         function SubtractNumber(v){}        // Light variable value = value - v if value <= v else value = 0

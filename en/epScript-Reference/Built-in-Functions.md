@@ -3376,21 +3376,38 @@
             Unsigned integer division [a] divided by [b], supports only positive integers, returns quotient and remainder.  
 
         - `div_towards_zero`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            Signed integer division, calculates the quotient and remainder of (a ÷ b), rounding the quotient towards zero.  
+            Added in euddraft 0.9.9.8. Signed integer division, calculates the quotient and remainder of (a ÷ b), rounding the quotient towards zero.  
 
         - `div_floor`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            Signed integer division, calculates the quotient and remainder of (a ÷ b), rounding the quotient towards negative infinity.
+            Added in euddraft 0.9.9.8. Signed integer division, calculates the quotient and remainder of (a ÷ b), rounding the quotient towards negative infinity.
 
         - `div_euclid`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            Signed integer division, calculates the quotient and remainder of Euclidean division of a by b.  
-            This computes the quotient such that `a = quotient * b + remainder`, and `0 <= r < abs(b)`.  
+            Added in euddraft 0.9.9.8. Signed integer division, calculates the quotient and remainder of Euclidean division of a by b.  
+            This computes the quotient such that `a = quotient * b + remainder`, and `0 <= remainder < abs(b)`.  
             In other words, the result is a ÷ b rounded to the quotient such that `a >= quotient * b`.  
             If `a > 0`, this is equal to round towards zero; if `a < 0`, this is equal to round towards +/- infinity (away from zero).  
 
         Example
 
         ```JavaScript
-        //
+        var a, b, quotient, remainder;
+        a, b = 17, 3;
+        quotient, remainder = div(a, b);
+        println("div(17, 3) returns {}, {}", quotient, remainder);                  // div(17, 3) returns 5, 2
+        a, b = 17, -3;
+        quotient, remainder = div_towards_zero(a, b);
+        println("div_towards_zero(17, -3) returns -{}, {}", -quotient, remainder);  // div_towards_zero(17, -3) returns -5, 2
+        quotient, remainder = div_floor(a, b);
+        println("div_floor(17, -3) returns -{}, -{}", -quotient, -remainder);       // div_floor(17, -3) returns -6, -1
+        quotient, remainder = div_euclid(a, b);
+        println("div_euclid(17, -3) returns -{}, {}", -quotient, remainder);        // div_euclid(17, -3) returns -5, 2
+        a, b = -17, -3;
+        quotient, remainder = div_towards_zero(a, b);
+        println("div_towards_zero(-17, -3) returns {}, -{}", quotient, -remainder); // div_towards_zero(-17, -3) returns 5, -2
+        quotient, remainder = div_floor(a, b);
+        println("div_floor(-17, -3) returns {}, -{}", quotient, -remainder);        // div_floor(-17, -3) returns 6, -1
+        quotient, remainder = div_euclid(a, b);
+        println("div_euclid(-17, -3) returns {}, {}", quotient, remainder);         // div_euclid(-17, -3) returns 6, 1
         ```
 
     <br />

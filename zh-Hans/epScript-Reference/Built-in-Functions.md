@@ -3377,20 +3377,37 @@
             无符号整数除法 [a] 除以 [b]，仅支持正整数，返回商和余数  
 
         - `div_towards_zero`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            向下取整有符号除法 [a] 除以 [b]，返回商和余数，当商是负数时，商向上取整（向 0 的方向）  
+            euddraft 0.9.9.8 版新增，向下取整有符号除法 [a] 除以 [b]，返回商和余数，当商是负数时，商向上取整（向 0 的方向）  
 
         - `div_floor`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            向下取整有符号除法 [a] 除以 [b]，返回商和余数，商是负数时依然会向下取整（向远离 0 的方向）  
+            euddraft 0.9.9.8 版新增，向下取整有符号除法 [a] 除以 [b]，返回商和余数，商是负数时依然会向下取整（向远离 0 的方向）  
 
         - `div_euclid`(a, b) : py_tuple[EUDVariable, EUDVariable]  
-            计算 [a] 除以 [b] 的欧几里得商和余数。  
+            euddraft 0.9.9.8 版新增，计算 [a] 除以 [b] 的欧几里得商和余数。  
             这是计算有符号（负数）除法，它计算商使得 `a = 商 * b + 余数`，并且 `0 <= 余数 < 绝对值(b)`。  
             换句话说，结果是将 a ÷ b 四舍五入到商的值，使得 `a >= 商 * b`。如果 `a > 0`，则等于向零舍入；如果 `a < 0`，则等于朝着正负无穷大方向（远离零）四舍五入。  
 
         示例
 
         ```JavaScript
-        //
+        var a, b, quotient, remainder;
+        a, b = 17, 3;
+        quotient, remainder = div(a, b);
+        println("div(17, 3) returns {}, {}", quotient, remainder);                  // div(17, 3) returns 5, 2
+        a, b = 17, -3;
+        quotient, remainder = div_towards_zero(a, b);
+        println("div_towards_zero(17, -3) returns -{}, {}", -quotient, remainder);  // div_towards_zero(17, -3) returns -5, 2
+        quotient, remainder = div_floor(a, b);
+        println("div_floor(17, -3) returns -{}, -{}", -quotient, -remainder);       // div_floor(17, -3) returns -6, -1
+        quotient, remainder = div_euclid(a, b);
+        println("div_euclid(17, -3) returns -{}, {}", -quotient, remainder);        // div_euclid(17, -3) returns -5, 2
+        a, b = -17, -3;
+        quotient, remainder = div_towards_zero(a, b);
+        println("div_towards_zero(-17, -3) returns {}, -{}", quotient, -remainder); // div_towards_zero(-17, -3) returns 5, -2
+        quotient, remainder = div_floor(a, b);
+        println("div_floor(-17, -3) returns {}, -{}", quotient, -remainder);        // div_floor(-17, -3) returns 6, -1
+        quotient, remainder = div_euclid(a, b);
+        println("div_euclid(-17, -3) returns {}, {}", quotient, remainder);         // div_euclid(-17, -3) returns 6, 1
         ```
 
     <br />
