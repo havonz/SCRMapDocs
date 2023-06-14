@@ -3268,6 +3268,7 @@
         > StarCraft units use angles stored in one byte, so they use the 256 degree system.  
         > 0 degrees faces up, 0 to 256 increments clockwise.  
         > 64 degrees faces right, 128 degrees faces down, 192 degrees faces left.  
+
         > **Warning**  
         > In euddraft version 0.9.9.7 and earlier, atan2_256 uses the mathematical coordinate system.  
         > In euddraft version 0.9.9.8 and above, atan2_256 is changed to use the StarCraft coordinate system.  
@@ -3323,6 +3324,7 @@
         > StarCraft units use angles stored in one byte, so they use the 256 degree system.  
         > 0 degrees faces up, 0 to 256 increments clockwise.  
         > 64 degrees faces right, 128 degrees faces down, 192 degrees faces left.  
+
         > **Warning**  
         > In euddraft version 0.9.9.7 and earlier, lengthdir_256 uses the mathematical coordinate system.  
         > In euddraft version 0.9.9.8 and above, lengthdir_256 is changed to use the StarCraft coordinate system.  

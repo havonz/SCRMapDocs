@@ -196,11 +196,11 @@ Such tasks can usually be assisted by the MSQC plugin.
 
 ## Game Time 
 
-星际争霸1游戏中的时间概念不同于现实时间
+The game time in StarCraft 1 is different from real time.  
 
 - ### Game Frame (fr) 
 
-    The minimum unit of game time in StarCraft is the game frame (fr).  
+    The minimum unit of game time in StarCraft is the game frame (fr):  
     `1 fr` == `1/16 game seconds`
 
 - ### Game Seconds 
@@ -275,6 +275,11 @@ Such tasks can usually be assisted by the MSQC plugin.
 `Current Player` and `Local Player` are two different concepts.
 
 ### Current Player 
+
+The `Current Player` is a global variable. In some trigger actions, `Current Player` is used as an execution parameter.  
+Some trigger conditions and actions support passing a `Player` parameter, then, you can set the `Player` parameter to `13` to use the `Current Player` global variable as its parameter.  
+The value of the `Current Player` global variable does not necessarily have to be any player's ID, it can store any integer value.  
+
 <details><summary>Actions that only take effect on machines where Current Player == Local Player (allow desync use, can be used individually on some player machines)</summary>
 
 - DisplayText  
@@ -286,7 +291,7 @@ Such tasks can usually be assisted by the MSQC plugin.
 - SetMissionObjectives  
 </details>
 
-<details><summary>Actions that use the Current Player as a parameter (must be used synchronously on all player machines, otherwise dropped)</summary>
+<details><summary>Actions that only take effect on Current Player (must be used synchronously on all player machines, otherwise disconnected)</summary>
 
 - SetAllianceStatus  
 - RunAIScript  
@@ -300,7 +305,7 @@ The `setcurpl` function can be used to set the value of the `Current Player` glo
 The `getcurpl` function can be used to get the current value of the `Current Player` global variable.  
 No matter what value you set for the `Current Player`, the code will execute on all players' machines.  
 
-```JavaScript
+```PHP
 setcurpl(P1);
 DisplayText("Printed content for player 1");
 setcurpl(P2);
@@ -308,15 +313,15 @@ DisplayText("Printed content for player 2");
 setcurpl(P3);
 DisplayText("Printed content for player 3");
 
-// CurrentPlayer is the constant number 13. It can cause some player-related conditions or actions to access the current player value  
-// CurrentPlayer != getcurpl()  
+// $CurrentPlayer is the constant number 13. It can cause some player-related conditions or actions to access the current player value  
+// $CurrentPlayer != getcurpl()  
 if ($CurrentPlayer == 13) {
     DisplayTextAll("Well, right");
 }
 
 // Set Fastest game speed x2
 setcurpl(-122787 + 6);
-SetDeaths(CurrentPlayer, SetTo, 21, 0);
+SetDeaths($CurrentPlayer, SetTo, 21, 0);
 ```
 
 ### Local Player 

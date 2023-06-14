@@ -273,6 +273,11 @@ euddraft 对这两种扩展名的处理方式不一样
 `当前玩家` 与 `本机玩家` 是两个不同的概念
 
 ### 当前玩家
+
+可以将`当前玩家`视作是一个全局变量，在一些触发器动作中，`当前玩家`会被当作一个执行参数使用  
+一些触发器条件或动作支持传入`玩家`参数，则可将`玩家`参数设为`13`以使用`当前玩家`这个全局变量的值作为其参数  
+`当前玩家`这个全局变量的值不一定是任何玩家的编号，它可以存储任何整数值  
+
 <details><summary>只在 `当前玩家 == 本机玩家` 的机器上生效的动作（允许非同步使用，可单独在部分玩家机器上使用）</summary>
 
 - DisplayText  
@@ -284,7 +289,7 @@ euddraft 对这两种扩展名的处理方式不一样
 - SetMissionObjectives  
 </details>
 
-<details><summary>会使用 `当前玩家` 作为参数的动作（必须同步在所有玩家机器上使用，否则掉线）</summary>
+<details><summary>只对 `当前玩家` 生效的动作（必须同步在所有玩家机器上使用，否则掉线）</summary>
 
 - SetAllianceStatus  
 - RunAIScript  
@@ -297,7 +302,8 @@ euddraft 对这两种扩展名的处理方式不一样
 setcurpl 函数可以设置`当前玩家`这个全局变量值  
 getcurpl 函数可以获取`当前玩家`这个全局变量现在是什么值  
 无论你将`当前玩家`设置为什么值，代码都会在所有玩家的机器上执行  
-```JavaScript
+
+```PHP
 setcurpl(P1);
 DisplayText("给玩家 1 打印的内容");
 setcurpl(P2);
@@ -305,22 +311,22 @@ DisplayText("给玩家 2 打印的内容");
 setcurpl(P3);
 DisplayText("给玩家 3 打印的内容");
 
-// CurrentPlayer 是常量数字 13，它可以使一些与玩家相关的条件或动作去访问 当前玩家 的值
-// CurrentPlayer != getcurpl()
+// $CurrentPlayer 是常量数字 13，它可以使一些与玩家相关的条件或动作去访问 当前玩家 的值
+// $CurrentPlayer != getcurpl()
 if ($CurrentPlayer == 13) {
     DisplayTextAll("嗯，对");
 }
 
 // 将 Fastest 游戏速度 x2
 setcurpl(-122787 + 6);
-SetDeaths(CurrentPlayer, SetTo, 21, 0);
+SetDeaths($CurrentPlayer, SetTo, 21, 0);
 ```
 
 ### 本机玩家
 
 getuserplayerid() 可以获取 本机玩家编号，它对每个机器都返回不同的值，与 setcurpl 函数设置的值毫无关联  
 可以使用 getuserplayerid() 来获取本机玩家的编号意味着你可以在运行时决定是否在本机执行或者不执行某些代码  
-它有助于提升性能，当玩家很多的情况下，并不是所有代码都需要对每个玩家执行，例如不需要为每个玩家都生成所有玩家都文字提示信息  
+它有助于提升性能，当玩家很多的情况下，并不是所有代码都需要对每个玩家执行，例如不需要为所有玩家都生成只针对玩家1的文字提示信息  
 当然如果你因不熟悉同步规则使用 getuserplayerid() 直接或者间接污染了`需要同步的数据`，它也可能导致数据不同步而引发掉线  
 ```JavaScript
 setcurpl(P1);

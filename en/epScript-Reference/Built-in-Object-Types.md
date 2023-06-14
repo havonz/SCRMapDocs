@@ -95,7 +95,7 @@
     ```JavaScript
     object EUDLightVariable {
         // Compile-time constant functions
-        function *getValueAddr*(){}        
+        function getValueAddr(){}        
 
         // The goals that can be achieved by the following functions, conditions and actions can optionally use EUDLightVariable, otherwise an ordinary variable (EUDVariable) should be used.
         // Regular methods
