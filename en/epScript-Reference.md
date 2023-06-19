@@ -189,7 +189,7 @@ If you assign `desync-data` (such as the player's current mouse position) to a v
 
 Such tasks can usually be assisted by the MSQC plugin.  
 
-[Example: GameSpeedTextMenu/main.eps](res/%5BMSQC%5DGameSpeedTextMenu/main.eps)  
+[Example: GameSpeedTextMenu](res/%5BMSQC%5DGameSpeedTextMenu/)  
 <br /><br />
 
 

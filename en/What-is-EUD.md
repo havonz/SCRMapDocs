@@ -16,8 +16,8 @@ EUD is the abbreviation of Extended Unit Death (a technique to extend the use of
             SetDeaths(PlayerID, Add/Subtract/SetTo, Number, UnitTypeID);
     }
     ```
-    - PlayerID legal range: 0~26, actually a dword value, value range: `-2147483648 ~ 2147483647` 
-    - UnitTypeID legal range: 0~232, actually a word value, value range: `0 ~ 65535`  
+    - PlayerID legal range: 0 ~ 26, actually a dword value, value range: `-2147483648 ~ 2147483647` 
+    - UnitTypeID legal range: 0 ~ 232, actually a word value, value range: `0 ~ 65535`  
 
 When using illegal PlayerID and UnitTypeID, the Deaths and SetDeaths actions can still take effect in the game. In this way, arbitrary memory read and write is achieved. By trying, it is found that the overflow memory location of Deaths and SetDeaths is fixed, and the memory location that can be accessed is `0x58A364 + 4 * PlayerID + 48 * UnitTypeID`. Of course, you can also simply set the UnitTypeID to 0 and only use the PlayerID for overflow anchor point to access the 32-bit value at the memory location `0x58A364 + 4 * PlayerID`. When accessing less than 4 bytes, you need to first read 4 bytes and then separate the 4 bytes with an algorithm (of course, there is no need to consider this in detail in the [remastered](#eud-in-remastered)).  
 
