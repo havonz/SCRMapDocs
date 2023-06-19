@@ -56,7 +56,7 @@ Prepare ScmDraft2. If not already prepared, look back a few lines.
     Install it, install it however you like.   
     Install the eps-server plugin from the VSCode plugin store.  
 
-- Open file extension display in the system.   
+- Open file extension display in your operating system.   
     For Windows 10, refer to [https://www.google.com/search?q=Open-file-extension-display-in-windows-10](https://www.google.com/search?q=Open+file+extension+display+in+windows+10)   
     For Windows 11, refer to [https://www.google.com/search?q=Open-file-extension-display-in-windows-11](https://www.google.com/search?q=Open+file+extension+display+in+windows+11)  
 
@@ -110,10 +110,10 @@ T   hen change its content to:
 ### Example Projects
 
 - If you really don't understand the configuration process above, you can choose a simple example project to view:  
-    - [Trigger-and-RawTrigger](res/Trigger-and-RawTrigger/makefile.edd)
-    - [ChangeSupplyLimit](res/ChangeSupplyLimit/makefile.edd)
-    - [UsePosition](res/UsePosition/makefile.edd)
-    - [\[MSQC\]GameSpeedTextMenu](res/%5BMSQC%5DGameSpeedTextMenu/makefile.edd)  <br /><br />
+    - [Trigger-and-RawTrigger](res/Trigger-and-RawTrigger/)
+    - [ChangeSupplyLimit](res/ChangeSupplyLimit/)
+    - [UsePosition](res/UsePosition/)
+    - [\[MSQC\]GameSpeedTextMenu](res/%5BMSQC%5DGameSpeedTextMenu/)  <br /><br />
 
 
 

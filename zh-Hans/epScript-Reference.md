@@ -57,7 +57,7 @@
     安装它，随便怎么安装都行  
     从 VSCode 插件商店中安装 eps-server 这款插件  
 
-- 打开系统的文件扩展名显示  
+- 打开操作系统的文件扩展名显示  
     Windows 10 可以参考 [https://www.baidu.com/s?wd=win10显示文件扩展名](https://www.baidu.com/s?wd=win10%E6%98%BE%E7%A4%BA%E6%96%87%E4%BB%B6%E6%89%A9%E5%B1%95%E5%90%8D)  
     Windows 11 可以参考 [https://www.baidu.com/s?wd=win11显示文件扩展名](https://www.baidu.com/s?wd=win11显示文件扩展名)  
 
@@ -111,10 +111,10 @@
 ### 示例工程
 
 - 实在是看不懂上面的配置过程，随意选择一个简易示例工程查看  
-    - [Trigger和RawTrigger的运用](res/Trigger和RawTrigger的运用/makefile.edd)
-    - [修改单位消耗人口限制](res/修改单位消耗人口限制/makefile.edd)
-    - [位置函数的使用](res/位置函数的使用/makefile.edd)
-    - [[MSQC演示]游戏中文字菜单](res/[MSQC演示]游戏中文字菜单/makefile.edd)  <br /><br />
+    - [Trigger和RawTrigger的运用](res/Trigger和RawTrigger的运用/)
+    - [修改单位消耗人口限制](res/修改单位消耗人口限制/)
+    - [位置函数的使用](res/位置函数的使用/)
+    - [[MSQC演示]游戏中文字菜单](res/[MSQC演示]游戏中文字菜单/)  <br /><br />
 
 
 

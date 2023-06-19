@@ -153,7 +153,7 @@
 
     - ### What Are Variables (EUDVariable)
 
-        EUD triggers themselves have no concept of variables. Runtime variables (EUDVariable) in eudplib are essentially virtual triggers with only one SetDeathsX action and no conditions.   
+        EUD triggers have no concept of variables. Runtime variables (EUDVariable) in eudplib are essentially virtual triggers with only one SetDeathsX action and no conditions.  
         
         Its syntax in TrigEdit++ would be something like this:  
         ```Lua
@@ -256,7 +256,7 @@
                 ),
                 nextptr = b, // The next trigger of this trigger is b
             );
-            NEXT_NEXT_TRIGGER.__lshift__(NextTrigger()); // "NEXT_NEXT_TRIGGER" 在这
+            NEXT_NEXT_TRIGGER.__lshift__(NextTrigger()); // "NEXT_NEXT_TRIGGER" is here
 
             // This just outputs the result and is not part of the assignment process
             println("a:{} b:{}", dwread(a_valueAddr), dwread(b_valueAddr)); // a:11 b:7

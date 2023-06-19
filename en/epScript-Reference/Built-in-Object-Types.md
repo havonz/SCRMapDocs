@@ -103,7 +103,7 @@
 
         // The goals that can be achieved by the following functions, conditions and actions can optionally use EUDLightVariable, otherwise an ordinary variable (EUDVariable) should be used.
         // Common methods
-        function ineg(){}                   // Negate variable in-place (same as x = -x;). Supports action alternative DoActions(v.ineg(action = true)) in euddraft 0.9.9.8 and later versions;
+        function ineg(){}                   // Negate variable in-place (same as x = -x;). Supports action alternative DoActions(v.ineg(action = true)); in euddraft 0.9.9.8 and later versions
         function iabs(){}                   // Added in euddraft 0.9.9.8, Self-assign absolute value in-place (same as x = (x & (1 << 31) == 0) ? x : -x;). Supports action alternative DoActions(v.iabs(action = true));
         // Common conditions
         function AtLeast(v){}               // Light variable value >= v
