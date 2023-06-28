@@ -189,7 +189,7 @@
 
     ```JavaScript
     object EUDVArray {
-        function constructor(size : py_int, basetype : type) : _EUDVArray {}
+        function constructor(size : py_int, basetype : type) : _EUDVArrayClass {}
     };
 
     object _EUDVArray {
@@ -263,7 +263,7 @@
 
     ```JavaScript
     object EUDDeque {
-        function constructor(size : py_int, basetype : type) : _EUDDeque {}
+        function constructor(size : py_int, basetype : type) : _EUDDequeClass {}
     };
 
     object _EUDDeque {
