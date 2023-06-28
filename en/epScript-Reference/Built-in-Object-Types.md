@@ -248,7 +248,7 @@
 
 - ### PVariable
 
-    Player variable, it is actually another way of writing EUDVArray(8)() , that is, an array that stores different values for each player, with a maximum of 8 players in Starcraft.  
+    Player variable, which is actually another representation of `EUDVArray(8)()`, that is, an array that stores different values for each player, with a maximum of 8 players in StarCraft.  
 
     ```JavaScript
     object PVariable {
@@ -268,7 +268,7 @@
 
 - ### EUDVArrayReader
 
-    A object type for traversing EUDVArray
+    For traversing EUDVArray
 
     ```JavaScript
     object EUDVArrayReader {
