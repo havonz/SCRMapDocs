@@ -206,14 +206,20 @@
 
 - ### EUDVArray
     Static array container implemented using virtual triggers, it can be declared using `VArray(...)` syntax, the size cannot be dynamically changed.  
+    
+    EUDVArray container supports the static setting of the reference type of the values it contains.    
 
     It has faster access speed when the array index is a variable.  
 
     ```JavaScript
     object EUDVArray {
-        function constructor(size) {}
-        const length;
+        function constructor(size : py_int, basetype : type) : _EUDVArray {}
     };
+
+    object _EUDVArray {
+        function constructor(vars : list) {}
+        const length;
+    }
     ```
 
     Example
@@ -231,6 +237,11 @@
     foreach (i : py_range(4)) {
         d[i] = i + 1;
     }
+
+    // Declare a 4 x 2 two-dimensional array
+    const e = EUDVArray(4, EUDVArray(2))(list(VArray(5, 6), VArray(7, 8), VArray(9, 10), VArray(11, 12)));
+    var a = e[2][1]; // Supported in euddraft 0.9.9.8
+    println("e[2][1] == {}", a); // e[2][1] == 10
     ```
 
 <br />
@@ -257,7 +268,7 @@
 
 - ### EUDVArrayReader
 
-    A object type for quickly traversing EUDVArray
+    A object type for traversing EUDVArray
 
     ```JavaScript
     object EUDVArrayReader {
@@ -270,22 +281,28 @@
 
 - ### EUDDeque
 
-    Static double-ended queue container implemented using virtual triggers, EUDDeque is a runtime iterator type.
+    Static double-ended queue container implemented using virtual triggers, EUDDeque is a runtime iterator type.  
+    
+    EUDDeque container supports the static setting of the reference type of the values it contains.  
 
     ```JavaScript
     object EUDDeque {
-    function constructor(size) {}
-    function append(arg) {}
-    function appendleft(arg) {}
-    function pop() {}
-    function popleft() {}
-    function clear() {}
-    function empty() {}
-    const length;
+        function constructor(size : py_int, basetype : type) : _EUDDeque {}
+    };
+
+    object _EUDDeque {
+        function constructor() {}
+        function append(arg) {}
+        function appendleft(arg) {}
+        function pop() {}
+        function popleft() {}
+        function clear() {}
+        function empty() {}
+        const length;
     };
     ```
 
-    示例
+    Example
 
     ```JavaScript
     const dq = EUDDeque(10)();
@@ -312,6 +329,14 @@
     if (dq.empty()) {
         println("Deque is empty");
     }
+
+    // Create a deque that can contains CUnit types
+    const larvae = EUDDeque(3, CUnit)();
+    foreach(cunit: EUDLoopPlayerCUnit(P1)) {
+        if (cunit.unitType == $U("Zerg Larva")) {
+            larvae.append(cunit);
+        }
+    }
     ```
 
 <br />
@@ -322,8 +347,8 @@
 
     ```JavaScript
     object StringBuffer {
-        function constructor(content) {}
-        function constructor(len) {}
+        function constructor(content : py_str | py_bytes) {}
+        function constructor(len : py_int) {}
         function append(*args) {}
         function appendf(format_string, *args) {}
         function insert(index, *args) {}

@@ -159,7 +159,7 @@
 
     ```JavaScript
     object EUDArray {
-        function constructor(size) {}
+        function constructor(size : py_int) {}
         const length;
     };
     ```
@@ -181,15 +181,21 @@
 
 - ### EUDVArray
 
-    使用虚拟触发器实现的静态数组容器，它可以使用`VArray(...)`语法初始化声明，不能动态更改尺寸
+    使用虚拟触发器实现的静态数组容器，它还可以使用`VArray(...)`语法初始化声明，不能动态更改尺寸
+
+    EUDVArray 容器支持静态设定它包含的值的引用类型
 
     它在数组下标为变量时有更快的访问速度
 
     ```JavaScript
     object EUDVArray {
-        function constructor(size) {}
-        const length;
+        function constructor(size : py_int, basetype : type) : _EUDVArray {}
     };
+
+    object _EUDVArray {
+        function constructor(vars : list) {}
+        const length;
+    }
     ```
 
     示例
@@ -207,6 +213,11 @@
     foreach (i : py_range(4)) {
         d[i] = i + 1;
     }
+
+    // 声明一个尺寸为 4 x 2 的二维数组
+    const e = EUDVArray(4, EUDVArray(2))(list(VArray(5, 6), VArray(7, 8), VArray(9, 10), VArray(11, 12)));
+    var a = e[2][1]; // euddraft 0.9.9.8 开始支持该语法
+    println("e[2][1] == {}", a); // e[2][1] == 10
     ```
 
 <br />
@@ -224,7 +235,7 @@
     示例
 
     ```JavaScript
-    // 它俩等价
+    // 以下两个用法等价
     const pv1 = PVariable();
     const pv2 = EUDVArray(8)();
     ```
@@ -233,7 +244,7 @@
 
 - ### EUDVArrayReader
 
-    用于快速遍历 EUDVArray 的类
+    用于遍历 EUDVArray 的类
 
     ```JavaScript
     object EUDVArrayReader {
@@ -248,9 +259,15 @@
 
     使用虚拟触发器实现的静态双向队列容器，EUDDeque 是运行时迭代器类型
 
+    EUDDeque 容器支持静态设定它包含的值的引用类型
+
     ```JavaScript
     object EUDDeque {
-        function constructor(size) {}
+        function constructor(size : py_int, basetype : type) : _EUDDeque {}
+    };
+
+    object _EUDDeque {
+        function constructor() {}
         function append(arg) {}
         function appendleft(arg) {}
         function pop() {}
@@ -288,6 +305,14 @@
     if (dq.empty()) {
         println("双向队列为空");
     }
+
+    // 创建一个可以存放 CUnit 类型的双向队列
+    const larvae = EUDDeque(3, CUnit)();
+    foreach(cunit: EUDLoopPlayerCUnit(P1)) {
+        if (cunit.unitType == $U("Zerg Larva")) {
+            larvae.append(cunit);
+        }
+    }
     ```
 
 <br />
@@ -298,8 +323,8 @@
 
     ```JavaScript
     object StringBuffer {
-        function constructor(content) {}
-        function constructor(len) {}
+        function constructor(content : py_str | py_bytes) {}
+        function constructor(len : py_int) {}
         function append(*args) {}
         function appendf(format_string, *args) {}
         function insert(index, *args) {}

@@ -17,9 +17,9 @@
 
     ```JavaScript
     object CUnit {
-    function constructor(epd) {}
-    static function from_read(epd) {}
-    static function from_ptr(ptr) {}
+        function constructor(epd) {}
+        static function from_read(epd) {}
+        static function from_ptr(ptr) {}
     
         function set_color(Player : TrgPlayer){}
         function reset_buildq(){}
