@@ -1689,12 +1689,27 @@
         Example
 
         ```JavaScript
-        const locs = py_eval('[EncodeLocation(("Location {}").format(x)) for x in range(1, 4)]'); // Return list($L("Location 1"), $L("Location 2"), $L("Location 3")) from Python  
-        const actions = py_eval('[]'); // Return an empty list from Python
-        foreach(loc : locs) {
-            actions.append(CreateUnit(1, "Terran Marine", loc, P1)); // Add an action to the list
-        }   
-        DoActions(actions); // Execute all actions in the list at once  
+        import py_datetime;
+
+        function is_map_expired() {
+            static var expired = false;
+            once {
+                const expire_date = py_str('2024-01-01 00:00:00');
+                const expire_date_stamp = py_eval("int(datetime.datetime.strptime(expire_date, '%Y-%m-%d %H:%M:%S').timestamp())");
+                if (Memory(0x6D0F38, AtLeast, expire_date_stamp)) {
+                    expired = true;
+                }
+            }
+            return expired;
+        }
+
+        function onPluginStart() {
+            if (is_map_expired()) {
+                DisplayTextAll("This map has expired.");
+            } else {
+                DisplayTextAll("Have fun.");
+            }
+        }
         ```
 
     <br />

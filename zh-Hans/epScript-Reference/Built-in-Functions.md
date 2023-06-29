@@ -1692,12 +1692,27 @@
         示例
 
         ```JavaScript
-        const locs = py_eval('[EncodeLocation(("Location {}").format(x)) for x in range(1, 4)]'); // 从 Python 中返回 list($L("Location 1"), $L("Location 2"), $L("Location 3"))
-        const actions = py_eval('[]'); // 从 Python 中返回一个空 list
-        foreach(loc : locs) {
-            actions.append(CreateUnit(1, "Terran Marine", loc, P1)); // 往列表中添加一个动作
+        import py_datetime;
+
+        function is_map_expired() {
+            static var expired = false;
+            once {
+                const expire_date = py_str('2024-01-01 00:00:00');
+                const expire_date_stamp = py_eval("int(datetime.datetime.strptime(expire_date, '%Y-%m-%d %H:%M:%S').timestamp())");
+                if (Memory(0x6D0F38, AtLeast, expire_date_stamp)) {
+                    expired = true;
+                }
+            }
+            return expired;
         }
-        DoActions(actions); // 一次性执行列表所有的动作
+
+        function onPluginStart() {
+            if (is_map_expired()) {
+                DisplayTextAll("当前地图已经过期。");
+            } else {
+                DisplayTextAll("玩得开心。");
+            }
+        }
         ```
 
     <br />
