@@ -1691,8 +1691,8 @@
         ```JavaScript
         const locs = py_eval('[EncodeLocation(("Location {}").format(x)) for x in range(1, 4)]'); // Return list($L("Location 1"), $L("Location 2"), $L("Location 3")) from Python  
         const actions = py_eval('[]'); // Return an empty list from Python
-        foreach(loc : py_enumerate(locs)) {
-        actions.append(CreateUnit(1, "Terran Marine", loc, P1)); // Add an action to the list
+        foreach(loc : locs) {
+            actions.append(CreateUnit(1, "Terran Marine", loc, P1)); // Add an action to the list
         }   
         DoActions(actions); // Execute all actions in the list at once  
         ```

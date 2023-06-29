@@ -1694,7 +1694,7 @@
         ```JavaScript
         const locs = py_eval('[EncodeLocation(("Location {}").format(x)) for x in range(1, 4)]'); // 从 Python 中返回 list($L("Location 1"), $L("Location 2"), $L("Location 3"))
         const actions = py_eval('[]'); // 从 Python 中返回一个空 list
-        foreach(loc : py_enumerate(locs)) {
+        foreach(loc : locs) {
             actions.append(CreateUnit(1, "Terran Marine", loc, P1)); // 往列表中添加一个动作
         }
         DoActions(actions); // 一次性执行列表所有的动作
