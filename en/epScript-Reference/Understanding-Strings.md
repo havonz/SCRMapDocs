@@ -67,7 +67,7 @@
     const stTerranMarine = $B("Terran Marine");
     py_print(utTerranMarine, stTerranMarine); // Output 0 1 in the compile-time CLI
     if (utTerranMarine == stTerranMarine) {   // This is equivalent to if (0 == 1) {
-        simpleprint("所以这条信息永远不会输出");
+        simpleprint("So this message is never printed");
     }
     ```
 

@@ -95,10 +95,10 @@ function afterTriggerExec() {
             
             if (p == getuserplayerid()) { /* If the local player happens to be the player who operated the menu */
                 PlayWAV("sound\\glue\\mousedown2.wav");
-                printAt(10, "你将游戏速度更改为 \x07{}\x02%", currentSpeedSel);
+                printAt(10, "You change the game speed to \x07{}\x02%", currentSpeedSel);
             } else {
                 PlayWAV("sound\\misc\\transmission.wav");
-                printAt(10, "{}{} \x02将游戏速度更改为 \x07{}\x02%", PColor(p), PName(p), currentSpeedSel);
+                printAt(10, "{}{} \x02changes the game speed to \x07{}\x02%", PColor(p), PName(p), currentSpeedSel);
             }
         }
     }

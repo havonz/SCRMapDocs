@@ -1127,7 +1127,7 @@
         Example
 
         ```JavaScript
-        Transmission("Terran Marine", $L("Location 3"), "sound\\Zerg\\Advisor\\ZAdUpd00.WAV", Add, 5000, "Our objectives are:\nNo cavities！");
+        Transmission("Terran Marine", $L("Location 3"), "sound\\Zerg\\Advisor\\ZAdUpd00.WAV", Add, 5000, "Our objectives are:\nNo cavities!");
         ```
 
     <br />
@@ -2449,11 +2449,11 @@
 
     - #### **DisplayTextAt**
 
-        - `DisplayTextAt`(行, 文本 : TrgString)  
+        - `DisplayTextAt`(line, text : TrgString)  
             Displays [text] on line [line] of the `Local Player == Current Player` screen  
             It is different from DisplayText and does not return a trigger action expression  
 
-        - `DisplayTextAllAt`(行, 文本 : TrgString)  
+        - `DisplayTextAllAt`(line, text : TrgString)  
             Displays [text] on line [line] for all players (including observers) 
             It is different from DisplayTextAll and does not return a trigger action expression  
 
@@ -2704,8 +2704,8 @@
         Example
 
         ```JavaScript
-        println("玩家1: {}{}", PColor(P1), PName(P1)); // If Player 1 is named Soze and the color is red, this output will print the red Soze
-        println("玩家1: {:c}{:n}", P1, P1);            // Equivalent to the above
+        println("Player 1: {}{}", PColor(P1), PName(P1)); // If Player 1 is named Soze and the color is red, this output will print the red Soze
+        println("Player 1: {:c}{:n}", P1, P1);            // Equivalent to the above
         ```
 
     <br />
@@ -2718,7 +2718,7 @@
         - `SetPNamef`(player: TrgPlayer, format_string, *args)  
             Sets [player]'s name to the text formatted by multiple arguments [*args] using [format_string].  
 
-        这俩函数均不能影响 PName 函数获取到的那个名字，只影响玩家聊天显示的那个名字，并且只对当前帧有效，每一帧都需要重复运行
+        Both functions do not affect the name obtained by the PName function. They only affect the name displayed in player chat, and only valid for the current frame. They need to be re-run every frame.  
 
         Example
 
@@ -3499,7 +3499,7 @@
         ```JavaScript
         var a = 0b0011; // 3
         var b = 0b1100; // 12
-        println("{}", bitand(a, b)); // 0 (binary 0b0000）
+        println("{}", bitand(a, b)); // 0 (binary 0b0000)
         ```
 
     <br />
@@ -3514,7 +3514,7 @@
         ```JavaScript
         var a = 0b0011; // 3
         var b = 0b1100; // 12
-        println("{}", bitor(a, b)); // 15 (binary 0b1111）
+        println("{}", bitor(a, b)); // 15 (binary 0b1111)
         ```
 
     <br />
@@ -3783,7 +3783,7 @@
             if (getuserplayerid() == $P1) { // Check if the local player is player 1
                 QueueGameCommand_Select(1, uar); // Check if the local player is player 1
                 QueueGameCommand_QueuedRightClick(1234 + 2345 * 65536); /* Set the rally point to 1234, 2345 */
-                QueueGameCommand_TrainUnit("Terran SCV"); /* 训练一个 SCV */
+                QueueGameCommand_TrainUnit("Terran SCV"); /* Train an SCV */
             }
         }
         ```

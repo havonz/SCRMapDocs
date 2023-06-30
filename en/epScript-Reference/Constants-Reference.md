@@ -98,7 +98,7 @@ Custom: 7
 
 ```JavaScript
 // There are a total of 256 switches, numbered 0 to 255
-"Switch 1～256": 0~255
+"Switch 1~256": 0~255
 // When euddraft compiles, it will remove all switch names from the map string table, that is, switch names do not exist at runtime and are only used by map developers to distinguish
 ```
 

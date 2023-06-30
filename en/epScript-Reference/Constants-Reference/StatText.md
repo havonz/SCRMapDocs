@@ -1025,7 +1025,7 @@
 'Must target non-hovering ground units.': 901
 'Must target passable terrain.': 902
 
-# 命令名称
+# Commands
 'Die': 903
 'Fizzle': 904
 'Stop (Order)': 905

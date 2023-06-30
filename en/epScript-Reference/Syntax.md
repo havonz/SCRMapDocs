@@ -161,7 +161,7 @@
 
     You can use the `import` keyword to import other modules. `as` gives an alias to the imported module. The following code illustrates the usage:  
 
-    `Module1.eps`：
+    `Module1.eps`:
     ```JavaScript
     const A_CONST = 0; 
     static var A_VAR = 0;   
@@ -172,7 +172,7 @@
     }
     ```
 
-    `Module2.eps`：
+    `Module2.eps`:
     ```JavaScript
     import Module1;  
 
@@ -181,7 +181,7 @@
     }
     ```
 
-    `Module3.eps`：
+    `Module3.eps`:
     ```JavaScript
     import Module1 as m1; 
     import Module2 as m2;   

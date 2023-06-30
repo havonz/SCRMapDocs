@@ -14,7 +14,7 @@ def f_b2i4(bytes):
 print(f_b2i4(b"TMCu")) # 1967344980
 ```
 
-## AI 脚本类型
+## AI Scripts
 
 ```Python
 # Custom AI Scripts
