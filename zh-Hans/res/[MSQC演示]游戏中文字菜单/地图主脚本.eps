@@ -51,8 +51,8 @@ function showMenu(p) {
             }
         } else {
             const clearActions = py_list();
-            foreach(i : py_range(0, 7)) {
-                clearActions.append(isMouseOvered[i].Clear());
+            foreach(v : isMouseOvered) {
+                clearActions.append(v.Clear());
             }
             RawTrigger(actions = clearActions);
         }

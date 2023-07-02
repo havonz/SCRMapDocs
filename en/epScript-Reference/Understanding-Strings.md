@@ -223,7 +223,7 @@
     The string in memory corresponding to the TBLKey is not equal to the TBLKey itself.  
 
     ```JavaScript
-    println("{:s}", GetTBLAddr("Terran Siege Tank (Tank Mode)")); // Output：Terran Siege Tank
+    println("{:s}", GetTBLAddr("Terran Siege Tank (Tank Mode)")); // Output: Terran Siege Tank
     ```
 
     You can modify the names of units and abilities by modifying strings in the TBL table.s
