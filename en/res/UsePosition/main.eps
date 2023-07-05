@@ -21,10 +21,11 @@ function polarProjection_256(x, y, length, angle) {
     var ox, oy;
     if (_0998_above()) {
         ox, oy = lengthdir_256(length, angle);
+        return x + ox, y + oy;
     } else {
         ox, oy = lengthdir_256(length, 320 - angle);
+        return x + ox, y - oy;
     }
-    return x + ox, y - oy;
 }
 
 var marine_epd, ghost_epd = 0, 0;
@@ -60,8 +61,8 @@ function beforeTriggerExec() {
         const marine_cu = CUnit(marine_epd);
         const ghost_cu = CUnit(ghost_epd);
         once {
-            ghost_cu.statusFlags.Invincible = 1;
-            marine_cu.statusFlags.Invincible = 1;
+            ghost_cu.set_invincible();
+            marine_cu.set_invincible();
         }
         const x0, y0 = marine_cu.getpos("pos");
         const x1, y1 = ghost_cu.getpos("pos");

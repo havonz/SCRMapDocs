@@ -85,7 +85,7 @@ function beforeTriggerExec() {
 function afterTriggerExec() {
     /* 接收 MSQC 选择并同步到 currentSpeedSel，这个循环会在每一个玩家的机器上执行 */
     foreach(p : EUDLoopPlayer("Human")) {
-        if (menuSel[p] != 0) { /* 如果某玩家 p 的 menuSel 有值，这个 p 不一定是本机玩家 */
+        if (menuSel[p] != 0) { /* 如果某玩家 p 的 menuSel 有值 */
             currentSpeedSel = menuSel[p]; /* 接收它 */
             menuSel[p] = 0;               /* 清空它，等待下一次接收 */
 

@@ -85,7 +85,7 @@ function beforeTriggerExec() {
 function afterTriggerExec() {
     /* Receive MSQC selection and sync to currentSpeedSel, this loop will execute on each player's machine */ 
     foreach(p : EUDLoopPlayer("Human")) {
-        if (menuSel[p] != 0) { /* If player p's menuSel has a value, this p is not necessarily the local player */ 
+        if (menuSel[p] != 0) { /* If player p's menuSel has a value. */ 
             currentSpeedSel = menuSel[p]; /* Receive it */
             menuSel[p] = 0;               /* Clear it and wait for next reception */
 
