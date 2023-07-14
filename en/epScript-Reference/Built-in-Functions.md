@@ -394,7 +394,7 @@
             Compare whether the kills of [unitType] of [player] is [AtLeast/AtMost/Exactly] [value]  
 
             Kills is not kill score, note the difference  
-            Killing own or allied units is not counted in the Kills  
+            Killing own units is not counted in the Kills  
         
         Example
 
