@@ -3354,14 +3354,15 @@
             return is0998above;
         }
 
-        function polarProjection_256(x, y, length, angle256) {
-            var ox, oy;
+        function polarProjection_256(x0, y0, length, angle) {
+            var dx, dy;
             if (_0998_above()) {
-                ox, oy = lengthdir_256(length, angle256);
+                dx, dy = lengthdir_256(length, angle);
+                return x0 + dx, y0 + dy;
             } else {
-                ox, oy = lengthdir_256(length, 320 - angle256);
+                dx, dy = lengthdir_256(length, 320 - angle);
+                return x0 + dx, y0 - dy;
             }
-            return x + ox, y - oy;
         }
 
         const x, y = polarProjection_256(1264, 880, 888, 73);
