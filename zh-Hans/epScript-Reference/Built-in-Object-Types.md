@@ -259,8 +259,6 @@
 
     使用虚拟触发器实现的静态双向队列容器，EUDDeque 是运行时迭代器类型
 
-    EUDDeque 容器支持静态设定它包含的值的引用类型
-
     ```JavaScript
     object EUDDeque {
         function constructor(size : py_int, basetype : type) : _EUDDequeClass {}
@@ -304,14 +302,6 @@
     // `.empty()` : 判断当前双向队列中元素个数是否为 0
     if (dq.empty()) {
         println("双向队列为空");
-    }
-
-    // 创建一个可以存放 CUnit 类型的双向队列
-    const larvae = EUDDeque(3, CUnit)();
-    foreach(cunit: EUDLoopPlayerCUnit(P1)) {
-        if (cunit.unitType == $U("Zerg Larva")) {
-            larvae.append(cunit);
-        }
     }
     ```
 

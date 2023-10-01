@@ -1162,7 +1162,7 @@
         示例
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=502
+        // https://armoha.github.io/eud-book/offsets/KilledUnitCountsTable.html
         // 事实上传统触发器是没有 SetKills 这个动作的，它是用 EUD 模拟出来的
 
         // 如果 玩家编号 不是 CurrentPlayer(13) 的情况下，它的内部实现大概是这样，返回一条常量表达式
@@ -1217,7 +1217,7 @@
             DisplayText("给玩家1显示的内容"),
         ));
 
-        // https://euddb.website/?pg=entry&id=426
+        // https://armoha.github.io/eud-book/offsets/GameSpeedRefreshRate.html
         // 将 Slowest 到 Fastest 游戏速度都设置为 200%
         RawTrigger(actions = list(
             SetCurrentPlayer(EPD(0x5124D8)),
@@ -1375,7 +1375,7 @@
         const aiid = $B("AI Harass Here"); // 返回 1538
 
         // 更改 SCV 单位的名称字符串编号，$T("\x03啥也不是的农民") 会在编译时插入一个新字符串到地图中，并把这个字符串的编号返回到这儿
-        // https://euddb.website/?pg=entry&id=258
+        // https://armoha.github.io/eud-book/offsets/Units.dat-MapString.html
         wwrite(0x660260 + 2 * $U("Terran SCV"), $T("\x03啥也不是的农民"));
 
         // 可以直接使用 $ 语法的常量
@@ -1780,8 +1780,8 @@
         示例
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=542
-        // https://euddb.website/?pg=entry&id=543
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateX.html
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateY.html
         // 读取内存值的原理，使用 32 个触发器判断 32 位中的每一位的值，如果第 i 位的值大于 0 则给变量附加 2 的 i-1 次方的值
         function GetMouseXY() {
             var x, y;
@@ -1895,7 +1895,7 @@
         示例
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=240
+        // https://armoha.github.io/eud-book/offsets/GameSpeedRefreshRate.html
         const epd = EPD(0x5124D8); // (0x5124D8-0x58A364)/4 = -0x1DFA3 = -122787
         ```
 
@@ -2008,8 +2008,8 @@
 
         示例
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=542
-        // https://euddb.website/?pg=entry&id=543
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateX.html
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateY.html
         // 读取内存值的原理，使用 32 个触发器判断 32 位中的每一位的值，如果第 i 位的值大于 0 则给变量附加 2 的 i-1 次方的值
         function GetMouseXY() {
             var x, y;
@@ -2675,13 +2675,13 @@
         // CurrentPlayer 是常量数字 13，它可以使一些与玩家相关的条件或动作去访问 当前玩家 的值
         // CurrentPlayer != getcurpl()
 
-        // https://euddb.website/?pg=entry&id=426
+        // https://armoha.github.io/eud-book/offsets/GameSpeedRefreshRate.html
         setcurpl(-122787); // 第 1 档游戏速度 PlayerID 偏移
         addcurpl(6); // 第 7 挡游戏速度
         SetDeaths(CurrentPlayer, SetTo, 21, 0); // 游戏速度 x2
 
-        // https://euddb.website/?pg=entry&id=815
-        // https://euddb.website/?pg=entry&id=920
+        // https://armoha.github.io/eud-book/offsets/TriggerCurrentPlayerakaCPTrick.html
+        // https://armoha.github.io/eud-book/offsets/GameBrightness.html
         SetMemory(0x6509B0, SetTo, 210382); // 将 当前玩家 改为 210382 （游戏亮度等级 0~31）
         SetDeaths(CurrentPlayer, SetTo, 15, 0); // 设置亮度为 15
         setcurpl2cpcache(); // 将 当前玩家 恢复到 cpcache，防止干扰 getcurpl 等函数的使用
@@ -2872,7 +2872,7 @@
         示例
 
         ```JavaScript
-        // 0x582144 参考 https://euddb.website/?pg=entry&id=490
+        // 0x582144 参考 https://armoha.github.io/eud-book/offsets/ZergControlAvailable.html
         const SUP_RACE_ZERG = 0;
         const SUP_RACE_TERRAN = 1;
         const SUP_RACE_PROTOSS = 2;

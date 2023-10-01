@@ -1161,7 +1161,7 @@
         Example
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=502  
+        // https://armoha.github.io/eud-book/offsets/KilledUnitCountsTable.html  
         // In fact, there is no SetKills action in classical triggers, it is simulated by EUD.  
 
         // If the player number is not CurrentPlayer (13), its internal implementation is probably like this, returning a constant expression  
@@ -1216,7 +1216,7 @@
             DisplayText("Content displayed to Player 1"),
         ));
 
-        // https://euddb.website/?pg=entry&id=426
+        // https://armoha.github.io/eud-book/offsets/GameSpeedRefreshRate.html
         // Set all game speeds from Slowest to Fastest to 200%
         RawTrigger(actions = list(
             SetCurrentPlayer(EPD(0x5124D8)),
@@ -1373,7 +1373,7 @@
         const aiid = $B("AI Harass Here"); // Returns 1538
 
         // Change the string ID of the SCV unit name. $T("\x03Pool farmer") will insert a new string into the map during compilation and return the ID of this string here.
-        // https://euddb.website/?pg=entry&id=258
+        // https://armoha.github.io/eud-book/offsets/Units.dat-MapString.html
         wwrite(0x660260 + 2 * $U("Terran SCV"), $T("\x03Pool farmer"));
 
         // You can directly use $ syntax constants 
@@ -1777,8 +1777,8 @@
         Example
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=542
-        // https://euddb.website/?pg=entry&id=543
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateX.html
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateY.html
         // The principle of reading memory values is to use 32 triggers to compare the value of each bit in 32 bits. If the i-th bit is greater than 0, the variable is appended with 2 to the power of i-1.
         function GetMouseXY() {
             var x, y;
@@ -1892,7 +1892,7 @@
         Example
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=240
+        // https://armoha.github.io/eud-book/offsets/GameSpeedRefreshRate.html
         const epd = EPD(0x5124D8); // (0x5124D8-0x58A364)/4 = -0x1DFA3 = -122787
         ```
 
@@ -2006,8 +2006,8 @@
         Example
 
         ```JavaScript
-        // https://euddb.website/?pg=entry&id=542
-        // https://euddb.website/?pg=entry&id=543
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateX.html
+        // https://armoha.github.io/eud-book/offsets/MouseCoordinateY.html
         // The principle of reading memory values is to use 32 triggers to compare the value of each bit in 32 bits. If the i-th bit is greater than 0, the variable is appended with 2 to the power of i-1.
         function GetMouseXY() {
             var x, y;
@@ -2675,13 +2675,13 @@
         // CurrentPlayer is the constant number 13, which can cause some player-related conditions or actions to access the value of the current player
         // CurrentPlayer != getcurpl()
 
-        // https://euddb.website/?pg=entry&id=426
+        // https://armoha.github.io/eud-book/offsets/GameSpeedRefreshRate.html
         setcurpl(-122787); // PlayerID offset for game speed level 1
         addcurpl(6); // Game speed level 7
         SetDeaths(CurrentPlayer, SetTo, 21, 0); // Game speed x2
 
-        // https://euddb.website/?pg=entry&id=815
-        // https://euddb.website/?pg=entry&id=920
+        // https://armoha.github.io/eud-book/offsets/TriggerCurrentPlayerakaCPTrick.html
+        // https://armoha.github.io/eud-book/offsets/GameBrightness.html
         SetMemory(0x6509B0, SetTo, 210382); // Change the current player to 210382 (game brightness level 0~31)
         SetDeaths(CurrentPlayer, SetTo, 15, 0); // Set brightness to 15
         setcurpl2cpcache(); // Restore the current player to cpcache to prevent interference with getcurpl and other functions
@@ -2872,7 +2872,7 @@
         Example
 
         ```JavaScript
-        // 0x582144: https://euddb.website/?pg=entry&id=490
+        // 0x582144: https://armoha.github.io/eud-book/offsets/ZergControlAvailable.html
         const SUP_RACE_ZERG = 0;
         const SUP_RACE_TERRAN = 1;
         const SUP_RACE_PROTOSS = 2;

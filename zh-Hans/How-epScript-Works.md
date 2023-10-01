@@ -31,7 +31,7 @@
 - ## 虚拟触发器（Virtual Triggers）
 
     因为 [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) 中的 [TRIG 节（Section）](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers)中的触发器不会作为一个整体加载到内存，而是以链表形式加载，运行时需要通过链表上的节点遍历定位。  
-    [jjf28](http://www.staredit.net/topic/17546/#1) 发帖称只需要将触发器的字节码写入到内存中任何能访问的位置，然后将其添加到[触发器链表](https://euddb.website/?pg=entry&id=763)中，它们就会正常工作。  
+    [jjf28](http://www.staredit.net/topic/17546/#1) 发帖称只需要将触发器的字节码写入到内存中任何能访问的位置，然后将其添加到[触发器链表](https://armoha.github.io/eud-book/offsets/Player1TriggerList.html)中，它们就会正常工作。  
     这些不在 TRIG 节（Section）中的触发器可以在运行期确定其在内存中的相对位置，这意味着在这样的触发器之间实现定位跳转是相对容易的事情。[jjf28](http://www.staredit.net/topic/17546/#1) 将这样的触发器称之为虚拟触发器（Virtual Triggers）。  
     [trgk](http://www.staredit.net/topic/17546/#11) 提出 [STR 节（Section）](http://www.staredit.net/wiki/index.php/Scenario.chk#.22STR_.22_-_String_Data)在运行时会作为一个整体加载到内存中，因此若将虚拟触发器写入到 STR 节（Section）则可轻易在编译期固定其运行时内存相对位置，从而能更容易地实现运行时对触发器进行动态的修改以实现条件判断和流程控制。  
     在此基础之上，[trgk](http://www.staredit.net/topic/17546/#11) 设计出条件控制流程的 Python 伪语法库 [eudplib](https://github.com/armoha/eudplib)。  

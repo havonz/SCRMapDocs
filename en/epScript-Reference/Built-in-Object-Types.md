@@ -282,9 +282,7 @@
 - ### EUDDeque
 
     Static double-ended queue container implemented using virtual triggers, EUDDeque is a runtime iterator type.  
-    
-    EUDDeque container supports the static setting of the reference type of the values it contains.  
-
+  
     ```JavaScript
     object EUDDeque {
         function constructor(size : py_int, basetype : type) : _EUDDequeClass {}
@@ -330,13 +328,6 @@
         println("Deque is empty");
     }
 
-    // Create a deque that can contains CUnit types
-    const larvae = EUDDeque(3, CUnit)();
-    foreach(cunit: EUDLoopPlayerCUnit(P1)) {
-        if (cunit.unitType == $U("Zerg Larva")) {
-            larvae.append(cunit);
-        }
-    }
     ```
 
 <br />
