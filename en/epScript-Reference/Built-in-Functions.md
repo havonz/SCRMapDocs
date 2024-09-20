@@ -2916,7 +2916,7 @@
         Example
 
         ```JavaScript
-        // Similar to the example of read/write, but the memory offset benchmarks of _epd series are different. EPD macros can be used for conversion.  
+        // Much like the read/write example, the _epd family of functions differs from the memory offset reference, and the EPD function can be used to convert a memory address into an epd offset  
         function SetPlayerSupply(player: TrgPlayer, race, type, amount) {
             dwwrite_epd(EPD(0x582144) + (race) * 36 + (type) * 12 + (player), amount);
         }

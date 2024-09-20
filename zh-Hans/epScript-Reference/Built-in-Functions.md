@@ -2916,7 +2916,7 @@
         Example
 
         ```JavaScript
-        // 与 read/write 的例子很相似，不过 _epd 系列基准的内存偏移不同，用 EPD 宏可以转换
+        // 与 read/write 的例子很相似，不过 _epd 系列函数基准的内存偏移不同，使用 EPD 函数可以将内存地址转换为 epd 偏移值  
         function SetPlayerSupply(player: TrgPlayer, race, type, amount) {
             dwwrite_epd(EPD(0x582144) + (race) * 36 + (type) * 12 + (player), amount);
         }
