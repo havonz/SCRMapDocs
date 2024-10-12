@@ -2326,7 +2326,7 @@
         > For an instant when a drone hatches into a Zerg Extractor, it will inherit the address of the Vespene Geyser unit (the Vespene Geyser itself is a unit). The drone is considered dead. If the construction is cancelled, a new drone is returned. This drone can be traversed.   
         > Units queued in the barracks: they are only detected when they walk out after completion.   
         > Buildings: Can be detected as soon as construction starts (unfinished construction).   
-        > Archons and Dark Archons: After Templars merge, the Archon will use the address of one of the Templars. The other Templar is considered dead and will not produce a new unit. If the merge is cancelled, one Templar will inherit the Archon's address and the other will be a new unit. Dark Archons are similar.
+        > Archons and Dark Archons: After Templars merge, the Archon will use the address of one of the Templars. The other Templar is considered dead and will not produce a new unit. Dark Archons are similar.
 
         Example
 
