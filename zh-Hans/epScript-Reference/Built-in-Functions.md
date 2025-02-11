@@ -2814,7 +2814,7 @@
         示例
 
         ```JavaScript
-        const top, left = getlocTL($L("Location 1"));
+        const left, top = getlocTL($L("Location 1"));
         ```
 
     <br />
