@@ -1,7 +1,0 @@
-[main]
-input: UsePosition-Terrain.scx
-output: UsePosition.scx
-
-[eudTurbo]
-
-[main.eps]
