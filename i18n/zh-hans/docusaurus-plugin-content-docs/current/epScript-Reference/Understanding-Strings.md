@@ -221,7 +221,7 @@ sidebar_position: 5
     
     <summary>相关类型及函数</summary>
 
-    - $B([TBLKey](Constants-Reference/StatText.md) : [literal](Syntax.md#literal-strings))
+    - $B([TBLKey](Constants-Reference/StatText.md) : [literal](Syntax.md#字面量字符串literal-string))
     - EncodeTBL([TBLKey](Constants-Reference/StatText.md) : py_str)
     - GetTBLAddr([TBLKey或TBL编号](Constants-Reference/StatText.md))
     - settbl([TBLKey或TBL编号](Constants-Reference/StatText.md), 偏移地址, *args)

@@ -684,7 +684,7 @@ sidebar_position: 6
                 conditions = {Deaths(P1, AtLeast, 2^i, "Kakaru");};
                 actions = {
                     SetDeaths(P1, Add, 2^i, "Terran Marine");
-                    SetDeaths(P1, Add, 2^i, "Kakaru");
+                    SetDeaths(P1, Subtract, 2^i, "Kakaru");
                 };
             }
         end

@@ -98,7 +98,7 @@ sidebar_position: 9
         - [b2i](#b2i)
         - [i2b](#i2b)
         - [u2b/b2u](#u2bb2u)
-        - [utf8 编码/解码](#utf8-编码/解码)
+        - [utf8 编码/解码](#utf8-编码解码)
     - [常规函数](#常规函数)
         - [EPD](#epd)
         - [l2v](#l2v)
