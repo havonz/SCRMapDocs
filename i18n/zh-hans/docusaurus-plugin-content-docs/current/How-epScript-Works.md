@@ -23,8 +23,8 @@ sidebar_position: 6
 
 - ## 万物皆触发器
 
-    星际争霸重制版的地图并不支持任何运行时脚本语言，epScript 脚本（`*.eps`） 之所以可以在运行时生效  
-    是因为 epScript 代码最终都将以触发器的形式插入地图中，真正能在运行时生效的是触发器  
+    星际争霸重制版的地图并不支持任何运行时脚本语言，epScript 脚本（`*.eps`）之所以可以在运行时生效，  
+    是因为 epScript 代码最终都会以触发器的形式插入地图中；真正能在运行时生效的是触发器。  
 
     > 触发器字节码结构参考：  
     [http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers)  
@@ -34,10 +34,10 @@ sidebar_position: 6
 
 - ## 虚拟触发器（Virtual Triggers）
 
-    因为 [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) 中的 [TRIG 节（Section）](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers)中的触发器不会作为一个整体加载到内存，而是以链表形式加载，运行时需要通过链表上的节点遍历定位。  
-    [jjf28](http://www.staredit.net/topic/17546/#1) 发帖称只需要将触发器的字节码写入到内存中任何能访问的位置，然后将其添加到[触发器链表](https://armoha.github.io/eud-book/offsets/Player1TriggerList.html)中，它们就会正常工作。  
-    这些不在 TRIG 节（Section）中的触发器可以在运行期确定其在内存中的相对位置，这意味着在这样的触发器之间实现定位跳转是相对容易的事情。[jjf28](http://www.staredit.net/topic/17546/#1) 将这样的触发器称之为虚拟触发器（Virtual Triggers）。  
-    [trgk](http://www.staredit.net/topic/17546/#11) 提出 [STR 节（Section）](http://www.staredit.net/wiki/index.php/Scenario.chk#.22STR_.22_-_String_Data)在运行时会作为一个整体加载到内存中，因此若将虚拟触发器写入到 STR 节（Section）则可轻易在编译期固定其运行时内存相对位置，从而能更容易地实现运行时对触发器进行动态的修改以实现条件判断和流程控制。  
+    [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) 中 [TRIG 节（Section）](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers)里的触发器不会作为一个整体加载到内存，而是以链表形式加载；运行时需要通过链表节点遍历定位。  
+    [jjf28](http://www.staredit.net/topic/17546/#1) 发帖称，只需要将触发器字节码写入内存中任何可访问的位置，再将其添加到[触发器链表](https://armoha.github.io/eud-book/offsets/Player1TriggerList.html)中，它们就能正常工作。  
+    这些不在 TRIG 节（Section）中的触发器，可以在运行期确定其在内存中的相对位置，这意味着在这样的触发器之间实现定位跳转相对容易。[jjf28](http://www.staredit.net/topic/17546/#1) 将这样的触发器称为虚拟触发器（Virtual Triggers）。  
+    [trgk](http://www.staredit.net/topic/17546/#11) 提出 [STR 节（Section）](http://www.staredit.net/wiki/index.php/Scenario.chk#.22STR_.22_-_String_Data)在运行时会作为一个整体加载到内存中，因此若将虚拟触发器写入 STR 节（Section），就可以在编译期轻易固定其运行时内存相对位置，从而更容易在运行时动态修改触发器，实现条件判断和流程控制。  
     在此基础之上，[trgk](http://www.staredit.net/topic/17546/#11) 设计出条件控制流程的 Python 伪语法库 [eudplib](https://github.com/armoha/eudplib)。  
 
     > 参考：[http://www.staredit.net/topic/17546/](http://www.staredit.net/topic/17546/)
@@ -47,9 +47,9 @@ sidebar_position: 6
 - ## 数学运算
 
     常规触发器是不具备完整的数学运算功能的。  
-    可以用于模拟数学运算的功能是触发器动作（[Actions](http://www.staredit.net/wiki/index.php/Scenario.chk#Trigger_Actions_List)）中设置数字修改方法（[Number Modifiers](http://www.staredit.net/wiki/index.php/Scenario.chk#Number_Modifiers)）的设为（SetTo）/增加（Add）/减少（Substract）方法 —— 它们通常用于设置/增加/减少玩家资源或者死亡数等等。  
-    再加上在重制版中暴雪的软件工程师 [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) 给 Deaths 条件 和 SetDeaths 动作 增加了 bitmask 参数 —— DeathsX 和 SetDeathsX。  
-    基于这些和上一节[虚拟触发器（Virtual Triggers）](#虚拟触发器virtual-triggers)实现的自由的触发器流程控制，eudplib 的作者在 epScript 实现了基本的整数运算方法。  
+    可用于模拟数学运算的，是触发器动作（[Actions](http://www.staredit.net/wiki/index.php/Scenario.chk#Trigger_Actions_List)）中设置数字修改方法（[Number Modifiers](http://www.staredit.net/wiki/index.php/Scenario.chk#Number_Modifiers)）的设为（SetTo）/增加（Add）/减少（Subtract）方法 —— 它们通常用于设置、增加或减少玩家资源、死亡数等。  
+    再加上暴雪软件工程师 [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) 在重制版中为 Deaths 条件和 SetDeaths 动作增加的 bitmask 参数 —— DeathsX 和 SetDeathsX。  
+    基于这些能力，以及上一节[虚拟触发器（Virtual Triggers）](#虚拟触发器virtual-triggers)实现的自由触发器流程控制，eudplib 的作者在 epScript 中实现了基本的整数运算方法。  
     - ### 数字修改方法说明
 
         增加（Add）方法如果超过 4 字节范围（0xFFFFFFFF）则会回归到 0 再开始  
@@ -60,7 +60,7 @@ sidebar_position: 6
         println("a == {}", a); // a == 4
         ```
 
-        减少（Substract）方法的限制是最多会把数字减少到 0，即使减数大于被减数  
+        减少（Subtract）方法的限制是最多会把数字减少到 0，即使减数大于被减数  
         ```JavaScript
         var a = 10;
         DoActions(a.SubtractNumber(200000));
@@ -93,7 +93,7 @@ sidebar_position: 6
         return x;
     }
 
-    // Substract 不能用于计算得数小于 0 的减法，减法是使用 Add 方法加上减数的补码（即相反数）实现的
+    // Subtract 不能用于计算得数小于 0 的减法，减法是使用 Add 方法加上减数的补码（即相反数）实现的
     // 减法原理 参考源码：https://github.com/armoha/eudplib/blob/master/eudplib/core/variable/eudv.py#L336
     function my_minus(a, b) {
         b = my_neg(b);
@@ -235,7 +235,7 @@ sidebar_position: 6
         接下来的下一个触发器...
         ```
 
-        可以看到赋值操作也是一个触发器，这个触发器执行时把 b 的目标地址，设置成 a 的值地址，把 b 的方法设置为 Add，然后执行 b 触发器，这样就实现了把 b 的值加到 a 的值上了
+        可以看到，赋值操作也是一个触发器。这个触发器执行时，会把 b 的目标地址设置成 a 的值地址，把 b 的方法设置为 Add，然后执行 b 触发器，这样就实现了把 b 的值加到 a 的值上。
 
         下面用 epScript 实际代码演示上文 epScript 代码变量赋值的过程（原理演示）
         ```JavaScript
@@ -417,15 +417,15 @@ sidebar_position: 6
         从结构上看，在内存中，单个触发器节点（TriggerNode）确实占用了 2408 字节。  
         其中前 8 个字节是链表节点结构，之后的 320 字节是 16 个条件，每个条件占用 20 字节，而从第 328 字节开始，就是动作列表，其中 64 个动作每个占用 32 字节。  
         这个结构是固定的，因此，即使只含有一个动作，一个触发器节点也会占用 2408 字节空间。  
-        然而，星际争霸1游戏运行时对触发器条件/动作的遍历是遵循短路策略的 —— 遍历条件/动作时遇到第一个空条件/动作便会忽略之后所有的条件/动作。  
-        加之一个 EUDVariable 只需要用到一个动作，这意味着用于实现 EUDVariable 触发器中有许多字节是会被忽略闲置的。  
-        那么，如何利用这些闲置的空间呢？答案是将多个 EUDVariable 触发器节点叠放在一起，就像扑克牌叠在一起只露出关键部分，人们就能识别这些牌上的内容。  
+        然而，星际争霸 1 游戏运行时对触发器条件/动作的遍历遵循短路策略 —— 遍历条件/动作时遇到第一个空条件/动作，便会忽略之后所有条件/动作。  
+        加之一个 EUDVariable 只需要用到一个动作，这意味着用于实现 EUDVariable 的触发器中，有许多字节会被忽略并闲置。  
+        那么，如何利用这些闲置空间呢？答案是将多个 EUDVariable 触发器节点叠放在一起，只让游戏读取各自的关键部分。  
         现在假设我们有超过 2408 字节的内存空间，我们可以尝试在此之上构建一个假的触发器节点结构。  
-        触发器节点的前 4 个字节存储上一个触发器节点（prevTriggerPtr）信息，游戏过程中似乎也没啥用，咱们可以不理它；  
+        触发器节点的前 4 个字节存储上一个触发器节点（prevTriggerPtr）信息，游戏过程中似乎没有实际用途，可以先忽略；  
         接下来第 5 到第 8 字节是下一个触发器节点（nextTriggerPtr）信息，这个是有用的，因此这几字节在叠放时不能被覆盖；  
-        接着就是第 8 + 4 + 4 + 4 + 2 + 1 + 1 = 24 字节的位置（trigger.conditions\[0\].conditionType）需要设置为 0（第一个条件需要设置为空），叠放时它也不能被其它内容覆盖；  
+        接着就是第 8 + 4 + 4 + 4 + 2 + 1 + 1 = 24 字节的位置（trigger.conditions\[0\].conditionType）需要设置为 0（第一个条件需要设置为空），叠放时它也不能被其他内容覆盖；  
         然后是触发器第一个动作，在第 8 + 328 + 1 = 329 字节到第 8 + 320 + 32 = 360 字节这个区间（trigger.actions\[0\]），所以这些字节也要做上标记，叠放时也不能被覆盖；  
-        接下来我们还要处理触发器的第二个动作，因为它第一个动作不为空，游戏还会接着检测第二个动作，得把第二个动作设为空阻止游戏检测第三个动作，也就是将第 360 + 27 = 387 字节的位置（trigger.actions\[1\].actionType）固定为 0 并且确保其不被其它内容覆盖；  
+        接下来还要处理触发器的第二个动作。因为第一个动作不为空，游戏还会继续检测第二个动作，因此需要把第二个动作设为空，阻止游戏检测第三个动作；也就是将第 360 + 27 = 387 字节的位置（trigger.actions\[1\].actionType）固定为 0，并确保其不被其他内容覆盖；  
         最后就是这个触发器节点的第 8 + 320 + 2048 + 1 = 2377 字节（trigger.executionFlags）第三 bit（Preserverd）的内容得是 1 才行，这样一个变量如果不叠放最少也要占用 2377 个字节；  
         而我们需要在 0 到 2376 之间找到一个闲置的偏移位置定义另外一个触发器节点，这个偏移位置需要使得多个重叠的触发器节点的上述关键位置不发生交叉覆盖
         <details>
@@ -600,7 +600,7 @@ sidebar_position: 6
         }
         ```
         以上代码仅使用 1 个额外的触发器就对 b 完成一次自增运算以及对 a 完成了在 b 自增后的基础上两次自增赋值运算  
-        而 eudplib 专门为此种场景提供了 VProc 函数，它会包含一个 RawTrigger 并且在该 RawTrigger 执行后执行指定变量的虚拟触发器（变量也是一个触发器）以确保在当前 RawTrigger 对变量的虚拟触发器进行更改之后还能将每个变量更改后的的虚拟触发器逐个执行，而不再需要写回跳转的代码，以上代码就可以精简为  
+        而 eudplib 专门为这类场景提供了 VProc 函数。它会包含一个 RawTrigger，并在该 RawTrigger 执行后执行指定变量的虚拟触发器（变量本身也是一个触发器），以确保当前 RawTrigger 修改变量的虚拟触发器后，还能逐个执行这些修改后的虚拟触发器，而不再需要手写回跳代码。以上代码就可以精简为  
         ```JavaScript
         function afterTriggerExec() {
             var a, b = 3, 5;
@@ -637,8 +637,8 @@ sidebar_position: 6
 
 - ## 字符串（Db 或 StringBuffer）、轻数组（EUDArray）及轻变量（EUDLightVariable）
 
-    地图中的字符串都将会被存入到 STR 节中，通常这些字符串是不可变的，但是有 EUD 就不一样了  
-    咱们先不考虑 STR 节的数据结构，它大概可以使用很大很大的内存空间，通常是够用的  
+    地图中的字符串都会被存入 STR 节中。通常这些字符串是不可变的，但有了 EUD 就不一样了。  
+    这里先不考虑 STR 节的数据结构；它大致可以提供很大的可用内存空间，通常已经够用。  
 
     - ### 存在的形式
 
@@ -650,7 +650,7 @@ sidebar_position: 6
     - ### 内存读取或拷贝
 
         使用 SetDeathsX 动作可以轻松地改变字符串的每个字节的值，类似于普通变量的操作。  
-        然而，读取传递字符串的值则比较麻烦，因为没有一个可以从内存位置读取或者拷贝值的条件或动作（EUDVariable 的值传递并不依赖于内存读取）。  
+        然而，读取或传递字符串的值则比较麻烦，因为没有一个可以从内存位置读取或拷贝值的条件或动作（EUDVariable 的值传递并不依赖于内存读取）。  
         唯一可用的是判断内存位置的值是否大于/小于/等于某个值的条件 DeathsX。  
         我们可以思考一下，在传统触发器中如何将机枪兵的死亡数赋值给小狗的死亡数。  
         
@@ -693,10 +693,10 @@ sidebar_position: 6
         这个赋值操作用了 65 个触发器和一个中间单位彩蛇鸟来完成  
         1. 用一个触发器将小狗的死亡数和辅助的彩蛇鸟的死亡数归零  
         2. 使用 32 个触发器将机枪兵的死亡数用二进制位递减的方式转移到小狗和彩蛇鸟的死亡数上  
-        3. 将彩蛇鸟的死亡数用二进制递减的方转移回机枪兵的死亡数上  
+        3. 将彩蛇鸟的死亡数用二进制递减的方式转移回机枪兵的死亡数上  
         
 
-        在星际争霸重制版中，Deaths 是支持 bitmask 判断的（通常管它叫 DeathsX）  
+        在星际争霸重制版中，Deaths 支持 bitmask 判断（通常称为 DeathsX）  
         使用 DeathsX 条件和 SetDeaths 动作将机枪兵的死亡数赋值给小狗的死亡数（TrigEdit++ 代码）  
         ```Lua
         -- 先将小狗的死亡数量设置为 0
@@ -708,7 +708,7 @@ sidebar_position: 6
             };
         }
 
-        -- 将机枪兵的的数量的每一位都附加到小狗的死亡数对应的位上
+        -- 将机枪兵数量的每一位都附加到小狗死亡数对应的位上
         for i = 0, 31 do
             Trigger {
                 conditions = {DeathsX(P1, AtLeast, 1, "Terran Marine", 2^i);};
@@ -725,7 +725,7 @@ sidebar_position: 6
 
         以上我们用经典触发器实现了单位死亡数值的传递。  
 
-        因为单位死亡数的本质是一个 32 位整数，而 EUD 技术使得我们可以用 Deaths 或 SetDeaths 访问到单位死亡数之外的数据，这使得我们也可以使用该方式读取或拷贝内存中的其它地方的值。  
+        因为单位死亡数的本质是一个 32 位整数，而 EUD 技术使我们可以用 Deaths 或 SetDeaths 访问单位死亡数之外的数据，所以也可以用这种方式读取或拷贝内存中其他位置的值。  
 
         用 epScript 模拟实现一个 dwread_epd（[ dwread_epd 源码 ](https://github.com/armoha/eudplib/blob/master/eudplib/eudlib/memiof/dwepdio.py#L47)）
 
@@ -743,7 +743,7 @@ sidebar_position: 6
         }
         ```
 
-        这样我们就用了 32 个触发器模拟了一个读取指定 epd 位置的 dword 的值  
+        这样我们就用 32 个触发器模拟了读取指定 epd 位置 dword 值的过程。  
         它的细节实现还涉及内存地址是否为 4 的倍数等问题  
         例如我们知道玩家编号为 5004 对应的内存地址为 0x6557E0，玩家编号为 5005 对应的内存地址为 0x6557E4  
 
@@ -754,5 +754,5 @@ sidebar_position: 6
 
         要读取内存地址 0x6557E2 的 dword，Deaths 能接受的参数只能是玩家编号，这里假设它的值是 0xAA998877（为啥是反的？参考[字节序#小端序](https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F#%E5%B0%8F%E7%AB%AF%E5%BA%8F)）  
         这种情况就需要读取 5004 的后半部分和 5005 的前半部分  
-        其次对小于 4 字节的内存数据的读取拷贝还有更多的实现细节  
-        当然这里我们只是阐述原理，需要更多的细节可以直接阅读 eudplib 的源代码  
+        其次，对小于 4 字节的内存数据进行读取和拷贝时，还有更多实现细节。  
+        这里仅阐述原理；如需更多细节，可以直接阅读 eudplib 的源代码。  

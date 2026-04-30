@@ -13,7 +13,7 @@ output: ChangeSupplyLimit.scx
 
 ## main.eps
 ```Javascript
-// EUDDB: https://armoha.github.io/eud-book/
+// EUD offset address reference: https://armoha.github.io/eud-book/
 
 const SUP_RACE_ZERG = 0;
 const SUP_RACE_TERRAN = 1;
@@ -61,7 +61,7 @@ function onPluginStart() { // This function will execute once at the start of th
 
     SetUnitSupplyRequired($U("Terran SCV"), 0); // Set SCV's supply requirement to 0
     SetUnitMineralCost($U("Terran SCV"), 0); // Set the mineral cost to build SCV to 0
-    SetUnitBuildTime($U("Terran SCV"), 10); // Set the time to build SCV to 10 frames, build time is recommended to be at least 6 frames 
+    SetUnitBuildTime($U("Terran SCV"), 10); // Set the build time of SCV to 10 frames (10/24 seconds); build time should be at least 6 frames
 
     SetUnitSupplyProvided($U("Terran Command Center"), 200); // Set the supply provided by the command center to 200, i.e. 100 supply
     SetUnitSupplyProvided($U("Terran SCV"), 200); // Set the supply provided by SCV to 200, i.e. 100 supply
@@ -80,12 +80,12 @@ function onPluginStart() { // This function will execute once at the start of th
     );
 }
 
-function beforeTriggerExec() { // This will execute once before each frame, then execute classical triggers 
+function beforeTriggerExec() { // This runs once per frame, before classical triggers execute
     // const cp = getcurpl();
     // setcurpl(cp);
 }
 
-function afterTriggerExec() { // This function will execute once after classical triggers execute each frame 
+function afterTriggerExec() { // This runs once per frame, after classical triggers have executed
 
 }
 ```

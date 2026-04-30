@@ -928,7 +928,7 @@ sidebar_position: 9
         ```JavaScript
         SetCountdownTimer(SetTo, 100); // 将倒数计时器设置为 100 游戏秒
         SetCountdownTimer(Add, 5); // 给倒数计时器加 5 游戏秒
-        SetCountdownTimer(Substract, 3); // 给倒数计时器减少 3 游戏秒
+        SetCountdownTimer(Subtract, 3); // 给倒数计时器减少 3 游戏秒
         ```
 
     <br />
@@ -1079,7 +1079,7 @@ sidebar_position: 9
 
         ```JavaScript
         SetResources(P1, Add, 1000, Ore); // 给 玩家1 加 1000 水晶矿
-        SetResources(P1, Substract, 1000, Gas); // 给 玩家1 扣掉 1000 气矿
+        SetResources(P1, Subtract, 1000, Gas); // 给 玩家1 扣掉 1000 气矿
         SetResources(P1, SetTo, 5000, OreAndGas); // 将 玩家1 的 水晶矿 和 气矿 都设置为 2000
         ```
 
@@ -1835,7 +1835,7 @@ sidebar_position: 9
     - #### **b2i**
 
         - `b2i1`(content, index) : py_int  
-        - `b2i1`(content, index) : py_int  
+        - `b2i2`(content, index) : py_int  
         - `b2i4`(content, index) : py_int  
             将字面量字节组 [content] 在 [index] 位置的 byte、word、dword 使用小端序（Little Endian）方式转换转换成正整数常量
 
@@ -2184,7 +2184,7 @@ sidebar_position: 9
         println("VProc(c,d) 过程后 c:{} d:{}", c, d); // c:202 d:101
 
         c = 1;
-        VProc(list(c, d), list(
+        VProc(list(d, c), list(
             c.AddNumber(100),
             c.QueueAssignTo(d),
             d.QueueAddTo(c),

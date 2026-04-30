@@ -465,7 +465,7 @@ sidebar_position: 6
         Use the current StringBuffer to print multiple arguments [*args] sequentially to the next line of the scrolling message on the `current player`'s screen, scrolling the bottom message up.  
 
     - `.printf`(formatstring, *args)  
-        Use the current StringBuffer to format print multiple arguments [*args] to the next line of the scrolling message on the `current player`'s screen using the [format_string] format, scrolling the bottom  
+        Use the current StringBuffer to format print multiple arguments [*args] to the next line of the scrolling message on the `current player`'s screen using the [format_string] format, scrolling the bottom message up.  
 
     - `.printfAt`(line, formatstring, *args)  
         Use the current StringBuffer to format print multiple arguments [*args] to the [line]th line (range 0~10) from top to bottom of the scrolling message on the `current player`'s screen using the [format_string] format.  
@@ -500,16 +500,16 @@ sidebar_position: 6
 - #### .fade
 
     - `.fadeIn`(*args, line=0, color=None, wait=1, reset=true, tag=None)  
-        Make [*args] combine into a text gradually appearing from [line] line in [clolor] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], call repeatedly, return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
+        Make [*args] combine into a text gradually appearing from [line] line in [color] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], call repeatedly, return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
 
     - `.fadeOut`(*args, line=0, color=None, wait=1, reset=true, tag=None)  
-        Make [*args] combine into a text gradually disappearing from [line] line in [clolor] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], call repeatedly, return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
+        Make [*args] combine into a text gradually disappearing from [line] line in [color] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], call repeatedly, return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
 
     - `.fadeInf`(format_string, *args, line=0, color=None, wait=1, reset=true, tag=None)  
-        Make [*args] format into a text using [format_string] gradually appearing from [line] line in [clolor] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
+        Make [*args] format into a text using [format_string] gradually appearing from [line] line in [color] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
 
     - `.fadeOutf`(format_string, *args, line=0, color=None, wait=1, reset=true, tag=None)  
-        Make [*args] format into a text using [format_string] gradually disappearing from [line] line in [clolor] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
+        Make [*args] format into a text using [format_string] gradually disappearing from [line] line in [color] color, with [wait] frames interval, whether to reset [reset], special effect text tag [tag], return non-0 means the special effect is not completed and needs to continue calling, return 0 means the special effect is completed.  
 
     ```JavaScript
     function fadeInAndFadeOutTextOnce() {

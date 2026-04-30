@@ -1,4 +1,4 @@
-## TrgUnit
+## TrgUnit Unit Types
 
 ```JavaScript
 "Terran Marine": 0

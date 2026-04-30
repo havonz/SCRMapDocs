@@ -10,8 +10,8 @@ sidebar_position: 6
 
 - ### EUDVariable
 
-    其实就是 var 声明的那个变量啦，它也是一个对象，只不过它在语法上被定义为值类型，和其它对象类型有一些区别，比如可以用等号赋值等  
-    一个 EUDVariable 将使用一个只有一条 SetDeathsX 动作的虚拟触发器模拟，占用 72 字节，以下是它的类型结构，它有很多条件和动作函数  
+    它就是由 var 声明的变量，也是一个对象；只是它在语法上被定义为值类型，和其他对象类型有一些区别，例如可以用等号赋值。  
+    一个 EUDVariable 会使用一个只有一条 SetDeathsX 动作的虚拟触发器模拟，占用 72 字节。以下是它的类型结构，其中包含许多条件和动作函数。  
     ```JavaScript
     object EUDVariable {
         // 常规方法
@@ -70,9 +70,9 @@ sidebar_position: 6
 
 - ### EUDLightVariable
 
-    轻变量，它和 var 声明的变量不同，它仅开辟 4 字节的内存空间，它的传值操作相较于普通变量更消耗资源，判断值或者写入值和普通变量一样仅需要执行一条触发器。（普通变量实质是一个虚拟触发器，占用 72 字节）  
-    要将它的值当作参数传递到其它函数中则需要使用 dwread 函数来读取它。  
-    若一个普通变量（EUDVariable）的值不需要当作其它函数的参数（例如用于计数判断、自增、自减、赋值、开关等不与其它函数/条件/动作关联的场景），则可使用 EUDLightVariable 来替代该普通变量。  
+    轻变量和 var 声明的变量不同，它只开辟 4 字节内存空间。它的传值操作比普通变量更消耗资源，但判断值或写入值与普通变量一样，只需要执行一条触发器。（普通变量实质是一个虚拟触发器，占用 72 字节）  
+    要将它的值当作参数传递到其他函数中，需要使用 dwread 函数读取它。  
+    若一个普通变量（EUDVariable）的值不需要当作其他函数的参数（例如用于计数判断、自增、自减、赋值、开关等不与其他函数/条件/动作关联的场景），则可使用 EUDLightVariable 替代该普通变量。  
 
     ```JavaScript
     object EUDLightVariable {
@@ -118,9 +118,9 @@ sidebar_position: 6
 
 - ### EUDLightBool
 
-    轻布尔型（开关）变量，它使用最少 1 位（八分之一字节）存储，布尔型变量尽量用这个，而非 var  
-    在 eudplib 内部实现中每 32 个 EUDLightBool 共用一个 EUDLightVariable  
-    布尔型（开关）只能表示两个状态，1 表示 Set，0 表示 Cleared，默认初始值为 Cleared  
+    轻布尔型（开关）变量，它最少只使用 1 位（八分之一字节）存储。布尔型变量应尽量使用这个，而不是 var。  
+    在 eudplib 内部实现中，每 32 个 EUDLightBool 共用一个 EUDLightVariable。  
+    布尔型（开关）只能表示两个状态，1 表示 Set，0 表示 Cleared，默认初始值为 Cleared。  
 
     ```JavaScript
     object EUDLightBool {
@@ -228,7 +228,7 @@ sidebar_position: 6
 
 - ### PVariable
 
-    玩家变量，它实际上是 `EUDVArray(8)()` 的另一种表示方法，就是对每个玩家都存储不一样的值的一个数组，星际最多 8 个玩家
+    玩家变量实际上是 `EUDVArray(8)()` 的另一种表示方式，也就是一个为每个玩家分别存储不同值的数组。星际最多 8 个玩家。
 
     ```JavaScript
     object PVariable {
@@ -292,13 +292,13 @@ sidebar_position: 6
     dq.append(10);
 
     // `.pop()` : 将双向队列最右侧的元素弹出来（移除并返回），你需要先判断双向队列中是否还有元素，如果里面没有元素，直接使用这个方法的行为是未定义的
-    println("双向队列最右边的的值弹出 {}", dq.pop());
+    println("双向队列最右边的值弹出 {}", dq.pop());
 
     // `.appendleft(x)` : 将 x 添加到双向队列的最左侧
     dq.appendleft(13);
 
     // `.popleft()` : 将双向队列最左侧的元素弹出来（移除并返回），你需要先判断双向队列中是否还有元素，如果里面没有元素，直接使用这个方法的行为是未定义的
-    println("双向队列最左边的的值弹出 {}", dq.popleft());
+    println("双向队列最左边的值弹出 {}", dq.popleft());
 
     // `.clear()` : 清空双向队列
     dq.clear();
@@ -340,33 +340,33 @@ sidebar_position: 6
     };
     ```
 
-    除初始化方法外，StringBuffer 对象所有的方法都是非同步方法，都只在`当前玩家 == 本机玩家`的机器上生效
+    除初始化方法外，StringBuffer 对象的所有方法都是非同步方法，都只在`当前玩家 == 本机玩家`的机器上生效。
 
     ```JavaScript
     const buf = StringBuffer(64); // 初始化缓冲区尺寸
 
     setcurpl(P1); // 设置 当前玩家 为 P1
-    buf.insert(0, "给 玩家1 显示的信息");  // 这一行仅仅会修改 P1 机器上的 buf，因为当前玩家是 P1
+    buf.insert(0, "给玩家 1 显示的信息");  // 这一行只会修改 P1 机器上的 buf，因为当前玩家是 P1
 
     if (getuserplayerid() == $P2) {     // 本机玩家是 P2 才会执行
-        buf.insert(0, "这行代码没有卵用"); // 本机玩家是 P2 但当前玩家是 P1 所以这行代码不生效
+        buf.insert(0, "这行代码不会生效"); // 本机玩家是 P2，但当前玩家是 P1，所以这行代码不生效
     }
 
     setcurpl(P2); // 设置 当前玩家 为 P2
-    buf.insert(0, "给 玩家2 显示的信息");  // 这一行仅仅会修改 P2 机器上的 buf，因为当前玩家是 P2
+    buf.insert(0, "给玩家 2 显示的信息");  // 这一行只会修改 P2 机器上的 buf，因为当前玩家是 P2
 
     setcurpl(P1);
-    buf.Display(); // 给 玩家1 显示 “给 玩家1 显示的信息”
+    buf.Display(); // 给玩家 1 显示 “给玩家 1 显示的信息”
 
     setcurpl(P2);
-    buf.Display(); // 给 玩家2 显示 “给 玩家2 显示的信息”
+    buf.Display(); // 给玩家 2 显示 “给玩家 2 显示的信息”
     ```
 
 - #### StringBuffer
 
     - `StringBuffer`(content)  
-        若 [content] 是字符串或者字节串，则以该字符串或字节串初始化一个 StringBuffer 对象  
-        若 [content] 是一个整数，则以 [content] 作为尺寸尺寸初始化一个 StringBuffer 对象  
+        若 [content] 是字符串或字节串，则以该字符串或字节串初始化一个 StringBuffer 对象。  
+        若 [content] 是一个整数，则以 [content] 作为尺寸初始化一个 StringBuffer 对象。  
         [content] 是可选参数，默认为整数 218  
 
     ```JavaScript
@@ -379,10 +379,10 @@ sidebar_position: 6
 - #### .insert
 
     - `.insert`(index, *args)  
-        将可变参数 [*args] 转换成字符串按顺序插入到`当前玩家`机器上的 StringBuffer 对象缓冲区的 `[index] * 4` 位置（索引不是 4 的倍数就不能用这个了）  
+        将可变参数 [*args] 转换成字符串，并按顺序插入到`当前玩家`机器上的 StringBuffer 对象缓冲区的 `[index] * 4` 位置（索引不是 4 的倍数时不能使用这个方法）。  
 
     - `.insertf`(index, format_string, *args)  
-        将可变参数 [*args] 使用格式 [format_string] 格式化后插入到`当前玩家`机器上的 StringBuffer 对象缓冲区的 `[index] * 4` 位置（索引不是 4 的倍数就不能用这个了）  
+        将可变参数 [*args] 使用格式 [format_string] 格式化后，插入到`当前玩家`机器上的 StringBuffer 对象缓冲区的 `[index] * 4` 位置（索引不是 4 的倍数时不能使用这个方法）。  
 
     ```JavaScript
     const s1 = StringBuffer();
@@ -395,10 +395,10 @@ sidebar_position: 6
 - #### .append
 
     - `.append`(*args)  
-        将可变参数 [*args] 转换成字符串按顺序插入到`当前玩家`机器上的 StringBuffer 对象缓冲区中的字符串的末尾  
+        将可变参数 [*args] 转换成字符串，并按顺序插入到`当前玩家`机器上的 StringBuffer 对象缓冲区中字符串的末尾。  
 
     - `.appendf`(format_string, *args)  
-        将可变参数 [*args] 使用格式 [format_string] 格式化后插入到`当前玩家`机器上的 StringBuffer 对象缓冲区中的字符串的末尾  
+        将可变参数 [*args] 使用格式 [format_string] 格式化后，插入到`当前玩家`机器上的 StringBuffer 对象缓冲区中字符串的末尾。  
 
     ```JavaScript
     const s1 = StringBuffer();
@@ -413,14 +413,14 @@ sidebar_position: 6
 - #### .delete
 
     - `.delete`(start, length=1)  
-        从`当前玩家`机器上的 StringBuffer 对象的 `[start] * 4` 索引位置删除掉 `[length] * 4` 个字节（索引不是 4 的倍数就不能用这个了）  
+        从`当前玩家`机器上的 StringBuffer 对象的 `[start] * 4` 索引位置删除 `[length] * 4` 个字节（索引不是 4 的倍数时不能使用这个方法）。  
 
         
 
 - #### .Display
 
     - `.Display()`  
-        将 StringBuffer 缓冲区的字符串打印到`当前玩家`屏幕滚动信息的最底下哪一行  
+        将 StringBuffer 缓冲区的字符串打印到`当前玩家`屏幕滚动信息的最底下一行。  
     - `.DisplayAt`(line)  
         将 StringBuffer 缓冲区的字符串打印到`当前玩家`屏幕滚动信息从上到下第 [line] 行  
 
@@ -436,13 +436,13 @@ sidebar_position: 6
 - #### .print
 
     - `.print`(*args)  
-        使用当前 StringBuffer 将多个参数 [*args] 按顺序打印到`当前玩家`屏幕滚动信息的下一行，并把最底下的信息往上滚动  
+        使用当前 StringBuffer 将多个参数 [*args] 按顺序打印到`当前玩家`屏幕滚动信息的下一行，并将最底下的信息向上滚动。  
 
     - `.printf`(formatstring, *args)  
-        使用当前 StringBuffer 以格式 [format_string] 格式化打印多个参数 [*args] 到`当前玩家`屏幕滚动信息的下一行，并把最底下的信息往上滚动  
+        使用当前 StringBuffer 以格式 [format_string] 格式化多个参数 [*args]，并打印到`当前玩家`屏幕滚动信息的下一行，同时将最底下的信息向上滚动。  
 
     - `.printfAt`(line, formatstring, *args)  
-        使用当前 StringBuffer 以格式 [format_string] 格式化打印多个参数 [*args] 到`当前玩家`屏幕滚动信息的从上往下的第 [line] 行（取值范围 0~10）  
+        使用当前 StringBuffer 以格式 [format_string] 格式化多个参数 [*args]，并打印到`当前玩家`屏幕滚动信息从上往下的第 [line] 行（取值范围 0~10）。  
 
     ```JavaScript
     const s1 = StringBuffer();
@@ -458,15 +458,15 @@ sidebar_position: 6
 
     - `.Play()`  
         将`当前玩家`机器上的 StringBuffer 对象的内容作为声音文件名，播放该声音文件  
-        当目标声音文件包含本地化声音时，则使用 StringBuffer 动态拼接的文件名会无法播放  
+        当目标声音文件包含本地化声音时，使用 StringBuffer 动态拼接的文件名可能无法播放。  
 
     ```JavaScript
     setcurpl(P1);
     buf.insert(0, "sound\\Zerg\\Devourer\\");
     buf.append("ZDvPss00.WAV\0");
-    buf.Display();    // 在 玩家1 的屏幕上的下一行输出 “sound\Zerg\Devourer\ZDvPss00.WAV”
-    buf.DisplayAt(9); // 在 玩家1 的屏幕上的第十行输出 “sound\Zerg\Devourer\ZDvPss00.WAV”
-    buf.Play();       // 找到文字指向的 wav 并在 玩家1 的电脑上播放它
+    buf.Display();    // 在玩家 1 的屏幕上的下一行输出 “sound\Zerg\Devourer\ZDvPss00.WAV”
+    buf.DisplayAt(9); // 在玩家 1 的屏幕上的第十行输出 “sound\Zerg\Devourer\ZDvPss00.WAV”
+    buf.Play();       // 找到文字指向的 wav 并在玩家 1 的电脑上播放它
 
     StringBuffer("sound\\terran\\advisor\\tadupd04.wav").Play(); // nuclear launch detected.
     ```
@@ -476,16 +476,16 @@ sidebar_position: 6
 - #### .fade
 
     - `.fadeIn`(*args, line=0, color=None, wait=1, reset=true, tag=None)  
-        使 [*args] 组合成一个文本从 [line] 行以 [clolor] 颜色渐显出现，步间隔帧数为 [wait]，是否重置 [reset]，特效文本标签为 [tag]，循环调用，返回非 0 表示特效尚未完成还需继续调用，返回 0 表示特效已完成  
+        使 [*args] 组合成的文本从 [line] 行以 [color] 颜色渐显出现，步间隔帧数为 [wait]，是否重置由 [reset] 决定，特效文本标签为 [tag]。循环调用时，返回非 0 表示特效尚未完成、还需继续调用，返回 0 表示特效已完成。  
 
     - `.fadeOut`(*args, line=0, color=None, wait=1, reset=true, tag=None)  
-        使 [*args] 组合成一个文本从 [line] 行以 [clolor] 颜色渐隐消失，步间隔帧数为 [wait]，是否重置 [reset]，特效文本标签为 [tag]，循环调用，返回非 0 表示特效尚未完成还需继续调用，返回 0 表示特效已完成  
+        使 [*args] 组合成的文本从 [line] 行以 [color] 颜色渐隐消失，步间隔帧数为 [wait]，是否重置由 [reset] 决定，特效文本标签为 [tag]。循环调用时，返回非 0 表示特效尚未完成、还需继续调用，返回 0 表示特效已完成。  
 
     - `.fadeInf`(format_string, *args, line=0, color=None, wait=1, reset=true, tag=None)  
-        使 [*args] 使用 [format_string] 格式化成一个文本从 [line] 行以 [clolor] 颜色渐显出现，步间隔帧数为 [wait]，是否重置 [reset]，特效文本标签为 [tag]，返回非 0 表示特效尚未完成还需继续调用，返回 0 表示特效已完成  
+        使 [*args] 使用 [format_string] 格式化成的文本从 [line] 行以 [color] 颜色渐显出现，步间隔帧数为 [wait]，是否重置由 [reset] 决定，特效文本标签为 [tag]。返回非 0 表示特效尚未完成、还需继续调用，返回 0 表示特效已完成。  
 
     - `.fadeOutf`(format_string, *args, line=0, color=None, wait=1, reset=true, tag=None)  
-        使 [*args] 使用 [format_string] 格式化成一个文本从 [line] 行以 [clolor] 颜色渐隐消失，步间隔帧数为 [wait]，是否重置 [reset]，特效文本标签为 [tag]，返回非 0 表示特效尚未完成还需继续调用，返回 0 表示特效已完成  
+        使 [*args] 使用 [format_string] 格式化成的文本从 [line] 行以 [color] 颜色渐隐消失，步间隔帧数为 [wait]，是否重置由 [reset] 决定，特效文本标签为 [tag]。返回非 0 表示特效尚未完成、还需继续调用，返回 0 表示特效已完成。  
 
     ```JavaScript
     function 单次渐显然后渐隐文字() {
@@ -541,7 +541,7 @@ sidebar_position: 6
 
 - ### Db
 
-    静态内存字节数据类型
+    静态内存字节数据类型。
 
     ```JavaScript
     object Db {
@@ -550,9 +550,9 @@ sidebar_position: 6
     };
     ```
 
-    支持使用整数、字符串、字节串初始化一段内存字节数据
+    支持使用整数、字符串、字节串初始化一段内存字节数据。
 
-    使用`Db("string")`等同于`Db(b"string\0")`(UTF-8)
+    使用`Db("string")`等同于`Db(b"string\0")`（UTF-8）。
 
     ```JavaScript
     const buf1 = Db(b"string\0"); // Db(b"string\0")
@@ -564,7 +564,7 @@ sidebar_position: 6
 
 - ### EUDByteStream
 
-    内存字节流操作类
+    内存字节流操作类。
 
     ```JavaScript
     object EUDByteStream {
@@ -642,8 +642,5 @@ sidebar_position: 6
   
 
   
-
-
-
 
 

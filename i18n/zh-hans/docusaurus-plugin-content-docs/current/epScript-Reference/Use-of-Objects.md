@@ -14,12 +14,14 @@ sidebar_position: 4
 
 ## 对象类型
 
-对象类型为引用类型
+对象类型是引用类型。
 
 
 - ### 声明方法
 
-    可以用如下方式声明一个对象类型
+    对象类型只能在模块作用域声明，并且定义末尾必须加分号。
+
+    可以用如下方式声明一个对象类型：
 
     ```JavaScript
     object 对象类型名 {
@@ -35,7 +37,7 @@ sidebar_position: 4
     };
     ```
 
-    也可以给对象类型声明构造方法和销毁方法
+    也可以给对象类型声明构造方法和销毁方法。
 
     ```js
     const objList = EUDArray(100);
@@ -63,9 +65,9 @@ sidebar_position: 4
     const dynObj = Obj.alloc(1, 2, 3);
     ```
 
-    `(epScript 对象类型通常都有一个静态构造方法 constructor_static，它内部对内存的分配都是限制在一定范围的)`
+    `(epScript 对象类型通常都有一个静态构造方法 constructor_static，它内部的内存分配都限制在一定范围内)`
 
-    以下声明了一个 Date 对象类型
+    以下声明了一个 Date 对象类型：
 
     ```JavaScript
     object Date {
@@ -120,9 +122,9 @@ sidebar_position: 4
 
     - 有两种方法可以创建一个对象实例  
         - 静态初始化：`const 对象1 = 对象类型名();`  
-        - 动态初始化：`const 对象1 = 对象类型名.alloc();` 你可以将它传递到任何作用域使用，用完了记得用 `对象类型名.free(对象1);` 释放掉它占用的内存。  
+        - 动态初始化：`const 对象1 = 对象类型名.alloc();` 你可以将它传递到任何作用域使用；用完后记得用 `对象类型名.free(对象1);` 释放它占用的内存。  
 
-    以下是 Date 对象实例使用方法
+    以下是 Date 对象实例的使用方法：
     ```JavaScript
     function afterTriggerExec() {
 
@@ -164,6 +166,4 @@ sidebar_position: 4
 
     }
     ```
-
-
 

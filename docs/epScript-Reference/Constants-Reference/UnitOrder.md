@@ -1,4 +1,4 @@
-## UnitOrder
+## Unit Order Types
 
 ```Python
 "Die": 0,  # Causes the unit to die. Normal units run the death iscript animation,

@@ -1,4 +1,4 @@
-## StatText
+## StatText String List
 
 ```Python
 # Units

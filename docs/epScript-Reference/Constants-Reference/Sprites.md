@@ -1,4 +1,4 @@
-## Sprites
+## Sprite Types
 
 ```Python
 "2/38 Ash": 0

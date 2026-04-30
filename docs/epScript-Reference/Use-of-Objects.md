@@ -17,7 +17,7 @@ Object types are reference types.
 
 - ### Declarations
 
-    You can only declare object in module scope, and must put semicolon at end of definition.
+    Object types can only be declared at module scope, and must end with a semicolon.
 
     You can declare an object type as follows:  
 
@@ -63,7 +63,7 @@ Object types are reference types.
     const dynObj = Obj.alloc(1, 2, 3);
     ```
 
-    `(there's constructor_static but defining it in epScript has limitation.)`
+    `(epScript object types usually also have a static constructor method constructor_static, but its internal memory allocation range is constrained.)`
 
     The following declares a Date object type
 

@@ -66,7 +66,7 @@ sidebar_position: 5
     SetDeaths(P1, Add, 10, csTerran_ + csGoliath);
     ```
 
-     At compile time, you can get the ID of the compile-time string in different constant tables through the macro index.
+     At compile time, you can use index macros to get the ID of a compile-time string in various constant tables.
 
     ```JavaScript
     const utTerranMarine = $U("Terran Marine");
@@ -230,7 +230,7 @@ sidebar_position: 5
     - settbl2([TBLKey](Constants-Reference/StatText.md), offset, *args)
     </details>
 
-    TBL strings refer to strings in Starcraft's internal string table, containing unit names, tech names, ability names, etc.   
+    TBL strings refer to strings in StarCraft 1's internal string table, containing unit names, tech names, ability names, etc.   
     You cannot add strings to the TBL string table. You can find the ID corresponding to all TBLKeys from [StatText](Constants-Reference/StatText.md).  
     The string in memory corresponding to the TBLKey is not equal to the TBLKey itself.  
 
@@ -238,7 +238,7 @@ sidebar_position: 5
     println("{:s}", GetTBLAddr("Terran Siege Tank (Tank Mode)")); // Output: Terran Siege Tank
     ```
 
-    You can modify the names of units and abilities by modifying strings in the TBL table.s
+    You can modify unit and ability names by editing strings in the TBL table.
 
     ```JavaScript
     dbstr_print(GetTBLAddr("Terran Marine"), "机枪兵\x00"); // Modifying tbl will cause localization to fail. All unit and ability names that have not been modified will become English. Strongly not recommended to modify tbl.

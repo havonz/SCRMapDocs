@@ -34,10 +34,10 @@ sidebar_position: 6
 
 - ## Virtual Triggers
 
-    Because the triggers in the [TRIG section](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers) in [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) are not loaded into the memory as a whole, but are loaded in the form of a [node list](https://armoha.github.io/eud-book/offsets/Player1TriggerList.html), and the nodes on the node list need to be traversed to locate them during runtime.  
-    [jjf28](http://www.staredit.net/topic/17546/#1) posted that you just need to write the bytecode of the trigger to any accessible location in memory, then add it to the trigger node list , and they will work normally.  
-    These triggers that are not in the TRIG section can determine their relative positions in memory at runtime, which means that it is relatively easy to achieve positioning jumps between such triggers. jjf28 calls such triggers Virtual Triggers.  
-    [trgk](http://www.staredit.net/topic/17546/#11) proposed that the STR section will be loaded into the memory as a whole at runtime, so if a virtual trigger is written to the STR section, the relative position of its runtime memory can be easily fixed at compile time, thereby enabling more It is easy to implement dynamic modification of triggers during runtime to realize conditional control flow.  
+    Because the triggers in the [TRIG section](http://www.staredit.net/wiki/index.php/Scenario.chk#.22TRIG.22_-_Triggers) in [Scenario.chk](http://www.staredit.net/wiki/index.php/Scenario.chk) are not loaded into memory as a whole, but are loaded as a [linked list](https://armoha.github.io/eud-book/offsets/Player1TriggerList.html), and must be located at runtime by traversing the nodes.  
+    [jjf28](http://www.staredit.net/topic/17546/#1) posted that you only need to write the trigger bytecode to any accessible location in memory, then add it to the [trigger list](https://armoha.github.io/eud-book/offsets/Player1TriggerList.html), and they will work normally.  
+    These triggers that are not in the TRIG section can determine their relative positions in memory at runtime, which makes positional jumps between such triggers relatively straightforward. jjf28 calls such triggers Virtual Triggers.  
+    [trgk](http://www.staredit.net/topic/17546/#11) proposed that since the STR section is loaded as a whole into memory at runtime, writing a virtual trigger into the STR section allows its runtime memory position to be fixed at compile time, thereby making it much easier to dynamically modify triggers at runtime for conditional control flow.  
     On this basis, trgk designed a Python pseudo-syntax library [eudplib](https://github.com/armoha/eudplib) for conditional control flow.  
 
     > Reference: [http://www.staredit.net/topic/17546/](http://www.staredit.net/topic/17546/)
@@ -47,13 +47,13 @@ sidebar_position: 6
 - ## Mathematical Operations
 
     Ordinary triggers do not have complete mathematical operation capabilities.  
-    The functions that can be used to simulate mathematical operations are the [number modifier](http://www.staredit.net/wiki/index.php/Scenario.chk#Number_Modifiers) (SetTo/Add/Subtract) in the trigger [actions](http://www.staredit.net/wiki/index.php/Scenario.chk#Trigger_Actions_List) - they are usually used to SetTo/Add/Subtract player resources or death counts, etc.  
+    The available functions for simulating mathematical operations are the [number modifier](http://www.staredit.net/wiki/index.php/Scenario.chk#Number_Modifiers) (SetTo/Add/Subtract) in trigger [actions](http://www.staredit.net/wiki/index.php/Scenario.chk#Trigger_Actions_List) — typically used to set, add to, or subtract from player resources or death counts.  
     In addition, in the Remastered Edition, Blizzard software engineer [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) added bitmask parameters (DeathsX and SetDeathsX) to the Deaths condition and SetDeaths action.  
     Based on these and the free trigger flow control implemented in the last section [Virtual Triggers](#virtual-triggers), the author of eudplib implemented basic integer operations in epScript.  
 
     - ### Number Modifier Description
 
-        The Add method will overflow to 0 and start over if it exceeds the 4-byte range (0xFFFFFFFF)  
+        The Add method will wrap around to 0 when it exceeds the 4-byte range (0xFFFFFFFF)  
         ```JavaScript
         var a = 0xFFFFFFFF;
         println("a == {}", a); // a == 4294967295
@@ -61,7 +61,7 @@ sidebar_position: 6
         println("a == {}", a); // a == 4
         ```
 
-        The Subtract method is limited to subtracting a number down to 0 at most, even if the subtrahend is greater than the minuend.  
+        The Subtract method can only reduce a value to 0 at minimum, even when the subtrahend is greater than the minuend.  
         ```JavaScript
         var a = 10;
         DoActions(a.SubtractNumber(200000));
@@ -602,7 +602,7 @@ sidebar_position: 6
         }
         ```
         The above code uses only 1 additional trigger to complete an increment operation on b and two increment assignments on a based on the increment of b.  
-        For such scenarios, eudplib specifically provides the VProc function, which contains a RawTrigger. After this RawTrigger is executed, it executes the virtual trigger (the variable is also a trigger) of the specified variable to ensure that after the current RawTrigger changes the virtual trigger of the variable, each The changed virtual trigger of the variable can be executed one by one without having to write back jump code. The above code can be simplified to:  
+        For such scenarios, eudplib specifically provides the VProc function, which contains a RawTrigger. After this RawTrigger is executed, it executes the virtual trigger (the variable is also a trigger) of the specified variable to ensure that after the current RawTrigger changes the virtual trigger of the variable, each changed virtual trigger of the variable can be executed one by one without having to write back jump code. The above code can be simplified to:  
         ```JavaScript
         function afterTriggerExec() {
             var a, b = 3, 5;
@@ -639,7 +639,7 @@ sidebar_position: 6
 
 - ## Strings (Db Or StringBuffer), Light Arrays (EUDArray) And Light Variables (EUDLightVariable)  
 
-    The strings in the map will be stored in the STR section. Usually these strings are immutable, but EUD is different. Let's not consider the data structure of the STR section for now. It can probably use a very large memory space, which is usually enough.  
+    Strings in a map are stored in the STR section. These strings are normally immutable, but EUD changes that. We won't concern ourselves with the STR section's data structure here — it can accommodate a very large amount of data, which is usually sufficient.  
 
     - ### Structure
 

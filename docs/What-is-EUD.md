@@ -4,12 +4,12 @@ sidebar_position: 2
 
 # What is EUD
 
-For the development of Starcraft maps, EUD is almost the origin of all map development techniques.
+EUD is the origin of virtually all StarCraft map gameplay techniques.
 
 ## EUD or EPD
 
-### The original EUD
-EUD is the abbreviation of Extended Unit Death (a technique to extend the use of unit death count triggers). This technique originates from the buffer overflow vulnerabilities that exist in the Deaths conditions and SetDeaths actions of the trigger editor in the map editor of StarCraft 1.08 and previous versions.  
+### Origins of EUD
+EUD stands for Extended Unit Death — a technique that extends the use of unit death count triggers. It originated from buffer overflow vulnerabilities in the Deaths condition and SetDeaths action found in the trigger editor of StarCraft's map editor (version 1.08 and earlier).  
 
 - The descriptive prototypes of the Deaths condition and SetDeaths action are as follows  
     ```CSS
@@ -20,29 +20,29 @@ EUD is the abbreviation of Extended Unit Death (a technique to extend the use of
             SetDeaths(PlayerID, Add/Subtract/SetTo, Number, UnitTypeID);
     }
     ```
-    - PlayerID legal range: 0 ~ 26, actually a dword value, value range: `-2147483648 ~ 2147483647` 
-    - UnitTypeID legal range: 0 ~ 232, actually a word value, value range: `0 ~ 65535`  
+    - PlayerID valid range: 0–26, but actually a dword value with range: `-2147483648 ~ 2147483647` 
+    - UnitTypeID valid range: 0–232, but actually a word value with range: `0 ~ 65535`  
 
-When using illegal PlayerID and UnitTypeID, the Deaths and SetDeaths actions can still take effect in the game. In this way, arbitrary memory read and write is achieved. By trying, it is found that the overflow memory location of Deaths and SetDeaths is fixed, and the memory location that can be accessed is `0x58A364 + 4 * PlayerID + 48 * UnitTypeID`. Of course, you can also simply set the UnitTypeID to 0 and only use the PlayerID for overflow anchor point to access the 32-bit value at the memory location `0x58A364 + 4 * PlayerID`. When accessing less than 4 bytes, you need to first read 4 bytes and then separate the 4 bytes with an algorithm (of course, there is no need to consider this in detail in the [remastered](#eud-in-remastered)).  
+Even with out-of-range PlayerID and UnitTypeID values, Deaths and SetDeaths still take effect in-game, enabling arbitrary memory reads and writes. Through experimentation, it was found that the overflowed addresses accessed by Deaths and SetDeaths are deterministic: `0x58A364 + 4 * PlayerID + 48 * UnitTypeID`. You can also set UnitTypeID to 0 and use only PlayerID as the offset anchor, accessing the 32-bit value at `0x58A364 + 4 * PlayerID`. When accessing values smaller than 4 bytes, you must first read 4 bytes and then extract the target bytes algorithmically (this is not a concern in [Remastered](#eud-in-remastered)).  
 
-EPD refers to the "Special PlayerID" used to access a specific memory location when using PlayerID as an offset anchor point to overflow the buffer using this technique.  
-A map containing at least one overflow access of PlayerID or UnitTypeID in Deaths or SetDeaths is called an EUD map.  
+EPD refers to the special PlayerID value used as an overflow offset anchor to access a specific memory address with this technique.  
+A map with at least one Deaths or SetDeaths trigger using an out-of-range PlayerID or UnitTypeID is called an EUD map.  
 
 
 ### EUD in Remastered
-In StarCraft: Remastered, the Deaths/SetDeaths vulnerabilities mentioned above were fixed, so there was no EUD functionality at all when Remastered was first released. However, Blizzard's software engineer [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) developed the "Remastered EUD Simulator" shortly after the release of Remastered. This feature was released with [StarCraft 1.21.0](https://news.blizzard.com/en-gb/starcraft/21313396/patch-1-21-0-the-return-of-eud-maps) in December 2017. Since then, when StarCraft: Remastered encounters a map containing EUD triggers, it will automatically enable the EUD Simulator to execute the triggers in the map, allowing authors to continue to implement EUD functionality in StarCraft: Remastered through Deaths/SetDeaths triggers as before.  
+StarCraft: Remastered patched the Deaths/SetDeaths vulnerabilities described above, so EUD functionality was completely unavailable at Remastered's initial release. Blizzard software engineer [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) developed the "Remastered EUD Simulator" shortly after Remastered's release, which shipped with [StarCraft 1.21.0](https://news.blizzard.com/en-gb/starcraft/21313396/patch-1-21-0-the-return-of-eud-maps) in December 2017. From that point on, when StarCraft: Remastered encounters a map with EUD triggers, it automatically activates the EUD Simulator to execute them, allowing map authors to continue implementing EUD functionality through Deaths/SetDeaths triggers just as before.  
 
-However, in StarCraft: Remastered, Blizzard has restricted map triggers to read and write memory: some memory can only be read but not written, some memory cannot be read or written, and only a small amount of memory can be both read and written. Details in [EUDDB](https://ldconval.github.io/eudtools/Include/EUDDB.html). If an EUD map attempts to read or write illegal memory when running a trigger during gameplay, the game is immediately terminated (pop-up error: Sorry, this EUD map is not currently supported... The error code is a hexadecimal number. Subtracting this hexadecimal number from 0xFFFFFFFF yields the illegal memory address the current trigger is attempting to read or write). This has led to many limitations in the functionality of Remastered EUD technology. For example, Remastered cannot modify anything related to models or images, cannot extend the unit limit, and cannot directly port 1.08's EUD plug-ins to Remastered, etc.  
+In StarCraft: Remastered, however, Blizzard restricted memory access from map triggers: some addresses are read-only, some are completely inaccessible, and only a small subset supports both reading and writing. See [EUDDB](https://ldconval.github.io/eudtools/Include/EUDDB.html) for details. If an EUD map trigger attempts to access a restricted address during gameplay, the game terminates immediately with a pop-up error: "Sorry, this EUD map is not currently supported..." The error code is a hexadecimal value; subtracting it from 0xFFFFFFFF gives the restricted address the trigger attempted to access. This results in significant functional limitations for Remastered EUD — for example, it cannot modify model or image data, extend the unit limit, or directly port EUD plug-ins from version 1.08.  
 
 In StarCraft: Remastered, EUD maps have the following characteristics:  
 - The unit limit can only be the original 1700, not the extended 3400 unit limit. (When hosting, the entire "Unit Limit" option row is grayed out and forced to "Original" and cannot be selected as "Extended")
-- Unable to save games during gameplay  
-- Unable to save replays after the game ends  
+- Cannot save during gameplay  
+- Cannot save replays after the game ends  
 - The game will still show defeat in the score screen after winning  
 
-In Remastered, Blizzard's software engineer [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) added bitmask parameters to the Deaths condition and SetDeaths action.  
-Conditions and actions using bitmasks can more efficiently determine and write arbitrary byte contents at memory addresses that are not multiples of 4.  
-ScmDraft2 or euddraft name this usage DeathsX and SetDeathsX.  
+In Remastered, Blizzard software engineer [Elias Bachaalany](https://starcraft.fandom.com/wiki/Elias_Bachaalany) added bitmask parameters to the Deaths condition and SetDeaths action.  
+Conditions and actions using bitmasks can more efficiently read and write arbitrary byte values at memory addresses not aligned to 4-byte boundaries.  
+ScmDraft2 and euddraft refer to this usage as DeathsX and SetDeathsX.  
 - For DeathsX and SetDeathsX principles, refer to:  
     ```C
     typedef struct { /* 20 bytes */

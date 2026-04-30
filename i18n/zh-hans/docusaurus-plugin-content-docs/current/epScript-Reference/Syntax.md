@@ -46,20 +46,20 @@ sidebar_position: 1
 
 - ### 编译期（compile-time）和运行时（run-time）
 
-    除声明变量外的任何非编译期代码都不可暴露在函数外  
-    包含了任何运行时操作的函数为非编译期函数  
-    所有的对变量的声明/初始化/读取/运算/赋值操作都是运行时操作  
-    编译期的代码 if 条件不成立也会执行
+    除声明变量外，任何非编译期代码都不能暴露在函数外。  
+    包含任何运行时操作的函数都是非编译期函数。  
+    所有对变量的声明、初始化、读取、运算和赋值操作都是运行时操作。  
+    编译期代码即使 if 条件不成立也会执行。
 
 
 - ### 大小写敏感
 
-    epScript 是大小写敏感的编程语言，A 和 a 意思不同 
+    epScript 是大小写敏感的编程语言，A 和 a 含义不同。 
 
 
 - ### 值类型
 
-    epScript 基本的`值类型`只有一种，就是 32 位无符号整数 
+    epScript 基本的`值类型`只有一种，就是 32 位无符号整数。 
 
 
 - ### 逻辑规则
@@ -70,7 +70,7 @@ sidebar_position: 1
 
 - ### 字面量数字（literal number）
 
-    字面量数字包含 10 进制数字、16 进制数字、二进制数字  
+    字面量数字包括 10 进制数字、16 进制数字和二进制数字。  
     ```JavaScript
     // 以下代码中的 15、0xf、0b1111 均表示同一个数 15，只是写法不同，所以 a、b、c 是相等的
     var a = 15;
@@ -81,14 +81,14 @@ sidebar_position: 1
 
 - ### 字面量字符串（literal string）
 
-    字面量字符串用成对单引号`'`或者成对双引号`"`包裹字面值即可  
+    字面量字符串用成对单引号`'`或成对双引号`"`包裹字面值即可。  
     ```JavaScript
     DisplayText("这是字面量字符串");
     DisplayText('这是字面量字符串');
     DisplayText("这是字面量\
     字符串"); // 当字符串太长时，可以用反斜杠 \ 换一行继续这个字面量字符串，这并不表示在字符串中插入换行符，以上两个写法完全等价
     ```
-    字面量字符串支持使用反斜杠转义符
+    字面量字符串支持使用反斜杠转义符。
     |描述|说明|示例|示例结果|
     |-|-|-|-|
     |\\\\ |表示 \\ 本身|`DisplayText("你好\\星际");`|你好\星际|
@@ -97,14 +97,14 @@ sidebar_position: 1
     |\\`换行`|表示续行，不换行|`DisplayText("你好\`<br />`星际");`|你好星际|
     |\\n|换行符，等同于 \x0A|`DisplayText("你好\n星际");`|你好<br />星际|
     |\\t|横向制表符，等同于 \\x09|`DisplayText("你好\t星际");`|你好&emsp;星际|
-    |\\r|回车符，等同于 \\x0D，在游戏中没啥效果|`DisplayText("你好\r星际");`|你好星际|
+    |\\r|回车符，等同于 \\x0D，在游戏中基本没有效果|`DisplayText("你好\r星际");`|你好星际|
     |\\"|在双引号字符串中表示双引号本身|`DisplayText("你好\"星际\"");`|你好"星际"|
     |\\'|在单引号字符串中表示单引号本身|`DisplayText('你好\'星际\'');`|你好'星际'|
 
 
 - ### 字面量字节串（literal bytes）
 
-    字面量字节串用`b"`和`"`包裹或者`b'`和`'`包裹字面值即可，字节串不以 \0 结尾，字面量字节串同样也支持字面量字符串中的转义符
+    字面量字节串用`b"`和`"`包裹，或用`b'`和`'`包裹字面值即可。字节串不以 \0 结尾，字面量字节串同样支持字面量字符串中的转义符。
     ```JavaScript
     println("{}", b"ASCII\nliteral");
     println("{}", b'ASCII\nliteral');
@@ -128,7 +128,7 @@ sidebar_position: 1
     var abc# = 2;
     ```
 
-    变量名、常量名及函数名不能用关键字命名，哪些是关键字我也不清楚，但这些是
+    变量名、常量名及函数名不能使用关键字命名。关键字列表未在此完整列出，但至少包括以下内容：
 
     ```C#
     static var const object this function 
@@ -148,7 +148,7 @@ sidebar_position: 1
     raise return try while with yield 
     ```
 
-    另外一个特例是函数名用 py_ 开头的情况下，调用它要用 py_py_ 开头才行
+    另一个特例是：如果函数名以 py_ 开头，调用它时需要使用 py_py_ 开头。
 
     ```JavaScript
     function py_函数名() {
@@ -161,7 +161,7 @@ sidebar_position: 1
 
 - ### 引入其它模块
 
-    可以使用`import`关键词引入其它模块，`as`给引入的模块一个别名，以下代码说明用法  
+    可以使用`import`关键字引入其他模块，并用`as`为引入的模块指定别名。以下代码说明用法：  
 
     `模块1.eps`：
     ```JavaScript
@@ -197,11 +197,11 @@ sidebar_position: 1
 
 - ### 符号
 
-    所有涉及语法的符号都是纯英文状态下的半角符号，可以在 [ASCII](https://zh.wikipedia.org/zh-cn/ASCII) 表中找到
+    所有涉及语法的符号都是英文输入状态下的半角符号，可以在 [ASCII](https://zh.wikipedia.org/zh-cn/ASCII) 表中找到。
 
     - #### 代码块
 
-        使用成对的大括号`{}`把单句或多句代码包围起来成为一个代码块
+        使用成对的大括号`{}`包围单句或多句代码，即可形成一个代码块。
 
         ```JavaScript
         {
@@ -209,7 +209,7 @@ sidebar_position: 1
         }
         ```
 
-        若希望单句代码为一个代码块时，也可省略掉大括号，以下示例是合法的
+        如果代码块中只有单句代码，也可以省略大括号。以下示例是合法的：
 
         ```JavaScript
         function 无聊的示例函数()
@@ -224,7 +224,7 @@ sidebar_position: 1
 
     - #### 语法层换行符
 
-        语法层的换行符是分号`;`，而不是换行符
+        语法层的换行符是分号`;`，而不是实际换行符。
 
         ```JavaScript
         var a;var b;
@@ -233,7 +233,7 @@ sidebar_position: 1
     - #### 索引运算符
 
         `[]`
-        取索引访问或修改数组中的元素
+        用于通过索引访问或修改数组中的元素。
 
         ```JavaScript
         const a = EUDArray(10);
@@ -243,7 +243,7 @@ sidebar_position: 1
 
     - #### 赋值符
 
-        赋值符号是单个等号`=`
+        赋值符号是单个等号`=`。
 
         ```JavaScript
         var a; // 声明变量 a
@@ -253,7 +253,7 @@ sidebar_position: 1
 
     - #### 行注释符
 
-        两个斜杠`//`开始行注释
+        两个斜杠`//`表示行注释的开始。
 
         ```JavaScript
         var a = 1; // 注释是代码中不会执行的部分，从 // 开始到当前行的结尾的内容不会被认为是代码
@@ -261,7 +261,7 @@ sidebar_position: 1
 
     - #### 块注释符
 
-        在`/*`到`*/`之间的内容叫块注释
+        `/*`到`*/`之间的内容称为块注释。
 
         ```JavaScript
         var /* 注释是代码中不会执行的部分，块注释可以加在代码中间 */ a = 1;
@@ -282,7 +282,7 @@ sidebar_position: 1
 
         ```JavaScript
         if (a == 2) // 逻辑相等比较是两个等号
-            单句; // 逻辑比较的是非代码块是单句可以省略掉大括号
+            单句; // 如果逻辑比较后执行的是单句代码，可以省略大括号
 
         if (a == 2) {
             // a 等于 2
@@ -352,7 +352,7 @@ sidebar_position: 1
         a = a * 2;
         a = a / 2;  // 整数除法运算符，向下取整
         a = a % 2;  // 取余运算符
-        a = a ** 3; // 这个是幂运算符，返回 a 的 3 次幂，杨幂的幂～
+        a = a ** 3; // 幂运算符，返回 a 的 3 次幂
         a = a << 1; // 左位移 1 位
         a = a >> 1; // 右位移 1 位
         ```
@@ -373,7 +373,7 @@ sidebar_position: 1
 
     - #### if
 
-        if 语法的形式为
+        if 语法的形式为：
 
         ```JavaScript
         if (条件表达式1) {
@@ -383,7 +383,7 @@ sidebar_position: 1
 
     - #### if else
 
-        if 的否则分支 else 语法
+        if 的否则分支使用 else 语法：
 
         ```JavaScript
         if (条件表达式1) {
@@ -395,7 +395,7 @@ sidebar_position: 1
 
     - #### 条件串联
 
-        可以将 if 串联到另外一个 else 上
+        可以将 if 串联到另一个 else 上。
 
         ```JavaScript
         if (条件表达式1) {
@@ -409,7 +409,7 @@ sidebar_position: 1
 
     - #### 条件嵌套
 
-        可以将 if 写到另外一个 if 的代码块中
+        可以将 if 写到另一个 if 的代码块中。
 
         ```JavaScript
         if (条件表达式1) {
@@ -429,14 +429,14 @@ sidebar_position: 1
 
     - #### 单次执行
 
-        故名思义就是在运行时条件满足执行了一次之后就不再执行，通常用于加在 beforeTriggerExec 或者 afterTriggerExec 中每一帧重复判断，直到达成条件则执行一次
+        顾名思义，就是在运行时条件满足并执行一次后就不再执行。它通常用在 beforeTriggerExec 或 afterTriggerExec 中，每帧重复判断，直到条件达成时执行一次。
 
         ```JavaScript
-        once (条件表达式) { // 在运行时重复运行 once 代码块的情况下，会在条件表达式满足时仅仅运行一次它里面的代码
+        once (条件表达式) { // 在运行时重复运行 once 代码块时，会在条件表达式满足后只执行一次其中的代码
             // 代码
         }
 
-        once { // 无条件仅执行一次它里面的代码
+        once { // 无条件只执行一次其中的代码
             // 代码
         }
 
@@ -447,7 +447,7 @@ sidebar_position: 1
             }
         }
 
-        // 以下代码将只会在有机枪兵进入编号 1 到 10 的区域的任何一个区域的时候触发一次，不会在分别进入每个区域的时候触发，不会触发 10 次
+        // 以下代码只会在机枪兵进入 1 到 10 号区域中的任意一个区域时触发一次，不会因分别进入每个区域而触发 10 次
         for (var i = $L("Location 1"); i <= $L("Location 10"); i++) {
             once ( Bring(P1, AtLeast, 1, "Terran Marine", i) ) {
                 println("机枪兵进入区域 {}", i);
@@ -460,7 +460,7 @@ sidebar_position: 1
 
     - #### for 循环
 
-        for 循环可设定循环初始化动作表达式、循环执行条件表达式以及每循环附加动作表达式
+        for 循环可设定循环初始化动作表达式、循环执行条件表达式以及每轮循环后的附加动作表达式。
 
         ```JavaScript
         for (初始化动作表达式; 循环执行条件表达式; 每循环附加动作表达式) {
@@ -470,7 +470,7 @@ sidebar_position: 1
         for (var i = 0; i < 10; i++) {
             println("{}", i);
         }
-        // 简单描述一下，上面的代码声明了一个计数变量 i，初始值为 0，当 i < 10 的情况下就一直循环执行，并且每执行一次都将 i 自增 1，i 的作用域就是后面那个大括号里，大括号是每次循环需要执行的内容
+        // 简单来说，上面的代码声明了一个计数变量 i，初始值为 0；当 i < 10 时持续循环执行，并在每次执行后将 i 自增 1。i 的作用域就是后面的代码块，大括号中的内容是每次循环需要执行的代码。
 
         var i1, i8;
         for (i1, i8 = 0, 0 ; i1 < 10 && i8 < 80 ; i1++, i8 += 8) {
@@ -480,7 +480,7 @@ sidebar_position: 1
 
     - #### while 循环
 
-        while 循环可以设定一个循环条件，假如条件满足就一直循环执行，直到条件不满足则不再继续
+        while 循环可以设定一个循环条件。条件满足时持续循环执行，直到条件不满足为止。
 
         ```JavaScript
         var i = 0;
@@ -492,7 +492,7 @@ sidebar_position: 1
 
     - #### break 跳出循环
 
-        可以使用 break 跳出一个运行时循环或 switch
+        可以使用 break 跳出一个运行时循环或 switch。
 
         ```JavaScript
         var i = 0;
@@ -555,11 +555,11 @@ sidebar_position: 1
         ```
 
         **运行时迭代器**  
-        名字以 EUDLoop 开头的迭代器函数通常是返回的是运行时迭代器  
+        名字以 EUDLoop 开头的迭代器函数，通常返回运行时迭代器。  
 
         > EUDLoopPlayer、EUDLoopRange、EUDLoopUnit、EUDLoopUnit2、EUDLoopCUnit、EUDLoopNewUnit、EUDLoopNewCUnit、EUDLoopPlayerUnit、EUDLoopPlayerCUnit   
         
-        其次是 EUDQueue、EUDDeque 容器也属于运行时迭代器，UnitGroup.cploop 也返回一个运行时迭代器  
+        此外，EUDQueue、EUDDeque 容器也属于运行时迭代器，UnitGroup.cploop 也会返回运行时迭代器。  
         
         EUDDeque 演示  
         ```C#
@@ -608,13 +608,13 @@ sidebar_position: 1
 
     - #### switch 变量值多重选择分支
 
-        对单个值的多种状态判断的条件分支
+        用于对单个值的多种状态进行条件分支判断。
 
         **普通 switch**
         ```JavaScript
         switch (day) {
             case 1:
-                DisplayText("苦逼上班日子开始了");
+                DisplayText("工作日开始了");
                 break;
             case 4:
             case 5:
@@ -630,7 +630,7 @@ sidebar_position: 1
         // 上述 switch 代码可以看作以下 if 条件分支代码
 
         if (day == 1) {
-            DisplayText("苦逼上班日子开始了");
+            DisplayText("工作日开始了");
         } else if (day == 4 || day == 5) {
             DisplayText("马上周末了");
         } else if (day == 0 || day == 6) {
@@ -655,7 +655,7 @@ sidebar_position: 1
 
     - #### epdswitch 内存值多重选择分支
 
-        对单个运行时内存位置的值的多种状态判断的条件分支
+        用于对单个运行时内存位置的多种值状态进行条件分支判断。
 
         ```JavaScript
         const unitId = epd + 0x64/4;
@@ -671,6 +671,5 @@ sidebar_position: 1
         ```
 
       
-
 
 

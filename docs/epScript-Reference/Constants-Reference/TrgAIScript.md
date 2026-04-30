@@ -3,7 +3,7 @@ The AI script number is in the form of a little-endian four-character code, whic
 b"TMCu" represents the number 1967344980. This method of using four characters to represent a number is called [Four-Character Codes](https://en.wikipedia.org/wiki/FourCC), and on the x86 platform it is usually little-endian. 
 
 ```JavaScript
-println("{} == {}", py_int().from_bytes(b"+Vi0", "little"), EncodeAIScript("Turn ON Shared Vision for Player 1")); // 812209707 == 812209707
+println("{} == {}", py_int().from_bytes(b"+Vi0", "little"), EncodeAIScript("Turn ON Shared Vision for Player 1")); // output: 812209707 == 812209707
 RunAIScript(b2i4(b"ZMCu"));
 ```
 

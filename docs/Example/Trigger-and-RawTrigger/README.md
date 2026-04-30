@@ -26,12 +26,12 @@ function doTriggerList() {
     // Set up a trigger that executes every 3 game seconds 
     Trigger(
         conditions = list(
-            ElapsedTime(AtLeast, NextWaveTime), // This condition uses the variable NextWaveTime so only Trigger can be used instead of RawTrigger 
+            ElapsedTime(AtLeast, NextWaveTime), // This condition uses the variable NextWaveTime, so Trigger must be used instead of RawTrigger
         ),
         actions = list(
             GiveUnits(1, "Zerg Zergling", P1, $L("Location 1"), P12),
             Order("Zerg Zergling", P12, $L("Location 1"), Move, $L("Location 3")),
-            // Give NextWaveTime + 3 to trigger again 3 seconds after this trigger 
+            // Adding 3 to NextWaveTime schedules the next trigger 3 seconds after this one
             NextWaveTime.AddNumber(3),
             CreateUnit(1, "Zerg Zergling", "Location 1", P1),
         ),
@@ -67,11 +67,11 @@ function onPluginStart() {
 function beforeTriggerExec() {
     const cp = getcurpl();
     
-    // Other code written here 
+    // Write other code here
 
     setcurpl(cp);
 
-    doTriggerList(); // Execute triggers
+    doTriggerList(); // Execute trigger list
 }
 
 function afterTriggerExec() {
@@ -93,16 +93,16 @@ Right-click to edit the "build.bat" file and change the path of euddraft.exe in 
 Then double-click "build.bat" to compile the code and synthesize it with "Trigger-and-RawTrigger-Terrain.scx" into a new map file "Trigger-and-RawTrigger.scx".
 
 makefile.edd
-    Is the project configuration file
+    The project configuration file
 
 main.eps
-    Is the code file 
+    The main code file
 
 Trigger-and-RawTrigger-Terrain.scx
-    Is the original terrain file, this file can be opened and edited with SCMD 
+    The original terrain file; can be opened and edited with SCMD
 
 Trigger-and-RawTrigger.scx
-    This is the final output map file, which can be placed in the game's map file directory ([StarCraft installation or document path]\Maps\) to see the actual effect of the code in the game. It can no longer be directly opened and edited with SCMD.
+    The final output map file. Place it in the game's map directory ([StarCraft installation or documents path]\Maps\) to see the code's effect in-game. It can no longer be directly opened and edited with SCMD.
 
 Demo from: https://github.com/havonz/SCRMapDocs
 ```

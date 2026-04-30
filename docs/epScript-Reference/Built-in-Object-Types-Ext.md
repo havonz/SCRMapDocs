@@ -4,9 +4,9 @@ sidebar_position: 7
 
 # Built-in Extended Object Types
 
-Object types related to game content  
+Object types related to game content.  
 
-Reference:   
+Reference:  
 [https://cafe.naver.com/edac/120138](https://cafe.naver.com/edac/120138)
 
 <br />
@@ -22,9 +22,9 @@ Reference:
 
 - ### CUnit
 
-    EPDCUnitMap is another way to write CUnit  
-    Unit instance operation object, which can operate a specific unit on the map. In the editor, Unit actually refers to the unit type instead of the unit instance.  
-    CUnit is a reference type, and the unit instance it operates on belongs to `data that needs to be synchronized`.  
+    EPDCUnitMap is another way to write CUnit.  
+    A unit instance operation object that allows operating on a specific unit on the map. In the editor, "Unit" refers to a unit type, not a unit instance.  
+    CUnit is a reference type, and the unit instance it operates on is `data that needs to be synchronized`.  
 
     ```JavaScript
     object CUnit {
@@ -157,9 +157,9 @@ Reference:
     ```
 
     ```JavaScript
-    // Example: Increase resource collection over 256
-    const bonusMineral = PVariable(list(492, 0, 0, 0, 0, 0, 0, 0));  // P1 is 492 + 8 = collect up to 500 mineral  
-    const bonusGas = PVariable(list(992, 0, 0, 0, 0, 0, 0, 0));  // P1 is 992 + 8 = collect up to 1000 gas
+    // Example: Per-trip resource collection exceeding 256
+    const bonusMineral = PVariable(list(492, 0, 0, 0, 0, 0, 0, 0));  // P1 workers: 492 + 8 = collect up to 500 minerals  
+    const bonusGas = PVariable(list(992, 0, 0, 0, 0, 0, 0, 0));  // P1 workers: 992 + 8 = collect up to 1000 gas
     function loopUnit() {
         foreach(unit : EUDLoopCUnit()) {
             epdswitch(unit + 0x64/4, 255) {  // Unit type  
@@ -189,7 +189,8 @@ Reference:
                     // Indicates mineral/gas 
                     worker.resourceType = 1 + l2v(worker.order == EncodeUnitOrder("Enter/Exit Gas Mine"));
                     break;
-                } case EncodeUnitOrder("Reset Collision (Harvester&amp;Mine)") * 256: {
+                }
+                case EncodeUnitOrder("Reset Collision (Harvester&Mine)") * 256: {
                     // Operates after mining minerals or gas
                     if(worker.connectedUnit >= 1 && worker.resourceType >= 1 && worker.resourceType <= 2) {
                         const player = worker.owner;
@@ -224,11 +225,11 @@ Reference:
 
 - ### UnitGroup
 
-    UnitGroup is an optimized unit instance container after applying CPTricks.  
+    UnitGroup is a unit instance container optimized with CPTricks.  
 
     ```JavaScript
     object GUnit {
-        function remove(){}           // Remove itself from the UnitGroup you belong to
+        function remove(){}           // Remove itself from the UnitGroup it belongs to
         const dying : EUDGUnitIter;   // It is not actually an iterator. If the unit is alive, the foreach code block will not execute. If the unit dies, after executing the code block in foreach, the dead unit will remove itself from the UnitGroup it belongs to.
     }
 

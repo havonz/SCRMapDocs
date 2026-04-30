@@ -6,7 +6,7 @@ sidebar_position: 7
 
 <br />
 
-- [Trigger和RawTrigger的运用](Trigger-and-RawTrigger/README.md)  
-- [修改单位消耗人口限制](ChangeSupplyLimit/README.md)  
+- [Trigger 和 RawTrigger 的运用](Trigger-and-RawTrigger/README.md)  
+- [修改单位占用人口限制](ChangeSupplyLimit/README.md)  
 - [位置函数的使用](UsePosition/README.md)  
-- [\[MSQC演示\]游戏中文字菜单](%5BMSQC%5DGameSpeedTextMenu/README.md)  
+- [\[MSQC 演示\] 游戏内文字菜单](%5BMSQC%5DGameSpeedTextMenu/README.md)  

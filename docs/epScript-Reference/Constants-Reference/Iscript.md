@@ -1,4 +1,4 @@
-## Iscript
+## Iscript Animation Script Types
 
 ```JavaScript
 "Scourge": 0

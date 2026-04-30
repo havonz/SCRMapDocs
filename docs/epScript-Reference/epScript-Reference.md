@@ -41,7 +41,7 @@ sidebar_position: 5
 <br />
 
 ## Getting Started 
-If there are any parts you don't understand, you can try searching the Internet to solve them.  
+If anything is unclear, try searching online for answers.  
 
 Here we assume you already know how to use ScmDraft2 for basic terrain design.  
 - If not, refer to: [SCMD](http://www.stormcoast-fortress.net/Irregularies/#downloads)   
@@ -57,17 +57,17 @@ Prepare ScmDraft2. If not already prepared, look back a few lines.
 - Download [euddraft0.9.9.9.zip](https://github.com/armoha/euddraft/releases/download/v0.9.9.9/euddraft0.9.9.9.zip)   
     Unpack euddraft to a path with only English letters and no spaces, e.g. D:\SCRMapDevTools\euddraft0.9.9.9 
 - Download [VSCode](https://code.visualstudio.com/Download)  
-    Install it, install it however you like.   
+    Install it however you like.   
     Install the eps-server plugin from the VSCode plugin store.  
 
-- Open file extension display in your operating system.   
+- Enable file extension display in your operating system.   
     For Windows 10, refer to [https://www.google.com/search?q=Open-file-extension-display-in-windows-10](https://www.google.com/search?q=Open+file+extension+display+in+windows+10)   
     For Windows 11, refer to [https://www.google.com/search?q=Open-file-extension-display-in-windows-11](https://www.google.com/search?q=Open+file+extension+display+in+windows+11)  
 
 
 ### Map Preparation  
 
-Prepare a normal map file, you can create a new one with ScmDraft2 and then save it as Starcraft: Remastered Broodwar Map (*.scx) format.   
+Prepare a map file; you can create a new one in ScmDraft2 and save it as a Starcraft: Remastered Broodwar Map (*.scx).   
 Also save it to a path with only English letters and no spaces, e.g. D:\Projects\test\basemap.scx.  
 
 
@@ -82,7 +82,7 @@ Then change its content to:
 
     [main.eps]
     ```
-    The above code uses relative paths as an example, it actually supports absolute paths.   
+    The above uses relative paths as an example, but absolute paths are also supported.   
 
 2. Create a new text document and change its extension to eps, e.g. D:\Projects\test\main.eps  
     Open this eps file with VSCode.  
@@ -106,14 +106,14 @@ Then change its content to:
     ```PowerShell
     D:\SCRMapDevTools\euddraft0.9.9.9\euddraft.exe test.edd
     ```
-    The above code assumes you unpacked euddraft to D:\SCRMapDevTools\euddraft0.9.9.9. If not, you should replace it.  
+    This assumes euddraft is unpacked to D:\SCRMapDevTools\euddraft0.9.9.9. Update the path if yours differs.  
 
-    Now the project is ready. Just double click to run build.bat to generate test.scx. Put this map in the map directory of StarCraft: Remastered. Then when you enter the game, you will see `Hello World` output on the screen.
+    The project is now ready. Double-click build.bat to generate test.scx. Place this map in the StarCraft: Remastered map directory and load it in-game to see `Hello World` displayed on screen.
 
 
 ### Example Projects
 
-- If you really don't understand the configuration process above, you can choose a simple example project to view:  
+- If the configuration steps above are unclear, browse one of the example projects below:  
     - [Trigger-and-RawTrigger](../Example/Trigger-and-RawTrigger/README.md)
     - [ChangeSupplyLimit](../Example/ChangeSupplyLimit/README.md)
     - [UsePosition](../Example/UsePosition/README.md)
@@ -126,7 +126,7 @@ Then change its content to:
 ## Running Mode
 
 ### Script File Extension Differences
-- If it is a `.py` format script, the extension name can be omitted in the .eds/.edd file. `.eps` format scripts need to add the extension name.  
+- For `.py` format scripts, the file extension can be omitted in the .eds/.edd file. `.eps` format scripts must include the extension.  
 
     ```ini
     [main]
@@ -142,7 +142,7 @@ Then change its content to:
 
 ### Load Order
 
-- The order of plugin names in the configuration file is associated with their loading order after the game starts. After the game starts, onPluginStart() in the script will be executed once, and beforeTriggerExec(), triggers, and afterTriggerExec() will be executed cyclically on all players' machines.  
+- The order of plugin names in the configuration file determines their loading order after the game starts. After the game starts, onPluginStart() in the script will be executed once, and beforeTriggerExec(), triggers, and afterTriggerExec() will be executed cyclically on all players' machines.  
 
     For example, with the following main.edd configuration:  
 
@@ -259,7 +259,7 @@ The game time in StarCraft 1 is different from real time.
     ```
     </details>
     
-    The game seconds comparsion in the ElapsedTime condition parameter takes the integer part.
+    The ElapsedTime condition parameter compares game seconds using the integer part.
     ```JavaScript
     function beforeTriggerExec() {
         if (ElapsedTime(Exactly, 6)) {
@@ -277,7 +277,7 @@ The game time in StarCraft 1 is different from real time.
     }
     ```
     Similarly, the CountdownTimer condition also takes the integer part of the countdown at the top of the screen.     
-    Therefore, when writing conditions related to time comparsion, Exactly (`==`) should not be used, but AtLeast (`>=`) or AtMost (`<=`) should be used.  <br /><br />
+    Therefore, for time-based conditions, avoid using Exactly (`==`) and instead use AtLeast (`>=`) or AtMost (`<=`).  <br /><br />
 
 
 ## Current Player And Local Player
@@ -287,7 +287,7 @@ The game time in StarCraft 1 is different from real time.
 ### Current Player 
 
 The `Current Player` is a global variable. In some trigger actions, `Current Player` is used as an execution parameter.  
-Some trigger conditions and actions support passing a `Player` parameter, then, you can set the `Player` parameter to `13` to use the `Current Player` global variable as its parameter.  
+Some trigger conditions and actions accept a `Player` parameter, in which case you can set it to `13` to use the value of the `Current Player` global variable.  
 The value of the `Current Player` global variable does not necessarily have to be any player's ID, it can store any integer value.  
 
 <details>
@@ -340,10 +340,10 @@ SetDeaths($CurrentPlayer, SetTo, 21, 0);
 
 ### Local Player 
 
-getuserplayerid() can be used to get the local player ID. It returns a different value for each machine and is unrelated to the value set by setcurpl.   
-The ability to use getuserplayerid() to get the local player ID means you can decide at runtime whether or not to execute certain code on the local machine.   
-It helps improve performance. When there are many players, not all code needs to execute for each player, e.g. no need to generate text prompts for all players for each player.  
-Of course, if you pollute sync-data directly or indirectly due to unfamiliarity with synchronization rules using getuserplayerid(), it can also lead to data synchronization causing dropped
+getuserplayerid() returns the local player ID, which differs per machine and is unrelated to the value set by setcurpl.   
+This means you can decide at runtime whether to execute certain code on the local machine.   
+This helps improve performance: with many players, not all code needs to run for every player — for example, you don't need to generate text prompts for all players when only targeting one specific player.  
+Of course, if you pollute sync-data directly or indirectly due to unfamiliarity with synchronization rules, using getuserplayerid() can also lead to desync and dropped connections.
 
 ```JavaScript
 setcurpl(P1);

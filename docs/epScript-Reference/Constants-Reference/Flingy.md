@@ -1,4 +1,4 @@
-## Flingy
+## Flingy Types
 
 ```JavaScript
 "Scourge": 0

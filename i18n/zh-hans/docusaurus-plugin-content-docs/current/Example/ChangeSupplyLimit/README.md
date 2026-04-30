@@ -1,4 +1,4 @@
-# 修改单位消耗人口限制
+# 修改单位占用人口限制
 
 [下载演示地图](ChangeSupplyLimit.zip)
 
@@ -54,16 +54,16 @@ function SetWeaponCooldown(wt : Weapon, frames) {
     bwrite(0x656FB8 + wt, frames);
 }
 
-function onPluginStart() { // 游戏开始将会执行一次这个函数
-    SetPlayerSupply(P1, SUP_RACE_ZERG, SUP_TYPE_MAX, 1000); // 将 玩家1 最大虫子人口 改成 500
-    SetPlayerSupply(P1, SUP_RACE_TERRAN, SUP_TYPE_MAX, 1000); // 将 玩家1 最大人类人口 改成 500
-    SetPlayerSupply(P1, SUP_RACE_PROTOSS, SUP_TYPE_MAX, 1000); // 将 玩家1 最大神族人口 改成 500
+function onPluginStart() { // 游戏开始时会执行一次这个函数
+    SetPlayerSupply(P1, SUP_RACE_ZERG, SUP_TYPE_MAX, 1000); // 将玩家 1 的最大虫族人口改成 500
+    SetPlayerSupply(P1, SUP_RACE_TERRAN, SUP_TYPE_MAX, 1000); // 将玩家 1 的最大人族人口改成 500
+    SetPlayerSupply(P1, SUP_RACE_PROTOSS, SUP_TYPE_MAX, 1000); // 将玩家 1 的最大神族人口改成 500
 
-    SetUnitSupplyRequired($U("Terran SCV"), 0); // 设置 SCV 的人口需求为 0 也就是不用人口
+    SetUnitSupplyRequired($U("Terran SCV"), 0); // 设置 SCV 的人口需求为 0，也就是不占用人口
     SetUnitMineralCost($U("Terran SCV"), 0); // 设置建造 SCV 的矿物消耗为 0
     SetUnitBuildTime($U("Terran SCV"), 10); // 设置建造 SCV 的时间为 10/24 秒，建造时间建议至少设为 6
 
-    SetUnitSupplyProvided($U("Terran Command Center"), 200); // 将控制中心的人口提供量改成 200，也就是 100 人口
+    SetUnitSupplyProvided($U("Terran Command Center"), 200); // 将指挥中心的人口提供量改成 200，也就是 100 人口
     SetUnitSupplyProvided($U("Terran SCV"), 200); // 将 SCV 的人口提供量改成 200，也就是 100 人口
     SetUnitSupplyProvided($U("Terran Ghost"), 200); // 将 Ghost 的人口提供量改成 200，也就是 100 人口
 
@@ -80,12 +80,12 @@ function onPluginStart() { // 游戏开始将会执行一次这个函数
     );
 }
 
-function beforeTriggerExec() { // 游戏每一帧会先执行一次这个，然后执行传统触发器
+function beforeTriggerExec() { // 游戏每帧都会先执行一次这个函数，然后执行传统触发器
     // const cp = getcurpl();
     // setcurpl(cp);
 }
 
-function afterTriggerExec() { // 游戏每一帧在执行完传统触发器后，会执行一次这个函数
+function afterTriggerExec() { // 游戏每帧执行完传统触发器后，会执行一次这个函数
 
 }
 ```
@@ -100,8 +100,8 @@ function afterTriggerExec() { // 游戏每一帧在执行完传统触发器后�
 
 ## 说明.txt
 ```
-右键编辑 “编译输出.bat” 文件，将其中的 euddraft.exe 路径改成你自己电脑上的  euddraft.exe 的路径
-然后双击 “编译输出.bat” 即会将代码编译并与 “修改单位消耗人口限制-地形.scx” 合成输出到一个新地图文件 “修改单位消耗人口限制.scx”
+右键编辑 “编译输出.bat” 文件，将其中的 euddraft.exe 路径改成你自己电脑上的 euddraft.exe 路径
+然后双击 “编译输出.bat”，即可将代码编译并与 “修改单位消耗人口限制-地形.scx” 合成为新的地图文件 “修改单位消耗人口限制.scx”
 
 makefile.edd
     是工程配置文件
@@ -110,10 +110,10 @@ makefile.edd
     是代码文件
 
 修改单位消耗人口限制-地形.scx
-    是原始地形文件，这个文件可以用 SCMD 打开编辑地形等
+    是原始地形文件，可以用 SCMD 打开编辑地形等内容
 
 修改单位消耗人口限制.scx
-    这是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\）在游戏中看到实际代码在游戏中的效果，它已经无法再直接使用 SCMD 打开编辑
+    是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\），在游戏中查看代码的实际效果；它无法再直接使用 SCMD 打开编辑
 
 演示来自 https://github.com/havonz/SCRMapDocs
 ```

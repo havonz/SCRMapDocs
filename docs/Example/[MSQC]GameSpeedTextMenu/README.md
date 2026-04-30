@@ -26,9 +26,9 @@ QCUnit : 218
 
 ## main.eps
 ```Javascript
-// EUDDB: https://armoha.github.io/eud-book/
+// EUD offset address reference: https://armoha.github.io/eud-book/
 
-/* Set the game speed percentage function, with the normal speed of Fastest (level: 6) as 100% */ 
+/* Set the game speed percentage; treats Fastest speed (level 6) as 100% */
 function SetGameSpeed(level, speed) {
     const mspf = 1000000 / (10000 / 42 * speed);
     dwwrite_epd(EPD(0x5124D8) + level, mspf);
@@ -38,7 +38,7 @@ const MOUSE_X_EPD, MOUSE_Y_EPD = EPD(0x6CDDC4), EPD(0x6CDDC8);
 const menuSel = PVariable();
 var currentSpeedSel;
 
-/* Register the menuSel global variable to MSQC */ 
+/* Register the global variable menuSel with MSQC */
 EUDRegisterObjectToNamespace("menuSel", menuSel);
 
 function showMenu(p) {
@@ -57,9 +57,9 @@ function showMenu(p) {
             buf.appendf(" Game Speed {}%\x02", speedList[i]);
             buf.DisplayAt(i + 1);
         }
-        if (MemoryEPD(MOUSE_X_EPD, AtLeast, 10) && MemoryEPD(MOUSE_X_EPD, AtMost, 25)) { /* The menu option X coordinates triggers the range */
+        if (MemoryEPD(MOUSE_X_EPD, AtLeast, 10) && MemoryEPD(MOUSE_X_EPD, AtMost, 25)) { /* Menu option X coordinate trigger range */
             foreach(i : py_range(0, 7)) {
-                if (MemoryEPD(MOUSE_Y_EPD, AtLeast, 129 + i * 16) && MemoryEPD(MOUSE_Y_EPD, AtMost, 139 + i * 16)) { /* The menu option Y coordinates triggers the range */
+                if (MemoryEPD(MOUSE_Y_EPD, AtLeast, 129 + i * 16) && MemoryEPD(MOUSE_Y_EPD, AtMost, 139 + i * 16)) { /* Menu option Y coordinate trigger range */
                     if (speedList[i] != currentSpeedSel) {
                         buf.insert(0);
                         buf.append("\x07[  ]\x1E ");
@@ -111,17 +111,17 @@ function beforeTriggerExec() {
 }
 
 function afterTriggerExec() {
-    /* Receive MSQC selection and sync to currentSpeedSel, this loop will execute on each player's machine */ 
+    /* Receive MSQC selection and sync to currentSpeedSel; this loop executes on each player's machine */
     foreach(p : EUDLoopPlayer("Human")) {
-        if (menuSel[p] != 0) { /* If player p's menuSel has a value. */ 
+        if (menuSel[p] != 0) { /* If player p's menuSel has a value */
             currentSpeedSel = menuSel[p]; /* Receive it */
-            menuSel[p] = 0;               /* Clear it and wait for next reception */
+            menuSel[p] = 0;               /* Clear it and wait for the next reception */
 
-            /* The following is operation on the local machine */
+            /* The following operations run on the local machine */
             SetGameSpeed(6, currentSpeedSel);
             setcurpl(getuserplayerid());
             
-            if (p == getuserplayerid()) { /* If the local player happens to be the player who operated the menu */
+            if (p == getuserplayerid()) { /* If the local player is the one who operated the menu */
                 PlayWAV("sound\\glue\\mousedown2.wav");
                 printAt(10, "You change the game speed to \x07{}\x02%", currentSpeedSel);
             } else {
@@ -144,19 +144,19 @@ function afterTriggerExec() {
 ## readme.txt
 ```
 Right-click to edit the "build.bat" file and change the path of euddraft.exe in it to the path of euddraft.exe on your own computer.
-Then double-click "build.bat" to compile the code and synthesize it with "GameTextMenu-Terrain.scx" into a new map file "GameTextMenu.scx".
+Then double-click "build.bat" to compile the code and synthesize it with "GameSpeedTextMenu-Terrain.scx" into a new map file "GameSpeedTextMenu.scx".
 
 makefile.edd
-    Is the project configuration file
+    The project configuration file
 
 main.eps
-    Is the code file 
+    The main code file
 
-GameTextMenu-Terrain.scx
-    Is the original terrain file, this file can be opened and edited with SCMD 
+GameSpeedTextMenu-Terrain.scx
+    The original terrain file; can be opened and edited with SCMD
 
-GameTextMenu.scx
-    This is the final output map file, which can be placed in the game's map file directory ([StarCraft installation or document path]\Maps\) to see the actual effect of the code in the game. It can no longer be directly opened and edited with SCMD.
+GameSpeedTextMenu.scx
+    The final output map file. Place it in the game's map directory ([StarCraft installation or documents path]\Maps\) to see the code's effect in-game. It can no longer be directly opened and edited with SCMD.
 
 Demo from: https://github.com/havonz/SCRMapDocs
 ```

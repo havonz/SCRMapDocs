@@ -23,8 +23,9 @@ sidebar_position: 2
 
 ## Basic Description
 
-All variables in epScript code allow desync modification or access. sync modification access belongs to synced-data, and desync modification access belongs to desync-data.  
+All variables in epScript code allow desync modification or access. Sync modification or access makes them synced-data; desync modification or access makes them desync-data.  
 epScript has only one value type variable, which is a 32-bit unsigned integer.  
+There are no string value type variables!! There are no string value type variables!! There are no string value type variables!!  
 
 - ### Variable Declaration
 
@@ -211,7 +212,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
 
 - ### Appendix Static Or Dynamic Instantiation
 
-    Every variable in epScript has fixed memory address. So every variable is persistent. For example, consider this code.
+    Every variable in epScript has a fixed memory address. All variables — whether global or local — are statically allocated to fixed memory space; there is no variable stack. So every variable is persistent. For example, consider this code.
 
     ```JavaScript
     function x() {
@@ -254,7 +255,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
     }
     ```
 
-    You may think that we're assigning a separate `EUDArray(10)` instance for each cell of X, but this code don't act like that.The code above is equivalent to:
+    You may think that we're assigning a separate `EUDArray(10)` instance for each cell of X, but this code doesn't work that way. The code above is equivalent to:
 
     ```JavaScript
     const _t0 = EUDArray(10);  // Even intermediate values are static
@@ -306,7 +307,7 @@ epScript has only one value type variable, which is a 32-bit unsigned integer.
 
 
 - ### Explanation Of const And var
-    The essence of const is to declare a variable at the Python (compile time), not a map runtime variable. When declaring an object, it stores the runtime address of the referenced object.  
+    The essence of const is to declare a variable at the Python level (compile time), not a map runtime variable. When declaring an object, it stores the runtime address of the referenced object.  
     The essence of var is syntactic sugar for declaring a reference to an EUDVariable object, which is a map runtime variable.  
     The difference from const is that at compile time, it will compile the assignment operation `=` into the left shift operator `<<` at the Python. The left shift operator of runtime types is usually overloaded to change the value stored in the runtime object, while the const at the syntax level does not allow the use of the assignment operator `=` after declaring the initial value.  
 

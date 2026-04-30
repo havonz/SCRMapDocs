@@ -21,8 +21,8 @@ Reference:
 
 ## Basic configuration
 1. Create a configuration file with the extension .eds/.edd  
-    .eds format means it will only be compiled once 
-    .edd format means it will compile in daemon mode, monitor the project status, and automatically recompile after files in the current directory are modified  
+    .eds format means it will be compiled only once 
+    .edd format means it will run in daemon mode, monitoring the project and automatically recompiling whenever files in the current directory change  
 
     ```ini
     [main]
@@ -54,7 +54,7 @@ Reference:
 
     
 
-3. If successful, the map will be output. If unsuccessful, there will be error messages.  
+3. On success, the output map will be generated; on failure, error messages will be displayed.  
     euddraft has built-in several plugins  
     ```ini
     [dataDumper]
@@ -77,9 +77,9 @@ Reference:
 <br />
 
 ## Script/Plugin Writing
-euddraft uses script writing to write EUD triggers. There are two ways to write scripts:  
-One is to directly use a pseudo-syntax of Python to call eudplib to complete  
-The other is to use epScript specially designed for this purpose (which will be compiled into Python pseudo-syntax and ultimately also call eudplib to complete the work)  
+euddraft uses scripts to write EUD triggers. There are two ways to write scripts:  
+One is to use Python pseudo-syntax to call eudplib directly  
+The other is to use epScript, which is specifically designed for this purpose (it will be compiled into Python pseudo-syntax and ultimately also calls eudplib to complete the work)  
 
 - ### Python Pseudo-Syntax
 
@@ -215,7 +215,7 @@ The other is to use epScript specially designed for this purpose (which will be 
 ## Running Mode
 
 ### Script File Extension Differences
-- If it is a `.py` format script, the extension name can be omitted in the .eds/.edd file. `.eps` format scripts need to add the extension name.  
+- For `.py` format scripts, the file extension can be omitted in the .eds/.edd file. `.eps` format scripts must include the extension.  
 
     ```ini
     [main]
@@ -231,7 +231,7 @@ The other is to use epScript specially designed for this purpose (which will be 
 
 ### Load Order
 
-- The order of plugin names in the configuration file is associated with their loading order after the game starts. After the game starts, onPluginStart() in the script will be executed once, and beforeTriggerExec(), triggers, and afterTriggerExec() will be executed cyclically on all players' machines.  
+- The order of plugin names in the configuration file determines their loading order after the game starts. After the game starts, onPluginStart() in the script will be executed once, and beforeTriggerExec(), triggers, and afterTriggerExec() will be executed cyclically on all players' machines.  
 
     For example, with the following main.edd configuration:  
 

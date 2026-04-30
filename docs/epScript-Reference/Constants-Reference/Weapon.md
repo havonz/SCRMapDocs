@@ -1,4 +1,4 @@
-## Weapon
+## Unit Weapon Types
 
 ```JavaScript
 "Gauss Rifle": 0

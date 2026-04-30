@@ -1083,7 +1083,7 @@ sidebar_position: 9
 
         ```JavaScript
         SetResources(P1, Add, 1000, Ore); // Give Player 1 1000 Ore
-        SetResources(P1, Substract, 1000, Gas); // Take 1000 Gas from Player 1
+        SetResources(P1, Subtract, 1000, Gas); // Take 1000 Gas from Player 1
         SetResources(P1, SetTo, 5000, OreAndGas); // Set Player 1's Ore and Gas resources to 5000
         ```
 
@@ -1218,7 +1218,7 @@ sidebar_position: 9
     - #### **AddCurrentPlayer**
 
         - `AddCurrentPlayer`(playerid : TrgPlayer) : [Action]  
-            Allows desynchronized execution. Set `CurrentPlayer` and cpcache to [playerID].  
+            Allows desynchronized execution. Add [playerID] to `CurrentPlayer` and cpcache.  
             Composed of three classical trigger actions.  
 
         Example
@@ -1573,7 +1573,7 @@ sidebar_position: 9
     - #### **GetPlayerInfo**
 
         - `GetPlayerInfo`(player: TrgPlayer) : py_struct  
-            Compile-time gets the information of player [player] in the map information.[player] only supports constants. The information obtained is the information set in the map, not the runtime information.  
+            Compile-time gets the information of player [player] in the map information. [player] only supports constants. The information obtained is the information set in the map, not the runtime information.  
 
         Example
 
@@ -1833,7 +1833,7 @@ sidebar_position: 9
     - #### **b2i**
 
         - `b2i1`(content, index) : py_int  
-        - `b2i1`(content, index) : py_int  
+        - `b2i2`(content, index) : py_int  
         - `b2i4`(content, index) : py_int  
             Converts the byte, word, or dword at position [index] in the literal byte string [content] to a positive integer constant using little endian.  
 
@@ -2285,7 +2285,7 @@ sidebar_position: 9
 
         - `EUDLoopUnit2()` : EUDIterator  
             Iterates over the ptr and epd of all units.  
-            Does not include subunits, Scanner Sweep, Map Revealer, etc.  
+            Includes subunits, Scanner Sweep, Map Revealer, etc.  
 
         Example
 
@@ -2311,7 +2311,7 @@ sidebar_position: 9
 
         - `EUDLoopCUnit()` : EUDIterator  
             It uses EUDLoopUnit2 to traverse and wraps the traversed pointers into CUnit objects.  
-            Does not include subunits, Scanner Sweep, Map Revealer, etc.
+            Includes subunits, Scanner Sweep, Map Revealer, etc.
 
         Example
 
@@ -2414,7 +2414,7 @@ sidebar_position: 9
                 // start
                 // Your codes
                 // end
-                unit.remove();	//This code is necessary!!!Don't skip it
+                unit.remove();	// This code is necessary!!! Don't skip it
             }
         }
         ```
@@ -3255,6 +3255,7 @@ sidebar_position: 9
 
         - `GetTBLAddr`(TBLKey : StatText) : EUDVariable  
             Gets the memory address of a TBL table Key/ID [TBLKey].  
+            Note: This is different from `$B` (i.e., `EncodeTBL`), which returns the index of the entry within the tbl file.  
 
             > It is worth mentioning that the TBLKey string itself may not actually exist in memory.  
             > For example, there is no "Terran Siege Tank (Tank Mode)" string in memory.  
@@ -3337,7 +3338,7 @@ sidebar_position: 9
     - #### **sqrt**
 
         - `sqrt`(x) : py_int | EUDVariable  
-            Calculates the square root of [x].  
+            Calculates the integer square root of [x] (truncated).  
 
         Example
 
@@ -3654,16 +3655,16 @@ sidebar_position: 9
 
 - ### QueueGameCommand Functions
 
-    Queue game command to packet queue.  
+    Queue game commands to the packet queue.  
 
-    Starcraft periodically broadcasts game packets to other player. Game packets are stored to queue, and this function add data to that queue, so that SC can broadcast it.
+    StarCraft periodically broadcasts game packets to other players. Game packets are stored in the queue, and these functions add data to that queue for StarCraft to broadcast.
   
-    The QueueGameCommand functions are all for the local player rather than the current player, and cannot be used for players not in the game or computer players.  
+    The QueueGameCommand functions all target the local player rather than the current player, and cannot be used for players not in the game or computer players.  
 
     > **Note**
     > If packet queue is full, this function fails. This behavior is silent
     > without any warning or error, since this behavior shouldn't happen in
-    > common situations. So **Don't** use this function too much in a frame.
+    > common situations. So **don't** use this function too much in a frame.
 
     <br />
 
@@ -3809,7 +3810,7 @@ sidebar_position: 9
                 CreateUnitWithProperties(1, "Terran Command Center", "Location 1", P1, UnitProperty(invincible = true));
             }
             if (getuserplayerid() == $P1) { // Check if the local player is player 1
-                QueueGameCommand_Select(1, uar); // Check if the local player is player 1
+                QueueGameCommand_Select(1, uar); // Select it
                 QueueGameCommand_QueuedRightClick(1234 + 2345 * 65536); /* Set the rally point to 1234, 2345 */
                 QueueGameCommand_TrainUnit("Terran SCV"); /* Train an SCV */
             }

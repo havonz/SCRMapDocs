@@ -1,6 +1,6 @@
-AI 脚本的编号是小端四字符代码形式的，它实质也是个 32 位无符号整数
+AI 脚本的编号采用小端四字符代码形式，实质上也是一个 32 位无符号整数。
 
-b"TMCu" 表示数字 1967344980，这种使用四个字符表示一个数字的方法叫[四字符代码](https://en.wikipedia.org/wiki/FourCC)，在 x86 平台它通常是[字节序#小端序](https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F#%E5%B0%8F%E7%AB%AF%E5%BA%8F)的
+b"TMCu" 表示数字 1967344980。这种使用四个字符表示一个数字的方法叫[四字符代码](https://en.wikipedia.org/wiki/FourCC)，在 x86 平台通常采用[字节序#小端序](https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F#%E5%B0%8F%E7%AB%AF%E5%BA%8F)。
 
 ```JavaScript
 println("{} == {}", py_int().from_bytes(b"+Vi0", "little"), EncodeAIScript("Turn ON Shared Vision for Player 1")); // 输出 812209707 == 812209707
@@ -318,6 +318,5 @@ b"Brood Wars Zerg 10 - Town F": b"ZB0F"
 ```
 
   
-
 
 

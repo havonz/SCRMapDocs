@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # 内置的地图辅助开发对象类型
 
-这些是与游戏相关的对象类型
+这些是与游戏相关的对象类型。
 
 文档资料参考来源：  
 [https://cafe.naver.com/edac/120138](https://cafe.naver.com/edac/120138)
@@ -15,9 +15,9 @@ sidebar_position: 7
 
 - ### CUnit
 
-    EPDCUnitMap 是 CUnit 的另外一种写法  
-    单位实例操作对象，可以特别操作地图上某一个单位，编辑器里中 Unit 实际是指单位的类型，而非单位的实例  
-    CUnit 是引用类型，它所操作单位实例属于`需要同步的数据`  
+    EPDCUnitMap 是 CUnit 的另一种写法。  
+    CUnit 是单位实例操作对象，可以专门操作地图上的某一个单位。编辑器中的 Unit 实际指的是单位类型，而不是单位实例。  
+    CUnit 是引用类型，它所操作的单位实例属于`需要同步的数据`。  
 
     ```JavaScript
     object CUnit {
@@ -144,7 +144,7 @@ sidebar_position: 7
     const unit = CUnit.cast(v)        // 将函数参数或返回值转换为 CUnit 对象
     const unit = CUnit(EPD)           // 从结构偏移 EPD 值创建 CUnit 对象
     const unit = CUnit(EPD, ptr=ptr)  // 从结构偏移 EPD 值和 ptr 值创建 CUnit 对象
-    const unit = CUnit.from_read(EPD) // 从存储 EPD 地址的值读取并创建 CUnit 对象。 如果地址为空则 unit 为 0
+    const unit = CUnit.from_read(EPD) // 从存储 EPD 地址的值读取并创建 CUnit 对象。如果地址为空，则 unit 为 0
     const unit = CUnit.from_ptr(ptr)  // 从 ptr 值计算 EPD 并创建 CUnit 类型。在调用位置缓存 ptr 值，避免重复计算 EPD
     const unit = CUnit(EPD).subUnit   // CUnit 实例的 CUnit 类型成员
     ```
@@ -182,7 +182,8 @@ sidebar_position: 7
                     // 表示水晶矿/气矿 
                     worker.resourceType = 1 + l2v(worker.order == EncodeUnitOrder("Enter/Exit Gas Mine")); 
                     break; 
-                } case EncodeUnitOrder("Reset Collision (Harvester&Mine)") * 256: { 
+                }
+                case EncodeUnitOrder("Reset Collision (Harvester&Mine)") * 256: { 
                     // 在采集水晶矿或气矿后操作
                     if(worker.connectedUnit >= 1 && worker.resourceType >= 1 && worker.resourceType <= 2) { 
                         const player = worker.owner; 
@@ -201,9 +202,9 @@ sidebar_position: 7
                         }
                     } 
                 }
-                case EncodeUnitOrder("Can Harvesting Minerals") * 256:
+                case EncodeUnitOrder("Can Harvest Minerals") * 256:
                     if(worker.orderState == 2) { 
-                        worker.order = py_str("Move to Harvesting Minerals"); 
+                        worker.order = py_str("Move to Harvest Minerals"); 
                         worker.orderState = 1; 
                     } 
                     break; 

@@ -25,16 +25,16 @@ Player9: 8
 Player10: 9
 Player11: 10
 Player12: 11
-CurrentPlayer: 13
-Foes: 14
-Allies: 15
-NeutralPlayers: 16
-AllPlayers: 17
+CurrentPlayer: 13          // Current player
+Foes: 14                   // Players hostile to the current player
+Allies: 15                 // Players allied with the current player
+NeutralPlayers: 16         // Neutral players
+AllPlayers: 17             // All players
 Force1: 18
 Force2: 19
 Force3: 20
 Force4: 21
-NonAlliedVictoryPlayers: 26
+NonAlliedVictoryPlayers: 26 // Players not allied with the current player who have not yet won
 ```
 
   

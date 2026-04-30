@@ -87,8 +87,8 @@ function beforeTriggerExec() {
         const dist = distanceBetween(x0, y0, x1, y1);
         const x, y = polarProjection_256(x0, y0, dist, ang);
         setcurpl(P1);
-        printAt(0, "The distance from the Machine({},{})(Face:{}) to the Ghost({},{})(Face:{}) is {} , the angle is {}", x0, y0, marine_cu.currentDirection2, x1, y1, ghost_cu.currentDirection2, dist, ang);
-        printAt(1, "Walking {} distance {} degrees from the Machine position will reach the Ghost's position at ({}, {})", ang, dist, x, y);
+        printAt(0, "The distance from the Marine({},{})(Facing:{}) to the Ghost({},{})(Facing:{}) is {}, the angle is {}", x0, y0, marine_cu.currentDirection2, x1, y1, ghost_cu.currentDirection2, dist, ang);
+        printAt(1, "From the Marine's position, walking {} degrees for a distance of {} will reach the Ghost's position at ({}, {})", ang, dist, x, y);
     }
 
     setcurpl(cp);
@@ -113,16 +113,16 @@ Right-click to edit the "build.bat" file and change the path of euddraft.exe in 
 Then double-click "build.bat" to compile the code and synthesize it with "UsePosition-Terrain.scx" into a new map file "UsePosition.scx".
 
 makefile.edd
-    Is the project configuration file
+    The project configuration file
 
 main.eps
-    Is the code file 
+    The main code file
 
 UsePosition-Terrain.scx
-    Is the original terrain file, this file can be opened and edited with SCMD 
+    The original terrain file; can be opened and edited with SCMD
 
 UsePosition.scx
-    This is the final output map file, which can be placed in the game's map file directory ([StarCraft installation or document path]\Maps\) to see the actual effect of the code in the game. It can no longer be directly opened and edited with SCMD.
+    The final output map file. Place it in the game's map directory ([StarCraft installation or documents path]\Maps\) to see the code's effect in-game. It can no longer be directly opened and edited with SCMD.
 
 Demo from: https://github.com/havonz/SCRMapDocs
 ```

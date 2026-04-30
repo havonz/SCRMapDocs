@@ -1,4 +1,4 @@
-## Icon
+## Icon Types
 
 ```JavaScript
 "Marine": 0

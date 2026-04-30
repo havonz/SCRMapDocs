@@ -1,4 +1,4 @@
-## Image
+## Image Types
 
 ```JavaScript
 "Scourge": 0

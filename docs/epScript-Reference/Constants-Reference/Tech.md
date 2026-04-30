@@ -1,4 +1,4 @@
-## Tech
+## Technology Types
 
 ```JavaScript
 "Stim Packs": 0

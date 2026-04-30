@@ -1,4 +1,4 @@
-## Upgrade
+## Upgrade Types
 
 ```JavaScript
 "Terran Infantry Armor": 0

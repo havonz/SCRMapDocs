@@ -8,7 +8,7 @@ sidebar_position: 8
 
 ```JavaScript
 All: 0
-其它正整数
+其他正整数
 ```
 
 ## TrgModifier 数值修改方法
@@ -16,7 +16,7 @@ All: 0
 ```JavaScript
 SetTo: 7    // 设置为 =
 Add: 8      // 加上  +=
-Subtract: 9 // 减去  -=（最多可以减为零，即使减去大于当前值的数值）
+Subtract: 9 // 减去  -=（最多减为零，即使减去大于当前值的数值）
 ```
 
 ## TrgComparison 数值比较方法
@@ -90,12 +90,12 @@ Custom: 7            // 自定义分
 
 ## TrgLocation 位置/区域
 ```JavaScript
-// 位置/区域 一共 255 个，编号从 0~63,65~255
+// 位置/区域一共 255 个，编号从 0~63,65~255
 // 编号 64 表示任意位置/区域
 "Location 1~64": 0~63
 "Anywhere": 64
 "Location 66~256": 65~255
-// euddraft 编译时会将所有的位置/区域的名称从地图字符串表（Map String Table）中删除，也就是说，位置/区域名称在运行时是不存在的，仅用于地图开发者辨别
+// euddraft 编译时会将所有位置/区域名称从地图字符串表（Map String Table）中删除，也就是说，位置/区域名称在运行时不存在，仅用于地图开发者辨别
 ```
 
 ## TrgSwitch 开关
@@ -103,12 +103,12 @@ Custom: 7            // 自定义分
 ```JavaScript
 // 开关一共 256 个，编号为 0~255
 "Switch 1～256": 0~255
-// euddraft 编译时会将所有的开关的名称从地图字符串表（Map String Table）中删除，也就是说，开关名称在运行时是不存在的，仅用于地图开发者辨别
+// euddraft 编译时会将所有开关名称从地图字符串表（Map String Table）中删除，也就是说，开关名称在运行时不存在，仅用于地图开发者辨别
 ```
 
 ## [TrgPlayer 玩家编号](TrgPlayer.md)  
 ## [TrgUnit 单位类型](TrgUnit.md)  
-## [TrgAIScript AI脚本类型](TrgAIScript.md)  
+## [TrgAIScript AI 脚本类型](TrgAIScript.md)  
 ## [Weapon 单位武器类型](Weapon.md)  
 ## [Tech 科技类型](Tech.md)  
 ## [Upgrade 升级类型](Upgrade.md)  
@@ -120,4 +120,3 @@ Custom: 7            // 自定义分
 ## [Portrait 单位头像类型](Portrait.md)  
 ## [Sprites 精灵类型](Sprites.md)  
 ## [StatText 字符串列表](StatText.md)
-

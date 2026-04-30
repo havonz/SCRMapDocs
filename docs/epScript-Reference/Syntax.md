@@ -49,7 +49,7 @@ sidebar_position: 1
     Any non-compile-time code outside of variable declarations cannot be exposed outside of functions.  
     Functions containing any runtime operations are non-compile-time functions.  
     All variable declaration/initialization/reading/operation/assignment operations are runtime operations.   
-    Compile-time code will execute even if the if condition is not met.   
+    Compile-time code executes regardless of whether the if condition is met.   
 
 
 - ### Case Sensitivity
@@ -93,7 +93,7 @@ sidebar_position: 1
     |Description|Explanation|Example|Result|
     |-|-|-|-|
     |\\\\ |Denotes \\ |`DisplayText("Hello\\SC");`|Hello\SC|
-    |\octal|Denotes a octal ASCII code|`DisplayText("SC\101\102\103");`|SCABC|
+    |\\octal|Denotes an octal ASCII code|`DisplayText("SC\101\102\103");`|SCABC|
     |\xhex|Denotes a hex ASCII code|`DisplayText("SC\x41\x42\x43");`|SCABC|
     |\\`newline`|Indicates continuing the line without a line break|`DisplayText("Hello\`<br />`SC");`|HelloSC|
     |\\n|Inserts a line break, equivalent to \x0A|`DisplayText("Hello\nSC");`|Hello<br />SC|
@@ -528,18 +528,18 @@ sidebar_position: 1
         ```C#
         foreach (i : py_range(3)) {
             once (ElapsedTime(AtLeast, i)) {
-                println("The {} secound(s)", i);
+                println("The {} second(s)", i);
             }
         }
         // Equivalent to the following code
         once (ElapsedTime(AtLeast, 0)) {
-            println("The {} secound(s)", 0);
+            println("The {} second(s)", i);
         }
         once (ElapsedTime(AtLeast, 1)) {
-            println("The {} secound(s)", 1);
+            println("The {} second(s)", 1);
         }
         once (ElapsedTime(AtLeast, 2)) {
-            println("The {} secound(s)", 2);
+            println("The {} second(s)", 2);
         }
         ```
 

@@ -6,10 +6,10 @@ sidebar_position: 0
 
 <br />
 
-"StarCraft 1" is StarCraft, plus the number 1 is mainly used to distinguish "StarCraft 2"  
-StarCraft can be downloaded and played for free since version [1.18](https://news.blizzard.com/en-gb/starcraft/20674424/starcraft-brood-war-patch-1-18-patch-notes)  
-[StarCraft: Remastered](https://news.blizzard.com/en-gb/starcraft/20977641/starcraft-remastered-is-live) is StarCraft 1.20+ a paid skin, which can be unlocked for a fee in the latest version of StarCraft  
-StarCraft: Remastered also belongs to "StarCraft 1"
+"StarCraft 1" refers to StarCraft; the "1" is mainly used to distinguish it from "StarCraft 2"  
+StarCraft has been free to download and play since version [1.18](https://news.blizzard.com/en-gb/starcraft/20674424/starcraft-brood-war-patch-1-18-patch-notes)  
+[StarCraft: Remastered](https://news.blizzard.com/en-gb/starcraft/20977641/starcraft-remastered-is-live) is a paid cosmetic skin introduced in StarCraft 1.20+, available for purchase in the latest version of StarCraft  
+StarCraft: Remastered is also considered part of "StarCraft 1"
 
 <br />
 

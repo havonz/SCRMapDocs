@@ -1,6 +1,6 @@
-# 游戏中的文字菜单
+# 游戏内文字菜单
 
-[下载演示地图]([MSQC]GameSpeedTextMenu.zip)
+[下载演示地图](%5BMSQC%5DGameSpeedTextMenu.zip)
 
 ## makefile.edd
 ```ini
@@ -101,7 +101,7 @@ function beforeTriggerExec() {
         CreateUnitWithProperties(1, "Zerg Overlord", "Location 1", P2, UnitProperty(invincible = true)),
     ), preserved = false);
 
-    /* 给所有的人类玩家显示菜单 */
+    /* 给所有人类玩家显示菜单 */
     foreach(p : EUDLoopPlayer("Human")) {
         setcurpl(p);
         showMenu(p);
@@ -111,13 +111,13 @@ function beforeTriggerExec() {
 }
 
 function afterTriggerExec() {
-    /* 接收 MSQC 选择并同步到 currentSpeedSel，这个循环会在每一个玩家的机器上执行 */
+    /* 接收 MSQC 选择并同步到 currentSpeedSel，这个循环会在每个玩家的机器上执行 */
     foreach(p : EUDLoopPlayer("Human")) {
         if (menuSel[p] != 0) { /* 如果某玩家 p 的 menuSel 有值 */
             currentSpeedSel = menuSel[p]; /* 接收它 */
             menuSel[p] = 0;               /* 清空它，等待下一次接收 */
 
-            /* 以下就是对本机的操作了 */
+            /* 下面是本机操作 */
             SetGameSpeed(6, currentSpeedSel);
             setcurpl(getuserplayerid());
             
@@ -143,8 +143,8 @@ function afterTriggerExec() {
 
 ## 说明.txt
 ```
-右键编辑 “编译输出.bat” 文件，将其中的 euddraft.exe 路径改成你自己电脑上的  euddraft.exe 的路径
-然后双击 “编译输出.bat” 即会将代码编译并与 “游戏中的文字菜单-地形.scx” 合成输出到一个新地图文件 “游戏中的文字菜单.scx”
+右键编辑 “编译输出.bat” 文件，将其中的 euddraft.exe 路径改成你自己电脑上的 euddraft.exe 路径
+然后双击 “编译输出.bat”，即可将代码编译并与 “游戏中的文字菜单-地形.scx” 合成为新的地图文件 “游戏中的文字菜单.scx”
 
 makefile.edd
     是工程配置文件
@@ -153,10 +153,10 @@ makefile.edd
     是代码文件
 
 游戏中的文字菜单-地形.scx
-    是原始地形文件，这个文件可以用 SCMD 打开编辑地形等
+    是原始地形文件，可以用 SCMD 打开编辑地形等内容
 
 游戏中的文字菜单.scx
-    这是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\）在游戏中看到实际代码在游戏中的效果，它已经无法再直接使用 SCMD 打开编辑
+    是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\），在游戏中查看代码的实际效果；它无法再直接使用 SCMD 打开编辑
 
 
 演示来自 https://github.com/havonz/SCRMapDocs

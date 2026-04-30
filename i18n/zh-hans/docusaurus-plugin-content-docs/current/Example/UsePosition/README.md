@@ -51,7 +51,7 @@ function onPluginStart() {
 
 }
 
-function beforeTriggerExec() { // 游戏每一帧会先执行一次这个，然后执行传统触发器
+function beforeTriggerExec() { // 游戏每帧都会先执行一次这个函数，然后执行传统触发器
     const cp = getcurpl();
 
     once (ElapsedTime(AtLeast, 0)) {
@@ -87,14 +87,14 @@ function beforeTriggerExec() { // 游戏每一帧会先执行一次这个，然�
         const dist = distanceBetween(x0, y0, x1, y1);
         const x, y = polarProjection_256(x0, y0, dist, ang);
         setcurpl(P1);
-        printAt(0, "机枪兵({},{})(脸朝:{}) 与 鬼兵({},{})(脸朝:{}) 的距离为 {} 角度为 {}", x0, y0, marine_cu.currentDirection2, x1, y1, ghost_cu.currentDirection2, dist, ang);
-        printAt(1, "从机枪兵位置向 {} 度走 {} 的距离将到达 ({},{}) 鬼兵的位置", ang, dist, x, y);
+        printAt(0, "机枪兵({},{})(朝向:{}) 与鬼兵({},{})(朝向:{}) 的距离为 {}，角度为 {}", x0, y0, marine_cu.currentDirection2, x1, y1, ghost_cu.currentDirection2, dist, ang);
+        printAt(1, "从机枪兵位置向 {} 度移动 {} 的距离，将到达鬼兵所在的 ({},{})", ang, dist, x, y);
     }
 
     setcurpl(cp);
 }
 
-function afterTriggerExec() { // 游戏每一帧在执行完传统触发器后，会执行一次这个函数
+function afterTriggerExec() { // 游戏每帧执行完传统触发器后，会执行一次这个函数
 
 }
 ```
@@ -109,8 +109,8 @@ function afterTriggerExec() { // 游戏每一帧在执行完传统触发器后�
 
 ## 说明.txt
 ```
-右键编辑 “编译输出.bat” 文件，将其中的 euddraft.exe 路径改成你自己电脑上的  euddraft.exe 的路径
-然后双击 “编译输出.bat” 即会将代码编译并与 “位置函数的使用-地形.scx” 合成输出到一个新地图文件 “位置函数的使用.scx”
+右键编辑 “编译输出.bat” 文件，将其中的 euddraft.exe 路径改成你自己电脑上的 euddraft.exe 路径
+然后双击 “编译输出.bat”，即可将代码编译并与 “位置函数的使用-地形.scx” 合成为新的地图文件 “位置函数的使用.scx”
 
 makefile.edd
     是工程配置文件
@@ -119,10 +119,10 @@ makefile.edd
     是代码文件
 
 位置函数的使用-地形.scx
-    是原始地形文件，这个文件可以用 SCMD 打开编辑地形等
+    是原始地形文件，可以用 SCMD 打开编辑地形等内容
 
 位置函数的使用.scx
-    这是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\）在游戏中看到实际代码在游戏中的效果，它已经无法再直接使用 SCMD 打开编辑
+    是最终输出的地图文件，可以放入游戏的地图文件目录（[星际争霸安装或文档路径]\Maps\），在游戏中查看代码的实际效果；它无法再直接使用 SCMD 打开编辑
 
 演示来自 https://github.com/havonz/SCRMapDocs
 ```
